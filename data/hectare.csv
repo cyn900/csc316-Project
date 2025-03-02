@@ -1,0 +1,701 @@
+﻿Hectare,Shift,Date,Anonymized Sighter,Sighter Observed Weather Data,Litter,Litter Notes,Other Animal Sightings,Hectare Conditions,Hectare Conditions Notes,Number of sighters,Number of Squirrels,Total Time of Sighting
+01A,AM,10072018,110,"70º F, Foggy",Some,,"Humans, Pigeons",Busy,,1,4,22
+01A,PM,10142018,177,"54º F, overcast",Abundant,,"Humans, Pigeons",Busy,,1,7,26
+01B,AM,10122018,11,"60º F, sunny",Some,,"Humans, Dogs, Pigeons, Horses",Busy,,1,17,23
+01B,PM,10192018,109,"59.8º F, Sun, Cool",Some,,"Humans, Dogs, Pigeons, Sparrow, Blue jay",Busy,,1,10,35
+01C,PM,10132018,241,"55° F, Partly Cloudy",None,,"Humans, Dogs, Pigeons, Birds",Busy,,1,10,25
+01D,AM,10062018,250,"66º F, cloudy, light drizzle",Some,,Humans,Calm,,1,9,35
+01E,AM,10062018,218,"65º F approx, misty",Some,,Humans,Calm,,1,5,26
+01F,AM,10102018,123,"74º F, Partly cloudy, no wind",None,,"Humans, Dogs, Ducks",Calm,,1,5,20
+01F,PM,10192018,241,"59º F, Clear",None,,"Humans, Dogs, Pigeons, Birds",Busy,,1,3,24
+01G,PM,10102018,151,"77º F, Warm, sunny, humid",None,,"Humans, Dogs, Cats, Raccoons",Busy,,1,3,28
+01G,AM,10062018,232,"64º F, cloudy, light drizzle",None,,"Humans, Dogs, Pigeons, Ducks, Bluejay, Sparrow, Starling",Busy,,1,4,25
+01H,PM,10132018,27,"56° F, Cloudy",None,,Humans,Busy,,1,2,28
+01H,AM,10122018,224,"59º F, mostly sunny, windy",Some,,"Humans, Pigeons, Small birds",Busy,,1,2,27
+01I,AM,10072018,8,"71º F, Cloudy",Some,,"Humans, Dogs, Pigeons, Horses",Calm,,1,0,28
+02A,AM,10102018,66,"73º F, Cloudy, 85% humidity",Abundant,,"Humans, Dogs",Busy,,1,9,25
+02A,PM,10192018,109,"55º F, Sun",Some,,"Humans, Dogs, Pigeons, Downy Woodpecker, Sparrows",Calm,,1,6,30
+02C,AM,10102018,66,70º F,None,,"Humans, Small birds",Busy,,1,9,25
+02D,AM,10072018,116,"71º F, cloudy",None,,"Humans, Dogs",Calm,,1,6,25
+02D,PM,10122018,134,"61º F, sunny",None,,Humans,Busy,,1,2,35
+02E,AM,10102018,167,73º F,,,"Humans, Hawks, Dogs",Calm,,1,7,20
+02E,PM,10142018,177,"58º F, overcast",Some,,"Humans, Dogs",Busy,,1,5,22
+02F,AM,10062018,126,"64º F, slight wind, dew point 59, misty",Some,,"Humans, Dogs",Calm,,1,5,25
+02G,AM,10102018,60,"73º F, Overcast",None,,"Humans, Dogs",Busy,,1,4,20
+02G,PM,10072018,119,"80º F, Humid. Party. Cloudy.",None,,"Humans, Pigeons, Mice",Calm,,1,3,22
+02H,AM,10062018,116,"65º F, cloudy",,,"Humans, Pigeons, Ducks, Geese",,,1,3,22
+02H,PM,10062018,196,"67º F, Cloudy, mist-rain",Some,,"Humans, Dogs",Busy,,1,2,30
+02I,AM,10062018,56,"65º F, overcast",Some,,"Humans, Pigeons",Busy,,1,2,28
+02I,PM,10062018,134,,,,,,,1,2,20
+03A,PM,10172018,241,"60º F, mostly cloudy",None,,"Humans, Dogs, Birds",Calm,,1,8,25
+03B,PM,10072018,231,"80º F, Cloudy. Humid",Some,,"Humans, Dogs",Busy,,1,11,15
+03C,AM,10072018,116,"71º F, Cloudy",None,,"Humans, Dogs",Calm,,1,2,20
+03C,PM,10082018,134,"62º F, overcast",Some,,"Humans, Dogs",Busy,,1,2,30
+03D,AM,10062018,121,"64º F, overcast, moist",Some,,"Humans, Dogs, Pigeons, Birds",Busy,,1,8,35
+03D,PM,10102018,241,"77º F, Sunny, humid",None,,"Humans, Dogs, Birds",Busy,,1,14,31
+03E,AM,10062018,28,"cloudy, slight drizzle",Some,,"Humans, Dogs (off-leash)",Calm,,1,8,23
+03E,PM,10082018,158,"65º F, overcast",,,Humans,Busy,,1,9,25
+03F,AM,10062018,93,"66º F, overcast",None,,"Humans, Birds",Calm,,1,14,46
+03G,AM,10082018,114,"67º F, overcast",Some,,"Humans, Dogs, Pigeons",Moderate,kinde (sic),1,3,20
+03G,PM,10132018,224,"57° F, Cloudy to Partly Cloudy, ""Crisp""",Some,,"Humans, Dogs, Ducks, Cardinal, Small birds, Robin",Busy,,1,3,39
+03H,AM,10082018,114,"67º F, overcast",,,"Humans, Dogs, Pigeons",Calm,,1,6,23
+03I,PM,10132018,27,"56° F, Partly Cloudy",Some,,"Humans, Pigeons",Busy,,1,8,25
+03I,AM,10102018,123,"74º F, Partly cloudy, minimal wind",None,,"Humans, Dogs, Pigeons",Busy,,1,5,20
+04A,AM,10072018,110,"70º F, Foggy",None,,"Humans, Dogs, Birds, but not pigeons",Calm,,1,5,22
+04A,PM,10072018,231,"80º F, Cloudy. Humid",Some,,"Humans, Dogs",Busy,,1,6,20
+04B,PM,10182018,109,"48º F, Sun",None,,"Humans, Dogs",Busy,,1,5,
+04B,AM,10102018,167,70º F Partly cloudy,Abundant,,"Humans, Dogs",Busy,,1,6,25
+04C,PM,10102018,217,"77º F, Mostly sunny, humid",None,,"Humans, Dogs, Sparrows",Busy,,1,17,20
+04D,AM,10122018,11,"60º F, partly cloudy",None,,"Humans, Dogs, Blue Jays",Busy,,1,4,25
+04D,PM,10082018,134,"65º F, overcast",Some,,Humans,Calm,,1,14,65
+04E,AM,10202018,145,"55º F, Cloudy",None,,"Humans, Dogs, Small birds, Dogs",Busy,,1,4,24
+04E,PM,10082018,158,"65º F, overcast",None,,,,,1,8,29
+04F,AM,10072018,8,"71º F, Coudy. Misty. Rain.",Some,,"Humans, Dogs",Calm,,1,0,23
+04G,PM,10072018,133,"77º F, Sunny",Some,,Humans,Busy,,1,1,36
+04H,PM,10062018,134,"65º F, Very Overcast",None,,Humans,Busy,,1,2,31
+04H,AM,10062018,168,"64º F, overcast",Some,,"Humans, Dogs, Birds, Song birds and Crows",Busy,,1,4,45
+04I,AM,10062018,34,"65º F, overcast, misty",Some,,"Humans, Dogs, Pigeons, Rat",Busy,,1,3,42
+04I,PM,10072018,134,"77º F, Sunny",Some,,Humans,Busy,,1,3,31
+05A,AM,10062018,61,64º F,None,,"Humans, Dogs",Busy,,1,5,50
+05A,PM,10102018,241,"77º F, Mostly Sun, humid",,,"Humans, Dogs, Birds",Calm,,1,4,23
+05B,AM,10082018,163,"66º F, overcast",Some,,"Humans, Dogs",Busy,,1,4,26
+05B,PM,10132018,241,"55° F, Partly Cloudy",None,,"Humans, Dogs, Birds",Busy,,1,6,25
+05C,AM,10062018,169,"64º F, cloudy, light rain",Some,,"Humans, Dogs, Sparrows, Starlings, American robins",Calm,,1,7,25
+05C,PM,10102018,217,"77º F, Mostly sunny",None,,"Humans, Dogs",Busy,,1,13,20
+05D,PM,10182018,109,"48º F, Sunny",None,,"Humans, Dogs, Sparrows, Robin",Moderate,,1,7,20
+05D,AM,10202018,145,"55º F, Cloudy",None,,"Humans, Dogs, Other birds",Calm,,1,4,23
+05E,PM,10122018,134,"61º F, sunny",,,Humans,Busy,,1,6,44
+05E,AM,10082018,163,"66º F, overcast, misty",Some,,"Humans, Hawks, Dogs",Busy,,1,10,34
+05F,AM,10072018,17,"71º F, Cloudy",Some,,"Humans, Dogs, Pigeons",Busy,,1,6,25
+05F,PM,10072018,119,"80º F, Humid. Cloudy.",None,,"Humans, Dogs, Pigeons, Tourists",Busy,,1,6,22
+05G,PM,10102018,151,77º F Sunny humid,,,Dogs,Busy,,1,5,20
+05G,AM,10062018,230,"64º F, cloudy, misty",,,"Humans, little Birds",Busy,,1,1,20
+05H,AM,10072018,17,"70º F, Cloudy",None,,"Humans, Dogs",Calm,,1,1,25
+05H,PM,10062018,196,"67º F, Cloudy, misting",Abundant,,Humans,Busy,,1,0,30
+05I,AM,10102018,60,74º F,None,,"Humans, Dogs",Busy,,1,6,20
+05I,PM,10082018,96,"65º F, dark and damp, drizzling",None,,"Humans, Dogs, Pigeons",Calm,,1,2,25
+06A,PM,10122018,115,"sunny, chilly",Some,,"Humans, Dogs, Birds",Busy,,1,7,25
+06A,AM,10062018,211,"65º F, gray, misting",Some,,"Humans, Dogs",Calm,,1,8,20
+06B,PM,10172018,241,"61º F, mostly cloudy",None,,"Humans, Dogs, Birds",Busy,,1,7,25
+06B,AM,10122018,261,"58º F, partly sunny, breezy",None,,"Humans (Bikers, Runners), Dogs, Small birds",Busy,,1,2,22
+06C,AM,10072018,34,"68º F, Overcast. Humid.",None,,"Humans, Dogs",Busy,T/V busy with cars. Lots on dogs in ball fields.,1,8,25
+06C,PM,10202018,150,65º F,,,,,,1,4,25
+06D,PM,10202018,150,65º F,Some,,"Humans, Dogs",Busy,,1,6,25
+06D,AM,10082018,250,"66º F, cloudy",Some,,"Humans, Dogs",Calm,,1,4,21
+06E,PM,10102018,195,"77º F, Mostly sunny (humid) but lovely",,,Humans,Busy,,1,5,22
+06F,PM,10082018,114,"65º F, drizzly",,,"Humans, Dogs",Busy,,1,6,23
+06F,AM,10062018,263,"18º C, Cloudy",Abundant,,"Humans, Dogs",Busy,,1,1,26
+06G,PM,10202018,242,"61º F, Sunny. Sun starting to go down",Some,,"Humans, Horses, Birds",Busy,,1,4,24
+06H,AM,10082018,6,"66º F, overcast, damp",,,"Humans, Dogs",,,1,2,30
+06H,PM,10202018,242,"63º F, Perfect",None,,"Humans, Birds, Cardinal",Calm,,1,3,25
+06I,AM,10062018,17,"65º F, cloudy",,,,,,1,1,23
+06I,PM,10132018,256,"57° F, Cloudy",Some,,"Humans, Dogs, Pigeons",Busy,,1,7,26
+07A,PM,10072018,182,"79º F, Cloudy",,,"Humans, Dogs",Calm,,1,2,22
+07A,AM,10062018,227,"67º F, light drizzle",Some,,"Humans, Dogs, Robins (Birds)",Busy,,1,3,29
+07B,AM,10082018,60,"67º F, misty",None,,"Humans, Dogs, Pigeons",Busy,,1,15,30
+07B,PM,10062018,118,Misty,Some,,"Humans, Dogs",Busy,,1,1,22
+07C,AM,10122018,261,"58º F, partly cloudy, breezy",None,,Humans (Very Few),Calm,Sheep Meadow Closed!,1,3,20
+07D,PM,10102018,115,"77º F, Humid, sunny",Some,,Humans,Busy,,1,1,25
+07D,AM,10062018,117,"60s, cloudy, threatening to rain, misty",None,,"Humans, Dogs",Calm,,1,0,30
+07E,AM,10062018,118,"64º F, Cloudy",,,"Humans, Dogs, Pigeons",Calm,,1,6,26
+07F,PM,10122018,131,"60º F, sunny",None,,"Humans, Dogs, Small birds",Calm,,1,3,25
+07G,AM,10102018,67,"Muggy, cloudy, slightly damp",None,,"Humans, Dogs, Birds, Blue jays",Busy,,1,9,25
+07G,PM,10182018,242,"52º F, Sunny",,,Humans,Busy,,1,7,20
+07H,PM,10062018,"227,228","68º F, drizzle",None,,"Humans, Sparrow",,,1,10,25
+07I,AM,10122018,44,"59º F, sunny, very windy",Some,,"Humans, Dogs, Pigeons, Small birds",Busy,Construction,1,0,25
+07I,PM,10132018,256,,,,,,,1,8,33
+08A,PM,10142018,103,"58º F, cloudy, cool & crisp",None,,"Humans, Dogs, Pigeons, Mice, Sparrows",Busy,,1,3,25
+08B,PM,10122018,115,"chilly, sunny",Some,,Humans,Busy,,1,9,35
+08C,AM,10072018,34,"68º F, Overcast. Humid.",None,,"Humans, Dogs",Calm,Humans quietly walking polite dogs. dog run.,1,2,20
+08D,PM,10072018,182,"80º F, Sunny",Some,,"Humans, Dogs",Busy,,1,4,22
+08D,AM,10072018,224,"71º F, Overcast. Misty",None,,"Humans, Dogs, Pigeons",Calm,"Very calm, except you can hear machinery",1,8,26
+08E,AM,10132018,78,"46º F, rain",None,,"Humans, Dogs",Calm,,1,2,20
+08E,PM,10082018,96,"cloudy, drizzling",None,,"Humans, Dogs",Busy,,1,8,25
+08F,PM,10122018,131,"60º F, sunny",Some,,"Humans, Dogs",Calm,,1,8,25
+08F,AM,10142018,145,"52º F, Partly Cloudy, Mostly Sunny",None,,"Humans, Dogs, Owls, Small birds",Busy,Concert at Naumburg Bandshell,1,0,23
+08G,AM,10122018,44,,,,Humans,Calm,,1,0,23
+08G,PM,10172018,242,"61º F, Sunny, Breezy",,,"Humans, Dogs, Horses, Birds",Busy,,1,2,20
+08H,PM,10142018,138,"57º F, Cloudy",Some,,"Dogs, Pigeons, Small birds",Calm,,1,9,25
+08H,AM,10172018,163,"50º F, clear, windy",None,,"Humans, Dogs",Busy,,1,6,26
+08I,PM,10132018,134,"56° F, Partly Cloudy",Some,,"Humans, Dogs, Wood Thrush",Calm,,1,9,64
+08I,AM,10062018,237,"77º F, cloudy",Some,,"Humans, Dogs",Busy,,1,12,27
+09A,PM,10102018,195,77º F (humid) but lovely,None,,"Humans, Dogs, Pigeons",Busy,Doggie play area,1,4,22
+09B,AM,10102018,211,70º F,,,Blue jay,Busy,,1,9,30
+09C,AM,10062018,196,"68º F, cloudy",Some,,"Humans, Dogs, Birds",Busy,,1,3,20
+09C,PM,10062018,230,"65º F, Mostly Cloudy",Some,,"Humans, Dogs, Birds",,,1,7,20
+09D,PM,10082018,55,drizzling,Some,,"Humans, Dogs",Calm,,1,0,10
+09D,AM,10082018,60,"66º F, overcast, misty",Some,,"Humans, Dogs, Birds",Busy,,1,4,20
+09E,AM,10082018,6,"overcast, damp",,,"Humans, Dogs",Busy,,1,4,20
+09E,PM,10142018,101,"57º F, cloudy",None,,"Humans, Hawks, Dogs, Small birds",Busy,,1,3,30
+09F,AM,10132018,78,"46º F, rain",None,,"Humans, Dogs",Busy,,1,4,20
+09F,PM,10142018,138,"57º F, crisp & mostly cloudy",Some,,"Humans, Dogs, dogs off-leash :( , Birds",Calm,But loud music at edge,1,8,23
+09G,PM,10072018,96,"81º F, Cloudy",Some,,"Humans, Dogs, Pigeons",Busy,,1,6,34
+09G,AM,10072018,97,"70º F, Humid. Cloudy.",Some,,"Humans, Dogs, Horse drawn carriage. Woodpecker",Busy,,1,4,25
+09H,PM,10182018,242,"52º F, Sunny",,,"Humans, Dogs",Busy,,1,9,21
+09I,PM,10102018,114,"77º F, Mostly sunny",,,"Humans, Dogs",Busy,,1,7,24
+10A,AM,10062018,8,"65º F, cloudy, light drizzle",None,,"Humans, Dogs, Red Robins",Busy,,1,4,24
+10A,PM,10142018,101,"57º F, cloudy",,,"Humans, Dogs, Pigeons, Small birds, Rat, Mice",,,1,4,25
+10B,PM,10142018,103,"58º F, overcast cool & crisp",None,,"Humans, Dogs, Pigeons, Tiny birds on trees",Busy,,1,5,25
+10C,AM,10182018,242,"43º F, Sunny, Breezy",Some,,"Humans, Dogs",Calm,,1,4,22
+10D,PM,10082018,55,"65º F, overcast",Some,,"Humans, Dogs",Busy,,1,1,18
+10D,AM,10082018,250,"66º F, cloudy",Some,,Humans,Busy,,1,5,21
+10E,AM,10102018,211,"71º F, Cloudy, humid",Some,,"Humans, Dogs",Busy,,1,2,25
+10E,PM,10072018,224,"79º F, Partly Cloudy",Some,,Humans,Busy,,1,1,24
+10F,AM,10072018,97,"71º F, Humid. Cloudy.",None,,"Humans, Dogs, Pigeons, Chickadees, Tour groups",Busy,,1,3,25
+10F,PM,10192018,221,"58º F, Partly, Cloudy",Some,,"Humans, Dogs, Pigeons",Busy,CRAZY BUSY,1,12,30
+10G,PM,10172018,242,"60º F, windy, clouds coming in. A couple drops of rain.",None,,Humans,Calm,,1,10,23
+10H,PM,10072018,96,"81º F, Partly Cloudy. Humid.",Some,,"Humans, Dogs, Pigeons, Horses",Busy,,1,2,25
+10I,AM,10102018,67,"Partly cloudy, dewy",Some,,"Humans, Dogs",Busy,,1,4,26
+10I,PM,10132018,134,"56° F, Partly Cloudy",None,,"Humans, Dogs",Busy,,1,1,25
+11A,AM,10142018,13,"Mild (mid-50s), cloudy",Some,,"Humans, Dogs, Robins, Small brown birds -- not sparrows",Busy,Noisy and thumpy Avon Walk music from east,1,0,22
+11A,PM,10132018,229,"55º F, cloudy",Some,,"Humans, Dogs, Rat (with an apple core), Horses, Robin",Busy,,1,5,25
+11B,AM,10072018,35,"71º F, Overcast. Humid",Some,,"Humans, Dogs, Pigeons, Horses",Busy,,1,5,30
+11B,PM,10142018,234,"Cool, Cloudy",Some,,"Humans, Dogs, Horses",Busy,,1,8,18
+11C,AM,10072018,35,"70º F, Overcast. Humid.",None,,"Humans, Dogs",Busy,,1,0,30
+11C,PM,10182018,191,"53º F, Sunset",None,,"Humans, Ducks, Blue Jay, Horse!",Calm,,1,1,26
+11D,AM,10102018,83,"72º F, Glasses fogging humid",None,,"Humans, Dogs, Blue jays, Robins",Calm,,1,8,20
+11E,PM,10122018,132,"61º F, sunny",Some,,"Humans, Dogs, Pigeons",Busy,,1,7,20
+11E,AM,10132018,203,"48º F, rain (from light to steady)",,,"Humans, Horses",Busy,,1,4,21
+11F,AM,10132018,97,"49º F, rainy, overcast, kinda windy",None,,"Humans, Dogs, Chickadees",Busy,,1,3,30
+11G,AM,10122018,37,"60º F, partly cloudy, windy",Some,,"Humans, Blue jays, Robins",Calm,,1,1,20
+11G,PM,10132018,85,"55º F, cloudy",None,,"Humans, Horses",Busy,,1,2,26
+11H,AM,10102018,37,"70º F, Muggy",Some,,"Humans, Sparrows",Calm,,1,9,20
+11I,AM,10122018,166,"60º F, windy, partly cloudy",None,,"Humans, Dogs",Calm,,1,2,20
+12A,AM,10082018,123,"66º F, overcast, drizzling, no wind",Some,,"Humans, Dogs",Busy,,1,2,20
+12A,PM,10132018,229,"55º F, cloudy",Some,,"Humans, Dogs, Rat",,,1,4,24
+12B,PM,10182018,151,"50º F, Sunny, Brisk",Some,,"Humans, Dogs",Busy,,1,1,20
+12B,AM,10072018,260,"70º F, Cloudy",Some,,Dogs,Busy,,1,2,
+12C,AM,10132018,203,"48º F, light & steady rain",,,"Humans, Dogs, Pigeons, Ducks, Geese",Calm,,1,3,20
+12C,PM,10172018,249,"partly cloudy, pleasant",Some,,"Humans, Waterfowl",Calm,,1,1,22
+12D,AM,10132018,28,rainy,Some,,"Humans, Dogs",Busy,,1,2,23
+12D,PM,10142018,36,56º F,None,,"Humans, Dogs",Calm,,1,3,20
+12E,AM,10172018,83,"51º F, sunny, clear",Some,,"Humans, Dogs, Pigeons, Various bird types",Busy,,1,8,25
+12E,PM,10182018,191,"53º F, Sunny",None,,"Humans, Dogs, Birds, Ducks",Busy,,1,6,23
+12F,PM,10072018,220,"79º F, Partly Cloudy",,,"Humans, Dogs, Pigeons",Busy,,1,15,21
+12F,AM,10202018,256,"55º F, Cloudy",Some,,"Humans, Dogs, Pigeons",Busy,,1,6,35
+12G,AM,10122018,166,"60º F, windy, cloudy",None,,"Humans, Dogs, Blue jay, Sparrows",Calm,,1,5,20
+12H,AM,10072018,235,"71º F, Cloud",Some,,"Humans, Dogs, Mandarin Duck",Moderate,,1,0,20
+12I,AM,10132018,8,"46º F, rainy, cold",None,,"Humans, Dogs",Calm,,1,1,25
+12I,PM,10172018,80,"60º F, sunny, very windy",None,,"Humans, Dogs",Busy,,1,0,25
+13A,AM,10172018,83,"49º F, sunny, not a cloud",None,,"Humans, Hawks, Dogs, Pigeons, Sparrows, blue jays",Calm,,1,5,22
+13A,PM,10142018,234,"cool, cloudy",None,,"Humans, Dogs",Busy,,1,4,20
+13B,AM,10082018,123,"66º F, overcast, no wind",Some,,"Humans, Dogs, Ducks",Busy,,1,0,20
+13B,PM,10082018,240,"70º F, misting",None,,"Humans, Dogs, Sparrows, Rats",Busy,,1,2,20
+13C,PM,10192018,47,"56º F, Overcast",Some,,Humans,Calm,,1,5,25
+13C,AM,10102018,83,71º F Cloudy and wicked humid,Some,,"Humans, Dogs, Blue jay, Cardinal, Warbler","Calm, Busy",Sporadically punctuated busy,1,4,20
+13D,PM,10182018,215,"55º F, Sunny",Some,,"Humans, Dogs, Pigeons, Cats, Birds, Ducks",Busy,,1,14,27
+13D,AM,10142018,252,"51º F, cloudy w/sun",Some,,"Humans, Dogs",Calm,Loud from concert,1,11,22
+13E,PM,10082018,184,"66º F, misty, cloudy, humid",Some,,"Humans, Dogs",Busy,,1,11,30
+13E,AM,10172018,224,"52º F, sunny & brisk",Some,,"Humans, Birds (non-pigeon)",Calm,,1,13,50
+13F,PM,10082018,127,"66º F, misty, light rain, cloudy",,,Humans,Busy,,1,5,20
+13F,AM,10072018,145,70-73º F,None,,"Humans, Dogs, Small birds",Calm,,1,4,28
+13G,AM,10132018,162,"50º F, rain",None,,Humans,Calm,,1,0,25
+13G,PM,10082018,244,"65º F, overcast, light breeze",None,,"Humans, Dogs, Sparrows, Robins",Moderate,,1,4,22
+13H,PM,10102018,60,"80º F, sunny",Abundant,,"Humans, Dogs",Busy,,1,9,25
+13H,AM,10132018,240,"~60º F, rainy",Some,2-3 pieces,"Humans, Dogs, Ducks",Calm,Tour at Alice in Wonderland),1,1,20
+13I,AM,10132018,8,46º F,None,,"Humans, Dogs, Ducks",Calm,,1,0,30
+13I,PM,10082018,127,"66º F, misty, cloudy",Some,,"Humans, Dogs, Mice",Busy,,1,1,20
+14A,AM,10142018,13,"mid-50s, cloudy",None,,"Humans, Dogs, Pigeons, Finches, Sparrows",Busy,Avon Walk,1,2,21
+14A,PM,10142018,36,57º F,Some,,"Humans, Dogs, Small birds",Calm,,1,8,20
+14B,AM,10072018,28,"67º F, Cloudy",Some,,Woodpecker,Busy,,1,3,
+14B,PM,10142018,222,"57º F, overcast",Some,,"Humans, Dogs, Rat, Ducks","Calm, Busy","Busy, calm off walkways",1,8,22
+14C,PM,10062018,25,"67º F, Gloomy, overcast",Some,,"Humans, Dogs, Pigeons",Calm,,1,3,30
+14C,AM,10072018,254,"70º F, Cloudy",Some,,"Humans, Dogs",Calm,,1,0,22
+14D,AM,10142018,116,"52º F, mostly cloudy",None,,"Humans, Dogs",Calm,Loud music from Bethesda Terrace,1,16,55
+14D,PM,10192018,151,"60º F, Cloudy",Some,,"Humans, Dogs",Busy,,1,16,35
+14E,PM,10172018,80,"58º F, sunny, breezy",None,,"Humans, Dogs",Calm,,1,5,25
+14E,AM,10082018,203,"65º F, fog, clouds, mist",Some,,Humans,Calm,,1,23,40
+14F,PM,10122018,24,"61º F, sunny, windy",Some,,"Humans, Dogs",Calm,,1,9,25
+14F,AM,10072018,172,73º F,Some,,"Humans, Dogs",Calm,,1,6,29
+14G,AM,10122018,37,"60º F, partly cloudy, windy",None,,"Humans, Dogs, Robins, Horses",Calm,,1,4,20
+14H,PM,10122018,24,"61º F, sunny, windy, sun going behind trees",Some,,"Humans, Dogs (Lots)",Busy,,1,8,20
+14H,AM,10072018,235,"71-78º F, Cloudy",Some,,"Humans, Dogs, Mandarin Ducks",,,1,4,25
+14I,PM,10182018,70,"40º F, Sunny",Some,,"Humans, Dogs, Pigeons, Rat",Calm,,1,6,25
+14I,AM,10132018,240,"~60º F, rainy",None,,"Humans, Dogs, Pigeons","Calm, Busy","Calm (in Park), Busy (on Road)",1,1,21
+15A,PM,10172018,224,"52º F, cloudy, light rain drops, chilly",None,,"Humans, Birds","Calm, Busy",Busy at sidewalk,1,1,20
+15B,PM,10172018,206,"cool, windy",None,,"Humans, Dogs, Birds",Busy,,1,5,40
+15B,AM,10142018,209,"50º F, sunny",None,,"Humans, Dogs",Busy,,1,3,20
+15C,AM,10102018,203,74º F Muggy & cloudy,None,,"Humans, Dogs, Crickets",Calm,,1,3,37
+15C,PM,10172018,249,got dark very suddenly,Some,,"mouse, Rats, Other birds",Calm,,1,5,40
+15D,PM,10172018,163,"61º F, partly cloudy, then some showers",Some,,"Humans, Birds, Mouse, Rat",Calm,,1,6,31
+15E,AM,10132018,132,"47º F, raining",None,,Humans,Calm,,1,4,20
+15E,PM,10082018,203,"64º F, cloudy",Some,,Humans,Moderate,,1,11,33
+15F,PM,10102018,60,80º F Sunny,,,"Humans, Dogs",Busy,,1,7,29
+15F,AM,10072018,145,"73º F, Cloudy",None,,"Humans, Dogs",Calm,,1,10,30
+15G,AM,10082018,67,"damp, misty, cloudy",Some,,"Humans, Dogs",Busy,,1,6,23
+15G,PM,10192018,138,"60º F, Mostly Sunny + Slightly Breezy",Some,,"Humans, Dogs, Small birds",Calm,,1,12,23
+15H,AM,10132018,97,"49º F, light rain, cloudy",None,,"Humans, Dogs, Bluebird, Chickadees",Calm,,1,3,27
+15H,PM,10082018,244,"67º F, overcast, light breeze",None,,"Humans, Dogs",Calm,,1,7,21
+15I,AM,10082018,67,"damp, humid, cloudy, dreary, misty, not raining, moist",Some,,"Humans, Dogs, Sparrows, Crickets, Blue jay",Busy,,1,6,29
+16A,AM,10132018,28,rainy,,,"Humans, Dogs",Calm,,1,2,23
+16A,PM,10192018,88,"58º F, Partly Cloudy",None,,"Humans, Dogs, Sparrows",Calm,,1,7,20
+16B,PM,10172018,206,"cool, windy",None,,"Humans, Dogs, Birds",Busy,,1,2,
+16B,AM,10142018,209,"50º F, sunny",None,,"Humans, Dogs",Busy,,1,2,19
+16C,PM,10182018,1,"51º F, Dry and Clear",Some,,"Humans, Birds (unknown), Chipmunk",Busy,,1,3,24
+16C,AM,10142018,172,"50º F, partly cloudy",Some,,"Humans, Dogs",Calm,,1,4,43
+16D,PM,10102018,203,"76º F, Sunny, occasional breezes",None,,"Humans, Dogs, Butterflies",Moderate,,1,13,28
+16D,AM,10072018,254,"70º F, Cloudy",Abundant,,Humans,Calm,,1,6,21
+16E,AM,10142018,35,"50º F, sunny",Abundant,,"Humans, Dogs, Yoga Class",Calm,,1,10,40
+16E,PM,10182018,267,"48º F, Partly Cloudly",Some,,Humans,Busy,,1,10,35
+16F,PM,10132018,85,"55º F, clouds",Some,,"Humans, Dogs, Raccoon (Dead)",Busy,,1,6,46
+16F,AM,10082018,149,"68º F, moist",Some,,Humans,Calm,,1,3,30
+16G,AM,10102018,37,70º F Muggy and partly cloudy,None,,"Humans, Dogs, Sparrows",Busy,,1,5,20
+16G,PM,10172018,104,"62º F, sunny, light breeze",Some,,"Humans, Dogs",Busy,,1,1,25
+16H,AM,10072018,172,"72º F, Overcast",None,,"Humans, Dogs",Calm,"Calm, but lots of dogs",1,1,20
+16I,AM,10082018,149,"70º F, moist",Some,,Humans,Calm,,1,4,25
+17A,PM,10132018,141,"50s, sunny",None,,Humans,Busy,,1,3,20
+17A,AM,10172018,255,"Low 50s, cool & sunny",Some,,"Humans, Dogs, Pigeons, other Birds",Busy,,1,1,25
+17B,PM,10122018,29,"60º F, Breezy",None,,"Humans, Dogs, Mouse or Baby Rat",Busy,,1,3,22
+17B,AM,10102018,166,"73º F, Sunny",None,,"Humans, Dogs, Pigeons",Busy,,1,3,20
+17C,PM,10132018,141,"50s, sunny",None,,Humans,Busy,,1,5,25
+17D,PM,10082018,184,"66º F, misty, cloudy , humid",None,,Humans,Calm,,1,0,10
+17D,AM,10082018,184,"67º F, misty, cloudy, humid",None,,"Humans, Dogs",Calm,,1,7,20
+17E,PM,10182018,178,73º F,Some,,"Humans, Cats",Moderate,Partially blocked due to contruction,1,3,20
+17E,AM,10172018,247,"55º F, Sunny",None,,"Birds, Ducks",Calm,,1,11,35
+17F,PM,10202018,128,"61º F, Clear Sky",,,Humans,,,1,6,
+17F,AM,10072018,173,"70º F, Cloudy",None,,"Humans, Dogs",Moderate,,1,7,50
+17G,AM,10182018,76,"40º F, Windy, Clear",Some,,"Humans, Dogs",Busy,,1,1,24
+17G,PM,10172018,104,"62º F, Sunny, light breeze & light sprinkle later on",None,,"Humans, Dogs, Other birds",Busy,,1,4,25
+17H,PM,10072018,87,"79º F, Cloudy",None,,"Humans, Dogs",Busy,,1,2,20
+17H,AM,10102018,255,"70º F, Humid and partly sunny",Some,,"Humans, Dogs, Robin",Moderate,,1,0,25
+17I,PM,10172018,202,"62º F, cloudy, windy",Abundant,,"Humans, Dogs, Pigeons, Cats",Busy,,1,1,20
+17I,AM,10142018,230,"49º F, calm & crisp",Some,,"Humans, Dogs",Busy,With street noise,1,4,27
+18A,PM,10182018,69,"49º F, Clear",Some,,"Dogs, Robins, Mourning Dove, Sparrow",Busy,,1,1,20
+18A,AM,10122018,211,"58º F, cloudy, very windy",Some,,"Humans, Dogs, Robins, Blue jays",Calm,,1,2,30
+18B,PM,10182018,95,"Sunny, Windy, Cool",,,,,,1,0,30
+18B,AM,10172018,247,"57º F, sunny",None,,,Calm,,1,0,20
+18C,PM,10182018,95,,None,,"Humans, Dogs",Busy,,1,9,40
+18C,AM,10182018,224,"40º F, Cold, Sunny, Windy",None,,"Humans, Dogs, Birds (lots)",Moderate,,1,2,20
+18D,PM,10172018,138,"63º F, mostly sunny, off-&-on windy",Some,,"Humans, Dogs, Small birds",Calm,,1,1,20
+18E,PM,10062018,114,"65º F, drizzly",,,"Humans, Dogs",Busy,,1,1,21
+18E,AM,10122018,211,"58º F, cloudy, very windy",None,,"Humans, Dogs, Robins (Many)",Calm,,1,0,23
+18G,PM,10132018,203,"49º F, breezy, partly cloudy",None,,"Humans, Dogs",,,1,4,20
+18H,PM,10142018,201,"58º F, cool",None,,Humans,Busy,,1,3,20
+18H,AM,10182018,239,"44º F, Sunny, Clear Sky, Gusty",None,,Humans,Calm,,1,2,25
+18I,AM,10172018,37,"50º F, sunny",Abundant,,"Humans, Dogs",Calm,,1,3,20
+18I,PM,10072018,220,"79º F, Partly Cloudy",,,"Humans, Dogs, Pigeons",Busy,,1,9,20
+19A,PM,10132018,13,"~Low 50s, cold, partly cloudy, sunshine",Some,1 reusable bag,"Humans, Dogs, Sparrows, Blue Finch-like Birds, Robins, Blackbirds",Busy,,1,6,26
+19A,AM,10132018,209,"50º F, rain",None,,,Calm,"Calm (in Park), Traffic",1,0,18
+19B,AM,10192018,148,46º F,Some,,"Humans, Dogs, Birds, but less Robins, Sparrows, Crows, Sterlings, Doves",Busy,,1,2,25
+19C,AM,10192018,148,"46º F, Sunny Breezy",Some,,"Humans, Dogs, Robins, starling, Mourning dove, Finches, Sparrows",Busy,,1,0,25
+19D,AM,10072018,252,69º F,None,,"Humans, Dogs",Busy,Busy on path,1,2,20
+19D,PM,10082018,266,"68º F, misty",None,,"Humans, Blue jays, Cardinals, Sparrows, Titmice",Moderate,,1,3,20
+19E,PM,10182018,69,"49º F, Clear",None,,Dogs,Calm,,1,5,30
+19E,AM,10072018,252,"69º F, Cloudy. A bit humid",None,,Dogs,Busy,Busy on suncuncting(?) path,1,0,20
+19F,PM,10172018,151,"63º F, windy, cloudy",,,"Humans, Dogs",Calm,,1,7,30
+19F,AM,10072018,173,"29º C, Cloudy",None,,Dogs,Calm,,1,3,50
+19G,AM,10182018,17,"43º F, Sunny",Some,,"Humans, Dogs",Busy,,1,0,25
+19G,PM,10172018,202,"62º F, Partly Cloudy, very windy (attacked by flying leaves kind)",None,,"Humans, Dogs",Busy,,1,3,24
+19H,AM,10102018,255,"70º F, Humid and cloudy",None,,"Humans, Dogs",Moderate,,1,5,20
+19I,PM,10172018,151,"63º F, Breezy, Sunny",None,,"Humans, Pigeons",Busy,,1,0,20
+19I,AM,10172018,166,"51º F, sunny, windy",None,,"Humans, Dogs",Busy,,1,0,20
+20A,PM,10172018,138,"63º F, sunny then cloudy, wind gusts, a few raindrops",Some,,"Humans, Dogs, Small birds",Calm,,1,1,23
+20A,AM,10102018,166,"73º F, Cloudy and humid",Some,,"Humans, Dogs, Pigeons, Birds",Calm,,1,2,20
+20B,PM,10132018,13,"Low 50s, cold",Some,1 piece of plastic,"Humans, Dogs, Pigeons, Robins, Blackbirds, Sparrows",Busy,,1,10,22
+20B,AM,10072018,82,"70º F, Drizzly. Overcast.",None,,"Humans, Robin, Seagulls - lots flying high.",Calm,,1,3,20
+20C,AM,10182018,94,"Sunny, Blue Sky",None,,"Humans, Dogs, Small birds",Busy,,1,0,23
+20C,PM,10182018,178,"76º F, Sunny",None,,"Humans, Dogs",Busy,,1,9,25
+20D,PM,10142018,45,"57º F, overcast",None,,"Humans, Dogs",Busy,"Great lawn, (2/3 of this hectare fenced off for the season)",1,1,20
+20D,AM,10072018,82,70º F,None,,"Humans, Dogs, Pigeons, Seagulls (3), Butterfly",Busy,,1,2,25
+20E,AM,10142018,132,"49º F, sunny",None,,"Humans, Dogs, Jays",Busy,Lots of dogs off leash,1,2,20
+20F,PM,10072018,132,"78º F, Humid. Sunny. Filtered by trees",None,,"Humans, Dogs, Sparrows, Robins",Moderate,,1,14,20
+20F,AM,10142018,230,"49º F, calm & crisp",Some,,"Humans, Dogs, Small birds",Busy,,1,3,23
+20G,AM,10182018,17,"43º F, Partly Sunny, Breezy",Some,,"Humans, Hawks, Dogs",Busy,,1,3,30
+20G,PM,10132018,78,"54º F, cloudy",None,,"Humans, Dogs, Pigeons, Robins",Busy,,1,3,20
+20H,PM,10132018,203,"49º F, partly cloudy",,,"Humans, Dogs",Calm,,1,0,23
+20H,AM,10142018,240,"55º F, partly sunny",None,,,Busy,Construction site: no access until 2022,1,0,22
+20I,PM,10182018,70,"40º F, Sunny, Windy",None,,"Humans, Dogs, Pigeons",Busy,,1,0,19
+20I,AM,10172018,166,"51º F, sunny, windy",None,,"Humans, Dogs",Busy,,1,0,20
+21B,PM,10172018,194,"77º F, with some breeze",Some,,"Humans, Pigeons, Birds",Busy,Kids playing soccer,1,5,20
+21C,AM,10142018,216,"54º F, partly cloudy",Some,,"Humans, Dogs",Busy,,1,5,23
+21D,PM,10082018,266,"68º F, misty",Some,,"Humans, Dogs, Chimney swifts, Blue jay",Busy,,1,6,20
+21E,PM,10122018,16,"61º F, sunny",None,,Bird,Calm,"Empty, Roped Off",1,2,22
+21E,AM,10172018,255,"low 50s, cool & sunny",None,,"Humans, Dogs, Pigeons",Calm,,1,3,20
+21F,PM,10182018,76,"50º F, Light wind, Clear",Some,,"Humans, Dogs",Busy,,1,3,25
+21F,AM,10182018,166,"44º F, Sunny, Windy",None,,"Humans, Dogs, Robins",Busy,,1,8,20
+21G,PM,10072018,87,"79º F, Some clouds",None,,"Humans, Dogs",Busy,,1,4,25
+21G,AM,10142018,240,"55º F, partly sunny",Some,,"Humans, Dogs, Sparrows",Busy,,1,7,25
+21H,AM,10172018,37,"50º F, Sunny",Some,,"Humans, Dogs",Busy,,1,2,20
+21H,PM,10182018,267,"52º F, Clear, Windy",Some,,"Humans, Woodpecker",Calm,,1,4,15
+21I,AM,10182018,37,"44º F, Sunny",Abundant,,"Humans, Dogs, Pigeons","Calm, Busy","Busy near street, near empty on the playground.",1,0,20
+21I,PM,10132018,205,"55º F, partly cloudy (sundown)",Some,,"Humans, Dogs, Sparrows, Migratory birds (a distant V of 30-40 going south)",Busy,,1,0,20
+22A,PM,10172018,194,"75º F, with some breeze",None,,"Humans, Dogs",Busy,A lot of traffic noise,1,3,25
+22B,AM,10132018,2,"~58º F, wet, drizzle",Some,,"Humans, Dogs",Calm,,1,5,30
+22B,PM,10142018,75,"50º F, Cloudy",Some,,"Humans, Dogs, Woodpecker, Blue jay, Robins",Busy,,1,7,20
+22C,AM,10132018,209,"50º F, rain",None,,"Humans, Dogs",Calm,,1,3,17
+22D,PM,10122018,16,"61º F, sunny",None,,"Humans, Pigeons, Sparrows","Calm, Busy",,1,7,26
+22D,AM,10082018,184,"67º F, misty, cloudy, humid",None,,"Humans, Dogs",Calm,,1,0,35
+22E,PM,10142018,75,50º F,None,,,Calm,,1,2,20
+22E,AM,10182018,224,"40s, Cold, Sunny, Windy",None,,"Humans, Dogs, Birds",Calm,,1,0,20
+22F,PM,10142018,201,"58º F, cool",,,Humans,Busy,,1,8,20
+22G,AM,10182018,76,"40º F, Windy, Clear",None,,"Humans, Dogs",Medium,,1,5,24
+22G,PM,10182018,215,"53º F, Sunny",Some,,"Humans, Dogs, Birds",Busy,,1,3,25
+22H,AM,10182018,37,"44º F, Sunny, Windy",,,"Humans, Dogs, Pigeons",Busy,,1,0,20
+22H,PM,10072018,132,"78º F, More overcast",Some,,"Humans, Dogs, Rats, Sparrows",Busy,,1,4,20
+22I,PM,10132018,78,"55º F, partly cloudy",Some,,"Humans, Dogs, Pigeons, Birds (galore: House sparrows, House finch, Blue jay, etc.)",Busy,,1,0,20
+23A,AM,10182018,94,Sunny,None,,"Humans, Dogs",Calm,,1,5,25
+23B,PM,10122018,29,"60º F, Breezy",None,,"Humans, Dogs, Robins, Jays",Busy,,1,7,26
+23B,AM,10192018,57,"48º F, Chilly, Mild",None,,"Humans, Dogs, Falcons",Moderate,,1,0,24
+23C,PM,10142018,45,"57º F, overcast",Some,,"Humans, Dogs, Horse (saw droppings)",Busy,Lots of foot and bike traffic on paths,1,4,21
+23C,AM,10192018,57,"48º F, Chilly, Mild",None,,"Humans, Dogs, Falcons",Busy,Noisy,1,1,23
+23D,AM,10132018,2,"~56º F, drizzle",None,,"Humans, Dogs, Ducks",Busy,,1,1,25
+23E,AM,10142018,216,"54º F, partly cloudy",Some,,"Humans, Dogs, Birds",Busy,,1,0,27
+23E,PM,10062018,265,"drizzling, cloudy",Some,,"Humans, Dogs, Pigeons, Small birds",Calm,,1,1,35
+23F,AM,10182018,166,"44º F, Sunny, Windy",None,,"Humans, Dogs, Sparrows, Crows, Cardinal",Busy,,1,1,20
+23F,PM,10132018,205,"55º F, partly cloudy (with sun)",Some,,"Humans, Dogs, Blue Jay, Rat, Bee, Sparrow",Moderate,"Busy near gate house, quiet on and south of Transverse, reservoir path medium",1,4,
+23G,AM,10182018,239,"44º F, Sunny, Clear Sky, Windy (Gusts(",Some,,"Humans, Few and calls of larger birds, but not visible",Busy,,1,0,25
+23H,PM,10192018,45,"60º F, Partly Cloudy",Some,,"Humans, Dogs","Calm, Busy",Busy on Running Path,1,1,17
+23H,AM,10142018,240,"55º F, partly sunny",Some,,"Humans, Dogs, Runners",Busy,,1,0,17
+23I,AM,10192018,23,"46º F, Sunny, no clouds",None,,"Humans, Dogs, Small birds",Busy,,1,1,45
+23I,PM,10192018,45,"60º F, Partly Cloudy",None,,"Humans, Dogs, Ducks",Busy,Busy,1,3,25
+24A,AM,10142018,170,"50º F, Sunny, Clear",None,,"Humans, Dogs",Busy,5k,1,2,25
+24B,PM,10102018,65,"70s, sunny, humid",Some,,"Humans, Dogs, Birds",Busy,,1,0,20
+24B,AM,10132018,243,"50º F, rain, very cloudy",None,,"Humans, Dogs, Birds",Busy,,1,1,30
+24C,AM,10102018,104,"73º F, Vaguely sunny",None,,"Pigeons, Other birds",Busy,,1,0,35
+24C,PM,10172018,115,"62º F, sunny, windy",,,,,,1,0,25
+24I,AM,10192018,250,"45º F, Sunny, Windy",Some,,"Humans, Dogs",Busy,,1,1,30
+25A,AM,10132018,243,"50º F, drizzle, light rain, overcast",None,,"Humans, Dogs, Other Birds",Busy,Busy (road),1,5,40
+25B,AM,10142018,28,Partly cloudy,,,"Humans, Dogs, Warblers",,,1,0,
+25B,PM,10072018,41,"80º F, Sunny. Humid.",None,,Humans,Busy,,1,2,20
+25I,PM,10072018,155,Humid,Some,,,Busy,,1,8,45
+25I,AM,10122018,204,"60º F, windy",None,,"Humans, Dogs, Pigeons, Song birds",Calm,,1,3,35
+26A,AM,10142018,248,"51º F, Mostly Cloudy, Light Breeze",None,,"Humans, Dogs",Busy,,1,2,20
+26B,AM,10102018,104,70º F Humid and cloudy,None,,"Humans, Dogs, Pigeons",Busy,,1,1,30
+26B,PM,10172018,250,"62º F, sunny, windy",Some,,"Humans, Dogs, Pigeons, Ducks",Busy,,1,0,20
+26I,PM,10102018,211,"79º F, Part sunny",Some,,"Humans, Dogs",Busy,,1,6,20
+26I,AM,10102018,224,"73º F, Partly cloudy, muggy, occasional cool breeze",Some,,"Humans, Dogs, Seagull",Busy,,1,2,26
+27A,AM,10082018,97,"65º F, overcast, cloudy, light drizzle",Some,,"Humans, Dogs, Chickadees",Calm,,1,2,25
+27A,PM,10062018,265,drizzling cloudy,None,,"Humans, Pigeons",Busy,,1,1,32
+27B,AM,10142018,170,"49º F, Sunny, Clear",Some,,"Humans, Dogs, Birds",Busy,5k race,1,0,23
+27C,AM,10142018,248,"53º F, mostly sunny, calm",None,,"Humans, Turtle (in water)",Busy,,1,0,5
+27C,PM,10122018,250,"61º F, sunny, windy",None,,Humans,Busy,,1,0,20
+27I,AM,10072018,102,Cool,None,,Butterfly,Busy,Heavy human congestion,1,4,42
+28A,PM,10072018,40,"80º F, Overcast. Humid.",Abundant,,"Humans, Dogs, Birds",Busy,,1,5,20
+28A,AM,10142018,124,"50º F, Sunny & Cloudy",Some,,,Calm,,1,1,25
+28B,AM,10072018,122,"71º F, Overcast. Breezy",Some,,"Humans, Dogs, Pigeons",Busy,,1,1,25
+28B,PM,10102018,161,"79º F, Humid, sunny",Some,,"Humans, Dogs, Pigeons",Busy,,1,2,30
+28C,AM,10142018,242,"50ish, sunny, calm",None,,"Humans, Dogs, Song birds",Busy,,1,2,22
+28C,PM,10062018,257,,,,,,,1,2,20
+28D,PM,10192018,219,"59º F, P/Cloudy, Light Wind",Some,,"Humans, Dogs, Pigeons, Sparrows, Robins, Grackles",Busy,,1,2,20
+28D,AM,10122018,250,"59º F, windy",None,,"Humans, Dogs, Robins, Blue jay",Busy,,1,6,21
+28I,PM,10072018,170,78º F,None,,"Humans, Dogs, Birds",Busy,,1,1,26
+28I,AM,10132018,230,"50º F, overcast, wet, light rain",,,"Humans, Dogs",Busy,,1,1,24
+29A,PM,10192018,242,"59º F, Sunny",Some,,"Humans, Dogs, Birds",Busy,,1,3,20
+29A,AM,10132018,248,"50º F, light rain, calm",Some,,"Humans, Dogs",Busy,,1,1,25
+29B,PM,10102018,65,"70s, Sunny, humid",None,,"Humans, Dogs, Birds",Busy,,1,5,25
+29B,AM,10072018,170,"70º F, Overcast. Moist.",Some,,"Humans, Dogs, Robins",Busy,,1,2,20
+29C,PM,10062018,9,"Cool, cloudy & light drizzle",None,,"Humans, Dogs, Song birds",Busy,,1,2,23
+29C,AM,10072018,122,70º F,Some,,"Humans, Dogs, Pigeons",Calm,,1,6,20
+29D,AM,10142018,28,,,,,,,1,6,
+29D,PM,10102018,250,"77º F, Sunny",None,,"Humans, Dogs",Busy,,1,2,20
+29E,AM,10172018,19,"51º F, clear & sunny",Some,,"Humans, Unknown birds",Busy,,1,0,22
+29E,PM,10062018,155,"Misty, Rain, Cool",None,,"Humans, Dogs",Moderate,Tennis courts and joggers,1,0,20
+29H,PM,10062018,56,"65º F, Foggy",Some,,"Humans, Ducks",Calm,,1,2,22
+29H,AM,10132018,230,"50º F, drizzle, overcast",Some,,"Humans (runners), Dogs (1 off-leash), Seagulls?",Calm,,1,0,20
+29I,PM,10072018,200,"80º F, Overcast",Some,,"Humans, Dogs, Pigeons, Cats",Busy,,1,1,26
+29I,AM,10192018,250,"45º F, Sunny, Windy",Some,,"Humans, Dogs, Hummingbird??",Busy,,1,0,20
+30A,AM,10102018,18,"22º C, Cloudy and bright",None,,"Humans, Dogs, Pigeons, Midges",Busy,,1,1,25
+30A,PM,10202018,250,"62º F, Sunny",Some,,"Humans, Dogs",Busy,,1,4,20
+30B,PM,10192018,19,59º F,Some,,"Humans, Dogs, Birds (Other)",Busy,,1,9,22
+30B,AM,10072018,170,"70º F, Overcast. Moist.",Some,,"Humans, Dogs, Assorted Birds",Busy,,1,12,20
+30C,PM,10082018,122,"65º F, misting",Abundant,,"Humans, Dogs",Busy,,1,1,20
+30C,AM,10142018,124,"50º F, Cloudy",None,,"Humans, Dogs",Busy,,1,2,21
+30D,PM,10072018,40,"80º F, Sunny. Humid.",None,,"Humans, Dogs, Lots of Birds",Busy,,1,0,20
+30D,AM,10172018,60,"51º F, sunny",None,,"Humans, Dogs",Busy,,1,2,30
+30E,AM,10082018,97,"66º F, drizzle, overcast",None,,"Humans, Dogs, Pigeons",Busy,,1,3,28
+30E,PM,10082018,122,"65º F, misting",Some,,"Humans, Dogs, Pigeons",Busy,,1,1,23
+30F,PM,10072018,200,"80º F, Overcast",None,,"Humans, Dogs, Pigeons",,,1,1,20
+30F,AM,10192018,242,30º F,None,,"Humans, Dogs",Busy,,1,0,20
+30G,AM,10132018,170,"50º F, cold, drizzly, overcast",None,,"Humans, Blue jay",Busy,,1,0,20
+30G,PM,10102018,211,"76º F, Sunny, breezy",None,,"Humans, Dogs",Busy,,1,0,20
+30H,AM,10072018,102,"Muggy, but cool. Sprinkling.",None,,,Busy,,1,3,20
+30I,AM,10132018,17,"49º F, rain showers, calm",,,,,,1,0,35
+31A,AM,10102018,18,"25º C, Sunny with clouds",Some,,"Humans, Dogs, Blackbird and other birds",Calm,,1,5,25
+31A,PM,10172018,250,"62º F, sunny, windy",Some,,"Humans, Dogs, Pigeons, Sparrows",Busy,,1,4,20
+31B,PM,10072018,41,"80º F, Overcast. Humid.",Some,,,Busy,,1,4,20
+31B,AM,10172018,60,"51º F, sunny, windy",None,,"Humans, Dogs",Busy,,1,3,30
+31C,AM,10172018,19,"49º F, clear & sunny",Some,,"Humans, Dogs, Falcons, unknown bird",Calm,,1,1,24
+31C,PM,10102018,250,"79º F, Sunny",Some,,"Humans, Dogs, Robins",Calm,,1,3,20
+31D,PM,10062018,126,"65º F, dew point 62º F,  misty, light wind",Some,,"Humans, Dogs",Calm,,1,4,22
+31D,AM,10142018,243,"50º F, Calm, Fair Sky - Sunny",Some,,"Humans, Dogs",Busy,,1,7,30
+31E,AM,10142018,67,"49º F, Partly Cloudy, Chilly",Some,,"Humans, Hawks, Dogs",Calm,,1,1,25
+31E,PM,10062018,126,"65º F, 62º F, dewpoint, light wind, misty",Some,,"Humans, Dogs",Calm,,1,9,20
+31F,PM,10072018,155,Humid,Some,,"Humans, Dogs, Pigeons",Calm,,1,5,25
+31F,AM,10132018,170,"50º F, cold, drizzly, overcast, calm",None,,"Humans, Dogs, Birds",Calm,,1,1,25
+31G,PM,10072018,170,"78º F, Overcast",None,,"Humans, Dogs, Birds",Calm,,1,1,26
+31G,AM,10192018,242,"46º F,  Windy, Shady",Abundant,,"Humans, Dogs",Busy,,1,0,20
+31H,AM,10132018,17,"50º F, cloudy, calm",None,,"Humans, Dogs, Sparrows, Jays",Busy,,1,0,20
+31H,PM,10082018,217,drizzling,None,,Humans,Busy,,1,5,25
+31I,AM,10122018,204,"60º F, windy, cloudy",None,,"Humans, Dogs, Pigeons",Busy,,1,0,20
+31I,PM,10192018,219,"58º F, P Cloudy",Some,,"Humans, Dogs",Busy,,1,4,20
+32A,AM,10182018,247,"44º F, Sunny, Breezy",None,,"Humans, Hawks, Dogs",Moderate,,1,5,20
+32A,PM,10132018,258,,,,,,,1,9,23
+32B,AM,10172018,40,"50º F, clear/sunny",Some,,"Humans, Dogs, other Birds",Busy,,1,4,20
+32B,PM,10102018,125,"81º F, Sunny",None,,"Humans, Dogs, Chipmunk",Busy,,1,6,35
+32C,AM,10142018,67,"51º F, Partly Cloudy",Abundant,,"Humans, Dogs",Calm,,1,6,22
+32C,PM,10132018,171,"60º F, partly sunny",None,,"Humans, Dogs",Calm,,1,13,25
+32D,PM,10062018,212,"65º F, cloudy",None,,"Humans, Dogs, Small birds",Moderate,,1,9,20
+32E,PM,10172018,125,"61º F, cloudy",Some,,"Humans, Dogs",Busy,,1,16,25
+32E,AM,10072018,154,"70º F, Overcast. Slight mist.",,,"Humans, Dogs",Calm,,1,14,20
+32F,PM,10082018,104,"66º F, cloudy",Some,,"Humans, Dogs",Busy,,1,8,30
+32F,AM,10122018,114,"59º F, partly cloudy, windy",,,"Humans, Dogs",Calm,,1,7,18
+32G,PM,10132018,222,"56° F, partly cloudy",Some,1 plastic bag,"Humans (lots of bikers), Dogs, Small birds",Busy,,1,3,21
+32G,AM,10102018,264,73º F,,,"Humans, Hawks, Dogs",Calm,,1,2,25
+32H,PM,10062018,81,"65º F, cloudy",Some,,Humans,Calm,,1,3,30
+32H,AM,10102018,223,"72º F, Overcast",None,,"Humans, Dogs, Other Song birds",Moderate,,1,1,22
+32I,AM,10132018,61,"49º F, light rain",None,,"Humans, Dogs",Calm,,1,6,50
+32I,PM,10072018,183,81F Partly cloudy. Humid.,None,,"Humans, Dogs",Busy,,1,3,
+33A,PM,10182018,244,"Clear Skies, Breezy",Some,,"Humans, Dogs, Song birds",Calm,,1,4,26
+33B,PM,10102018,125,"81º F, Sunny",None,,Humans,Busy,,1,12,27
+33B,AM,10102018,199,"70º F, Nice, overcast",None,,"Humans, Dogs",Calm,,1,6,30
+33C,PM,10072018,81,"78º F, Cloudy",Some,,"Humans, Dogs, Birds",Busy,,1,4,20
+33C,AM,10122018,104,"59º F, mostly cloudy, windy (sunny by 9:30)",None,,"Humans, Dogs",Calm,,1,2,25
+33D,PM,10062018,35,"65º F, Overcast Drizzly",None,,Humans,Busy,Active Tennis and use of fields,1,3,30
+33D,AM,10172018,40,"51º F, clear, sunny, breezy",None,,Humans,Calm,,1,9,20
+33E,AM,10142018,10,"50º F, mostly sunny",None,,"Humans, Dogs, Birds, Humans playing tennis",Calm,Except the tennis court was loud,1,13,20
+33E,PM,10122018,250,"61º F, sunny, windy",Some,,"Humans, Dogs, Sparrows, Woodpecker",Busy,,1,9,21
+33F,PM,10122018,19,"60º F, sunny, clear",None,,"Humans, Dogs, Warbler (Internet says magnolia warbler), Unknown grey/brown bird",Calm,,1,6,27
+33F,AM,10082018,233,"65º F, drizzling",None,,"Humans, Dogs, blue jay",Calm,,1,2,25
+33G,PM,10062018,41,Calm,Some,,,Calm,,1,2,20
+33G,AM,10132018,145,"50º F, light rain",None,,"Humans, Dogs, Small birds",Busy,,1,3,22
+33H,AM,10192018,114,"46º F, Sunny, Breezy",,,"Humans, Dogs",Calm,,1,2,20
+33H,PM,10122018,248,"61º F, clear, breezy",Some,,"Humans, Hawks, Dogs",Busy,,1,0,25
+33I,PM,10062018,81,"65º F, drizzling",Some,,"Humans, Dogs",Calm,,1,9,25
+33I,AM,10082018,233,"66º F, Drizzly",Some,,"Humans, Dogs, Rat",Calm,,1,5,30
+34A,AM,10122018,104,"59º F, windy, sunny",None,,"Humans, Dogs, Pigeons, Birds (Assorted)",Calm,,1,3,25
+34A,PM,10132018,171,"60º F (?), partly cloudy",None,,"Humans, Dogs",Calm,,1,5,21
+34B,PM,10072018,81,"78º F, Cloudy",Some,,"Humans, Dogs",Busy,,1,1,30
+34C,PM,10122018,77,"61º F, sunny, light breeze",None,,"Humans, Dogs",Calm,"People on path, not in fields",1,4,23
+34C,AM,10072018,154,"70º F, Overcast",,,,Calm,,1,2,22
+34D,PM,10072018,1,"80º F, Humid. Overcast.",None,,"Humans, Dogs",Busy,,1,3,26
+34E,PM,10062018,212,"65º F, Drizzle",None,,"Humans, Dogs, Falcons, Small birds",Calm,,1,2,25
+34E,AM,10182018,247,"45º F, Brisk",None,,,,,1,0,20
+34F,AM,10072018,10,"70º F, Overcast",None,,"Humans, Dogs, Butterflies, Birds with red chest",Calm,,1,1,20
+34F,PM,10122018,35,"clear blue sky, breezy, getting cold",Some,,"Humans, Dogs",Calm,,1,1,30
+34G,PM,10062018,46,drizzling,Some,,"Humans, Dogs, Many Small birds",Calm,,1,2,20
+34G,AM,10182018,60,,,,,,,1,0,
+34H,PM,10062018,46,sprinkling,Some,,"Humans, Dogs, Children in costume",Calm,,1,7,20
+34H,AM,10072018,237,"76º F, Cloudy",Some,,"Humans, Dogs, Pigeons, Robins, Woodpeckers",Busy,,1,1,25
+34I,PM,10102018,42,77-80º F,Some,,,Calm,,1,7,47
+34I,AM,10122018,114,"59º F, misty, windy",Some,,Humans,Busy,,1,4,20
+35A,AM,10142018,10,"50º F, mostly sunny",None,,"Humans, Dogs, Birds",,Some dogs off leashes next to roads,1,8,22
+35A,PM,10132018,81,"54º F, partly cloudy",None,,"Humans, Dogs",Calm,,1,12,20
+35B,PM,10132018,45,"56° F, Partly Cloudy",None,,"Humans, Dogs, Rats, Ducks, Canada Geese",Calm,Foot traffic on the path,1,7,28
+35B,AM,10102018,223,"73º F, Cloud/Overcast, beginning to clear, humid",None,,"Humans, Dogs, Sparrows",Calm,,1,4,22
+35C,AM,10072018,209,"70º F, Overcast",None,,"Humans, Dogs",Busy,,1,6,21
+35C,PM,10132018,248,"56° F, Partly Cloudy, Breeze",,,"Humans, Dogs",Busy,,1,8,23
+35D,AM,10192018,186,"45º F, Sunny, Windy",None,,"Humans, Dogs, Birds, No Pigeons",Busy,"Chainsaw in distance, park golf carts zipping around, joggers",1,2,20
+35D,PM,10132018,258,,,,,,,1,9,23
+35E,PM,10062018,35,"68º F, Overcast Misty",Some,,"Humans, Dogs",Busy,,1,7,30
+35E,AM,10202018,114,"55º F, Overcast, Breezy",Some,,"Humans, Hawks, Dogs",Calm,,1,4,21
+35F,PM,10122018,19,"61º F, sunny, clear",None,,"Humans, Hawks, Dogs, Blue jay",Calm,,1,3,27
+35F,AM,10072018,237,"74º F, Cloudy",Some,,"Humans, Dogs",Busy,,1,1,1
+35G,AM,10072018,10,"70º F, Overcast",Some,,"Humans, Dogs, Birds.",Busy,,1,2,20
+35G,PM,10062018,196,64 F Cloudy & misty,,,,Moderate,,1,1,20
+35H,AM,10132018,61,"49º F, light rain",None,,"Humans, Dogs",Calm,,1,2,23
+35H,PM,10122018,248,"61º F, clear sky, breezy",None,,"Humans, Dogs",Busy,,1,0,25
+35I,PM,10062018,41,"68º F, misty, humid",Some,,"Humans, Dogs, Field mouse, Chipmunk",Calm,"Hilly, rocky terrain",1,2,20
+35I,AM,10132018,145,"50º F, light rain",Some,,"Humans, Dogs, Small birds",Calm,"Calm in hectare, but cars on [road]",1,1,23
+36A,AM,10182018,2,"45º F, Brisk, Clear",None,,"Humans, Dogs, Birds, Sparrows",Calm,,1,2,23
+36A,PM,10132018,243,"56º F, mostly sunny, very slight breeze",Some,,"Humans, Dogs, Pigeons, Chipmunk (?), Crickets",Busy,Busy (bypassers),1,9,67
+36B,AM,10132018,41,"50º F, rainy",Some,,"Humans, Dogs, Ducks",Calm,,1,4,23
+36B,PM,10132018,81,"54º F, partly cloudy",None,,"Humans, Birds (lots of screeching, not sure what kind of birds)",Calm,,1,5,20
+36C,PM,10132018,45,"56° F, Partly Cloudy",None,,"Humans, Dogs, Dogs (on path), Ducks & Geese (in pool)","Calm, Busy",Busy on West Dr,1,6,25
+36C,AM,10142018,243,"50º F, Calm, Fair, Sunny",None,,"Humans, Birds","Calm, Busy","Calm in woods, busy outside with fund walk",1,4,40
+36D,PM,10072018,1,"81º F, Humid. Overcast.",Some,,"Humans, Dogs, Turtle, Chipmunks",Calm,,1,2,32
+36D,AM,10072018,209,"70º F, Overcast",Some,,"Humans, Dogs, Chipmunks",Calm,,1,1,34
+36E,AM,10132018,41,"50º F, rainy",,,"Humans, Dogs, Chipmunk",Moderate,Lots of runners,1,3,20
+36E,PM,10122018,77,"61º F, sunny, light breeze",Some,,"Humans, Dogs, Rat",Calm,People on path,1,2,25
+36F,PM,10122018,35,"61º F, no clouds, clear sky, breeze",None,,"Humans, Robin",Busy,,1,7,25
+36F,AM,10172018,183,"50º F, sunny, clear",None,,"Humans, Dogs",Calm,Squeaky toys,1,5,20
+36G,AM,10182018,60,,,,,,,1,0,
+36G,PM,10122018,250,"61º F, sunny, windy",Some,,"Humans, Dogs, Pigeons, Robins",Busy,,1,2,20
+36H,PM,10082018,104,"66º F, foggy, drizzly",None,,"Humans, Hawks, Dogs",Busy,,1,2,40
+36H,AM,10102018,264,"72º F, Mostly cloudy, calm",None,,"Dogs, lots of Blue jays & Gackels",Calm,,1,2,26
+36I,AM,10172018,183,"50º F, sunny, clear",Some,,"Humans, Dogs, Many song birds: Wrens, Finches, Blue jays, Mourning dove",Calm,Traffic noises nearby,1,8,23
+36I,PM,10072018,183,"81º F, partly cloudy. Humid",None,,"Humans, Dogs, Blue jays. Robins, Sparrows",Busy,,1,13,30
+37A,AM,10122018,248,"59º F, partly cloudy, breeze",,,"Morning Dove, Crows",Calm,,1,1,23
+37B,AM,10182018,120,"45º F, Clear, Cold",None,,"Humans, Dogs, Birds",Calm,,1,6,25
+37B,PM,10132018,128,"55° F, mostly cloudy",,,Dogs,Calm,,1,5,25
+37C,PM,10132018,242,"55° F, Mostly Cloudy, Cool, Breezy",,,Chipmunks (2),Busy,,1,5,20
+37C,AM,10122018,248,"59º F, mostly cloudy, windy",Some,Beer party can debris,"Humans, Blue Jay, Warbler",Calm,,1,4,24
+37D,AM,10182018,2,"45º F, Clear",None,,"Humans, Falcon, Chipmunks",Calm,,1,2,31
+37D,PM,10142018,209,"57º F, overcast",Some,,"Humans, Chipmunks",Calm,,1,8,26
+37E,PM,10062018,40,"65º F, misty overcast",Some,,"Humans, Chipmunks, Lots of little birds",Calm,,1,9,20
+37E,AM,10132018,252,"50º F, light rain",None,,"Humans, Dogs, Birds",Calm,,1,5,22
+37F,AM,10102018,120,Overcast & humid but cool,Some,,"Humans, Dogs, Gull, Birds",Busy,,1,1,25
+37F,PM,10142018,243,"59º F, overcast, SW 6 mph",None,,Humans,Busy,,1,3,24
+37G,PM,10072018,114,"81º F, p/c. Humid",,,"Humans, Dogs",Busy,,1,9,24
+37H,PM,10062018,34,"65º F, misty, overcast",None,,"Humans, Dogs",Calm,Lots of humans walking quietly,1,6,23
+37H,AM,10182018,84,"45º F, Very Sunny, Chilly",,,"Humans, Dogs, Mourning doves (sic), Sparrows",Calm,,1,4,27
+37I,AM,10102018,120,Overcast & humid but cool,None,,"Humans, Dogs, Birds, Chipmunks",Calm,,1,5,25
+37I,PM,10062018,172,"~65º F, Misting & Cloudy",None,,"Humans, Dogs, Chipmunks (5+)",Calm,,1,2,22
+38A,AM,10192018,186,"45º F, Sunny Windy",None,,"Humans, Birds, No Pigeons",Busy,"Traffic, lawn mowing in 39A, kids on lawn in 39.",1,5,25
+38A,PM,10132018,210,"55º F, partly cloudly",Some,,"Humans, Dogs, Pigeons",Calm,,1,5,23
+38B,AM,10192018,7,"45º F, Sunny, Cold Breeze",None,,"Humans, Dogs",,,1,5,25
+38B,PM,10182018,114,"53º F, Sunny, Light Breeze",None,,"Humans, Hawks, Dogs",Busy,Lots of school kids,1,2,24
+38C,AM,10192018,7,"45º F, Sunny, Cold Breeze Wind",None,,"Humans, Dogs",Calm,,1,11,25
+38C,PM,10142018,217,"58º F, Cloudy",None,,"Humans, Sparrows",Busy,,1,10,25
+38D,PM,10062018,40,"65º F, Misty, overcast",Some,,"Humans, Small birds, Chipmunks",Moderate,,1,4,20
+38D,AM,10172018,135,"50º F, clear, sunny",None,,"Humans, Dogs, Migratory birds",Calm,,1,6,32
+38E,AM,10102018,105,"72º F, Bit cloudier",Some,,Chipmunks,Calm,,1,12,20
+38E,PM,10142018,243,"59º F, overcast, SW 6 mph",None,,"Humans, Chippys, Birds",Busy,,1,5,35
+38F,AM,10182018,114,"45º F, Clear",Some,,"Humans, Dogs",,,1,6,23
+38F,PM,10132018,222,"56º F, partly cloudy",None,,"Humans, Small birds, Chipmunks","Calm, Busy","Only small chunk near road was busy, the rest was unoccupied",1,6,22
+38G,PM,10202018,87,"61º F, Sunny and Clear",None,,Humans,Calm,,1,11,25
+38G,AM,10182018,114,"45º F, Sunny",,,"Humans, Dogs",Busy,,1,0,20
+38H,PM,10122018,64,"61º F, breeze, blue sky",Abundant,,"Humans, Birds",Calm,,1,1,30
+38H,AM,10192018,114,"46º F, Sunny",Some,,"Humans, Hawks, Dogs",Calm,,1,1,22
+38I,AM,10192018,37,"45º F, Sunny, Breezy",None,,"Humans, So many Birds!",Calm,,1,2,20
+38I,PM,10142018,100,"57º F, overcast",Some,,"Humans, Dogs, Rats, Chipmunks",Busy,,1,4,25
+39A,PM,10142018,238,"57º F, overcast",Some,,"Humans, Dogs",Busy,,1,3,23
+39A,AM,10132018,252,"50º F, light rain",None,,Humans,Calm,,1,1,20
+42D,AM,10142018,215,"50º F, mostly sunny",Some,,"Humans, Dogs, Pigeons",Busy,,1,3,25
+39B,PM,10142018,183,"57º F, Cloudy",None,,"Humans, Hawks, Dogs, Chipmunks, Blue jays","Calm, Busy","Calm in woods, busy, music nearby w/ tambourines, chanting, just outside so. edge of hectare",1,6,20
+39B,AM,10182018,262,"45º F, Clear, Brisk",,,"Humans, Dogs",Busy,,1,1,26
+39C,AM,10172018,120,"50º F, clear, sunny",None,,"Humans, Dogs",Busy,,1,4,30
+39C,PM,10062018,196,"64º F, Cloudy & Misty",,,"Hawks, Chipmunk",Moderate,,1,4,20
+39D,PM,10122018,22,"61º F, clear sky, windy",Some,,"Humans, Chipmunk, Warbler",Calm,,1,4,32
+39D,AM,10082018,224,"67º F, cloudy, drizzling",Some,,Humans,Calm,,1,6,33
+39E,PM,10132018,3,"59º F, sunny, slightly cloudy",Abundant,,"Humans, Dogs, Birds, Chipmunks",Calm,,1,2,26
+39E,AM,10182018,120,"45º F, Clear, Brisk",Some,,"Humans, Dogs, Birds",Busy,,1,5,28
+39F,AM,10142018,17,"51º F, mostly sunny",None,,"Humans, Dogs, Chipmunks","Calm, Busy","""no woods""",1,5,25
+39F,PM,10062018,34,"65º F, misty, overcast",None,,"Humans, Dogs",Calm,,1,4,21
+39G,AM,10182018,244,"45º F, Windy, Clear Skies",Some,,"Humans, Song birds",Calm,,1,2,24
+39H,PM,10132018,236,"55° F, mostly cloudy",None,,"Humans, Hawks, Dogs",Busy,,1,3,25
+39H,AM,10072018,259,,,,"Humans, Dogs",Busy,,1,4,
+39I,AM,10192018,37,"45º F, Sunny, Breezy",None,,"Humans, Hawks, Dogs",Calm,,1,0,25
+40A,PM,10142018,99,"57º F, overcast",,,Humans,,,1,6,
+40A,AM,10102018,105,"72º F, Absolute perfection",Some,,Robins?,Moderate,Noise pollution,1,4,25
+40B,AM,10192018,253,"47º F, Sunny, Breezy",Some,,"Humans, Dogs",Calm,,1,9,40
+40C,AM,10172018,135,"50º F, clear, sunny",None,,"Humans, Chipmunk, migratory birds",Calm,,1,7,23
+40D,AM,10132018,40,"50º F, light rain",Abundant,,Humans (a trail runner),Calm,,1,7,20
+40D,PM,10132018,210,"56º F, Partly Cloudy",Abundant,,"Humans, Dogs, Chipmunk",Calm,,1,7,27
+40E,AM,10142018,215,"50º F, mostly sunny",Some,,"Humans, Hawks, Dogs",Busy,,1,4,25
+40F,AM,10182018,84,"45º F, Clear, Sunny",,,"Humans, Dogs, Ducks, Mainly female mallards, Canadian geese, also Small birds Sparrows?",Calm,,1,0,27
+40F,PM,10062018,172,"~65º F, cloudy misting",Some,,Dogs,Calm,,1,3,28
+40G,AM,10072018,54,"70º F, Overcast",,,"Humans, Dogs, Finches",Calm,,1,2,
+40H,PM,10082018,49,"overcast, dusk",None,,"Humans, Dogs, Woodpecker, Chipmunk",Calm,,1,0,25
+40H,AM,10172018,104,"52º F, breezy, sunny",None,,"Humans, Dogs, Geese",Calm,,1,2,20
+40I,AM,10182018,27,"45º F, Clear",,,"Humans, Hawks, Ducks",Busy,,1,2,20
+41A,PM,10072018,30,"81º F, Partly Cloudy",Some,,"Humans, Dogs, Pigeons, Chipmunks",Busy,,1,6,25
+41A,AM,10132018,40,"50º F, light rain",Abundant,,"Humans, Dogs, Birds, Chipmunks",Calm,,1,1,20
+41B,PM,10142018,111,"57º F, overcast",Some,,"Dogs, Chipmunks (at least 3)",Calm,,1,5,45
+41C,PM,10072018,30,"81º F, Partly Cloudy",,,"Humans, Birds. Chipmunks",,,1,4,25
+41C,AM,10172018,120,"50º F, clear, sunny",Abundant,,"Humans, Dogs, Birds",Calm,,1,7,30
+41D,PM,10142018,26,"57º F, cloudy",Some,,"Humans, Hawks, Dogs, Chipmunk",Calm,,1,5,30
+41D,AM,10142018,176,"50º F, mostly sunny",Some,,"Humans, Dogs",Calm,,1,5,
+41E,AM,10072018,114,"71º F, o/c",Some,,"Humans, Dogs",Busy,Runners,1,6,25
+41F,PM,10192018,114,"60º F, p/c bluh",,,Humans,,,1,2,
+41F,AM,10192018,183,"45º F, Sunny, Breezy",None,,"Humans, Dogs, Geese, Mallard Nests","Calm, Busy","Started busy, then very calm",1,0,21
+41G,PM,10142018,10,"57º F, overcast",Some,,"Humans, Ducks, Birds",Calm,,1,0,20
+41G,AM,10132018,114,"50º F, sprinkling",Some,,"Humans, Dogs",Calm,,1,2,20
+41H,PM,10082018,49,"cool, overcast",,,"Humans, Dogs, Pigeons, Turtles, Ducks, Geese",,,1,0,15
+41H,AM,10172018,104,"51º F, sunny, light breeze",Some,,"Humans, Dogs, Geese",Calm,,1,0,30
+41I,AM,10182018,27,"45º F, Clear",,,"Humans, Dogs, Pigeons",Busy,,1,2,20
+41I,PM,10172018,114,"63º F, partly cloudy, breezy",Some,,"Humans, Dogs, Pigeons, Geese, Ducks",Busy,,1,1,22
+42A,PM,10142018,12,"57º F, mostly cloudy",Some,,"Humans, Dogs, Sparrows",Busy,He took a 20-minute lunch break in the middle of shift.,1,1,28
+42A,AM,10192018,253,"45º F, Sunny Breezy",Some,,"Humans, Dogs, Pigeons, Rat, Chipmunk",Calm,,1,1,30
+42B,PM,10082018,134,"64º F, cloudy, slight drizzle, humid",Some,,"Humans, Dogs",Busy,,1,0,25
+42C,AM,10072018,114,71º F,,,"Humans, Dogs",Busy,,1,4,27
+42C,PM,10132018,128,"55° F, mostly cloudy",Some,,"Humans, Dogs, Chipmunk",Busy,,1,6,26
+42D,PM,10132018,3,"55º F, cloudy (mostly)",Abundant,On street,"Humans, Dogs, Birds, Chipmunks, Rats",Calm,,1,4,28
+19H,PM,10082018,"164,165",cloudy,,,,Calm,,2,1,5
+42E,PM,10122018,22,"61º F, clear sky, windy",Some,,"Humans, Dogs, Pigeons",Busy,,1,6,20
+42E,AM,10082018,224,"65º F, cloudy, drizzling",Abundant,,Humans,Busy,Construction just outside sector,1,0,21
+42F,AM,10192018,194,"66º F, Calm and some Breeze",Abundant,,"Humans, Dogs, Geese",Busy,,1,2,20
+42G,AM,10182018,244,"45º F, Breezy, Clear Skies",,,"Humans, Dogs, Pigeons, other Song birds",Calm,,1,3,25
+42H,PM,10142018,39,"57º F, overcast",Some,,"Humans, Dogs, Pigeons",Busy,,1,5,30
+42H,AM,10192018,194,"66º F, Calm, Sunny",Some,,"Humans, Dogs, Birds",Calm,,1,2,25
+42I,PM,10142018,79,"57º F, cloudy",None,,"Humans, Dogs, Pigeons, Sparrows",Calm,,1,3,25
+42I,AM,10192018,183,"45º F, Sunny, Breezy",None,,"Humans, Dogs, Geese (a few)",Calm,,1,0,20
+9I,AM,10142018,145,"54º F, mostly sunny",Some,,"Humans, Dogs, Pigeons, Small birds",Busy,,1,9,22
+01C,AM,10122018,"225,226","cool, sunny",Some,,"Humans, Dogs, Cats",Calm,,2,2,30
+01D,PM,10072018,"3,334","80º F, Cloudy",None,,"Humans, Dogs, Pigeons, Sparrows",,,2,7,25
+01E,PM,10072018,"3,334","80º F, Sunny",None,,"Humans, Dogs, Pigeons,  Robins. Blue jays",Busy,,2,3,20
+01I,PM,10122018,"225,226","cold, sunny",Some,,"Humans, Hawks, Dogs, Pigeons, Cats",Busy,,2,4,70
+02B,PM,10132018,"245,246","54° F, Sunny, Breezy",None,,"Humans, Dogs, Pigeons, Robins, Sparrows","Calm, Busy",West Drive Busy,2,9,22
+02B,AM,10102018,"6,263",70º F Partly cloudy,Some,,"Humans, Dogs, Pigeons",Busy,,2,8,25
+02C,PM,10132018,"245,246","54° F, Sunny, Breezy",None,,"Humans, Robins, Sparrows","Calm, Busy",Fenced Areas / West Drive,2,12,24
+02F,PM,10142018,"9,798","57º F, cloudy",None,,"Humans, Dogs, Pigeons, Chickadees",Busy,,2,12,23
+03A,AM,10122018,"225,226","sunny, cool",None,,"Humans (Notes), Dogs, Cats",Calm,,2,3,45
+03B,AM,10102018,"6,263",70º F Cloudy,Some,,"Humans, Dogs",Busy,,2,10,30
+03F,PM,10132018,"3,031","13° C, Partly Cloudy",,,"Humans, Dogs, Birds",Busy,,2,7,20
+03H,PM,10142018,"9,798","57º F, cloudy",Some,,"Humans, Dogs, Pigeons, Chickadees",Busy,,2,7,25
+04C,AM,10062018,73,"65º F, cloudy",None,,"Humans, Dogs",Calm,,2,5,20
+04F,PM,10132018,"3,031","13° C, Partly Cloudy",None,,"Humans, Dogs, Birds, Rats (Fat), Inchworm",Busy,,2,4,20
+06E,AM,10142018,"146,147","50º F, mostly sunny",Some,,"Humans, Dogs, Small birds",Calm,,2,1,22
+07C,PM,10202018,"189,190","62º F, Sunny",None,,"Humans, Dogs, Sparrows, Other Birds",Calm,,2,6,23
+07E,PM,10132018,"112,113","56° F, Cloudy, Light Wind",None,,"Humans, Dogs, Sparrows",Busy,,2,5,39
+07H,AM,10062018,"5,051","60s, cloudy, slight drizzle",Some,,"Sparrows, Butterflies",Busy,,2,16,30
+08C,PM,10132018,"197,198","54° F, Bit Breezy, Cool",Some,,"Humans, Dogs, Pigeons",Calm,,2,8,22
+09B,PM,10132018,"197,198","54° F, Breeze, Cool",None,,"Humans, Dogs, Rats (Notes)",Calm,,2,10,22
+09H,AM,10062018,"2,526","64º F, cloudy",Some,,"Humans, Dogs",Busy,,2,6,20
+10B,AM,10062018,"7,172",,Some,,"Humans, Dogs, Pigeons",Busy,,2,4,35
+10C,PM,10132018,"112,113","56° F, Cloudy",Some,,"Humans, Dogs, Sparrow, Starlings, Cardinals, Crows",Busy,,2,4,27
+10G,AM,10062018,"136,137","64º F, overcast",Some,,"Humans, Dogs, Sparrows",Busy,,2,11,58
+10H,AM,10142018,"146,147","50º F, cloudy",None,,"Humans, Dogs, Small birds",Busy,,2,6,23
+11D,PM,10062018,"2,829",65º F,None,,"Humans, Dogs, Horses",Busy,,2,5,25
+11H,PM,10132018,"129,130","55º F, sunny",Abundant,,Humans,Busy,,2,4,20
+11I,PM,10122018,"4,243","58-60º F, sunny",None,,"Humans, Dogs, Birds, Mice",Calm,,2,7,23
+14G,PM,10132018,"129,130","55º F, sunny",Abundant,,Humans,Busy,,2,1,20
+15A,AM,10072018,"2,021","71º F, Humid. Cloudy.",Some,,"Humans, Dogs, Sparrows. Butterflies",Busy,,2,2,20
+15D,AM,10072018,"2,021","71º F, humid cloudy",Some,,"Humans, Dogs",Calm,,2,8,
+15I,PM,10122018,"4,243","58-60º F, sunny",Some,,"Humans, Dogs, Birds",Busy,,2,7,25
+16H,PM,10142018,"5,253","cool, dusk",Some,,"Humans, Dogs, Birds","Calm, Busy",,2,5,25
+16I,PM,10142018,"5,253","cool, dusk",Some,,"Humans, Dogs, Birds",Calm,,2,0,20
+17C,AM,10182018,"213,214","Low 40s, Windy, Sunny",None,,"Dogs, Birds",Calm,,2,0,25
+18D,AM,10182018,"213,214","Low 40s, Windy, Sunny",Some,,Humans,Busy,,2,4,25
+18F,PM,10082018,"164,165","cloudy, misting rain",None,,"Humans, Dogs, Mallard, Sparrow",Busy,,2,2,16
+18F,AM,10142018,"8,990",49º F,None,,"Humans, Dogs, Birds",Busy,,2,2,24
+18G,AM,10142018,"8,990","49º F, sunny",None,,Birds,Calm,,2,3,25
+19B,PM,10182018,"9,192","51º F, Clear",None,,"Humans, Dogs, Birds, Robins, Mourning Doves",Busy,,2,5,30
+19C,PM,10182018,"207,208","51º F, Clear",None,,"Humans, Hawks, Dogs, Pigeons, Robin",Busy,,2,8,30
+20E,PM,10062018,"8,586","65º F, light drizzle",None,,Humans,Calm,,2,0,15
+21A,AM,10192018,"213,214","Clear, Calm, No wind",Some,,"Humans, Dogs, Birds",Calm,,2,9,25
+21A,PM,10062018,"8,586","65º F, Drizzle",Abundant,,"Humans, Dogs",Busy,,2,0,27
+21B,AM,10192018,"213,214","Mid 40s, Clear, No Wind",Some,,"Humans, Dogs, Pigeons, Birds",Calm,,2,7,25
+21C,PM,10062018,"1,415","65º F, Slightly Drizzling",Some,,Humans,Busy,,2,1,25
+21D,AM,10082018,"156,157","70º F, cloudy, misty",None,,"Humans, Dogs, Birds",Busy,,2,6,20
+22A,AM,10082018,"156,157","70º F, cloudy",Some,,"Dogs, Birds",Busy,,2,6,20
+22C,PM,10062018,"1,415","65º F, Drizzling",None,,"Humans, Dogs",Busy,,2,13,30
+22F,AM,10072018,"5,859","72º F, Foggy",Some,,"Humans, Dogs, Sparrow",Moderate,In between,2,7,20
+22I,AM,10072018,"5,859","72º F, Foggy",Some,,"Humans, Dogs, Starlings, Sparrows, Blue jays",Busy,,2,3,20
+23A,PM,10072018,"192,193",,Some,,"Humans, Dogs",Busy,,2,0,20
+23D,PM,10072018,"192,193",,Some,,"Humans, Rats (by reservoir)",Busy,,2,0,20
+23G,PM,10122018,"3,032","artsy lighting, breezy",Some,,Humans,Calm,,2,0,20
+24A,PM,10072018,"3,132","80º F, Humid. Overcast. No rain.",None,,"Humans, Dogs, Little Birds",Moderate,In between calm and busy,2,5,23
+24I,PM,10072018,45,Humid. Overcast.,None,,"Humans, Dogs, Birds",Calm,,2,0,30
+25A,PM,10072018,"3,132","79º F, Humid. Overcast. No rain.",None,,"Humans, Dogs, Raccoons, Little Birds, Raccoon sleeping in tree","Calm, Busy",Calm on grass. Busy on road.,2,1,21
+27B,PM,10062018,155,"Misty, rain, cool",None,,"Pigeons, Robins",Calm,,2,2,20
+27I,PM,10202018,"3,334","60º F, Sunny",Some,,"Humans, Dogs, Pigeons",Busy,,2,5,20
+30H,PM,10062018,"159,160",Raining,,,Ducks,,,2,1,11
+30I,PM,10062018,"159,160",,,,,,,2,7,23
+32D,AM,10132018,"187,188","48º F, sprinkling",,,"Humans, Dogs",Busy,,2,6,20
+33A,AM,10082018,"139,140","65º F, drizzle",,,,,,2,1,30
+34B,AM,10132018,"187,188","50º F, light rain",,,Humans,Busy,,2,3,23
+34D,AM,10082018,"139,140","65º F, drizzle",Some,,Humans,Calm,,2,3,25
+37A,PM,10132018,"250,251","55º F, mostly cloudy",Abundant,,"Humans, Dogs, Chipmunk, Sparrow",Calm,,2,2,20
+37G,AM,10142018,"139,140","50º F, mostly sunny",,,"Humans, Dogs",Calm,,2,6,27
+39G,PM,10132018,"6,768","Sunny, cloudy, chilly, damp, slightly warm",Some,,"Humans, Sleeping possum, Chipmunk, Blue jay",Calm,,2,7,24
+39I,PM,10132018,"174,175","53º F, mostly cloudy",,,"Humans, Dogs, Pigeons, Blue jays, American Robin, Chipmunk",Busy,,2,4,23
+40B,PM,10142018,"152,153","57º F, cloudy",None,,"Humans, Hawks, Chipmunks",Calm,,2,8,35
+40C,PM,10062018,"174,175",Overcast lite rain,,,"Humans, Dogs, Chimney Swifts, Birds, Chipmunk",Calm,,2,8,25
+40E,PM,10172018,"139,140","63º F, Partly Cloudy",,,,,,2,3,
+40G,PM,10132018,"174,175","55º F, partly cloudy",,,"Humans, Pigeons, Chipmunk",Calm,,2,6,22
+40I,PM,10132018,"6,768","55º F, partly cloudy, chilly, breezy, some sun",Some,,"Humans, Hawks, Dogs, Pigeons, Duck",Busy,,2,1,25
+41B,AM,10102018,74,Humid,Some,,,Calm,,2,11,32
+41E,PM,10132018,"250,251","55º F, partly cloudy",Some,,"Humans, Dogs, Chipmunk, Sparrows","Calm, Busy","Calm (in forest), Busy (near road)",2,5,21
+42B,AM,10142018,176,,None,,"Humans, Dogs",Calm,,2,2,
+42F,PM,10172018,"139,140","62º F, Partly Sunny/Cloudy",,,"Mallards, Canadian Geese",,,2,4,
+42G,PM,10142018,"3,839",overcast,Some,,"Humans, Hawks, Dogs, Pigeons, Geese",Busy,,2,3,25
+04G,AM,10062018,"142,143,144","65º F, cloudy, sprinkling of rain",None,,"Humans, Dogs, Horses",Busy,,3,5,24
+06G,AM,10082018,48,"68º F, humid",None,,"Humans, Dogs",Calm,,3,6,20
+07F,AM,10082018,48,"68º F, chilly, humid",Some,,"Humans, Dogs",Calm,,3,17,22
+08A,AM,10132018,"179,180,181","55º F, rainy",Some,,Pigeons,Calm,,3,6,20
+08B,AM,10072018,227,"70º F, Muggy",None,,"Humans, Dogs, Pigeons, Doves. Grackle Birds",Busy,,3,9,25
+09A,AM,10132018,"179,180,181",,Some,,"Humans, Dogs, Pigeons, Rats, Blue jays",Busy,,3,12,20
+11F,PM,10062018,168,,Some,,"Humans, Dogs, Pigeons",Busy,,3,3,26
+12G,PM,10072018,106.107108,80º F,None,,"Humans, Cat bird",Busy,,3,7,29
+12H,PM,10072018,106.107108,79º F,None,,"Humans, Sparrows",Busy,,3,8,30
+26A,PM,10062018,185,,,,"Horse, Pony",,,3,6,30
