@@ -1,1 +1,14 @@
+/* Heatmap-specific styles */
+.heatmap-cell {
+    stroke: #ccc;
+    stroke-width: 1px;
+}
 
+.axis-label {
+    font-size: 12px;
+}
+
+#heatmap {
+    margin: auto;
+    width: 80%;
+}
