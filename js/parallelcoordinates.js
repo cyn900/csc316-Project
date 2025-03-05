@@ -230,7 +230,7 @@
                     // For simplicity, assume each age group for an activity appears only once.
                     activityAgePositions[actKey][ageKey] = { start: y1_top, end: y1_bot };
 
-                    const color = ageKey === "Adult" ? "#bf1b1b" : "#D2691E";
+                    const color = ageKey === "Adult" ? "#D2691E" : "#bf1b1b";
                     const pathData = ribbonPath(x("Age"), x("Activity"), y0_top, y0_bot, y1_top, y1_bot);
                     chartG.append("path")
                         .attr("d", pathData)
@@ -295,7 +295,7 @@
                         const rightPos = (interactionAgePositions[interKey] && interactionAgePositions[interKey][age]) || null;
                         if (leftPos && rightPos) {
                             const pathData = ribbonPath(x("Activity"), x("Interaction"), leftPos.start, leftPos.end, rightPos.start, rightPos.end);
-                            const color = age === "Adult" ? "#bf1b1b" : "#D2691E";
+                            const color = age === "Adult" ? "#D2691E" : "#bf1b1b";
                             chartG.append("path")
                                 .attr("d", pathData)
                                 .attr("fill", color)
