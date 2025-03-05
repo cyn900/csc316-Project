@@ -18,7 +18,7 @@
     // Create title
     controlContainer.append("h2")
         .attr("class", "chart-title")
-        .text("Animal Interaction Flows");
+        .text("Comparing Juvenile and Adult Squirrels: Activities and Human Interaction Patterns");
 
     // Create controls
     const controls = controlContainer.append("div")
