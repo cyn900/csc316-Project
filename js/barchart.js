@@ -15,23 +15,23 @@
 
     // Create header section
     const header = mainContainer.append("header")
-        .attr("class", "header-section");
+        .attr("class", "barchart-header-section");
 
     header.append("h1")
-        .attr("class", "main-title")
+        .attr("class", "barchart-main-title")
         .text("FIRST TITLE WOULD BE");
 
     // Create content grid container
     const contentGrid = mainContainer.append("div")
-        .attr("class", "content-grid");
+        .attr("class", "barchart-content-grid");
 
     // Create filter section at the top
     const filterSection = contentGrid.append("div")
-        .attr("class", "filter-section");
+        .attr("class", "barchart-filter-section");
 
     // Move filter container creation into filter section
     const filterContainer = filterSection.append("div")
-        .attr("class", "filter-container");
+        .attr("class", "barchart-filter-container");
 
     // Add filter groups with headers
     const filterGroups = [
@@ -74,21 +74,21 @@
     filterGroups.forEach(group => {
         const groupContainer = filterContainer
             .append("div")
-            .attr("class", "filter-group");
+            .attr("class", "barchart-filter-group");
 
         groupContainer
             .append("h3")
-            .attr("class", "filter-title")
+            .attr("class", "barchart-filter-title")
             .text(group.title);
 
         const buttonContainer = groupContainer
             .append("div")
-            .attr("class", "button-container");
+            .attr("class", "barchart-button-container");
 
         group.options.forEach(option => {
             buttonContainer
                 .append("button")
-                .attr("class", "filter-btn active")
+                .attr("class", "barchart-filter-btn active")
                 .attr("data-type", group.type)
                 .attr("data-value", option.value)
                 .text(option.label);
@@ -97,11 +97,11 @@
 
     // Create visualization container
     const visualizationContainer = contentGrid.append("div")
-        .attr("class", "visualization-container");
+        .attr("class", "barchart-visualization-container");
 
     // Create chart section
     const chartSection = visualizationContainer.append("div")
-        .attr("class", "chart-section");
+        .attr("class", "barchart-chart-section");
 
     // Set up chart dimensions
     const margin = {top: 40, right: 20, bottom: 120, left: 80};
@@ -123,7 +123,7 @@
 
     // Add chart title
     g.append("text")
-        .attr("class", "chart-subtitle")
+        .attr("class", "barchart-chart-subtitle")
         .attr("x", width / 2)
         .attr("y", -margin.top / 2)
         .attr("text-anchor", "middle")
@@ -131,22 +131,22 @@
 
     // Create image section
     const imageSection = visualizationContainer.append("div")
-        .attr("class", "image-section");
+        .attr("class", "barchart-image-section");
 
     imageSection.append("p")
-        .attr("class", "interaction-text")
+        .attr("class", "barchart-interaction-text")
         .text("Interactive Elements: Filter by age (adult/juvenile), color (black/gray/cinnamon/etc), time (am/pm) adn location (ground/above) to see how different factors affect the count. Tooltip showing the detailed information.");
 
     imageSection.append("div")
-        .attr("class", "squirrel-container")
+        .attr("class", "barchart-squirrel-container")
         .html(`
-            <img src="img/Squirrel.png" alt="Decorative squirrel illustration" class="squirrel-image">
+            <img src="img/Squirrel.png" alt="Decorative squirrel illustration" class="barchart-squirrel-image">
         `);
 
     // Create tooltip
     const tooltip = d3.select("#barchart")
         .append("div")
-        .attr("class", "tooltip")
+        .attr("class", "barchart-tooltip")
         .style("opacity", 0);
 
     // Initialize current filters
@@ -194,11 +194,11 @@
         const xAxis = d3.axisBottom(xScale);
         const yAxis = d3.axisLeft(yScale);
 
-        g.selectAll(".x-axis").remove();
-        g.selectAll(".y-axis").remove();
+        g.selectAll(".barchart-x-axis").remove();
+        g.selectAll(".barchart-y-axis").remove();
 
         g.append("g")
-            .attr("class", "x-axis")
+            .attr("class", "barchart-x-axis")
             .attr("transform", `translate(0,${height})`)
             .call(xAxis)
             .selectAll("text")
@@ -208,18 +208,18 @@
             .attr("dy", ".5em");
 
         g.append("g")
-            .attr("class", "y-axis")
+            .attr("class", "barchart-y-axis")
             .call(yAxis.ticks(5).tickSize(-width));
 
         // Update bars
-        const bars = g.selectAll(".bar")
+        const bars = g.selectAll(".barchart-bar")
             .data(activities);
 
         bars.exit().remove();
 
         const barsEnter = bars.enter()
             .append("rect")
-            .attr("class", "bar");
+            .attr("class", "barchart-bar");
 
         bars.merge(barsEnter)
             .transition()
@@ -267,7 +267,7 @@
     // Load data and initialize chart
     d3.csv("data/individual.csv").then(function(data) {
         // Add click handlers to filter buttons
-        d3.selectAll(".filter-btn").on("click", function() {
+        d3.selectAll(".barchart-filter-btn").on("click", function() {
             const button = d3.select(this);
             const filterType = button.attr("data-type");
             const filterValue = button.attr("data-value");
@@ -309,12 +309,12 @@
             background: transparent;
         }
 
-        .header-section {
+        .barchart-header-section {
             text-align: center;
             margin-bottom: 1rem;
         }
 
-        .main-title {
+        .barchart-main-title {
             color: #000;
             font-size: 2.5rem;
             font-weight: bold;
@@ -323,23 +323,23 @@
             border-bottom: 2px solid #000;
         }
 
-        .content-grid {
+        .barchart-content-grid {
             display: flex;
             flex-direction: column;
             gap: 2rem;
         }
 
-        .filter-section {
+        .barchart-filter-section {
             width: 100%;
         }
 
-        .filter-container {
+        .barchart-filter-container {
             display: flex;
             flex-wrap: wrap;
             gap: 1.5rem;
         }
 
-        .visualization-container {
+        .barchart-visualization-container {
             display: grid;
             grid-template-columns: 7fr 3fr;
             gap: 2rem;
@@ -347,7 +347,7 @@
             width: 100%;
         }
 
-        .chart-section {
+        .barchart-chart-section {
             width: 100%;
             min-width: 600px;
             padding: 30px;
@@ -356,7 +356,7 @@
             background: transparent;
         }
 
-        .chart-section svg {
+        .barchart-chart-section svg {
             display: block;
             width: 100%;
             height: auto;
@@ -364,62 +364,62 @@
             background: transparent;
         }
 
-        .chart-subtitle {
+        .barchart-chart-subtitle {
             font-size: 16px;
             font-weight: normal;
         }
 
-        .image-section {
+        .barchart-image-section {
             padding: 1rem;
             display: flex;
             flex-direction: column;
             gap: 1rem;
         }
 
-        .interaction-text {
+        .barchart-interaction-text {
             font-size: 0.9rem;
             line-height: 1.6;
             margin: 0;
         }
 
-        .squirrel-container {
+        .barchart-squirrel-container {
             position: relative;
         }
 
 
-        .squirrel-image {
+        .barchart-squirrel-image {
             width: 100%;
             height: auto;
             display: block;
         }
 
-        .squirrel-caption {
+        .barchart-squirrel-caption {
             margin: 0.5rem 0 0 0;
             font-size: 0.9rem;
         }
 
-        .x-axis path, .y-axis path {
+        .barchart-x-axis path, .barchart-y-axis path {
             stroke: rgba(0, 0, 0, 0.2);
             stroke-width: 1px;
         }
         
-        .x-axis line, .y-axis line {
+        .barchart-x-axis line, .barchart-y-axis line {
             stroke: #e0e0e0;
             stroke-width: 1px;
             stroke-dasharray: 2,2;
         }
         
-        .x-axis text {
+        .barchart-x-axis text {
             font-size: 12px;
             transform: rotate(-45deg);
             text-anchor: end;
         }
 
-        .y-axis text {
+        .barchart-y-axis text {
             font-size: 12px;
         }
 
-        .tooltip {
+        .barchart-tooltip {
             position: absolute;
             background: rgba(255, 255, 255, 0.9);
             padding: 8px 12px;
@@ -433,12 +433,12 @@
         }
 
         @media (max-width: 1024px) {
-            .visualization-container {
+            .barchart-visualization-container {
                 grid-template-columns: 1fr;
             }
         }
 
-        .filter-btn {
+        .barchart-filter-btn {
             padding: 0.5rem 1rem;
             background: #000000;
             color: white;
@@ -449,35 +449,35 @@
             transition: opacity 0.2s;
         }
 
-        .filter-btn:not(.active) {
+        .barchart-filter-btn:not(.active) {
             opacity: 0.6;
         }
 
-        .filter-btn:hover {
+        .barchart-filter-btn:hover {
             opacity: 0.8;
         }
 
-        .button-container {
+        .barchart-button-container {
             display: flex;
             gap: 1rem;
         }
 
-        .bar {
+        .barchart-bar {
             transition: fill 0.2s;
         }
 
-        .y-axis .tick line {
+        .barchart-y-axis .tick line {
             stroke: rgba(0, 0, 0, 0.1);
             stroke-width: 1px;
             stroke-dasharray: 2,2;
         }
 
-        .x-axis path.domain {
+        .barchart-x-axis path.domain {
             stroke: #ccc;
             stroke-width: 1px;
         }
 
-        .y-axis path.domain {
+        .barchart-y-axis path.domain {
             stroke: #ccc;
             stroke-width: 1px;
         }
