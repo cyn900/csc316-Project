@@ -1,23 +1,36 @@
 (function() {
     // Set up color
     const colors = {
-        primary: "#2c3e50",
-        accent: "#e74c3c",
-        background: "#ecf0f1",
-        bars: "#3498db",
-        barsHover: "#2980b9",
-        text: "#2c3e50"
+        primary: "#000000",
+        bars: "#bf1b1b", // Changed from #8B4513 to #bf1b1b
+        barsHover: "#a01616", // Slightly darker shade for hover
+        text: "#333333"
     };
 
-    // Create title
-    d3.select("#barchart")
-        .append("h2")
-        .attr("class", "chart-title")
-        .text("Squirrel Behavior Analysis");
+    // Create main container
+    const mainContainer = d3.select("#barchart")
+        .style("display", "flex")
+        .style("flex-direction", "column")
+        .style("gap", "2rem");
 
-    // Create filter buttons container
-    const filterContainer = d3.select("#barchart")
-        .append("div")
+    // Create header section
+    const header = mainContainer.append("header")
+        .attr("class", "header-section");
+
+    header.append("h1")
+        .attr("class", "main-title")
+        .text("FIRST TITLE WOULD BE");
+
+    // Create content grid container
+    const contentGrid = mainContainer.append("div")
+        .attr("class", "content-grid");
+
+    // Create filter section at the top
+    const filterSection = contentGrid.append("div")
+        .attr("class", "filter-section");
+
+    // Move filter container creation into filter section
+    const filterContainer = filterSection.append("div")
         .attr("class", "filter-container");
 
     // Add filter groups with headers
@@ -82,28 +95,29 @@
         });
     });
 
+    // Create visualization container
+    const visualizationContainer = contentGrid.append("div")
+        .attr("class", "visualization-container");
+
+    // Create chart section
+    const chartSection = visualizationContainer.append("div")
+        .attr("class", "chart-section");
+
     // Set up chart dimensions
-    const margin = {top: 40, right: 30, bottom: 100, left: 60};
-    const width = 800 - margin.left - margin.right;
-    const height = 500 - margin.top - margin.bottom;
+    const margin = {top: 40, right: 20, bottom: 120, left: 80};
+    const width = 1000 - margin.left - margin.right;
+    const height = 600 - margin.top - margin.bottom;
 
-    // Create tooltip
-    const tooltip = d3.select("#barchart")
-        .append("div")
-        .attr("class", "tooltip")
-        .style("opacity", 0);
-
-    // Create chart container
-    const chartContainer = d3.select("#barchart")
-        .append("div")
-        .attr("class", "chart-container");
-
-    // Create SVG container
-    const svg = chartContainer
+    // Create SVG container inside chart section
+    const svg = chartSection
         .append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom);
+        .attr("viewBox", `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`)
+        .attr("width", "100%")
+        .attr("height", "100%")
+        .style("min-width", "600px") // Ensure minimum width
+        .style("min-height", "400px"); // Ensure minimum height
 
+    // Make sure the g element is created after the background rect
     const g = svg.append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
@@ -114,6 +128,26 @@
         .attr("y", -margin.top / 2)
         .attr("text-anchor", "middle")
         .text("Observed Behaviors");
+
+    // Create image section
+    const imageSection = visualizationContainer.append("div")
+        .attr("class", "image-section");
+
+    imageSection.append("p")
+        .attr("class", "interaction-text")
+        .text("Interactive Elements: Filter by age (adult/juvenile), color (black/gray/cinnamon/etc), time (am/pm) adn location (ground/above) to see how different factors affect the count. Tooltip showing the detailed information.");
+
+    imageSection.append("div")
+        .attr("class", "squirrel-container")
+        .html(`
+            <img src="img/Squirrel.png" alt="Decorative squirrel illustration" class="squirrel-image">
+        `);
+
+    // Create tooltip
+    const tooltip = d3.select("#barchart")
+        .append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
 
     // Initialize current filters
     let currentFilters = {
@@ -150,7 +184,7 @@
         const xScale = d3.scaleBand()
             .domain(activities.map(d => d.name))
             .range([0, width])
-            .padding(0.1);
+            .padding(0.2);
 
         const yScale = d3.scaleLinear()
             .domain([0, d3.max(activities, d => d.count)])
@@ -169,19 +203,13 @@
             .call(xAxis)
             .selectAll("text")
             .style("text-anchor", "end")
+            .attr("transform", "rotate(-45)")
             .attr("dx", "-.8em")
-            .attr("dy", ".15em")
-            .attr("transform", "rotate(-45)");
+            .attr("dy", ".5em");
 
         g.append("g")
             .attr("class", "y-axis")
-            .call(yAxis)
-            .append("text")
-            .attr("transform", "rotate(-90)")
-            .attr("y", -margin.left + 20)
-            .attr("x", -(height / 2))
-            .attr("text-anchor", "middle")
-            .text("Number of Observations");
+            .call(yAxis.ticks(5).tickSize(-width));
 
         // Update bars
         const bars = g.selectAll(".bar")
@@ -200,7 +228,7 @@
             .attr("y", d => yScale(d.count))
             .attr("width", xScale.bandwidth())
             .attr("height", d => height - yScale(d.count))
-            .attr("fill", "steelblue");
+            .attr("fill", colors.bars);
 
         // Add tooltips
         barsEnter
@@ -208,15 +236,21 @@
                 const percentage = ((d.count / filteredData.length) * 100).toFixed(1);
                 tooltip.transition()
                     .duration(200)
-                    .style("opacity", .9);
-                tooltip.html(`${d.name}<br/>Count: ${d.count}<br/>${percentage}% of selected`)
-                    .style("left", (event.pageX) + "px")
-                    .style("top", (event.pageY - 28) + "px");
+                    .style("opacity", 1);
+                
+                tooltip.html(`${d.name}<br>Count: ${d.count}<br>${percentage}% of selected`)
+                    .style("left", (event.pageX + 15) + "px")
+                    .style("top", (event.pageY - 15) + "px");
                 
                 d3.select(this)
                     .transition()
                     .duration(200)
-                    .attr("fill", "orange");
+                    .attr("fill", colors.barsHover);
+            })
+            .on("mousemove", function(event) {
+                tooltip
+                    .style("left", (event.pageX + 15) + "px")
+                    .style("top", (event.pageY - 15) + "px");
             })
             .on("mouseout", function() {
                 tooltip.transition()
@@ -226,7 +260,7 @@
                 d3.select(this)
                     .transition()
                     .duration(200)
-                    .attr("fill", "steelblue");
+                    .attr("fill", colors.bars);
             });
     }
 
@@ -268,123 +302,184 @@
     const style = document.createElement('style');
     style.textContent = `
         #barchart {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            max-width: 1000px;
+            width: 100%;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 20px;
-            background: ${colors.background};
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 2rem;
+            background: transparent;
         }
 
-        .chart-title {
-            color: ${colors.primary};
+        .header-section {
             text-align: center;
-            margin-bottom: 30px;
-            font-size: 24px;
+            margin-bottom: 1rem;
         }
 
-        .chart-subtitle {
-            fill: ${colors.text};
-            font-size: 16px;
-            font-weight: 500;
+        .main-title {
+            color: #000;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 0;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #000;
+        }
+
+        .content-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .filter-section {
+            width: 100%;
         }
 
         .filter-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
         }
 
-        .filter-group {
+        .visualization-container {
+            display: grid;
+            grid-template-columns: 7fr 3fr;
+            gap: 2rem;
+            align-items: start;
+            width: 100%;
+        }
+
+        .chart-section {
+            width: 100%;
+            min-width: 600px;
+            padding: 30px;
+            margin-bottom: 20px;
+            overflow: visible;
+            background: transparent;
+        }
+
+        .chart-section svg {
+            display: block;
+            width: 100%;
+            height: auto;
+            overflow: visible;
+            background: transparent;
+        }
+
+        .chart-subtitle {
+            font-size: 16px;
+            font-weight: normal;
+        }
+
+        .image-section {
+            padding: 1rem;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 1rem;
         }
 
-        .filter-title {
-            color: ${colors.primary};
+        .interaction-text {
+            font-size: 0.9rem;
+            line-height: 1.6;
             margin: 0;
-            font-size: 16px;
-            font-weight: 500;
         }
 
-        .button-container {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
+        .squirrel-container {
+            position: relative;
         }
 
-        .filter-btn {
-            padding: 8px 12px;
-            border: 2px solid ${colors.primary};
-            background: white;
-            color: ${colors.primary};
-            cursor: pointer;
-            border-radius: 20px;
-            font-size: 14px;
-            transition: all 0.2s ease;
-            flex: 1;
-            min-width: 80px;
-            text-align: center;
+
+        .squirrel-image {
+            width: 100%;
+            height: auto;
+            display: block;
         }
 
-        .filter-btn:hover {
-            background: ${colors.primary}22;
+        .squirrel-caption {
+            margin: 0.5rem 0 0 0;
+            font-size: 0.9rem;
         }
 
-        .filter-btn.active {
-            background: ${colors.primary};
-            color: white;
+        .x-axis path, .y-axis path {
+            stroke: rgba(0, 0, 0, 0.2);
+            stroke-width: 1px;
+        }
+        
+        .x-axis line, .y-axis line {
+            stroke: #e0e0e0;
+            stroke-width: 1px;
+            stroke-dasharray: 2,2;
+        }
+        
+        .x-axis text {
+            font-size: 12px;
+            transform: rotate(-45deg);
+            text-anchor: end;
         }
 
-        .chart-container {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-
-        .bar {
-            fill: ${colors.bars};
-            transition: all 0.2s ease;
-        }
-
-        .bar:hover {
-            fill: ${colors.barsHover};
+        .y-axis text {
+            font-size: 12px;
         }
 
         .tooltip {
             position: absolute;
-            padding: 12px;
-            background: white;
-            border: none;
-            border-radius: 4px;
-            pointer-events: none;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 8px 12px;
             font-size: 14px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-            color: ${colors.text};
-            z-index: 1000;
+            pointer-events: none;
+            opacity: 0;
+            z-index: 100;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            white-space: nowrap;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        .x-axis text, .y-axis text {
-            fill: ${colors.text};
-            font-size: 12px;
-        }
-
-        .x-axis line, .y-axis line, .x-axis path, .y-axis path {
-            stroke: #ddd;
-        }
-
-        @media (max-width: 768px) {
-            .filter-container {
+        @media (max-width: 1024px) {
+            .visualization-container {
                 grid-template-columns: 1fr;
             }
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            background: #000000;
+            color: white;
+            border: none;
+            border-radius: 0;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .filter-btn:not(.active) {
+            opacity: 0.6;
+        }
+
+        .filter-btn:hover {
+            opacity: 0.8;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .bar {
+            transition: fill 0.2s;
+        }
+
+        .y-axis .tick line {
+            stroke: rgba(0, 0, 0, 0.1);
+            stroke-width: 1px;
+            stroke-dasharray: 2,2;
+        }
+
+        .x-axis path.domain {
+            stroke: #ccc;
+            stroke-width: 1px;
+        }
+
+        .y-axis path.domain {
+            stroke: #ccc;
+            stroke-width: 1px;
         }
     `;
     document.head.appendChild(style);
