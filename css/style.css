@@ -12,3 +12,19 @@
     margin: auto;
     width: 80%;
 }
+
+
+/* General styling for fullpage.js sections */
+.section {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100vw;
+    height: 100vh;
+}
+
+/* Background for each section */
+#homepage {
+    background-image: url('../img/home.png');
+    background-color: red;
+}
