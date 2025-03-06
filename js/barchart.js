@@ -1,5 +1,5 @@
 (function() {
-    // Set up color scheme
+    // Set up color
     const colors = {
         primary: "#2c3e50",
         accent: "#e74c3c",
