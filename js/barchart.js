@@ -117,6 +117,7 @@
         .style("min-width", "600px") // Ensure minimum width
         .style("min-height", "400px"); // Ensure minimum height
 
+    // Make sure the g element is created after the background rect
     const g = svg.append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
 
@@ -301,12 +302,11 @@
     const style = document.createElement('style');
     style.textContent = `
         #barchart {
-            font-family: 'Arial', sans-serif;
+            width: 100%;
             max-width: 1400px;
             margin: 0 auto;
             padding: 2rem;
             background: transparent;
-            width: 100%;
         }
 
         .header-section {
@@ -348,12 +348,12 @@
         }
 
         .chart-section {
-            background: white;
             width: 100%;
             min-width: 600px;
             padding: 30px;
             margin-bottom: 20px;
             overflow: visible;
+            background: transparent;
         }
 
         .chart-section svg {
@@ -361,6 +361,7 @@
             width: 100%;
             height: auto;
             overflow: visible;
+            background: transparent;
         }
 
         .chart-subtitle {
@@ -398,7 +399,7 @@
         }
 
         .x-axis path, .y-axis path {
-            stroke: #ccc;
+            stroke: rgba(0, 0, 0, 0.2);
             stroke-width: 1px;
         }
         
@@ -420,13 +421,13 @@
 
         .tooltip {
             position: absolute;
-            background: white;
+            background: rgba(255, 255, 255, 0.9);
             padding: 8px 12px;
             font-size: 14px;
             pointer-events: none;
             opacity: 0;
             z-index: 100;
-            border: 1px solid #ccc;
+            border: 1px solid rgba(0, 0, 0, 0.1);
             white-space: nowrap;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
@@ -466,10 +467,9 @@
         }
 
         .y-axis .tick line {
-            stroke: #e0e0e0;
+            stroke: rgba(0, 0, 0, 0.1);
             stroke-width: 1px;
             stroke-dasharray: 2,2;
-            x2: ${width};
         }
 
         .x-axis path.domain {
