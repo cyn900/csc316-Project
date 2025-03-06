@@ -4,32 +4,57 @@
     const height = 600;
     const margin = { top: 20, right: 20, bottom: 20, left: 20 };
 
-    // Create container with controls
-    const container = d3.select("#network")
-        .append("div")
-        .attr("class", "network-container");
+    // Create visualization directly in the network div
+    const network = d3.select("#network");
 
     // Create title
-    container.append("h2")
-        .attr("class", "chart-title")
-        .text("Animal Interaction Network");
+    network.append("div")
+        .attr("class", "network-title-container")
+        .append("h2")
+        .attr("class", "network-chart-title")
+        .text("Animal Interaction");
 
-    // Create controls
-    const controls = container.append("div")
-        .attr("class", "controls");
+    // Create grid content container
+    const contentGrid = network.append("div")
+        .attr("class", "network-content-grid");
 
-    // Add animal count slider
+    // Create left section for controls and visualization
+    const leftSection = contentGrid.append("div")
+        .attr("class", "network-left-section");
+
+    // Add controls to left section
+    const controls = leftSection.append("div")
+        .attr("class", "network-controls");
+
     controls.append("div")
-        .attr("class", "control-group")
+        .attr("class", "network-control-group")
         .html(`
-            <label for="animalCount">Number of top animals to show: <span id="animalCountValue">5</span></label>
-            <input type="range" id="animalCount" min="3" max="15" value="5">
+            <label for="networkAnimalCount">Number of top animals to show: <span id="networkAnimalCountValue">3</span></label>
+            <input type="range" id="networkAnimalCount" class="network-range" min="3" max="15" value="3">
         `);
 
-    // Create SVG container
-    const svg = container.append("svg")
-        .attr("width", width)
-        .attr("height", height);
+    // Add SVG to left section
+    const svg = leftSection.append("svg")
+        .attr("class", "network-svg")
+        .attr("viewBox", `0 0 ${width} ${height}`)
+        .attr("preserveAspectRatio", "xMidYMid meet");
+
+    // Create right section for text
+    const rightSection = contentGrid.append("div")
+        .attr("class", "network-right-section");
+
+    // Add content to right section
+    rightSection.append("h3")
+        .attr("class", "network-facts-title")
+        .text("Fun Facts:");
+
+    rightSection.append("div")
+        .attr("class", "network-facts-content")
+        .html(`
+            <p>squirrel<br>Sightings: 700</p>
+            <p>Connections:<br>human: 100.0%<br>dog: 100.0%</p>
+            <p class="network-interaction-text">Interactive Elements: Slider to show the number of top animals to show. You can also move the nodes around. Tooltip showing the detailed information.</p>
+        `);
 
     // Load data
     d3.csv("data/hectare.csv").then(function(data) {
@@ -147,18 +172,17 @@
                 .selectAll("line")
                 .data(links)
                 .enter().append("line")
-                .attr("class", "link")
-                .attr("stroke-width", d => Math.sqrt(d.value) * 5)
-                .attr("stroke", d => d.source.id === "squirrel" || d.target.id === "squirrel" 
-                    ? "#e74c3c" : "#95a5a6")
-                .attr("stroke-opacity", 0.6);
+                .attr("class", "network-link")
+                .attr("stroke-width", d => Math.sqrt(d.value) * 6)
+                .attr("stroke", "#bf1b1b")
+                .attr("stroke-opacity", 0.8);
 
             // Create the nodes
             const node = svg.append("g")
                 .selectAll("g")
                 .data(nodes)
                 .enter().append("g")
-                .attr("class", "node")
+                .attr("class", "network-node")
                 .call(d3.drag()
                     .on("start", dragstarted)
                     .on("drag", dragged)
@@ -167,8 +191,8 @@
 
             // Add circles to nodes
             node.append("circle")
-                .attr("r", d => Math.sqrt(d.size) * 3)
-                .attr("fill", d => d.id === "squirrel" ? "#e74c3c" : "#3498db");
+                .attr("r", d => Math.sqrt(d.size) * 4)
+                .attr("fill", "#bf1b1b");
 
             // Add labels to nodes
             node.append("text")
@@ -176,7 +200,7 @@
                 .attr("x", d => Math.sqrt(d.size) * 3 + 5)
                 .attr("y", 3)
                 .style("font-family", "sans-serif")
-                .style("font-size", "12px")
+                .style("font-size", "14px")
                 .style("font-weight", d => d.id === "squirrel" ? "bold" : "normal");
 
             // Add tooltips
@@ -234,8 +258,7 @@
                     .duration(200)
                     .attr("fill", node => {
                         if (connectedNodes.has(node.id)) {
-                            // Make connected nodes brighter
-                            return node.id === "squirrel" ? "#ff6b6b" : "#48dbfb";
+                            return "#bf1b1b";
                         }
                         return "#ddd";
                     })
@@ -261,9 +284,7 @@
                     .duration(200)
                     .attr("stroke", l => {
                         if (l.source.id === d.id || l.target.id === d.id) {
-                            // Make connected links brighter
-                            return l.source.id === "squirrel" || l.target.id === "squirrel" 
-                                ? "#ff6b6b" : "#48dbfb";
+                            return "#bf1b1b";
                         }
                         return "#ddd";
                     })
@@ -271,7 +292,7 @@
                         (l.source.id === d.id || l.target.id === d.id) ? 0.8 : 0.1
                     )
                     .attr("stroke-width", l => {
-                        const baseWidth = Math.sqrt(l.value) * 5;
+                        const baseWidth = Math.sqrt(l.value) * 6;
                         return (l.source.id === d.id || l.target.id === d.id) 
                             ? baseWidth * 1.5 : baseWidth;
                     });
@@ -287,7 +308,7 @@
                 node.selectAll("circle")
                     .transition()
                     .duration(200)
-                    .attr("fill", d => d.id === "squirrel" ? "#e74c3c" : "#3498db")
+                    .attr("fill", "#bf1b1b")
                     .attr("r", d => Math.sqrt(d.size) * 3)
                     .style("filter", null);
 
@@ -302,8 +323,7 @@
                 // Reset links
                 link.transition()
                     .duration(200)
-                    .attr("stroke", d => d.source.id === "squirrel" || d.target.id === "squirrel" 
-                        ? "#e74c3c" : "#95a5a6")
+                    .attr("stroke", "#bf1b1b")
                     .attr("stroke-opacity", 0.6)
                     .attr("stroke-width", d => Math.sqrt(d.value) * 5);
             }
@@ -325,16 +345,16 @@
 
             // Update CSS styles
             style.textContent += `
-                .node.highlighted circle {
+                .network-node.highlighted circle {
                     stroke-width: 3px;
                     stroke: #2c3e50;
                 }
 
-                .link.highlighted {
+                .network-link.highlighted {
                     stroke-width: 4px;
                 }
 
-                .node text.highlighted {
+                .network-node text.highlighted {
                     font-weight: bold;
                     font-size: 14px;
                 }
@@ -372,94 +392,156 @@
         }
 
         // Add slider event listener
-        d3.select("#animalCount").on("input", function() {
+        d3.select("#networkAnimalCount").on("input", function() {
             const value = this.value;
-            d3.select("#animalCountValue").text(value);
+            d3.select("#networkAnimalCountValue").text(value);
             updateNetwork(+value);
         });
 
         // Initial render
-        updateNetwork(5);
+        updateNetwork(3);
     });
 
     // Add CSS styles
     const style = document.createElement('style');
     style.textContent = `
-        .network-container {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
-            background: #ecf0f1;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        #network {
+            width: 100%;
+            margin: 0;
+            padding: 0 4rem;
+            background: transparent;
         }
 
-        .chart-title {
-            color: #2c3e50;
+        .network-title-container {
+            background: #bf1b1b;
+            padding: 1rem 2rem;
+            margin-bottom: 2rem;
             text-align: center;
-            margin-bottom: 20px;
+            width: calc(60% - 2rem);
+        }
+
+        .network-chart-title {
+            color: #ffffff !important;
+            margin: 0;
             font-size: 24px;
+            font-weight: bold;
         }
 
-        .controls {
-            margin-bottom: 20px;
-            padding: 15px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        .network-content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 4rem;
+            background: transparent;
         }
 
-        .control-group {
+        .network-left-section {
             display: flex;
             flex-direction: column;
-            gap: 10px;
-        }
-
-        .control-group label {
-            color: #2c3e50;
-            font-weight: 500;
-        }
-
-        input[type="range"] {
+            gap: 3rem;
+            background: transparent;
             width: 100%;
-            max-width: 300px;
+            max-width: 800px;
+            margin: 0;
         }
 
-        svg {
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        .network-controls {
+            padding: 0;
+            background: transparent;
         }
 
-        .node {
+        .network-control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .network-control-group label {
+            color: #000;
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+
+        .network-range {
+            width: 100%;
+            max-width: 100%;
+            height: 6px;
+            background: rgba(0, 0, 0, 0.1);
+            -webkit-appearance: none;
+            appearance: none;
+            border-radius: 3px;
+        }
+
+        .network-range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            background: #bf1b1b;
+            border-radius: 50%;
             cursor: pointer;
-            transition: all 0.2s;
         }
 
-        .node circle {
-            stroke: #fff;
+        .network-svg {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 4/3;
+            background: transparent !important;
+        }
+
+        .network-right-section {
+            padding: 0;
+        }
+
+        .network-facts-title {
+            font-size: 2rem;
+            font-weight: normal;
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .network-facts-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .network-facts-content p {
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .network-interaction-text {
+            margin-top: 2rem !important;
+            font-size: 0.9rem;
+        }
+
+        .network-node circle {
+            stroke: none;
+            transition: all 0.2s;
+            fill: #bf1b1b;
+        }
+
+        .network-node text {
+            pointer-events: none;
+            transition: all 0.2s;
+            font-size: 14px;
+            fill: #000;
+        }
+
+        .network-link {
+            stroke-opacity: 0.8;
             stroke-width: 2px;
             transition: all 0.2s;
         }
 
-        .node text {
-            pointer-events: none;
-            transition: all 0.2s;
-        }
-
-        .node:hover circle {
-            stroke: #2c3e50;
-            stroke-width: 3px;
-        }
-
-        .link {
-            stroke-opacity: 0.6;
-            transition: all 0.2s;
-        }
-
-        .link:hover {
+        .network-link:hover {
             stroke-opacity: 1;
+        }
+
+        @media (max-width: 768px) {
+            .network-content-grid {
+                grid-template-columns: 1fr;
+            }
         }
     `;
     document.head.appendChild(style);
