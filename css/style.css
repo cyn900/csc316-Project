@@ -16,11 +16,30 @@
 
 /* General styling for fullpage.js sections */
 .section {
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
     width: 100vw;
     height: 100vh;
+    position: relative;
+}
+
+/* Add overlay to ensure content visibility */
+.section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.95);
+    z-index: 0;
+}
+
+/* Ensure content stays above the background */
+.section > * {
+    position: relative;
+    z-index: 1;
 }
 
 /* Background for each section */
