@@ -5,15 +5,112 @@
 // Set up margins, width, and height
 const margin = { top: 50, right: 80, bottom: 50, left: 100 };
 const width = 800 - margin.left - margin.right;
-const height = 600 - margin.top - margin.bottom;
+const height = 800 - margin.top - margin.bottom;
 
-// Create the SVG container
-const svg = d3.select("#heatmap")
-    .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
+// Create main container with grid layout
+const container = d3.select("#heatmap")
+    .style("display", "grid")
+    .style("grid-template-columns", "2fr 1fr")
+    .style("gap", "4rem")
+    .style("padding", "0 4rem")
+    .style("background", "transparent");
+
+// Create left section for text content
+const leftSection = container.append("div")
+    .attr("class", "heatmap-left-section");
+
+// Add title box
+leftSection.append("div")
+    .attr("class", "heatmap-title-container")
+    .append("h2")
+    .attr("class", "heatmap-title")
+    .text("Special Addition");
+
+// Add descriptive text
+leftSection.append("div")
+    .attr("class", "heatmap-text-content")
+    .html(`
+        <p>The heatmap shows the relationship between weather conditions and squirrel activities.</p>
+        <p>Key findings:</p>
+        <ul>
+            <li>Squirrels are most active during sunny weather</li>
+            <li>Foraging is the most common activity across all weather conditions</li>
+            <li>Activity levels decrease significantly during rainy conditions</li>
+        </ul>
+        <p>Interactive Elements: Hover over cells to see detailed counts. The color intensity indicates the frequency of observations.</p>
+    `);
+
+// Create right section for heatmap
+const rightSection = container.append("div")
+    .attr("class", "heatmap-right-section");
+
+// Create SVG container inside right section
+const svg = rightSection.append("svg")
+    .attr("viewBox", `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`)
+    .attr("width", "100%")
+    .attr("height", "100%")
+    .style("min-height", "800px")
+    .style("background", "transparent")
     .append("g")
     .attr("transform", `translate(${margin.left},${margin.top})`);
+
+// Add CSS styles
+const style = document.createElement('style');
+style.textContent = `
+    .heatmap-title-container {
+        background: #bf1b1b;
+        padding: 1.5rem 2rem;
+        margin-bottom: 3rem;
+        text-align: center;
+        width: 100%;
+    }
+
+    .heatmap-title {
+        color: #ffffff;
+        margin: 0;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .heatmap-text-content {
+        font-size: 1.2rem;
+        line-height: 1.8;
+        background: transparent;
+    }
+
+    .heatmap-text-content p {
+        margin-bottom: 1.5rem;
+    }
+
+    .heatmap-text-content ul {
+        margin: 1.5rem 0;
+        padding-left: 2rem;
+    }
+
+    .heatmap-text-content li {
+        margin-bottom: 1rem;
+    }
+
+    .heatmap-right-section {
+        width: 100%;
+        height: auto;
+        min-height: 800px;
+        background: transparent;
+    }
+
+    .axis-label {
+        font-size: 14px;
+    }
+
+    .legend-tick {
+        font-size: 12px;
+    }
+
+    svg {
+        background: transparent !important;
+    }
+`;
+document.head.appendChild(style);
 
 // Load the data from the CSV files
 Promise.all([
