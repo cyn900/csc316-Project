@@ -20,18 +20,72 @@
         .attr("class", "chart-title")
         .text("Comparing Juvenile and Adult Squirrels: Activities and Human Interaction Patterns");
 
-    // Create controls
-    const controls = controlContainer.append("div")
+    // Create main layout: viz on left, info on right
+    const mainLayout = controlContainer.append("div")
+        .attr("class", "main-layout");
+
+    // Left side - Visualization container with filters above the viz
+    const vizContainer = mainLayout.append("div")
+        .attr("class", "viz-container");
+
+    // Append filter controls in vizContainer (moved from the right panel)
+    const controls = vizContainer.append("div")
         .attr("class", "controls");
 
-    // Append an SVG for the visualization
-    const svg = controlContainer.append("svg")
+    // Create controls for Activities
+    // (The Activities filter remains unchanged.)
+    // Build later after CSV load for dynamic options.
+
+    // Append an SVG for the visualization below the controls
+    const svg = vizContainer.append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom);
 
     // Group for the chart contents
     const chartG = svg.append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
+
+    // Right side - Legend and Text Info
+    const rightPanel = mainLayout.append("div")
+        .attr("class", "right-panel");
+
+    // Create legend below (now in the right panel)
+    const legend = rightPanel.append("div")
+        .attr("class", "legend");
+
+    legend.append("h3").text("Legend");
+
+    const legendItems = legend.append("div")
+        .attr("class", "legend-items");
+
+    // Adult legend item
+    const adultLegend = legendItems.append("div")
+        .attr("class", "legend-item");
+
+    adultLegend.append("div")
+        .attr("class", "legend-color")
+        .style("background-color", "#bf1b1b");
+
+    adultLegend.append("span").text("Adult");
+
+    // Juvenile legend item
+    const juvenileLegend = legendItems.append("div")
+        .attr("class", "legend-item");
+
+    juvenileLegend.append("div")
+        .attr("class", "legend-color")
+        .style("background-color", "#76bb65");
+
+    juvenileLegend.append("span").text("Juvenile");
+
+    // Text placeholder below legend
+    const textContent = rightPanel.append("div")
+        .attr("class", "text-content");
+
+    textContent.append("p")
+        .text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus.");
+    textContent.append("p")
+        .text("Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Vestibulum ante ipsum primis in faucibus orci luctus et.");
 
     // X-scale: place each dimension evenly
     const x = d3.scalePoint()
@@ -155,7 +209,6 @@
         updateVis();
 
         // --- Update Visualization ---
-        // We want to compute vertical mappings for each axis and record the age‐based partitions for Activity and Interaction.
         function updateVis() {
             const selectedActivity = activityFilterContainer.selectAll(".filter-icon.active")
                 .nodes().map(n => n.textContent);
@@ -196,7 +249,6 @@
             const interactionMap = getMapping(interactionCounts);
 
             // --- Section 1: Draw ribbons from Age to Activity ---
-            // Also record, for each activity category, the vertical segments allocated per Age.
             let activityAgePositions = {};  // { activity: { Adult: {start, end}, Juvenile: {start, end} } }
             let ageOffsets = {};
             Object.keys(ageMap).forEach(k => { ageOffsets[k] = ageMap[k].start; });
@@ -223,14 +275,12 @@
                     const y1_bot = y1_top + actThickness;
                     ageOffsets[ageKey] += ageThickness;
                     activityOffsets1[actKey] += actThickness;
-                    // Record the activity-age partition (if not already set, or add if multiple flows exist)
                     if (!activityAgePositions[actKey]) {
                         activityAgePositions[actKey] = {};
                     }
-                    // For simplicity, assume each age group for an activity appears only once.
                     activityAgePositions[actKey][ageKey] = { start: y1_top, end: y1_bot };
 
-                    const color = ageKey === "Adult" ? "#D2691E" : "#bf1b1b";
+                    const color = ageKey === "Adult" ? "#bf1b1b" : "#76bb65";
                     const pathData = ribbonPath(x("Age"), x("Activity"), y0_top, y0_bot, y1_top, y1_bot);
                     chartG.append("path")
                         .attr("d", pathData)
@@ -241,8 +291,6 @@
             });
 
             // --- Section 2: Draw ribbons from Activity to Interaction ---
-            // First, compute for each Interaction category a similar breakdown by Age.
-            // We group filteredData by Interaction then by Age.
             const flowInteractionByAge = Array.from(
                 d3.rollup(filteredData, v => v.length, d => d.Interaction, d => d.Age),
                 ([interaction, ageMapObj]) => ({
@@ -250,14 +298,12 @@
                     ageFlows: Array.from(ageMapObj, ([age, count]) => ({ age, count }))
                 })
             );
-            // Compute vertical offsets for each Interaction category based on aggregated counts:
-            let interactionAgePositions = {};  // { interaction: { Adult: {start, end}, Juvenile: {start, end} } }
+            let interactionAgePositions = {};
             flowInteractionByAge.forEach(d => {
                 const interKey = d.interaction;
                 const total = d3.sum(d.ageFlows, f => f.count);
                 let cum = interactionMap[interKey].start;
                 interactionAgePositions[interKey] = {};
-                // Here we order age groups in the same order as in section 1 (e.g., Adult first, then Juvenile)
                 const orderedAges = d.ageFlows.sort((a, b) => a.age.localeCompare(b.age));
                 orderedAges.forEach(f => {
                     const fraction = f.count / total;
@@ -268,7 +314,6 @@
                 });
             });
 
-            // Now, group flows from Activity to Interaction by Activity and Interaction and Age.
             const flowActivityInteraction = Array.from(
                 d3.rollup(filteredData,
                     v => d3.rollup(v, g => g.length, d => d.Age),
@@ -283,19 +328,17 @@
                 })
             );
 
-            // For each cell, for each age group, use the fixed positions from activityAgePositions and interactionAgePositions.
             flowActivityInteraction.forEach(d => {
                 const actKey = d.activity;
                 d.flows.forEach(cell => {
                     const interKey = cell.interaction;
                     cell.flows.forEach(item => {
                         const age = item.age;
-                        // Use the precomputed positions.
                         const leftPos = (activityAgePositions[actKey] && activityAgePositions[actKey][age]) || null;
                         const rightPos = (interactionAgePositions[interKey] && interactionAgePositions[interKey][age]) || null;
                         if (leftPos && rightPos) {
                             const pathData = ribbonPath(x("Activity"), x("Interaction"), leftPos.start, leftPos.end, rightPos.start, rightPos.end);
-                            const color = age === "Adult" ? "#D2691E" : "#bf1b1b";
+                            const color = age === "Adult" ? "#bf1b1b" : "#76bb65";
                             chartG.append("path")
                                 .attr("d", pathData)
                                 .attr("fill", color)
@@ -370,20 +413,33 @@
             margin-bottom: 20px;
             font-size: 24px;
         }
+        .main-layout {
+            display: flex;
+            gap: 20px;
+        }
+        .viz-container {
+            flex: 2;
+        }
+        .right-panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
         .controls {
-            margin-bottom: 20px;
             padding: 15px;
             background: white;
             border-radius: 8px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 10px;
             display: flex;
-            gap: 20px;
+            flex-direction: column;
+            gap: 15px;
         }
         .control-group {
             display: flex;
             flex-direction: column;
             gap: 10px;
-            flex: 1;
         }
         .control-group label {
             color: #2c3e50;
@@ -392,16 +448,17 @@
         .filter-container {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 8px;
         }
         .filter-icon {
-            padding: 8px 12px;
+            padding: 6px 10px;
             border: 1px solid #bdc3c7;
             border-radius: 4px;
             cursor: pointer;
             transition: all 0.3s ease;
             background-color: #f8f9fa;
             color: #2c3e50;
+            font-size: 0.9em;
         }
         .filter-icon:hover {
             background-color: #e8f4f8;
@@ -412,10 +469,53 @@
             color: white;
             border-color: #2980b9;
         }
+        .legend {
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .legend h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: #2c3e50;
+            font-size: 16px;
+        }
+        .legend-items {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+        .text-content {
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .text-content p {
+            margin: 0 0 10px 0;
+            color: #2c3e50;
+            line-height: 1.5;
+        }
+        .text-content p:last-child {
+            margin-bottom: 0;
+        }
         svg {
             background: white;
             border-radius: 8px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            width: 100%;
+            height: auto;
         }
     `;
     document.head.appendChild(style);
