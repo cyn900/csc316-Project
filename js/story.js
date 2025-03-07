@@ -4,24 +4,88 @@ d3.csv("data/stories.csv").then(function(data) {
     const stories = data.map(d => d["Note Squirrel & Park Stories"]);
     let selectedWords = [];
 
+    // Create main container with grid layout
+    const container = d3.select("#wordcloud")
+        .style("display", "grid")
+        .style("grid-template-columns", "1fr 2fr")  // 1:2 ratio
+        .style("gap", "4rem")
+        .style("padding", "0 4rem")
+        .style("background", "transparent");
+
+    // Create left section for text content
+    const leftSection = container.append("div")
+        .attr("class", "story-left-section")
+        .html(`
+            <div class="story-title-container">
+                <h2 class="story-title">Squirrel Stories</h2>
+            </div>
+            <div class="story-text-content">
+                <p>random text to fill the space probabaly somet instruction on how to read thisnckas ashchasdj csabfjash ah asudas d aa sa d a d sd f das sd das das x sd asd as as sad sad as d d sf sd as das d ad as das a</p>
+            </div>
+        `);
+
+    // Create right section for wordcloud and controls
+    const rightSection = container.append("div")
+        .attr("class", "story-right-section");
+
     // Create controls container
-    const controls = d3.select("#wordcloud")
-        .append("div")
-        .attr("class", "controls")
-        .style("margin-bottom", "20px");
+    const controls = rightSection.append("div")
+        .attr("class", "story-controls");
 
     // Add HTML button
     const button = controls.append("button")
-        .text("Fetch Random Story")
-        .style("padding", "10px")
-        .style("cursor", "pointer");
+        .attr("class", "story-button")
+        .text("Fetch Random Story");
 
     // Add story display
     const storyDisplay = controls.append("div")
-        .attr("class", "story-display")
-        .style("padding", "15px")
-        .style("border", "2px solid #eee")
-        .style("min-height", "100px");
+        .attr("class", "story-display");
+
+    // Add CSS
+    const style = document.createElement('style');
+    style.textContent = `
+        .story-left-section {
+            padding: 2rem;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .story-title-container {
+            margin-bottom: 2rem;
+        }
+
+        .story-title {
+            font-size: 28px;
+            font-weight: bold;
+            color: black;
+        }
+
+        .story-text-content {
+            font-size: 1.2rem;
+            line-height: 1.8;
+        }
+
+        .story-controls {
+            margin-bottom: 2rem;
+        }
+
+        .story-button {
+            padding: 10px 20px;
+            cursor: pointer;
+            background: #bf1b1b;
+            color: white;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .story-display {
+            padding: 15px;
+            border: 2px solid #eee;
+            min-height: 100px;
+            margin-bottom: 2rem;
+        }
+    `;
+    document.head.appendChild(style);
 
     // Process words with better filtering
     const wordCounts = {};
@@ -52,8 +116,8 @@ d3.csv("data/stories.csv").then(function(data) {
     layout.start();
 
     function draw(words) {
-        const cloudContainer = d3.select("#wordcloud")
-            .append("svg")
+        // Create SVG in the right section instead of directly in #wordcloud
+        const cloudContainer = rightSection.append("svg")
             .attr("width", layout.size()[0])
             .attr("height", layout.size()[1])
             .append("g")
@@ -64,20 +128,19 @@ d3.csv("data/stories.csv").then(function(data) {
             .enter().append("text")
             .style("font-size", d => `${d.size}px`)
             .style("font-family", "Impact")
-            .style("fill", "steelblue")
+            .style("fill", "#bf1b1b")  // Updated to match theme color
             .style("cursor", "pointer")
             .attr("text-anchor", "middle")
             .attr("transform", d => `translate(${[d.x, d.y]})rotate(${d.rotate})`)
             .text(d => d.text)
             .on("click", function(event, d) {
-                // Toggle word selection
                 const idx = selectedWords.indexOf(d.text);
                 if (idx === -1) {
                     selectedWords.push(d.text);
                     d3.select(this).style("fill", "#ff6b6b");
                 } else {
                     selectedWords.splice(idx, 1);
-                    d3.select(this).style("fill", "steelblue");
+                    d3.select(this).style("fill", "#bf1b1b");
                 }
             });
     }
