@@ -452,22 +452,22 @@
         }
         .filter-icon {
             padding: 6px 10px;
-            border: 1px solid #bdc3c7;
+            border: 1px solid #000000; /* Black border */
             border-radius: 4px;
             cursor: pointer;
             transition: all 0.3s ease;
-            background-color: #f8f9fa;
-            color: #2c3e50;
+            background-color: #000000; /* Default black background */
+            color: white;
             font-size: 0.9em;
         }
         .filter-icon:hover {
-            background-color: #e8f4f8;
-            border-color: #3498db;
+            background-color: #333333; /* Slightly lighter black on hover */
+            border-color: #555555;
         }
         .filter-icon.active {
-            background-color: #3498db;
+            background-color: #76bb65; /* Green when selected */
             color: white;
-            border-color: #2980b9;
+            border-color: #5a9b50; /* Slightly darker green border */
         }
         .legend {
             padding: 15px;

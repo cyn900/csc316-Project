@@ -70,7 +70,7 @@
         }
     ];
 
-    // Create filter groups
+    // Create filter groups with an "All" button
     filterGroups.forEach(group => {
         const groupContainer = filterContainer
             .append("div")
@@ -85,10 +85,19 @@
             .append("div")
             .attr("class", "barchart-button-container");
 
+        // Append "All" button as the first option (active by default)
+        buttonContainer
+            .append("button")
+            .attr("class", "barchart-filter-btn active")
+            .attr("data-type", group.type)
+            .attr("data-value", "All")
+            .text("All");
+
+        // Append individual options (not active initially)
         group.options.forEach(option => {
             buttonContainer
                 .append("button")
-                .attr("class", "barchart-filter-btn active")
+                .attr("class", "barchart-filter-btn")
                 .attr("data-type", group.type)
                 .attr("data-value", option.value)
                 .text(option.label);
@@ -151,20 +160,20 @@
 
     // Initialize current filters
     let currentFilters = {
-        age: ["Adult", "Juvenile"],
-        color: ["Black", "Gray", "Cinnamon"],
-        shift: ["AM", "PM"],
-        location: ["Ground Plane", "Above Ground"]
+        age: ["All"],
+        color: ["All"],
+        shift: ["All"],
+        location: ["All"]
     };
 
     // Function to update the chart
     function updateChart(data) {
         // Filter data based on current selections
-        const filteredData = data.filter(d => 
-            (d.Age === "" || currentFilters.age.includes(d.Age)) &&
-            currentFilters.color.includes(d['Primary Fur Color']) &&
-            currentFilters.shift.includes(d.Shift) &&
-            (d.Location === "" || currentFilters.location.includes(d.Location))
+        const filteredData = data.filter(d =>
+            ((currentFilters.age.includes("All")) || currentFilters.age.includes(d.Age)) &&
+            ((currentFilters.color.includes("All")) || currentFilters.color.includes(d['Primary Fur Color'])) &&
+            ((currentFilters.shift.includes("All")) || currentFilters.shift.includes(d.Shift)) &&
+            ((currentFilters.location.includes("All")) || currentFilters.location.includes(d.Location))
         );
 
         // Count activities and additional behaviors
@@ -271,26 +280,35 @@
             const button = d3.select(this);
             const filterType = button.attr("data-type");
             const filterValue = button.attr("data-value");
-            
-            // Toggle active class
-            button.classed("active", !button.classed("active"));
-            
-            // Update filters array
-            if (button.classed("active")) {
-                // Add value to filter
-                currentFilters[filterType].push(filterValue);
+
+            if (filterValue === "All") {
+                // When "All" is clicked: deselect all other buttons in this group and select only "All"
+                d3.selectAll(`.barchart-filter-btn[data-type="${filterType}"]`)
+                    .classed("active", false);
+                button.classed("active", true);
+                currentFilters[filterType] = ["All"];
             } else {
-                // Remove value from filter
-                currentFilters[filterType] = currentFilters[filterType].filter(v => v !== filterValue);
-                
-                // If no filters selected in group, reselect this one
-                if (currentFilters[filterType].length === 0) {
-                    currentFilters[filterType].push(filterValue);
+                // When a non-"All" button is clicked: deselect the "All" button in this group
+                d3.selectAll(`.barchart-filter-btn[data-type="${filterType}"][data-value="All"]`)
+                    .classed("active", false);
+
+                // Toggle the clicked button
+                button.classed("active", !button.classed("active"));
+
+                // Get current active selections for this group
+                let activeButtons = d3.selectAll(`.barchart-filter-btn[data-type="${filterType}"].active`)
+                    .nodes()
+                    .map(n => n.getAttribute("data-value"));
+
+                // If no button is active, reselect the clicked one
+                if (activeButtons.length === 0) {
                     button.classed("active", true);
+                    activeButtons.push(filterValue);
                 }
+                currentFilters[filterType] = activeButtons;
             }
 
-            // Update chart
+            // Update chart with new filter settings
             updateChart(data);
         });
 
@@ -439,22 +457,29 @@
         }
 
         .barchart-filter-btn {
-            padding: 0.5rem 1rem;
-            background: #000000;
-            color: white;
-            border: none;
-            border-radius: 0;
-            font-size: 0.8rem;
+            padding: 6px 10px;
+            border: 1px solid #000000; /* Black border */
+            border-radius: 4px;
             cursor: pointer;
-            transition: opacity 0.2s;
-        }
-
-        .barchart-filter-btn:not(.active) {
-            opacity: 0.6;
+            transition: all 0.3s ease;
+            background-color: #000000; /* Default black background */
+            color: white;
+            font-size: 0.9em;
         }
 
         .barchart-filter-btn:hover {
-            opacity: 0.8;
+            background-color: #333333; /* Slightly lighter black on hover */
+            border-color: #555555;
+        }
+        
+        .barchart-filter-btn.active {
+            background-color: #76bb65; /* Green when selected */
+            color: white;
+            border-color: #5a9b50; /* Slightly darker green border */
+        }
+
+        .barchart-filter-btn:not(.active) {
+            opacity: 1;
         }
 
         .barchart-button-container {
