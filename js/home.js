@@ -17,7 +17,7 @@
     header.append("div")
         .attr("id", "home-apple-icon")
         .attr("class", "home-icon apple")
-        .html('<img src="img/apple-icon.svg" alt="Apple icon">');
+        .html('<img src="img/apple-icon.png" alt="Apple Icon">');
 
     // Add the main title
     header.append("h1")
@@ -29,7 +29,7 @@
     header.append("div")
         .attr("id", "home-tree-icon")
         .attr("class", "home-icon tree")
-        .html('<img src="img/tree-icon.svg" alt="Tree icon">');
+        .html('<img src="img/tree-icon.png" alt="Tree icon">');
 
     // Add the stamp section
     const stampSection = content.append("div")
@@ -94,8 +94,8 @@
         }
 
         .home-icon img {
-            width: 60px;
-            height: 60px;
+            width: 200px;
+            height: 120px;
         }
 
         #home-main-title {
