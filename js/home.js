@@ -17,19 +17,19 @@
     header.append("div")
         .attr("id", "home-apple-icon")
         .attr("class", "home-icon apple")
-        .html('<img src="img/apple-icon.svg" alt="Apple icon">');
+        .html('<img src="img/apple-icon.png" alt="Apple Icon">');
 
     // Add the main title
     header.append("h1")
         .attr("id", "home-main-title")
         .attr("class", "home-title")
-        .text("OFFICIAL FURRY FEDERATION");
+        .text("OFFICIAL  FURRY  FEDERATION");
 
     // Add the tree icon
     header.append("div")
         .attr("id", "home-tree-icon")
         .attr("class", "home-icon tree")
-        .html('<img src="img/tree-icon.svg" alt="Tree icon">');
+        .html('<img src="img/tree-icon.png" alt="Tree icon">');
 
     // Add the stamp section
     const stampSection = content.append("div")
@@ -70,6 +70,8 @@
     // Update CSS
     const style = document.createElement('style');
     style.textContent = `
+        @import url('https://fonts.cdnfonts.com/css/cocogoose');
+
         #home-container {
             width: 100%;
             max-width: 1400px;
@@ -94,12 +96,13 @@
         }
 
         .home-icon img {
-            width: 60px;
-            height: 60px;
+            width: 200px;
+            height: 120px;
         }
 
         #home-main-title {
-            font-family: 'Stencil Std', 'Arial Black', sans-serif;
+            font-family: "COCOGOOSE", sans-serif;
+            font-weight: 500;
             font-size: 3rem;
             margin: 0;
             letter-spacing: 2px;
@@ -132,11 +135,13 @@
         }
 
         #home-heading {
-            font-size: 8rem;
-            font-weight: 900;
+            font-size: 12rem;
             margin: 2rem 0;
             letter-spacing: 4px;
             padding: 0 1rem;
+            font-family: "COCOGOOSE", sans-serif;
+            font-weight: 500;
+            font-style: bold;
         }
 
         #home-subtitle {

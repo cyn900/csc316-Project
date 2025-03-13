@@ -30,9 +30,9 @@ leftSection.append("div")
 leftSection.append("div")
     .attr("class", "heatmap-question-container")
     .html(`
-        <p class="question-part">should we be</p>
-        <p class="question-emphasis">worried about</p>
-        <p class="question-main">Weather</p>
+        <p class="question-part">should we be worried about</p>
+        <h3 class="question-main">Weather</h3>
+        <p </p>
         <p class="question-part">to spot our friends?</p>
     `);
 
@@ -70,6 +70,8 @@ rightSection.append("div")
 // Add CSS styles
 const style = document.createElement('style');
 style.textContent = `
+@import url(https://db.onlinewebfonts.com/c/07cb29fdcb073fff840edc6de2067b50?family=Amsterdam+Four_ttf);
+
     .heatmap-title-container {
         background: #bf1b1b;
         padding: 1.5rem 2rem;
@@ -92,10 +94,16 @@ style.textContent = `
         line-height: 1.4;
         margin-top: 3rem;
         margin-bottom: 3rem;
-        font-family: 'Arial', sans-serif;
+        font-family: 'Amsterdam Four_ttf;
         max-width: 400px;
+        text-align: center;
     }
-
+    
+    .heatmap-question-container p,
+    .heatmap-question-container h3 {
+        margin: 3rem 0; 
+    }
+    
     .question-part {
         font-size: 1.5rem;
         margin: 0.5rem 0;
@@ -112,7 +120,7 @@ style.textContent = `
         font-size: 3.5rem;
         font-weight: bold;
         margin: 0.5rem 0;
-        font-family: 'Cursive', 'Arial', sans-serif;
+        font-family: "Amsterdam Four_ttf";
     }
 
     .heatmap-info-display {
@@ -165,6 +173,10 @@ style.textContent = `
 
     svg {
         background: transparent !important;
+    }
+    
+    .h3 {
+    font-family: "Amsterdam Four_ttf";
     }
 `;
 document.head.appendChild(style);
