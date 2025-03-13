@@ -5,7 +5,7 @@
     const radius = Math.min(width, height) / 2;
 
     // Create main container with grid layout
-    const container = d3.select("#sunbust")
+    const container = d3.select("#sunburst")
         .style("display", "grid")
         .style("grid-template-columns", "1fr 2fr 1fr")
         .style("gap", "4rem")
@@ -32,6 +32,7 @@
                 <p>• Click in the center to zoom out</p>
             </div>
         `);
+
     // Create center section for sunburst
     const centerSection = container.append("div")
         .attr("class", "sunburst-center-section");
@@ -103,8 +104,8 @@
         .attr("class", "sunburst-side-section")
         .html(`
             <div class="info-box">
-                <h3>About the Data</h3>
-                <p>This visualization shows squirrel behaviors observed in Central Park, structured hierarchically from age to fur color to activities.</p>
+                <h3>Fun Facts:</h3>
+                <p>A group of squirrels is called a dray or a scurry. They are very territorial and will fight to the death to defend their area.</p>
             </div>
             <img src="img/squirrel.png" alt="Squirrel" class="sunburst-squirrel-img">
         `);
@@ -112,7 +113,7 @@
     // Update CSS styles
     const style = document.createElement('style');
     style.textContent = `
-    @import url('https://fonts.cdnfonts.com/css/cocogoose');
+        @import url('https://fonts.cdnfonts.com/css/cocogoose');
         .sunburst-title-container {
             padding: 1.5rem 2rem;
             margin-bottom: 2rem;
@@ -150,8 +151,8 @@
         }
         
         .sunburst-squirrel-container {
-        width: 100%;
-        max-width: 400px;
+            width: 100%;
+            max-width: 400px;
         }
         
         .sunburst-tooltip {
@@ -286,8 +287,8 @@
             })
             .on("click", clicked);
 
-        // Center circle for zooming out
-        g.append("circle")
+        // Add the middle circle AFTER the paths to ensure it's on top
+        const middleCircle = g.append("circle")
             .attr("r", radius * 0.15)
             .attr("fill", "transparent")
             .style("cursor", "pointer")

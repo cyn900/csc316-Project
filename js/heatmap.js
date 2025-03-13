@@ -351,14 +351,14 @@ Promise.all([
     // Add axis labels
     svg.append("text")
         .attr("class", "axis-title")
-        .attr("transform", `translate(${width / 2},${height + margin.bottom - 10})`)
+        .attr("transform", `translate(${width / 2},${height + margin.bottom - 2})`)
         .style("text-anchor", "middle")
         .text("Weather Conditions");
 
     svg.append("text")
         .attr("class", "axis-title")
         .attr("transform", "rotate(-90)")
-        .attr("y", -margin.left + 30)
+        .attr("y", -margin.left + 10)
         .attr("x", -height / 2)
         .style("text-anchor", "middle")
         .text("Activities");
