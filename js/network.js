@@ -206,7 +206,7 @@
             // Add tooltips
             node.append("title")
                 .text(d => {
-                    const connections = [...links.filter(l => 
+                    const connections = [...links.filter(l =>
                         l.source.id === d.id || l.target.id === d.id
                     )].map(l => {
                         const otherAnimal = l.source.id === d.id ? l.target.id : l.source.id;
@@ -272,10 +272,10 @@
                     .transition()
                     .duration(200)
                     .style("opacity", node => connectedNodes.has(node.id) ? 1 : 0.3)
-                    .style("font-size", node => 
+                    .style("font-size", node =>
                         connectedNodes.has(node.id) ? "14px" : "12px"
                     )
-                    .style("font-weight", node => 
+                    .style("font-weight", node =>
                         connectedNodes.has(node.id) ? "bold" : "normal"
                     );
 
@@ -288,12 +288,12 @@
                         }
                         return "#ddd";
                     })
-                    .attr("stroke-opacity", l => 
+                    .attr("stroke-opacity", l =>
                         (l.source.id === d.id || l.target.id === d.id) ? 0.8 : 0.1
                     )
                     .attr("stroke-width", l => {
                         const baseWidth = Math.sqrt(l.value) * 6;
-                        return (l.source.id === d.id || l.target.id === d.id) 
+                        return (l.source.id === d.id || l.target.id === d.id)
                             ? baseWidth * 1.5 : baseWidth;
                     });
 
