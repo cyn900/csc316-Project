@@ -23,7 +23,7 @@
     header.append("h1")
         .attr("id", "home-main-title")
         .attr("class", "home-title")
-        .text("OFFICIAL FURRY FEDERATION");
+        .text("OFFICIAL  FURRY  FEDERATION");
 
     // Add the tree icon
     header.append("div")
@@ -70,6 +70,8 @@
     // Update CSS
     const style = document.createElement('style');
     style.textContent = `
+        @import url('https://fonts.cdnfonts.com/css/cocogoose');
+
         #home-container {
             width: 100%;
             max-width: 1400px;
@@ -99,7 +101,8 @@
         }
 
         #home-main-title {
-            font-family: 'Stencil Std', 'Arial Black', sans-serif;
+            font-family: "COCOGOOSE", sans-serif;
+            font-weight: 500;
             font-size: 3rem;
             margin: 0;
             letter-spacing: 2px;
@@ -132,11 +135,13 @@
         }
 
         #home-heading {
-            font-size: 8rem;
-            font-weight: 900;
+            font-size: 12rem;
             margin: 2rem 0;
             letter-spacing: 4px;
             padding: 0 1rem;
+            font-family: "COCOGOOSE", sans-serif;
+            font-weight: 500;
+            font-style: bold;
         }
 
         #home-subtitle {
