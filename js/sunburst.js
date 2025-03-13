@@ -29,7 +29,7 @@
                 <p>• Middle ring: Fur Color (Gray/Cinnamon/Black)</p>
                 <p>• Outer ring: Activities</p>
                 <p>• Click on sections to zoom in</p>
-                <p>• Click in the center to zoom out</p>
+                <p>• Click the "Reset View" button to zoom out</p>
             </div>
         `);
 
@@ -61,7 +61,7 @@
         .attr("class", "center-text")
         .style("opacity", 1);
 
-    centerTextG.append("circle")
+    const middleCircle = centerTextG.append("circle")
         .attr("r", radius * 0.15)
         .attr("fill", "#f9f9f9")
         .attr("stroke", "#ccc")
@@ -107,7 +107,6 @@
                 <h3>Fun Facts:</h3>
                 <p>A group of squirrels is called a dray or a scurry. They are very territorial and will fight to the death to defend their area.</p>
             </div>
-            <img src="img/squirrel.png" alt="Squirrel" class="sunburst-squirrel-img">
         `);
 
     // Update CSS styles
@@ -287,15 +286,11 @@
             })
             .on("click", clicked);
 
-        // Add the middle circle AFTER the paths to ensure it's on top
-        const middleCircle = g.append("circle")
-            .attr("r", radius * 0.15)
-            .attr("fill", "transparent")
-            .style("cursor", "pointer")
-            .on("click", function(event) {
-                // Reset to the original view
-                clicked(event, root);
-            });
+        // Add reset button functionality
+        d3.select("#reset-button").on("click", function() {
+            // Reset to the root view
+            resetSunburst();
+        });
 
         // Click handler for zooming
         function clicked(event, p) {
@@ -345,6 +340,46 @@
             function isVisible(d) {
                 return d.x0 >= 0 && d.x1 <= 2 * Math.PI && d.y0 >= 0;
             }
+        }
+
+        // Function to fully reset the sunburst
+        function resetSunburst() {
+            currentRoot = root;
+
+            // Update center text
+            centerText.select(".center-category")
+                .text("All Squirrels");
+
+            centerText.select(".center-count")
+                .text("Click to explore");
+
+            const t = g.transition().duration(750);
+
+            // Transition all paths back to their original positions
+            paths.transition(t)
+                .tween("data", d => {
+                    const i = d3.interpolate({
+                        x0: d.x0,
+                        x1: d.x1,
+                        y0: d.y0,
+                        y1: d.y1
+                    }, {
+                        x0: d.x0_orig,
+                        x1: d.x1_orig,
+                        y0: d.y0_orig,
+                        y1: d.y1_orig
+                    });
+
+                    return t => {
+                        const b = i(t);
+                        d.x0 = b.x0;
+                        d.x1 = b.x1;
+                        d.y0 = b.y0;
+                        d.y1 = b.y1;
+                    };
+                })
+                .attr("d", arc)
+                .style("visibility", "visible");
         }
     });
 
