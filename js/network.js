@@ -405,6 +405,8 @@
     // Add CSS styles
     const style = document.createElement('style');
     style.textContent = `
+    @import url(https://db.onlinewebfonts.com/c/07cb29fdcb073fff840edc6de2067b50?family=Amsterdam+Four_ttf);
+
         #network {
             width: 100%;
             margin: 0;
@@ -494,9 +496,9 @@
 
         .network-facts-title {
             font-size: 2rem;
-            font-weight: normal;
+            font-weight: 600;
             margin-bottom: 2rem;
-            font-style: italic;
+            font-family: 'Amsterdam Four_ttf;
         }
 
         .network-facts-content {
