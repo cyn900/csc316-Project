@@ -51,6 +51,8 @@
     // Add CSS
     const style = document.createElement('style');
     style.textContent = `
+    @import url('https://fonts.cdnfonts.com/css/cocogoose')
+    
         .linechart-text {
             font-size: 2rem;
             font-weight: bold;
@@ -71,6 +73,7 @@
             font-weight: bold;
             text-align: center;
             margin-bottom: 2rem;
+            font-family: "COCOGOOSE", sans-serif;
         }
 
         .linechart-center {

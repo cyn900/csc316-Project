@@ -14,8 +14,14 @@
 
     // Create left section for placeholder
     const leftSection = container.append("div")
+        .attr("class", "sunburst-squirrel-container")
+        .html(`
+            <img src="img/Squirrel2.png" alt="Decorative squirrel illustration" class="sunburst-squirrel-container">
+        `);
+
+    leftSection.append("div")
         .attr("class", "sunburst-side-section")
-        .style("margin-top", "400px")
+        .style("margin-top", "10px")
         .html(`
             <div class="legend-container">
                 <h3>Guide to Sunburst</h3>
@@ -26,7 +32,6 @@
                 <p>• Click in the center to zoom out</p>
             </div>
         `);
-
     // Create center section for sunburst
     const centerSection = container.append("div")
         .attr("class", "sunburst-center-section");
@@ -100,7 +105,6 @@
             <div class="info-box">
                 <h3>About the Data</h3>
                 <p>This visualization shows squirrel behaviors observed in Central Park, structured hierarchically from age to fur color to activities.</p>
-                <p>Data collected as part of the 2018 Central Park Squirrel Census.</p>
             </div>
             <img src="img/squirrel.png" alt="Squirrel" class="sunburst-squirrel-img">
         `);
@@ -108,6 +112,7 @@
     // Update CSS styles
     const style = document.createElement('style');
     style.textContent = `
+    @import url('https://fonts.cdnfonts.com/css/cocogoose');
         .sunburst-title-container {
             padding: 1.5rem 2rem;
             margin-bottom: 2rem;
@@ -118,8 +123,9 @@
         .sunburst-title {
             color: black;
             margin: 0;
-            font-size: 28px;
+            font-size: 35px;
             font-weight: bold;
+            font-family: "COCOGOOSE", sans-serif;
         }
 
         .sunburst-side-section {
@@ -141,6 +147,11 @@
             width: 100%;
             max-width: 300px;
             margin-top: 2rem;
+        }
+        
+        .sunburst-squirrel-container {
+        width: 100%;
+        max-width: 400px;
         }
         
         .sunburst-tooltip {
