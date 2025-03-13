@@ -67,6 +67,11 @@
     const filterSection = centerSection.append("div")
         .attr("class", "linechart-filters");
 
+    // Add tooltip div to the container
+    const tooltipDiv = d3.select("#linechart")
+        .append("div")
+        .attr("class", "timeline-tooltip")
+        .style("opacity", 0);
 
     function processDataForMetric(data, metric) {
         const groupedData = d3.group(data, d => Math.round(d.temperature));
@@ -353,6 +358,52 @@
             .call(brush)
             .call(brush.move, [margin.left, width - margin.right]);
 
+        // Add overlay rects for timeline hover
+        const timelineOverlay = svg.append("g")
+            .attr("class", "timeline-overlay")
+            .attr("transform", `translate(0,${height - timelineHeight - timelineMargin.bottom})`);
+
+        timelineOverlay.append("rect")
+            .attr("x", margin.left)
+            .attr("y", 0)
+            .attr("width", width - margin.left - margin.right)
+            .attr("height", timelineHeight)
+            .attr("fill", "transparent")
+            .on("mousemove", function(event) {
+                const [x0] = d3.pointer(event);
+                const date = timeScale.invert(x0);
+                const nearestData = findNearestData(date);
+                
+                if (nearestData) {
+                    const formattedDate = d3.timeFormat("%B %d, %Y")(nearestData.date);
+                    const value = nearestData.value.toFixed(1);
+                    
+                    tooltipDiv.transition()
+                        .duration(200)
+                        .style("opacity", .9);
+                    
+                    tooltipDiv.html(`Date: ${formattedDate}<br/>Value: ${value}`)
+                        .style("left", (event.pageX + 10) + "px")
+                        .style("top", (event.pageY - 28) + "px");
+                }
+            })
+            .on("mouseout", function() {
+                tooltipDiv.transition()
+                    .duration(500)
+                    .style("opacity", 0);
+            });
+
+        // Helper function to find nearest data point
+        function findNearestData(date) {
+            if (!processedData.length) return null;
+            
+            return processedData.reduce((prev, curr) => {
+                const prevDiff = Math.abs(prev.date - date);
+                const currDiff = Math.abs(curr.date - date);
+                return currDiff < prevDiff ? curr : prev;
+            });
+        }
+
         // Add metric buttons
         buttonContainer.selectAll("button")
             .data(metrics)
@@ -519,6 +570,19 @@
         display: flex;
         flex-direction: column;
         gap: 1rem;
+    }
+
+    .timeline-tooltip {
+        position: absolute;
+        text-align: center;
+        padding: 8px;
+        font-size: 12px;
+        background: white;
+        border: 1px solid #bf1b1b;
+        border-radius: 4px;
+        pointer-events: none;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        z-index: 1000;
     }
     `;
     document.head.appendChild(style);

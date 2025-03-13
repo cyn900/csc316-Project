@@ -232,7 +232,7 @@
                     }
                 });
             });
-            
+
             // Update global links
             links = [];
             topAnimals.forEach((animal1, i) => {
@@ -257,17 +257,17 @@
                 group: animal === "squirrel" ? 1 : 2,
                 size: animalCounts[animal]
             }));
-            
+
             // Clear previous network
             svg.selectAll("*").remove();
-            
+
             // Create force simulation with proper nodes array
             const simulation = d3.forceSimulation(nodes)
                 .force("link", d3.forceLink(links).id(d => d.id))
                 .force("charge", d3.forceManyBody().strength(-800))  // Reduced strength
                 .force("center", d3.forceCenter(width / 2, height / 2))
                 .force("collision", d3.forceCollide().radius(d => Math.sqrt(d.size) * 2.5 + 5));  // Reduced padding
-            
+
             // Create the links
             const link = svg.append("g")
                 .selectAll("line")
@@ -308,7 +308,7 @@
             // Add tooltips
             node.append("title")
                 .text(d => {
-                    const connections = [...links.filter(l =>
+                    const connections = [...links.filter(l => 
                         l.source.id === d.id || l.target.id === d.id
                     )].map(l => {
                         const otherAnimal = l.source.id === d.id ? l.target.id : l.source.id;
@@ -378,10 +378,10 @@
                     .transition()
                     .duration(200)
                     .style("opacity", node => connectedNodes.has(node.id) ? 1 : 0.3)
-                    .style("font-size", node =>
+                    .style("font-size", node => 
                         connectedNodes.has(node.id) ? "14px" : "12px"
                     )
-                    .style("font-weight", node =>
+                    .style("font-weight", node => 
                         connectedNodes.has(node.id) ? "bold" : "normal"
                     );
 
@@ -394,12 +394,12 @@
                         }
                         return "#ddd";
                     })
-                    .attr("stroke-opacity", l =>
+                    .attr("stroke-opacity", l => 
                         (l.source.id === d.id || l.target.id === d.id) ? 0.8 : 0.1
                     )
                     .attr("stroke-width", l => {
                         const baseWidth = Math.sqrt(l.value) * 4;
-                        return (l.source.id === d.id || l.target.id === d.id)
+                        return (l.source.id === d.id || l.target.id === d.id) 
                             ? baseWidth * 1.5 : baseWidth;
                     });
 

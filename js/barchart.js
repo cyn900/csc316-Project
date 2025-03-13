@@ -152,11 +152,21 @@
             <img src="img/Squirrel.png" alt="Decorative squirrel illustration" class="barchart-squirrel-image">
         `);
 
-    // Create tooltip
-    const tooltip = d3.select("#barchart")
+    // Create tooltip - Move this to the top level, outside of any function
+    const tooltip = d3.select("body")  // Attach to body instead of #barchart
         .append("div")
         .attr("class", "barchart-tooltip")
-        .style("opacity", 0);
+        .style("opacity", 0)
+        .style("position", "absolute")
+        .style("background", "rgba(255, 255, 255, 0.95)")
+        .style("padding", "12px")
+        .style("border", "2px solid #bf1b1b")
+        .style("border-radius", "6px")
+        .style("pointer-events", "none")
+        .style("font-size", "14px")
+        .style("box-shadow", "0 4px 8px rgba(0,0,0,0.1)")
+        .style("min-width", "200px")
+        .style("z-index", "1000");
 
     // Initialize current filters
     let currentFilters = {
@@ -230,7 +240,8 @@
             .append("rect")
             .attr("class", "barchart-bar");
 
-        bars.merge(barsEnter)
+        // Merge and update all bars
+        const allBars = bars.merge(barsEnter)
             .transition()
             .duration(500)
             .attr("x", d => xScale(d.name))
@@ -239,17 +250,42 @@
             .attr("height", d => height - yScale(d.count))
             .attr("fill", colors.bars);
 
-        // Add tooltips
-        barsEnter
-            .on("mouseover", function(event, d) {
-                const percentage = ((d.count / filteredData.length) * 100).toFixed(1);
+        // Add event listeners to all bars - use on() directly on the selection, not after transition
+        g.selectAll(".barchart-bar").each(function(d) {
+            const bar = d3.select(this);
+            bar.on("mouseover", function(event) {
+                const total = filteredData.length;
+                const count = d.count;
+                const percentage = ((count / total) * 100).toFixed(1);
+                
+                // Get current filter states for context
+                const activeFilters = {
+                    Age: currentFilters.age.includes("All") ? "All" : currentFilters.age.join(", "),
+                    Color: currentFilters.color.includes("All") ? "All" : currentFilters.color.join(", "),
+                    Time: currentFilters.shift.includes("All") ? "All" : currentFilters.shift.join(", "),
+                    Location: currentFilters.location.includes("All") ? "All" : currentFilters.location.join(", ")
+                };
+
                 tooltip.transition()
                     .duration(200)
                     .style("opacity", 1);
                 
-                tooltip.html(`${d.name}<br>Count: ${d.count}<br>${percentage}% of selected`)
-                    .style("left", (event.pageX + 15) + "px")
-                    .style("top", (event.pageY - 15) + "px");
+                tooltip.html(`
+                    <div style="font-weight: bold; font-size: 16px; color: #bf1b1b; margin-bottom: 8px; border-bottom: 1px solid rgba(191, 27, 27, 0.2); padding-bottom: 4px;">${d.name}</div>
+                    <div style="color: #333; line-height: 1.4;">
+                        <div>Count: ${count}</div>
+                        <div>Percentage: ${percentage}%</div>
+                        <div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(0,0,0,0.1); font-size: 12px;">
+                            <div style="font-weight: bold; margin-bottom: 4px;">Filters Applied:</div>
+                            <div>Age: ${activeFilters.Age}</div>
+                            <div>Color: ${activeFilters.Color}</div>
+                            <div>Time: ${activeFilters.Time}</div>
+                            <div>Location: ${activeFilters.Location}</div>
+                        </div>
+                    </div>
+                `)
+                .style("left", (event.pageX + 15) + "px")
+                .style("top", (event.pageY - 15) + "px");
                 
                 d3.select(this)
                     .transition()
@@ -271,6 +307,7 @@
                     .duration(200)
                     .attr("fill", colors.bars);
             });
+        });
     }
 
     // Load data and initialize chart
@@ -442,15 +479,41 @@
 
         .barchart-tooltip {
             position: absolute;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 8px 12px;
-            font-size: 14px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 12px;
+            border: 2px solid #bf1b1b;
+            border-radius: 6px;
             pointer-events: none;
-            opacity: 0;
-            z-index: 100;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            white-space: nowrap;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            font-size: 14px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            min-width: 200px;
+            z-index: 1000;
+        }
+
+        .tooltip-header {
+            font-weight: bold;
+            font-size: 16px;
+            color: #bf1b1b;
+            margin-bottom: 8px;
+            border-bottom: 1px solid rgba(191, 27, 27, 0.2);
+            padding-bottom: 4px;
+        }
+
+        .tooltip-content {
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .tooltip-filters {
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid rgba(0,0,0,0.1);
+            font-size: 12px;
+        }
+
+        .tooltip-filters > div:first-child {
+            font-weight: bold;
+            margin-bottom: 4px;
         }
 
         @media (max-width: 1024px) {
