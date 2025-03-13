@@ -1,7 +1,7 @@
 (function() {
     // Set up dimensions
-    const width = 800;
-    const height = 600;
+    const width = 600;
+    const height = 450;
     const margin = { top: 20, right: 20, bottom: 20, left: 20 };
 
     // Create visualization directly in the network div
@@ -44,17 +44,118 @@
         .attr("class", "network-right-section");
 
     // Add content to right section
-    rightSection.append("h3")
-        .attr("class", "network-facts-title")
-        .text("Fun Facts:");
+    rightSection.html(`
+        <h3 class="network-facts-title">Animal Interactions</h3>
+        
+        <div class="network-info-container">
+            <div id="network-info-display">
+                <p class="network-default-text">Click on a node to see detailed information about that animal's interactions.</p>
+                
+                <div class="network-explanation">
+                    <p><strong>About the visualization:</strong></p>
+                    <p>• Each node represents an animal species observed in Central Park</p>
+                    <p>• Connections show which animals are frequently seen together</p>
+                    <p>• Percentages indicate how often two animals are seen together relative to their total sightings</p>
+                    <p>• Thicker lines indicate stronger connections</p>
+                </div>
+            </div>
+        </div>
+        <div class="network-scroll-indicator">
+            <div class="network-scroll-arrow"></div>
+            <div class="network-scroll-text">Scroll for more</div>
+        </div>
+    `);
 
-    rightSection.append("div")
-        .attr("class", "network-facts-content")
-        .html(`
-            <p>squirrel<br>Sightings: 700</p>
-            <p>Connections:<br>human: 100.0%<br>dog: 100.0%</p>
-            <p class="network-interaction-text">Interactive Elements: Slider to show the number of top animals to show. You can also move the nodes around. Tooltip showing the detailed information.</p>
-        `);
+    // Move the updateInfoDisplay function outside of the d3.csv callback
+    // so it's accessible in the global scope of the IIFE
+    let animalCounts = {};
+    let coOccurrences = {};
+    let links = [];
+
+    // Create a function to update the info display when a node is clicked
+    function updateInfoDisplay(d) {
+        const infoDisplay = d3.select("#network-info-display");
+        
+        if (!d) {
+            // Reset to default text
+            infoDisplay.html(`
+                <p class="network-default-text">Click on a node to see detailed information about that animal's interactions.</p>
+                
+                <div class="network-explanation">
+                    <p><strong>About the visualization:</strong></p>
+                    <p>• Each node represents an animal species observed in Central Park</p>
+                    <p>• Connections show which animals are frequently seen together</p>
+                    <p>• Percentages indicate how often two animals are seen together relative to their total sightings</p>
+                    <p>• Thicker lines indicate stronger connections</p>
+                </div>
+            `);
+            return;
+        }
+        
+        // Get connections for this animal
+        const connections = links.filter(l => 
+            l.source.id === d.id || l.target.id === d.id
+        ).map(l => {
+            const otherAnimal = l.source.id === d.id ? l.target : l.source;
+            return {
+                name: otherAnimal.id,
+                value: l.value,
+                count: coOccurrences[d.id][otherAnimal.id] || coOccurrences[otherAnimal.id][d.id]
+            };
+        }).sort((a, b) => b.value - a.value);
+        
+        // Create HTML for the info display
+        let html = `
+            <h4 class="network-animal-name">${d.id}</h4>
+            <p>Total sightings: ${animalCounts[d.id]}</p>
+            
+            <div class="network-connections">
+                <p><strong>Connections:</strong></p>
+                <ul class="network-connection-list">
+        `;
+        
+        connections.forEach(conn => {
+            html += `
+                <li>
+                    <span class="network-connection-name">${conn.name}</span>: 
+                    <span class="network-connection-value">${(conn.value * 100).toFixed(1)}%</span>
+                    <span class="network-connection-count">(${conn.count} shared sightings)</span>
+                </li>
+            `;
+        });
+        
+        html += `
+                </ul>
+            </div>
+            
+            <div class="network-percentage-explanation">
+                <p><strong>What do these percentages mean?</strong></p>
+            `;
+        
+        if (connections.length > 0) {
+            const topConnection = connections[0];
+            const percentage = (topConnection.value * 100).toFixed(1);
+            
+            html += `
+                <p>For example, when you see "${d.id}" and "${topConnection.name}" together:</p>
+                <ul class="network-example-list">
+                    <li>There were ${animalCounts[d.id]} total ${d.id} sightings</li>
+                    <li>There were ${animalCounts[topConnection.name]} total ${topConnection.name} sightings</li>
+                    <li>They were seen together ${topConnection.count} times</li>
+                </ul>
+                
+                <p>The ${percentage}% means: <strong>If you spot a ${d.id} in the park, there's a ${percentage}% chance you'll also see a ${topConnection.name} nearby.</strong></p>
+                
+                <p>We calculate this by taking the number of times they were seen together (${topConnection.count}) divided by the total number of opportunities to see them together (${Math.min(animalCounts[d.id], animalCounts[topConnection.name])}).</p>
+            `;
+        }
+        
+        html += `
+            </div>
+        `;
+        
+        infoDisplay.html(html);
+    }
 
     // Load data
     d3.csv("data/hectare.csv").then(function(data) {
@@ -105,8 +206,8 @@
         });
 
         function updateNetwork(topN) {
-            // Count animal frequencies
-            const animalCounts = {};
+            // Update global variables
+            animalCounts = {};
             animalSightings.flat().forEach(animal => {
                 animalCounts[animal] = (animalCounts[animal] || 0) + 1;
             });
@@ -118,8 +219,8 @@
                 .slice(0, topN - 1)
                 .map(([animal]) => animal)];
 
-            // Calculate co-occurrences between top animals
-            const coOccurrences = {};
+            // Update global coOccurrences
+            coOccurrences = {};
             topAnimals.forEach(animal1 => {
                 coOccurrences[animal1] = {};
                 topAnimals.forEach(animal2 => {
@@ -131,16 +232,9 @@
                     }
                 });
             });
-
-            // Create nodes
-            const nodes = topAnimals.map(animal => ({
-                id: animal,
-                group: animal === "squirrel" ? 1 : 2,
-                size: animalCounts[animal]
-            }));
-
-            // Create links with minimum threshold for visibility
-            const links = [];
+            
+            // Update global links
+            links = [];
             topAnimals.forEach((animal1, i) => {
                 topAnimals.slice(i + 1).forEach(animal2 => {
                     const count = coOccurrences[animal1][animal2];
@@ -157,30 +251,37 @@
                 });
             });
 
+            // Create nodes array properly
+            const nodes = topAnimals.map(animal => ({
+                id: animal,
+                group: animal === "squirrel" ? 1 : 2,
+                size: animalCounts[animal]
+            }));
+            
             // Clear previous network
             svg.selectAll("*").remove();
-
-            // Create force simulation
+            
+            // Create force simulation with proper nodes array
             const simulation = d3.forceSimulation(nodes)
                 .force("link", d3.forceLink(links).id(d => d.id))
-                .force("charge", d3.forceManyBody().strength(-1000))
+                .force("charge", d3.forceManyBody().strength(-800))  // Reduced strength
                 .force("center", d3.forceCenter(width / 2, height / 2))
-                .force("collision", d3.forceCollide().radius(d => Math.sqrt(d.size) * 4));
-
+                .force("collision", d3.forceCollide().radius(d => Math.sqrt(d.size) * 2.5 + 5));  // Reduced padding
+            
             // Create the links
             const link = svg.append("g")
                 .selectAll("line")
                 .data(links)
                 .enter().append("line")
                 .attr("class", "network-link")
-                .attr("stroke-width", d => Math.sqrt(d.value) * 6)
+                .attr("stroke-width", d => Math.sqrt(d.value) * 4)
                 .attr("stroke", "#bf1b1b")
                 .attr("stroke-opacity", 0.8);
-
-            // Create the nodes
+            
+            // Create the nodes with proper data
             const node = svg.append("g")
                 .selectAll("g")
-                .data(nodes)
+                .data(nodes)  // Use the nodes array directly
                 .enter().append("g")
                 .attr("class", "network-node")
                 .call(d3.drag()
@@ -191,8 +292,9 @@
 
             // Add circles to nodes
             node.append("circle")
-                .attr("r", d => Math.sqrt(d.size) * 4)
-                .attr("fill", "#bf1b1b");
+                .attr("r", d => Math.sqrt(d.size) * 2.5)
+                .attr("fill", d => d.id === "squirrel" ? "#D2691E" : "#bf1b1b")
+                .attr("class", d => d.id === "squirrel" ? "squirrel-node" : "animal-node");
 
             // Add labels to nodes
             node.append("text")
@@ -222,10 +324,12 @@
                     // If clicking the same node again, reset the view
                     selectedNode = null;
                     resetHighlight();
+                    updateInfoDisplay(null);
                 } else {
                     // Highlight the selected node and its connections
                     selectedNode = d.id;
                     highlightConnections(d);
+                    updateInfoDisplay(d);
                 }
                 event.stopPropagation();
             }
@@ -234,6 +338,7 @@
             svg.on("click", () => {
                 selectedNode = null;
                 resetHighlight();
+                updateInfoDisplay(null);
             });
 
             function getConnectedNodes(nodeId) {
@@ -257,13 +362,14 @@
                     .transition()
                     .duration(200)
                     .attr("fill", node => {
+                        if (node.id === "squirrel") return "#D2691E";
                         if (connectedNodes.has(node.id)) {
                             return "#bf1b1b";
                         }
                         return "#ddd";
                     })
                     .attr("r", node => {
-                        const baseSize = Math.sqrt(node.size) * 3;
+                        const baseSize = Math.sqrt(node.size) * 2.5;
                         return connectedNodes.has(node.id) ? baseSize * 1.2 : baseSize;
                     });
 
@@ -292,7 +398,7 @@
                         (l.source.id === d.id || l.target.id === d.id) ? 0.8 : 0.1
                     )
                     .attr("stroke-width", l => {
-                        const baseWidth = Math.sqrt(l.value) * 6;
+                        const baseWidth = Math.sqrt(l.value) * 4;
                         return (l.source.id === d.id || l.target.id === d.id)
                             ? baseWidth * 1.5 : baseWidth;
                     });
@@ -308,8 +414,8 @@
                 node.selectAll("circle")
                     .transition()
                     .duration(200)
-                    .attr("fill", "#bf1b1b")
-                    .attr("r", d => Math.sqrt(d.size) * 3)
+                    .attr("fill", d => d.id === "squirrel" ? "#D2691E" : "#bf1b1b")
+                    .attr("r", d => Math.sqrt(d.size) * 2.5)
                     .style("filter", null);
 
                 // Reset labels
@@ -325,7 +431,7 @@
                     .duration(200)
                     .attr("stroke", "#bf1b1b")
                     .attr("stroke-opacity", 0.6)
-                    .attr("stroke-width", d => Math.sqrt(d.value) * 5);
+                    .attr("stroke-width", d => Math.sqrt(d.value) * 4);
             }
 
             // Add glow filter definition
@@ -357,6 +463,23 @@
                 .network-node text.highlighted {
                     font-weight: bold;
                     font-size: 14px;
+                }
+
+                .squirrel-node {
+                    fill: #D2691E !important;
+                }
+                
+                .animal-node {
+                    fill: #bf1b1b;
+                }
+
+                .network-example-list {
+                    margin: 0.5rem 0;
+                    padding-left: 1.5rem;
+                }
+                
+                .network-example-list li {
+                    margin-bottom: 0.3rem;
                 }
             `;
 
@@ -439,11 +562,11 @@
         .network-left-section {
             display: flex;
             flex-direction: column;
-            gap: 3rem;
+            gap: 2rem;
             background: transparent;
-            width: 100%;
-            max-width: 800px;
-            margin: 0;
+            width: 90%;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         .network-controls {
@@ -484,23 +607,112 @@
         }
 
         .network-svg {
-            width: 100%;
+            width: 90%;
             height: auto;
             aspect-ratio: 4/3;
             background: transparent !important;
+            margin: 0 auto;
         }
 
         .network-right-section {
             padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
 
         .network-facts-title {
             font-size: 2rem;
             font-weight: 600;
-            margin-bottom: 2rem;
-            font-family: 'Amsterdam Four_ttf;
+            margin-bottom: 1rem;
+            font-family: 'Amsterdam Four_ttf';
         }
 
+        .network-info-container {
+            flex: 1;
+            overflow-y: auto;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.7);
+            height: calc(450px - 3rem - 30px);  /* Match SVG height minus title space and scroll indicator */
+            max-height: calc(450px - 3rem - 30px);
+            scrollbar-width: thin;
+            position: relative;
+        }
+        
+        .network-info-container::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .network-info-container::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+        }
+        
+        .network-info-container::-webkit-scrollbar-thumb {
+            background-color: rgba(191, 27, 27, 0.5);
+            border-radius: 3px;
+        }
+        
+        .network-info-container::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.9));
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .network-scroll-indicator {
+            text-align: center;
+            margin-top: 5px;
+            height: 25px;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .network-scroll-arrow {
+            width: 8px;
+            height: 8px;
+            border-left: 2px solid #bf1b1b;
+            border-bottom: 2px solid #bf1b1b;
+            transform: rotate(-45deg);
+            animation: scroll-bounce 1.5s infinite;
+            display: inline-block;
+        }
+        
+        .network-scroll-text {
+            font-size: 0.8rem;
+            color: #bf1b1b;
+            font-weight: 500;
+        }
+        
+        @keyframes scroll-bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) rotate(-45deg);
+            }
+            40% {
+                transform: translateY(-3px) rotate(-45deg);
+            }
+            60% {
+                transform: translateY(-2px) rotate(-45deg);
+            }
+        }
+        
+        .network-right-section:hover .network-scroll-indicator {
+            opacity: 1;
+        }
+
+        #network-info-display {
+            padding: 1rem;
+        }
+        
         .network-facts-content {
             display: flex;
             flex-direction: column;
@@ -513,38 +725,132 @@
         }
 
         .network-interaction-text {
-            margin-top: 2rem !important;
+            margin-top: 1rem !important;
             font-size: 0.9rem;
         }
 
-        .network-node circle {
-            stroke: none;
-            transition: all 0.2s;
-            fill: #bf1b1b;
+        .network-animal-name {
+            font-size: 1.5rem;
+            margin: 0 0 0.5rem 0;
+            color: #bf1b1b;
+            text-transform: capitalize;
         }
-
-        .network-node text {
-            pointer-events: none;
-            transition: all 0.2s;
-            font-size: 14px;
-            fill: #000;
+        
+        .network-connection-list {
+            list-style-type: none;
+            padding-left: 0.5rem;
+            margin: 0.5rem 0;
         }
-
-        .network-link {
-            stroke-opacity: 0.8;
-            stroke-width: 2px;
-            transition: all 0.2s;
+        
+        .network-connection-list li {
+            margin-bottom: 0.5rem;
         }
-
-        .network-link:hover {
-            stroke-opacity: 1;
+        
+        .network-connection-name {
+            text-transform: capitalize;
+            font-weight: 500;
         }
-
-        @media (max-width: 768px) {
-            .network-content-grid {
-                grid-template-columns: 1fr;
-            }
+        
+        .network-connection-value {
+            font-weight: bold;
+            color: #bf1b1b;
+        }
+        
+        .network-connection-count {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .network-percentage-explanation {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        
+        .network-explanation {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            line-height: 1.4;
         }
     `;
     document.head.appendChild(style);
+
+    // Add JavaScript to hide scroll indicator when scrolled to bottom
+    setTimeout(() => {
+        const container = document.querySelector('.network-info-container');
+        const scrollIndicator = document.querySelector('.network-scroll-indicator');
+        
+        if (container && scrollIndicator) {
+            // Initially hide the scroll indicator
+            scrollIndicator.style.display = 'none';
+            
+            // Function to check scroll status and update indicator
+            function updateScrollIndicator() {
+                const isScrollable = container.scrollHeight > container.clientHeight;
+                const isScrolledToBottom = container.scrollHeight - container.scrollTop <= container.clientHeight + 10;
+                
+                // Only show the indicator if content is scrollable and not at bottom
+                if (isScrollable && !isScrolledToBottom) {
+                    scrollIndicator.style.display = 'flex';
+                    scrollIndicator.style.opacity = '0.8';
+                } else {
+                    // If not scrollable or at bottom, hide the indicator
+                    scrollIndicator.style.opacity = '0';
+                    // Use setTimeout to hide after fade out animation completes
+                    setTimeout(() => {
+                        if (!isScrollable || isScrolledToBottom) {
+                            scrollIndicator.style.display = 'none';
+                        }
+                    }, 300);
+                }
+            }
+            
+            // Add scroll event listener
+            container.addEventListener('scroll', updateScrollIndicator);
+            
+            // Check on initial load and whenever content changes
+            updateScrollIndicator();
+            
+            // Also check when info display content changes
+            const observer = new MutationObserver(updateScrollIndicator);
+            observer.observe(document.getElementById('network-info-display'), { 
+                childList: true, 
+                subtree: true,
+                characterData: true
+            });
+            
+            // Check again after a short delay to account for any rendering delays
+            setTimeout(updateScrollIndicator, 500);
+        }
+    }, 100);
+
+    // Update the updateInfoDisplay function to check scroll status after content changes
+    const originalUpdateInfoDisplay = updateInfoDisplay;
+    updateInfoDisplay = function(d) {
+        // Call the original function
+        originalUpdateInfoDisplay(d);
+        
+        // Check scroll status after a short delay to allow DOM to update
+        setTimeout(() => {
+            const container = document.querySelector('.network-info-container');
+            const scrollIndicator = document.querySelector('.network-scroll-indicator');
+            
+            if (container && scrollIndicator) {
+                const isScrollable = container.scrollHeight > container.clientHeight;
+                const isScrolledToBottom = container.scrollHeight - container.scrollTop <= container.clientHeight + 10;
+                
+                if (isScrollable && !isScrolledToBottom) {
+                    scrollIndicator.style.display = 'flex';
+                    scrollIndicator.style.opacity = '0.8';
+                } else {
+                    scrollIndicator.style.opacity = '0';
+                    setTimeout(() => {
+                        if (!isScrollable || isScrolledToBottom) {
+                            scrollIndicator.style.display = 'none';
+                        }
+                    }, 300);
+                }
+            }
+        }, 100);
+    };
 })();
