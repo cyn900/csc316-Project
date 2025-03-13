@@ -20,7 +20,7 @@ d3.csv("data/stories.csv").then(function(data) {
                 <h2 class="story-title">Squirrel Stories</h2>
             </div>
             <div class="story-text-content">
-                <p>random text to fill the space probabaly somet instruction on how to read thisnckas ashchasdj csabfjash ah asudas d aa sa d a d sd f das sd das das x sd asd as as sad sad as d d sf sd as das d ad as das a</p>
+                <p>This is a world cloud of the most common words found in stories by sighters! Try to click on one of them and click fetch a random story to see what kind of stories sighters tell.</p>
             </div>
         `);
 
@@ -44,6 +44,8 @@ d3.csv("data/stories.csv").then(function(data) {
     // Add CSS
     const style = document.createElement('style');
     style.textContent = `
+    @import url(https://db.onlinewebfonts.com/c/07cb29fdcb073fff840edc6de2067b50?family=Amsterdam+Four_ttf);
+
         .story-left-section {
             padding: 2rem;
             max-width: 400px;
@@ -55,9 +57,10 @@ d3.csv("data/stories.csv").then(function(data) {
         }
 
         .story-title {
-            font-size: 28px;
-            font-weight: bold;
+            font-size: 50px;
+            font-family: "Amsterdam Four_ttf";
             color: black;
+            font-weight: 500;
         }
 
         .story-text-content {

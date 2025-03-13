@@ -19,7 +19,7 @@
 
     header.append("h1")
         .attr("class", "barchart-main-title")
-        .text("FIRST TITLE WOULD BE");
+        .text("HOW DO SQUIRRELS BEHAVE?");
 
     // Create content grid container
     const contentGrid = mainContainer.append("div")
@@ -319,6 +319,8 @@
     // Update CSS styles
     const style = document.createElement('style');
     style.textContent = `
+    @import url('https://fonts.cdnfonts.com/css/cocogoose');
+
         #barchart {
             width: 100%;
             max-width: 1400px;
@@ -334,6 +336,7 @@
 
         .barchart-main-title {
             color: #000;
+            font-family: 'COCOGOOSE', sans-serif;
             font-size: 2.5rem;
             font-weight: bold;
             margin: 0;
