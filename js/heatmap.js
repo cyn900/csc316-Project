@@ -1,18 +1,18 @@
 /* * * * * * * * * * * * * *
-*         HEATMAP          *
+*        HEATMAP     *
 * * * * * * * * * * * * * */
 
 // Set up margins, width, and height
-const margin = { top: 50, right: 80, bottom: 50, left: 100 };
+const margin = { top: 50, right: 100, bottom: 50, left: 100 };
 const width = 800 - margin.left - margin.right;
 const height = 800 - margin.top - margin.bottom;
 
 // Create main container with grid layout
 const container = d3.select("#heatmap")
     .style("display", "grid")
-    .style("grid-template-columns", "2fr 1fr")
-    .style("gap", "4rem")
-    .style("padding", "0 4rem")
+    .style("grid-template-columns", "1fr 1.2fr")
+    .style("gap", "2rem")
+    .style("padding", "2rem")
     .style("background", "transparent");
 
 // Create left section for text content
@@ -24,23 +24,26 @@ leftSection.append("div")
     .attr("class", "heatmap-title-container")
     .append("h2")
     .attr("class", "heatmap-title")
-    .text("Special Addition");
+    .text("SPECIAL ADDITION");
 
-// Add descriptive text
+// Add question text
 leftSection.append("div")
-    .attr("class", "heatmap-text-content")
+    .attr("class", "heatmap-question-container")
     .html(`
-        <p>The heatmap shows the relationship between weather conditions and squirrel activities.</p>
-        <p>Key findings:</p>
-        <ul>
-            <li>Squirrels are most active during sunny weather</li>
-            <li>Foraging is the most common activity across all weather conditions</li>
-            <li>Activity levels decrease significantly during rainy conditions</li>
-        </ul>
-        <p>Interactive Elements: Hover over cells to see detailed counts. The color intensity indicates the frequency of observations.</p>
+        <p class="question-part">should we be</p>
+        <p class="question-emphasis">worried about</p>
+        <p class="question-main">Weather</p>
+        <p class="question-part">to spot our friends?</p>
     `);
 
-// Create right section for heatmap
+// Add information display for interactive elements
+const infoDisplay = leftSection.append("div")
+    .attr("class", "heatmap-info-display")
+    .html(`
+        <p id="interaction-info">Interactive Elements: Click on cells to see detailed information.</p>
+    `);
+
+// Create right section for heatmap and tree image
 const rightSection = container.append("div")
     .attr("class", "heatmap-right-section");
 
@@ -49,10 +52,20 @@ const svg = rightSection.append("svg")
     .attr("viewBox", `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`)
     .attr("width", "100%")
     .attr("height", "100%")
-    .style("min-height", "800px")
+    .style("max-height", "600px")
     .style("background", "transparent")
     .append("g")
     .attr("transform", `translate(${margin.left},${margin.top})`);
+
+// Add tree image as background decoration
+rightSection.append("div")
+    .attr("class", "tree-image")
+    .style("position", "absolute")
+    .style("right", "0")
+    .style("bottom", "0")
+    .style("z-index", "-1")
+    .style("opacity", "0.8")
+    .html(`<img src="/path/to/tree-silhouette.png" alt="Tree silhouette" />`);
 
 // Add CSS styles
 const style = document.createElement('style');
@@ -68,38 +81,82 @@ style.textContent = `
     .heatmap-title {
         color: #ffffff;
         margin: 0;
-        font-size: 28px;
+        font-size: 32px;
+        font-weight: bold;
+        font-family: 'Arial', sans-serif;
+        letter-spacing: 1px;
+    }
+
+    .heatmap-question-container {
+        font-size: 1.5rem;
+        line-height: 1.4;
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+        font-family: 'Arial', sans-serif;
+        max-width: 400px;
+    }
+
+    .question-part {
+        font-size: 1.5rem;
+        margin: 0.5rem 0;
+        font-style: italic;
+    }
+
+    .question-emphasis {
+        font-size: 2rem;
+        margin: 0.5rem 0;
         font-weight: bold;
     }
 
-    .heatmap-text-content {
+    .question-main {
+        font-size: 3.5rem;
+        font-weight: bold;
+        margin: 0.5rem 0;
+        font-family: 'Cursive', 'Arial', sans-serif;
+    }
+
+    .heatmap-info-display {
+        border: 4px solid #bf1b1b;
+        border-radius: 8px;
+        padding: 1.5rem;
+        background-color: rgba(243, 244, 246, 0.8);
+        margin-top: 3rem;
+        text-align: center;
+    }
+
+    #interaction-info {
         font-size: 1.2rem;
-        line-height: 1.8;
-        background: transparent;
+        margin: 0;
+        line-height: 1.6;
+        color: #333;
     }
 
-    .heatmap-text-content p {
-        margin-bottom: 1.5rem;
+    .heatmap-cell {
+        stroke: #fff;
+        stroke-width: 2px;
+        transition: opacity 0.2s;
+        cursor: pointer;
     }
 
-    .heatmap-text-content ul {
-        margin: 1.5rem 0;
-        padding-left: 2rem;
+    .heatmap-cell:hover {
+        opacity: 0.8;
+        stroke: #333;
+        stroke-width: 3px;
     }
 
-    .heatmap-text-content li {
-        margin-bottom: 1rem;
-    }
-
-    .heatmap-right-section {
-        width: 100%;
-        height: auto;
-        min-height: 800px;
-        background: transparent;
+    .heatmap-cell.active {
+        stroke: #000;
+        stroke-width: 4px;
     }
 
     .axis-label {
         font-size: 14px;
+        font-weight: bold;
+    }
+
+    .axis-title {
+        font-size: 16px;
+        font-weight: bold;
     }
 
     .legend-tick {
@@ -196,17 +253,31 @@ Promise.all([
     const xScale = d3.scaleBand()
         .domain(groupedWeatherConditions)
         .range([0, width])
-        .padding(0.05);
+        .padding(0.1);
 
     const yScale = d3.scaleBand()
         .domain(activities)
         .range([0, height])
-        .padding(0.05);
+        .padding(0.1);
 
-    // We use non-linear scale for better color distinction
+    // Create a custom color scale using the specified colors
     const maxValue = d3.max(heatmapData.map(d => d.value));
-    const colorScale = d3.scaleSequential(d3.interpolatePlasma)
-        .domain([0, Math.pow(maxValue, 0.5)]); // Use a square root scale for better differentiation
+    const colorScale = d3.scaleLinear()
+        .domain([0, maxValue / 3, maxValue * 2/3, maxValue])
+        .range(["#ffffff", "#76bb65", "#f59e0b", "#bf1b1b"]);
+
+    // Store the currently selected cell
+    let selectedCell = null;
+
+    // Function to update the interaction info
+    const updateInteractionInfo = (d) => {
+        if (d) {
+            const infoText = `When it's ${d.weather}, there are ${d.value} squirrels ${d.activity.toLowerCase()}.`;
+            d3.select("#interaction-info").text(infoText);
+        } else {
+            d3.select("#interaction-info").text("Interactive Elements: Click on cells to see detailed information.");
+        }
+    };
 
     // Draw the heatmap
     svg.selectAll(".heatmap-cell")
@@ -217,17 +288,48 @@ Promise.all([
         .attr("y", d => yScale(d.activity))
         .attr("width", xScale.bandwidth())
         .attr("height", yScale.bandwidth())
-        .attr("fill", d => colorScale(Math.pow(d.value, 0.5))) // Apply square root scaling
+        .attr("fill", d => colorScale(d.value))
         .attr("class", "heatmap-cell")
-        .append("title")
-        .text(d => `${d.activity} (${d.weather}): ${d.value} squirrels`);
+        .on("mouseover", function(event, d) {
+            d3.select(this).transition().duration(100).style("opacity", 0.8);
+            updateInteractionInfo(d);
+        })
+        .on("mouseout", function(event, d) {
+            if (this !== selectedCell) {
+                d3.select(this).transition().duration(100).style("opacity", 1);
+            }
+            if (!selectedCell) {
+                updateInteractionInfo(null);
+            } else {
+                const selectedData = d3.select(selectedCell).datum();
+                updateInteractionInfo(selectedData);
+            }
+        })
+        .on("click", function(event, d) {
+            // Remove active class from previously selected cell
+            if (selectedCell) {
+                d3.select(selectedCell).classed("active", false);
+            }
+
+            // If clicking on the same cell, deselect it
+            if (this === selectedCell) {
+                selectedCell = null;
+                updateInteractionInfo(null);
+            } else {
+                // Select new cell
+                selectedCell = this;
+                d3.select(this).classed("active", true);
+                updateInteractionInfo(d);
+            }
+        });
 
     // Add axes
     svg.append("g")
         .attr("transform", `translate(0,${height})`)
         .call(d3.axisBottom(xScale))
         .selectAll("text")
-        .attr("class", "axis-label");
+        .attr("class", "axis-label")
+        .style("text-anchor", "middle");
 
     svg.append("g")
         .call(d3.axisLeft(yScale))
@@ -236,47 +338,58 @@ Promise.all([
 
     // Add axis labels
     svg.append("text")
+        .attr("class", "axis-title")
         .attr("transform", `translate(${width / 2},${height + margin.bottom - 10})`)
         .style("text-anchor", "middle")
         .text("Weather Conditions");
 
     svg.append("text")
+        .attr("class", "axis-title")
         .attr("transform", "rotate(-90)")
-        .attr("y", -margin.left + 20)
+        .attr("y", -margin.left + 30)
         .attr("x", -height / 2)
         .style("text-anchor", "middle")
         .text("Activities");
 
     // Add color legend
+    const legendWidth = 20;
     const legend = svg.append("g")
-        .attr("transform", `translate(${width + 20}, 0)`); // Move legend further to the right
+        .attr("transform", `translate(${width + 20}, 0)`);
 
-    // Create a scale for the legend
+    // Create a gradient for the legend
+    const legendValues = Array.from({ length: 20 }, (_, i) => i * maxValue / 19);
+
+    // Add the legend rectangles
+    legend.selectAll("rect")
+        .data(legendValues)
+        .enter()
+        .append("rect")
+        .attr("x", 0)
+        .attr("y", d => height - (d / maxValue) * height)
+        .attr("width", legendWidth)
+        .attr("height", height / 20 + 1) // +1 to avoid gaps
+        .attr("fill", d => colorScale(d));
+
+    // Add legend axis
     const legendScale = d3.scaleLinear()
-        .domain([0, Math.pow(maxValue, 0.5)]) // Match the color scale domain
+        .domain([0, maxValue])
         .range([height, 0]);
 
-    // Add the legend axis
     const legendAxis = d3.axisRight(legendScale)
         .ticks(5)
-        .tickFormat(d => Math.round(Math.pow(d, 2)));
+        .tickFormat(d => d);
 
     legend.append("g")
-        .attr("transform", `translate(20, 0)`) // Move axis to the right of the legend
+        .attr("transform", `translate(${legendWidth}, 0)`)
         .call(legendAxis)
         .selectAll("text")
         .attr("class", "legend-tick");
 
-    // Add the legend rectangles
-    legend.selectAll("rect")
-        .data(d3.range(0, Math.pow(maxValue, 0.5), 0.1))
-        .enter()
-        .append("rect")
-        .attr("x", 0)
-        .attr("y", d => legendScale(d))
-        .attr("width", 20)
-        .attr("height", 0.1 * (height / Math.pow(maxValue, 0.5)))
-        .attr("fill", d => colorScale(d));
+    // Add legend title
+    legend.append("text")
+        .attr("transform", `translate(${legendWidth / 2}, -10)`)
+        .style("text-anchor", "middle")
+        .text("Count");
 }).catch(error => {
     console.error("Error loading or processing data:", error);
 });
