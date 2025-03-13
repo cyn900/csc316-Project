@@ -30,7 +30,7 @@
         .attr("class", "network-control-group")
         .html(`
             <label for="networkAnimalCount">Number of top animals to show: <span id="networkAnimalCountValue">3</span></label>
-            <input type="range" id="networkAnimalCount" class="network-range" min="3" max="15" value="3">
+            <input type="range" id="networkAnimalCount" class="network-range" min="3" max="20" value="3">
         `);
 
     // Add SVG to left section
@@ -304,18 +304,6 @@
                 .style("font-family", "sans-serif")
                 .style("font-size", "14px")
                 .style("font-weight", d => d.id === "squirrel" ? "bold" : "normal");
-
-            // Add tooltips
-            node.append("title")
-                .text(d => {
-                    const connections = [...links.filter(l => 
-                        l.source.id === d.id || l.target.id === d.id
-                    )].map(l => {
-                        const otherAnimal = l.source.id === d.id ? l.target.id : l.source.id;
-                        return `${otherAnimal}: ${(l.value * 100).toFixed(1)}%`;
-                    }).join('\n');
-                    return `${d.id}\nSightings: ${animalCounts[d.id]}\nConnections:\n${connections}`;
-                });
 
             // Handle node click
             let selectedNode = null;
