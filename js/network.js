@@ -368,10 +368,6 @@
                         }
                         return "#ddd";
                     })
-                    .attr("r", node => {
-                        const baseSize = Math.sqrt(node.size) * 2.5;
-                        return connectedNodes.has(node.id) ? baseSize * 1.2 : baseSize;
-                    });
 
                 // Update labels
                 node.selectAll("text")
@@ -397,11 +393,6 @@
                     .attr("stroke-opacity", l => 
                         (l.source.id === d.id || l.target.id === d.id) ? 0.8 : 0.1
                     )
-                    .attr("stroke-width", l => {
-                        const baseWidth = Math.sqrt(l.value) * 4;
-                        return (l.source.id === d.id || l.target.id === d.id) 
-                            ? baseWidth * 1.5 : baseWidth;
-                    });
 
                 // Add glow effect to connected nodes
                 node.selectAll("circle")
@@ -635,7 +626,7 @@
             border-radius: 4px;
             background: rgba(255, 255, 255, 0.7);
             height: calc(450px - 3rem - 30px);  /* Match SVG height minus title space and scroll indicator */
-            max-height: calc(450px - 3rem - 30px);
+            max-height: calc(500px - 3rem - 30px);
             scrollbar-width: thin;
             position: relative;
         }
@@ -659,8 +650,6 @@
             bottom: 0;
             left: 0;
             right: 0;
-            height: 40px;
-            background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.9));
             pointer-events: none;
             z-index: 1;
         }
