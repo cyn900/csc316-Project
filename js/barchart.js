@@ -137,19 +137,35 @@
         .attr("y", -margin.top / 2)
         .attr("text-anchor", "middle")
         .text("Observed Behaviors");
+        
+    // Add y-axis label
+    g.append("text")
+        .attr("class", "barchart-axis-label")
+        .attr("transform", "rotate(-90)")
+        .attr("y", -margin.left + 20)
+        .attr("x", -height / 2)
+        .attr("text-anchor", "middle")
+        .text("Number of Squirrels");
 
     // Create image section
     const imageSection = visualizationContainer.append("div")
         .attr("class", "barchart-image-section");
-
-    imageSection.append("p")
-        .attr("class", "barchart-interaction-text")
-        .text("This is an interactive chart showing how different factors influence squirrel behavior! Try selecting an age group, color, time of day, or location, and then click to see how squirrel activities change. Hover over the bars to get detailed counts and behaviors. See what insights you can uncover about squirrel life!");
-
+        
+    // First add the squirrel image
     imageSection.append("div")
         .attr("class", "barchart-squirrel-container")
         .html(`
             <img src="img/Squirrel.png" alt="Decorative squirrel illustration" class="barchart-squirrel-image">
+        `);
+
+    // Then add the fun facts below the image
+    imageSection.append("div")
+        .attr("class", "info-box")
+        .html(`
+            <h3>Fun Facts:</h3>
+            <p>A group of squirrels is called a dray or a scurry. They are very territorial and will fight to the death to defend their area.</p>
+            <p>Squirrels can find food buried beneath a foot of snow and can detect food that's been buried for up to 9 months.</p>
+            <p>They plant thousands of trees each year by forgetting where they buried their nuts!</p>
         `);
 
     // Create tooltip - Move this to the top level, outside of any function
@@ -426,6 +442,12 @@
             font-size: 16px;
             font-weight: normal;
         }
+        
+        .barchart-axis-label {
+            font-size: 14px;
+            font-weight: bold;
+            fill: #333;
+        }
 
         .barchart-image-section {
             padding: 1rem;
@@ -574,17 +596,4 @@
         }
     `;
     document.head.appendChild(style);
-
-    // Create left section for text content
-    const leftSection = mainContainer.append("div")
-        .attr("class", "barchart-side-section");
-
-    leftSection.append("div")
-        .attr("class", "info-box")
-        .html(`
-            <h3>Fun Facts:</h3>
-            <p>A group of squirrels is called a dray or a scurry. They are very territorial and will fight to the death to defend their area.</p>
-            <p>Squirrels can find food buried beneath a foot of snow and can detect food that's been buried for up to 9 months.</p>
-            <p>They plant thousands of trees each year by forgetting where they buried their nuts!</p>
-        `);
 })();
