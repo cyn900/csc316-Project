@@ -276,7 +276,8 @@ Promise.all([
     const maxValue = d3.max(heatmapData.map(d => d.value));
     const colorScale = d3.scaleLinear()
         .domain([0, maxValue / 3, maxValue * 2/3, maxValue])
-        .range(["#ffffff", "#76bb65", "#f59e0b", "#bf1b1b"]);
+        .range(["#ffffff", "#76bb65", "#f59e0b", "#bf1b1b"])
+        .clamp(true); // Prevents extrapolating colors beyond min/max
 
     // Store the currently selected cell
     let selectedCell = null;
@@ -302,21 +303,6 @@ Promise.all([
         .attr("height", yScale.bandwidth())
         .attr("fill", d => colorScale(d.value))
         .attr("class", "heatmap-cell")
-        .on("mouseover", function(event, d) {
-            d3.select(this).transition().duration(100).style("opacity", 0.8);
-            updateInteractionInfo(d);
-        })
-        .on("mouseout", function(event, d) {
-            if (this !== selectedCell) {
-                d3.select(this).transition().duration(100).style("opacity", 1);
-            }
-            if (!selectedCell) {
-                updateInteractionInfo(null);
-            } else {
-                const selectedData = d3.select(selectedCell).datum();
-                updateInteractionInfo(selectedData);
-            }
-        })
         .on("click", function(event, d) {
             // Remove active class from previously selected cell
             if (selectedCell) {
