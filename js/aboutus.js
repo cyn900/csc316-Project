@@ -44,7 +44,7 @@
 
     // Data for the team members
     const teamMembers = [
-        { name: "Cynthia Zhou", role: "Student Number", photo: "img/cynthia.png" },
+        { name: "Cynthia Zhou", role: "Wanna see squirrels?!", photo: "img/cynthia.png" },
         { name: "Jonathan Chen", role: "Squirrels are pretty fire.", photo: "img/jonathan.webp" },
         { name: "Melissa Cecilia", role: "You don't like squirrels? You're nuts.", photo: "img/melissa.webp" },
         { name: "Naura Taufiq", role: "What’s a squirrel’s favorite channel? Nutflix.", photo: "img/naura.jpg" }
