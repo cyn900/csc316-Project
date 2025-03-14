@@ -7,12 +7,12 @@
     // Create visualization directly in the network div
     const network = d3.select("#network");
 
-    // Create title
+    // Create title - make it wider and centered
     network.append("div")
         .attr("class", "network-title-container")
         .append("h2")
         .attr("class", "network-chart-title")
-        .text("Animal Interaction");
+        .text("ANIMAL INTERACTION");
 
     // Create grid content container
     const contentGrid = network.append("div")
@@ -45,8 +45,6 @@
 
     // Add content to right section
     rightSection.html(`
-        <h3 class="network-facts-title">Animal Interactions</h3>
-        
         <div class="network-info-container">
             <div id="network-info-display">
                 <p class="network-default-text">Click on a node to see detailed information about that animal's interactions.</p>
@@ -521,14 +519,18 @@
             padding: 1rem 2rem;
             margin-bottom: 2rem;
             text-align: center;
-            width: calc(60% - 2rem);
+            width: 100%;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .network-chart-title {
             color: #ffffff !important;
             margin: 0;
-            font-size: 24px;
+            font-size: 28px;
             font-weight: bold;
+            font-family: 'COCOGOOSE', sans-serif;
         }
 
         .network-content-grid {
@@ -604,7 +606,7 @@
             font-size: 2rem;
             font-weight: 600;
             margin-bottom: 1rem;
-            font-family: 'Amsterdam Four_ttf';
+            font-family: 'COCOGOOSE', sans-serif;
         }
 
         .network-info-container {
@@ -613,8 +615,8 @@
             border: 1px solid rgba(0, 0, 0, 0.1);
             border-radius: 4px;
             background: rgba(255, 255, 255, 0.7);
-            height: calc(450px - 3rem - 30px);  /* Match SVG height minus title space and scroll indicator */
-            max-height: calc(500px - 3rem - 30px);
+            height: 600px;  /* Increased height from 450px to 600px */
+            max-height: 600px; /* Increased max-height from 500px to 650px */
             scrollbar-width: thin;
             position: relative;
         }

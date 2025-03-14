@@ -36,11 +36,11 @@
         .attr("id", "bibliography-stamp-section")
         .attr("class", "bibliography-stamp-section");
 
-    // Add the left text
+    // Add the left text with NYC Open Data
     stampSection.append("div")
         .attr("id", "bibliography-stamp-text-left")
         .attr("class", "bibliography-stamp-text left")
-        .text("Data Sources");
+        .html(`Data Sources: <a href="https://data.cityofnewyork.us/browse?category=Environment&Data-Collection_Data-Collection=2018+Central+Park+Squirrel+Census" target="_blank" class="data-source-link">NYC Open Data</a>`);
 
     // Add the right text
     stampSection.append("div")
@@ -56,13 +56,22 @@
         .style("align-items", "center")
         .style("margin-top", "2rem");
 
-    // Left column with placeholder text and no background
+    // Left column with insightful end message instead of placeholder text
     customSection.append("div")
         .attr("class", "left-text")
         .style("flex", "1")
         .style("padding", "20px")
         .style("color", "#000")
-        .text("Placeholder text: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vehicula, sapien sit amet congue dignissim, urna sapien laoreet massa, vitae tristique odio nunc non libero.");
+        .style("text-align", "left")
+        .style("line-height", "1.6")
+        .style("font-size", "1.1rem")
+        .html(`
+            <h3 style="margin-top: 0; color: #bf1b1b; font-family: 'COCOGOOSE', sans-serif;">Thanks for exploring with us!</h3>
+            <p>This project visualizes the fascinating world of Central Park's squirrels, revealing their behaviors, interactions, and habitats through data.</p>
+            <p>As you've seen, these small creatures have complex lives - from their varied activities to their social connections with other park animals.</p>
+            <p>Next time you're in a park, take a moment to observe these remarkable urban wildlife ambassadors. They're not just cute; they're essential parts of our urban ecosystems.</p>
+            <p style="font-style: italic; margin-top: 20px;">Fun Fact: Squirrels bury nuts and often forget where, helping forests grow.</p>
+        `);
 
     // Right column for the image
     const rightCol = customSection.append("div")
@@ -138,6 +147,18 @@
         .bibliography-stamp-text {
             font-size: 1.2rem;
             color: #000;
+        }
+        
+        .data-source-link {
+            color: #bf1b1b;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        
+        .data-source-link:hover {
+            color: #e63e3e;
+            text-decoration: underline;
         }
     `;
     document.head.appendChild(style);
