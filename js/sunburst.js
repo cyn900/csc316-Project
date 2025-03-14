@@ -57,7 +57,7 @@
     centerSection.append("div")
         .attr("class", "reset-button-container")
         .append("button")
-        .attr("id", "reset-button")
+        .attr("id", "sunburst-reset-button")
         .attr("class", "sunburst-reset-button")
         .html('<i class="reset-icon"></i> Reset Zoom')
         .style("display", "block")  // Ensure it's visible
@@ -344,7 +344,7 @@
         }
         
         /* Make sure our reset button is visible */
-        #reset-button, .sunburst-reset-button {
+        #sunburst-reset-button, .sunburst-reset-button {
             display: inline-flex !important;
             visibility: visible !important;
             opacity: 1 !important;
@@ -410,18 +410,19 @@
 
     // Function to remove the old reset button
     function removeOldResetButton() {
-        // Target all reset buttons that aren't our styled one
-        const oldButtons = document.querySelectorAll('input[type="reset"], button[type="reset"], input[value="Reset"]');
-        oldButtons.forEach(button => button.remove());
+        // Target all reset buttons EXCEPT our main sunburst-reset-button
+        // This will remove the extra button in the bottom left corner
+        d3.selectAll("button.reset, button:not(#sunburst-reset-button):not(#sunburst-backup-reset)")
+            .filter(function() {
+                const text = this.textContent.toLowerCase();
+                return text.includes("reset") || text.includes("zoom");
+            })
+            .remove();
+            
+        // Also remove any input reset buttons
+        d3.selectAll("input[type='reset'], input[value='Reset']").remove();
         
-        // Also target any button with "Reset" text that isn't our styled one
-        const allButtons = document.querySelectorAll('button');
-        allButtons.forEach(button => {
-            if (!button.classList.contains("sunburst-reset-button") && 
-                button.textContent.toLowerCase().includes("reset")) {
-                button.remove();
-            }
-        });
+        console.log("Removed extra reset buttons");
     }
 
     // Call immediately
@@ -429,12 +430,16 @@
     
     // Also call after a short delay to catch any buttons added after our script runs
     setTimeout(removeOldResetButton, 500);
+    setTimeout(removeOldResetButton, 1000); // Add another delay for good measure
     
     // And set up a mutation observer to catch any dynamically added buttons
     const observer = new MutationObserver(mutations => {
         for (const mutation of mutations) {
             if (mutation.type === 'childList') {
-                removeOldResetButton();
+                // Only remove buttons if new nodes were added
+                if (mutation.addedNodes.length > 0) {
+                    removeOldResetButton();
+                }
             }
         }
     });
@@ -444,6 +449,21 @@
         childList: true,
         subtree: true
     });
+
+    // Add CSS to hide any unwanted reset buttons
+    const hideResetStyle = document.createElement('style');
+    hideResetStyle.textContent = `
+        /* Hide any reset buttons in the bottom left corner */
+        body > button:not(#sunburst-reset-button):not(#sunburst-backup-reset),
+        #sunburst > button,
+        button.reset {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+    `;
+    document.head.appendChild(hideResetStyle);
 
     // Load and process data
     d3.csv("data/individual.csv").then(data => {
@@ -649,35 +669,40 @@
         }
 
         // Connect the reset button to the resetSunburst function
-        d3.select("#reset-button").on("click", function() {
+        d3.select("#sunburst-reset-button").on("click", function() {
             console.log("Reset button clicked");
             resetSunburst();
         });
         
         // Make sure the button is visible
-        d3.select("#reset-button")
+        d3.select("#sunburst-reset-button")
             .style("display", "inline-flex")
             .style("visibility", "visible")
             .style("opacity", "1");
             
-        // Create a second reset button if the first one isn't working
-        if (!document.querySelector("#reset-button:visible")) {
-            console.log("Creating backup reset button");
-            centerSection.append("button")
-                .attr("class", "backup-reset-button")
-                .style("background", "linear-gradient(135deg, #bf1b1b 0%, #e63e3e 100%)")
-                .style("color", "white")
-                .style("border", "none")
-                .style("border-radius", "30px")
-                .style("padding", "12px 25px")
-                .style("font-size", "16px")
-                .style("font-weight", "bold")
-                .style("cursor", "pointer")
-                .style("margin", "20px auto")
-                .style("display", "block")
-                .text("Reset Zoom")
-                .on("click", resetSunburst);
-        }
+        // Create a second reset button if needed - using proper DOM checking
+        setTimeout(() => {
+            const resetButton = document.getElementById("sunburst-reset-button");
+            // Check if button exists and is visible using computed style
+            if (!resetButton || window.getComputedStyle(resetButton).display === "none") {
+                console.log("Creating backup reset button");
+                centerSection.append("button")
+                    .attr("id", "sunburst-backup-reset")
+                    .attr("class", "backup-reset-button")
+                    .style("background", "linear-gradient(135deg, #bf1b1b 0%, #e63e3e 100%)")
+                    .style("color", "white")
+                    .style("border", "none")
+                    .style("border-radius", "30px")
+                    .style("padding", "12px 25px")
+                    .style("font-size", "16px")
+                    .style("font-weight", "bold")
+                    .style("cursor", "pointer")
+                    .style("margin", "20px auto")
+                    .style("display", "block")
+                    .text("Reset Zoom")
+                    .on("click", resetSunburst);
+            }
+        }, 500);
         
         // Remove any old reset buttons again after data is loaded
         removeOldResetButton();
