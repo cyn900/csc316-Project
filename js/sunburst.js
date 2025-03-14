@@ -336,12 +336,6 @@
             transform: translateX(-50%) rotate(45deg);
         }
         
-        /* Hide any old reset buttons */
-        input[type="reset"], 
-        button[type="reset"],
-        input[value="Reset"] {
-            display: none !important;
-        }
         
         /* Make sure our reset button is visible */
         #sunburst-reset-button, .sunburst-reset-button {
@@ -407,48 +401,6 @@
         }
     `;
     document.head.appendChild(style);
-
-    // Function to remove the old reset button
-    function removeOldResetButton() {
-        // Target all reset buttons EXCEPT our main sunburst-reset-button
-        // This will remove the extra button in the bottom left corner
-        d3.selectAll("button.reset, button:not(#sunburst-reset-button):not(#sunburst-backup-reset)")
-            .filter(function() {
-                const text = this.textContent.toLowerCase();
-                return text.includes("reset") || text.includes("zoom");
-            })
-            .remove();
-            
-        // Also remove any input reset buttons
-        d3.selectAll("input[type='reset'], input[value='Reset']").remove();
-        
-        console.log("Removed extra reset buttons");
-    }
-
-    // Call immediately
-    removeOldResetButton();
-    
-    // Also call after a short delay to catch any buttons added after our script runs
-    setTimeout(removeOldResetButton, 500);
-    setTimeout(removeOldResetButton, 1000); // Add another delay for good measure
-    
-    // And set up a mutation observer to catch any dynamically added buttons
-    const observer = new MutationObserver(mutations => {
-        for (const mutation of mutations) {
-            if (mutation.type === 'childList') {
-                // Only remove buttons if new nodes were added
-                if (mutation.addedNodes.length > 0) {
-                    removeOldResetButton();
-                }
-            }
-        }
-    });
-    
-    // Start observing the document body for changes
-    observer.observe(document.body, { 
-        childList: true,
-        subtree: true
-    });
 
     // Add CSS to hide any unwanted reset buttons
     const hideResetStyle = document.createElement('style');
@@ -704,8 +656,6 @@
             }
         }, 500);
         
-        // Remove any old reset buttons again after data is loaded
-        removeOldResetButton();
     });
 
     // Helper function to process data into nested hierarchical structure
