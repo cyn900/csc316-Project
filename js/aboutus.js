@@ -44,10 +44,10 @@
 
     // Data for the team members
     const teamMembers = [
-        { name: "Cynthia Zhou", role: "Student Number", photo: "https://via.placeholder.com/150" },
-        { name: "Jonathan Chen", role: "Student Number", photo: "https://via.placeholder.com/150" },
-        { name: "Melissa Cecilia", role: "Student Number", photo: "https://via.placeholder.com/150" },
-        { name: "Naura Taufiq", role: "1009713669", photo: "img/naura.jpg" }
+        { name: "Cynthia Zhou", role: "Student Number", photo: "img/cynthia.png" },
+        { name: "Jonathan Chen", role: "Squirrels are pretty fire.", photo: "img/jonathan.webp" },
+        { name: "Melissa Cecilia", role: "You don't like squirrels? You're nuts.", photo: "img/melissa.webp" },
+        { name: "Naura Taufiq", role: "What’s a squirrel’s favorite channel? Nutflix.", photo: "img/naura.jpg" }
     ];
 
     // Select the container
