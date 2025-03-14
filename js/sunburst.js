@@ -22,6 +22,7 @@
     leftSection.append("div")
         .attr("class", "sunburst-side-section")
         .style("margin-top", "10px")
+        .style("max-width", "100%")
         .html(`
             <div class="legend-container">
                 <h3>Guide to Sunburst</h3>
@@ -51,6 +52,17 @@
         .attr("height", "100%")
         .style("min-height", "500px")
         .style("background", "transparent");
+
+    // Add reset button below the SVG with improved visibility
+    centerSection.append("div")
+        .attr("class", "reset-button-container")
+        .append("button")
+        .attr("id", "reset-button")
+        .attr("class", "sunburst-reset-button")
+        .html('<i class="reset-icon"></i> Reset Zoom')
+        .style("display", "block")  // Ensure it's visible
+        .style("margin", "20px auto")
+        .style("z-index", "1000");  // Ensure it's on top
 
     // Create group for the sunburst and center it
     const g = svg.append("g")
@@ -91,13 +103,15 @@
         .attr("class", "sunburst-tooltip")
         .style("opacity", 0)
         .style("position", "absolute")
-        .style("background-color", "white")
-        .style("border", "1px solid #ddd")
-        .style("border-radius", "8px")
-        .style("padding", "10px")
-        .style("box-shadow", "0 3px 5px rgba(0,0,0,0.2)")
+        .style("background-color", "rgba(255, 255, 255, 0.95)")
+        .style("border", "2px solid #bf1b1b")
+        .style("border-radius", "6px")
+        .style("padding", "12px")
+        .style("box-shadow", "0 4px 8px rgba(0,0,0,0.1)")
         .style("pointer-events", "none")
-        .style("max-width", "220px");
+        .style("font-size", "14px")
+        .style("min-width", "200px")
+        .style("z-index", "1000");
 
     // Create right section for placeholder
     const rightSection = container.append("div")
@@ -131,8 +145,9 @@
         .sunburst-side-section {
             font-size: 1.2rem;
             line-height: 1.8;
-            padding: 2rem;
-            max-width: 300px;
+            padding: 1.5rem;
+            max-width: 100% !important;
+            width: 100%;
             margin: 0 auto;
             align-self: flex-start;
         }
@@ -141,6 +156,9 @@
             width: 100%;
             height: 100%;
             margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .sunburst-squirrel-img {
@@ -151,32 +169,169 @@
         
         .sunburst-squirrel-container {
             width: 100%;
-            max-width: 400px;
+            max-width: 100%;
         }
         
         .sunburst-tooltip {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 12px;
+            border: 2px solid #bf1b1b;
+            border-radius: 6px;
+            pointer-events: none;
             font-size: 14px;
-            line-height: 1.4;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            min-width: 200px;
+            z-index: 1000;
         }
         
-        .sunburst-tooltip h4 {
-            margin-top: 0;
-            margin-bottom: 5px;
+        .tooltip-header {
+            font-weight: bold;
+            font-size: 16px;
+            color: #bf1b1b;
+            margin-bottom: 8px;
+            border-bottom: 1px solid rgba(191, 27, 27, 0.2);
+            padding-bottom: 4px;
+        }
+        
+        .tooltip-content {
+            color: #333;
+            line-height: 1.4;
         }
         
         .legend-container, .info-box {
             background-color: rgba(255, 255, 255, 0.9);
             border-radius: 8px;
-            padding: 15px;
+            padding: 20px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 100%;
         }
         
         .legend-container h3, .info-box h3 {
             margin-top: 0;
-            font-size: 18px;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .legend-container p {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .reset-button-container {
+            margin-top: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+            width: 100%;
+            position: relative;
+            z-index: 1000;
+        }
+        
+        .sunburst-reset-button {
+            background: linear-gradient(135deg, #bf1b1b 0%, #e63e3e 100%);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(191, 27, 27, 0.3);
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            position: relative;
+            z-index: 1001;
+        }
+        
+        .sunburst-reset-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(191, 27, 27, 0.4);
+            background: linear-gradient(135deg, #e63e3e 0%, #bf1b1b 100%);
+        }
+        
+        .sunburst-reset-button:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 5px rgba(191, 27, 27, 0.4);
+        }
+        
+        .reset-icon {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid white;
+            border-radius: 50%;
+            position: relative;
+        }
+        
+        .reset-icon:before {
+            content: "";
+            position: absolute;
+            top: -2px;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 4px 6px 4px;
+            border-color: transparent transparent white transparent;
+            transform: translateX(-50%) rotate(45deg);
+        }
+        
+        /* Hide any old reset buttons */
+        input[type="reset"], 
+        button[type="reset"],
+        input[value="Reset"] {
+            display: none !important;
+        }
+        
+        /* Make sure our reset button is visible */
+        #reset-button, .sunburst-reset-button {
+            display: inline-flex !important;
+            visibility: visible !important;
+            opacity: 1 !important;
         }
     `;
     document.head.appendChild(style);
+
+    // Function to remove the old reset button
+    function removeOldResetButton() {
+        // Target all reset buttons that aren't our styled one
+        const oldButtons = document.querySelectorAll('input[type="reset"], button[type="reset"], input[value="Reset"]');
+        oldButtons.forEach(button => button.remove());
+        
+        // Also target any button with "Reset" text that isn't our styled one
+        const allButtons = document.querySelectorAll('button');
+        allButtons.forEach(button => {
+            if (!button.classList.contains("sunburst-reset-button") && 
+                button.textContent.toLowerCase().includes("reset")) {
+                button.remove();
+            }
+        });
+    }
+
+    // Call immediately
+    removeOldResetButton();
+    
+    // Also call after a short delay to catch any buttons added after our script runs
+    setTimeout(removeOldResetButton, 500);
+    
+    // And set up a mutation observer to catch any dynamically added buttons
+    const observer = new MutationObserver(mutations => {
+        for (const mutation of mutations) {
+            if (mutation.type === 'childList') {
+                removeOldResetButton();
+            }
+        }
+    });
+    
+    // Start observing the document body for changes
+    observer.observe(document.body, { 
+        childList: true,
+        subtree: true
+    });
 
     // Load and process data
     d3.csv("data/individual.csv").then(data => {
@@ -266,10 +421,12 @@
             }
 
             tooltip.html(`
-                <h4>${d.data.name}</h4>
-                <p>Path: ${pathDescription.join(" → ")}</p>
-                <p>Count: ${d.value} squirrels</p>
-                <p>Percentage: ${((d.value / root.value) * 100).toFixed(1)}%</p>
+                <div style="font-weight: bold; font-size: 16px; color: #bf1b1b; margin-bottom: 8px; border-bottom: 1px solid rgba(191, 27, 27, 0.2); padding-bottom: 4px;">${d.data.name}</div>
+                <div style="color: #333; line-height: 1.4;">
+                    <div>Path: ${pathDescription.join(" → ")}</div>
+                    <div>Count: ${d.value} squirrels</div>
+                    <div>Percentage: ${((d.value / root.value) * 100).toFixed(1)}%</div>
+                </div>
             `)
                 .style("left", (event.pageX + 10) + "px")
                 .style("top", (event.pageY - 28) + "px");
@@ -285,12 +442,6 @@
                     .style("opacity", 0);
             })
             .on("click", clicked);
-
-        // Add reset button functionality
-        d3.select("#reset-button").on("click", function() {
-            // Reset to the root view
-            resetSunburst();
-        });
 
         // Click handler for zooming
         function clicked(event, p) {
@@ -344,6 +495,7 @@
 
         // Function to fully reset the sunburst
         function resetSunburst() {
+            // Reset to root
             currentRoot = root;
 
             // Update center text
@@ -380,7 +532,43 @@
                 })
                 .attr("d", arc)
                 .style("visibility", "visible");
+                
+            console.log("Reset sunburst called");
         }
+
+        // Connect the reset button to the resetSunburst function
+        d3.select("#reset-button").on("click", function() {
+            console.log("Reset button clicked");
+            resetSunburst();
+        });
+        
+        // Make sure the button is visible
+        d3.select("#reset-button")
+            .style("display", "inline-flex")
+            .style("visibility", "visible")
+            .style("opacity", "1");
+            
+        // Create a second reset button if the first one isn't working
+        if (!document.querySelector("#reset-button:visible")) {
+            console.log("Creating backup reset button");
+            centerSection.append("button")
+                .attr("class", "backup-reset-button")
+                .style("background", "linear-gradient(135deg, #bf1b1b 0%, #e63e3e 100%)")
+                .style("color", "white")
+                .style("border", "none")
+                .style("border-radius", "30px")
+                .style("padding", "12px 25px")
+                .style("font-size", "16px")
+                .style("font-weight", "bold")
+                .style("cursor", "pointer")
+                .style("margin", "20px auto")
+                .style("display", "block")
+                .text("Reset Zoom")
+                .on("click", resetSunburst);
+        }
+        
+        // Remove any old reset buttons again after data is loaded
+        removeOldResetButton();
     });
 
     // Helper function to process data into nested hierarchical structure
