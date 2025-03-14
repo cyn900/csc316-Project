@@ -1,8 +1,8 @@
 (function() {
     // Set up margins and dimensions
-    const margin = { top: 60, right: 10, bottom: 40, left: 60 },
-        width = 800 - margin.left - margin.right,
-        height = 400 - margin.top - margin.bottom;
+    const margin = { top: 20, right: 10, bottom: 40, left: 20 },
+        width = 700 - margin.left - margin.right,
+        height = 300 - margin.top - margin.bottom;
 
     // Define our three dimensions
     const dims = ["Age", "Activity", "Interaction"];
@@ -83,9 +83,7 @@
         .attr("class", "text-content");
 
     textContent.append("p")
-        .text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus.");
-    textContent.append("p")
-        .text("Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus. Vestibulum ante ipsum primis in faucibus orci luctus et.");
+        .text("Click on the chart for detailed information. Click again to update after filtering. ");
 
     // X-scale: place each dimension evenly
     const x = d3.scalePoint()
@@ -207,6 +205,31 @@
 
         // Initial render
         updateVis();
+
+        svg.on("click", function() {
+            // Compute overall counts using the globalData loaded from CSV
+            const adultCount = globalData.filter(d => d.Age === "Adult").length;
+            const juvenileCount = globalData.filter(d => d.Age === "Juvenile").length;
+
+            // For activity and interaction counts, we use d3.rollup to aggregate the counts
+            const activityCounts = Array.from(d3.rollup(globalData, v => v.length, d => d.Activity));
+            const interactionCounts = Array.from(d3.rollup(globalData, v => v.length, d => d.Interaction));
+
+            // Update the text-content div with the new detailed information
+            textContent.html(""); // Clear the previous text
+            textContent.append("p").text(`Adult count: ${adultCount}`);
+            textContent.append("p").text(`Juvenile count: ${juvenileCount}`);
+
+            textContent.append("p").text("Activity Counts:");
+            activityCounts.forEach(([key, count]) => {
+                textContent.append("p").text(` - ${key}: ${count}`);
+            });
+
+            textContent.append("p").text("Interaction Counts:");
+            interactionCounts.forEach(([key, count]) => {
+                textContent.append("p").text(` - ${key}: ${count}`);
+            });
+        });
 
         // --- Update Visualization ---
         function updateVis() {
@@ -378,6 +401,24 @@
                     .text(dim);
             });
 
+            // Update the text-content area with details based on the filtered data
+            const adultCount = filteredData.filter(d => d.Age === "Adult").length;
+            const juvenileCount = filteredData.filter(d => d.Age === "Juvenile").length;
+            const activityCountsDetails = Array.from(d3.rollup(filteredData, v => v.length, d => d.Activity));
+            const interactionCountsDetails = Array.from(d3.rollup(filteredData, v => v.length, d => d.Interaction));
+
+            textContent.html(""); // Clear previous text
+            textContent.append("p").text(`Adult count: ${adultCount}`);
+            textContent.append("p").text(`Juvenile count: ${juvenileCount}`);
+            textContent.append("p").text("Activity Counts:");
+            activityCountsDetails.forEach(([key, count]) => {
+                textContent.append("p").text(` - ${key}: ${count}`);
+            });
+            textContent.append("p").text("Interaction Counts:");
+            interactionCountsDetails.forEach(([key, count]) => {
+                textContent.append("p").text(` - ${key}: ${count}`);
+            });
+
             // Helper: generate a curved ribbon path between two axes
             function ribbonPath(x0, x1, y0_top, y0_bot, y1_top, y1_bot) {
                 const curvature = 0.5;
@@ -428,7 +469,6 @@
         }
         .controls {
             padding: 15px;
-            background: white;
             border-radius: 8px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             margin-bottom: 10px;
@@ -471,7 +511,6 @@
         }
         .legend {
             padding: 15px;
-            background: white;
             border-radius: 8px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
@@ -511,7 +550,6 @@
             margin-bottom: 0;
         }
         svg {
-            background: white;
             border-radius: 8px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             width: 100%;
