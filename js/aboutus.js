@@ -57,7 +57,7 @@
     container.append("h1")
         .text("About Us")
         .style("text-align", "center")
-        .style("margin-bottom", "2rem")
+        .style("margin-bottom", "4rem")
         .style("font-family", "Amsterdam Four_ttf")
         .style("font-size", "3rem");
 
