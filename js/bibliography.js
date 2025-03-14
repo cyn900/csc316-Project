@@ -42,12 +42,6 @@
         .attr("class", "bibliography-stamp-text left")
         .text("Data Sources");
 
-    // Add the stamp
-    stampSection.append("div")
-        .attr("id", "bibliography-stamp")
-        .attr("class", "bibliography-stamp")
-        .text("TOP SECRET");
-
     // Add the right text
     stampSection.append("div")
         .attr("id", "bibliography-stamp-text-right")
@@ -144,17 +138,6 @@
         .bibliography-stamp-text {
             font-size: 1.2rem;
             color: #000;
-        }
-
-        #bibliography-stamp {
-            transform: rotate(15deg);
-            color: #bf1b1b;
-            border: 3px solid #bf1b1b;
-            padding: 0.5rem 2rem;
-            font-size: 1.5rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 2px;
         }
     `;
     document.head.appendChild(style);

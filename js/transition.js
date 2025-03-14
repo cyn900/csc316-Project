@@ -66,6 +66,7 @@
             padding: 2rem 1rem;
             text-align: center;
             position: relative;
+            background: transparent;
         }
 
         .transition-line {
@@ -105,6 +106,7 @@
             border-bottom: 2px solid #000;
             padding: 0.8rem 1rem;
             position: relative;
+            background: transparent;
         }
 
         .transition-guide-text {
@@ -114,8 +116,6 @@
             letter-spacing: 1px;
             text-align: center;
         }
-
-        /* Stamp CSS removed as requested */
 
         #transition-heading {
             font-size: 8rem;
@@ -138,6 +138,10 @@
             width: fit-content;
             font-weight: bold;
             font-family: "COCOGOOSE", sans-serif;
+        }
+
+        #transition-page {
+            background: transparent;
         }
     `;
     document.head.appendChild(style);

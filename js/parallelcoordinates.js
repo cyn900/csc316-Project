@@ -15,10 +15,19 @@
     const controlContainer = container.append("div")
         .attr("class", "network-container");
 
+    // Create title section
+    const titleSection = controlContainer.append("div")
+        .attr("class", "title-section");
+        
     // Create title
-    controlContainer.append("h2")
+    titleSection.append("h2")
         .attr("class", "chart-title")
-        .text("Comparing Juvenile and Adult Squirrels: Activities and Human Interaction Patterns");
+        .text("COMPARING SQUIRREL BEHAVIORS");
+        
+    // Add subtitle
+    titleSection.append("div")
+        .attr("class", "chart-subtitle")
+        .text("JUVENILE VS ADULT INTERACTION PATTERNS");
 
     // Create main layout: viz on left, info on right
     const mainLayout = controlContainer.append("div")
@@ -53,7 +62,9 @@
     const legend = rightPanel.append("div")
         .attr("class", "legend");
 
-    legend.append("h3").text("Legend");
+    legend.append("h3")
+        .attr("class", "panel-heading")
+        .text("LEGEND");
 
     const legendItems = legend.append("div")
         .attr("class", "legend-items");
@@ -82,8 +93,53 @@
     const textContent = rightPanel.append("div")
         .attr("class", "text-content");
 
+    textContent.append("h3")
+        .attr("class", "panel-heading")
+        .text("DETAILS");
+        
     textContent.append("p")
-        .text("Click on the chart for detailed information. Click again to update after filtering. ");
+        .attr("class", "instruction-text")
+        .text("Use the filters above to explore different combinations of activities and interactions.");
+        
+    // Create multi-column layout for data display
+    const dataColumns = textContent.append("div")
+        .attr("class", "data-columns");
+        
+    // Column 1: Age counts
+    const ageColumn = dataColumns.append("div")
+        .attr("class", "data-column");
+        
+    ageColumn.append("h4")
+        .attr("class", "column-heading")
+        .text("AGE");
+        
+    ageColumn.append("div")
+        .attr("class", "age-counts")
+        .html("<p>Click chart to view data</p>");
+        
+    // Column 2: Activity counts
+    const activityColumn = dataColumns.append("div")
+        .attr("class", "data-column");
+        
+    activityColumn.append("h4")
+        .attr("class", "column-heading")
+        .text("ACTIVITIES");
+        
+    activityColumn.append("div")
+        .attr("class", "activity-counts")
+        .html("<p>Click chart to view data</p>");
+        
+    // Column 3: Interaction counts
+    const interactionColumn = dataColumns.append("div")
+        .attr("class", "data-column");
+        
+    interactionColumn.append("h4")
+        .attr("class", "column-heading")
+        .text("INTERACTIONS");
+        
+    interactionColumn.append("div")
+        .attr("class", "interaction-counts")
+        .html("<p>Click chart to view data</p>");
 
     // X-scale: place each dimension evenly
     const x = d3.scalePoint()
@@ -110,7 +166,7 @@
             } else if (d.Foraging && d.Foraging.trim().toUpperCase() === "TRUE") {
                 d.Activity = "Foraging";
             } else if (d["Other Activities"]) {
-                d.Activity = "Other Activities";
+                d.Activity = "Others";
             } else {
                 d.Activity = "None";
             }
@@ -122,7 +178,7 @@
             } else if (d["Runs from"] && d["Runs from"].trim().toUpperCase() === "TRUE") {
                 d.Interaction = "Runs from";
             } else if (d["Other Interactions"]) {
-                d.Interaction = "Other Interactions";
+                d.Interaction = "Others";
             } else {
                 d.Interaction = "None";
             }
@@ -130,13 +186,13 @@
 
         globalData = data;
 
-        // Build filter options (forcing inclusion of "Other" categories)
+        // Build filter options (forcing inclusion of "Others" categories)
         const activitySet = new Set(data.map(d => d.Activity));
-        activitySet.add("Other Activities");
+        activitySet.add("Others");
         const activities = ["All", ...Array.from(activitySet).sort()];
 
         const interactionSet = new Set(data.map(d => d.Interaction));
-        interactionSet.add("Other Interactions");
+        interactionSet.add("Others");
         const interactions = ["All", ...Array.from(interactionSet).sort()];
 
         // Create controls for Activities
@@ -215,19 +271,24 @@
             const activityCounts = Array.from(d3.rollup(globalData, v => v.length, d => d.Activity));
             const interactionCounts = Array.from(d3.rollup(globalData, v => v.length, d => d.Interaction));
 
-            // Update the text-content div with the new detailed information
-            textContent.html(""); // Clear the previous text
-            textContent.append("p").text(`Adult count: ${adultCount}`);
-            textContent.append("p").text(`Juvenile count: ${juvenileCount}`);
-
-            textContent.append("p").text("Activity Counts:");
+            // Update the age column
+            const ageCountsDiv = d3.select(".age-counts");
+            ageCountsDiv.html("");
+            ageCountsDiv.append("p").html(`<strong>Adult:</strong> ${adultCount}`);
+            ageCountsDiv.append("p").html(`<strong>Juvenile:</strong> ${juvenileCount}`);
+            
+            // Update the activity column
+            const activityCountsDiv = d3.select(".activity-counts");
+            activityCountsDiv.html("");
             activityCounts.forEach(([key, count]) => {
-                textContent.append("p").text(` - ${key}: ${count}`);
+                activityCountsDiv.append("p").html(`<strong>${key}:</strong> ${count}`);
             });
-
-            textContent.append("p").text("Interaction Counts:");
+            
+            // Update the interaction column
+            const interactionCountsDiv = d3.select(".interaction-counts");
+            interactionCountsDiv.html("");
             interactionCounts.forEach(([key, count]) => {
-                textContent.append("p").text(` - ${key}: ${count}`);
+                interactionCountsDiv.append("p").html(`<strong>${key}:</strong> ${count}`);
             });
         });
 
@@ -407,16 +468,24 @@
             const activityCountsDetails = Array.from(d3.rollup(filteredData, v => v.length, d => d.Activity));
             const interactionCountsDetails = Array.from(d3.rollup(filteredData, v => v.length, d => d.Interaction));
 
-            textContent.html(""); // Clear previous text
-            textContent.append("p").text(`Adult count: ${adultCount}`);
-            textContent.append("p").text(`Juvenile count: ${juvenileCount}`);
-            textContent.append("p").text("Activity Counts:");
+            // Update the age column
+            const ageCountsDiv = d3.select(".age-counts");
+            ageCountsDiv.html("");
+            ageCountsDiv.append("p").html(`<strong>Adult:</strong> ${adultCount}`);
+            ageCountsDiv.append("p").html(`<strong>Juvenile:</strong> ${juvenileCount}`);
+            
+            // Update the activity column
+            const activityCountsDiv = d3.select(".activity-counts");
+            activityCountsDiv.html("");
             activityCountsDetails.forEach(([key, count]) => {
-                textContent.append("p").text(` - ${key}: ${count}`);
+                activityCountsDiv.append("p").html(`<strong>${key}:</strong> ${count}`);
             });
-            textContent.append("p").text("Interaction Counts:");
+            
+            // Update the interaction column
+            const interactionCountsDiv = d3.select(".interaction-counts");
+            interactionCountsDiv.html("");
             interactionCountsDetails.forEach(([key, count]) => {
-                textContent.append("p").text(` - ${key}: ${count}`);
+                interactionCountsDiv.append("p").html(`<strong>${key}:</strong> ${count}`);
             });
 
             // Helper: generate a curved ribbon path between two axes
@@ -439,121 +508,244 @@
     // Add CSS styles
     const style = document.createElement('style');
     style.textContent = `
+        @import url('https://fonts.cdnfonts.com/css/cocogoose');
+        
         .network-container {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
-            background: #ecf0f1;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 40px 20px;
+            background: transparent;
         }
-        .chart-title {
-            color: #2c3e50;
+        
+        .title-section {
+            margin-bottom: 40px;
             text-align: center;
-            margin-bottom: 20px;
-            font-size: 24px;
         }
+        
+        .chart-title {
+            color: #000000;
+            text-align: center;
+            margin: 0 0 10px 0;
+            font-size: 3rem;
+            font-weight: bold;
+            font-family: "COCOGOOSE", sans-serif;
+            letter-spacing: 2px;
+        }
+        
+        .chart-subtitle {
+            color: #bf1b1b;
+            text-align: center;
+            margin-bottom: 5px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        
         .main-layout {
             display: flex;
-            gap: 20px;
+            gap: 40px;
+            margin-top: 20px;
         }
+        
         .viz-container {
-            flex: 2;
+            flex: 1.2;
         }
+        
         .right-panel {
             flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 30px;
         }
+        
         .controls {
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            margin-bottom: 10px;
+            padding: 20px 0;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            background: transparent;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .control-group label {
+            color: #000000;
+            font-weight: 600;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+        }
+        
+        .filter-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .filter-icon {
+            padding: 8px 12px;
+            border: 1px solid #000000;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: #000000;
+            color: white;
+            font-size: 0.95em;
+            font-weight: 500;
+        }
+        
+        .filter-icon:hover {
+            background-color: #333333;
+            border-color: #555555;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .filter-icon.active {
+            background-color: #76bb65;
+            color: white;
+            border-color: #5a9b50;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+        }
+        
+        .panel-heading {
+            margin: 0 0 15px 0;
+            color: #000000;
+            font-size: 1.3rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            border-bottom: 2px solid #bf1b1b;
+            padding-bottom: 8px;
+            font-family: "COCOGOOSE", sans-serif;
+        }
+        
+        .legend {
+            padding: 0;
+            background: transparent;
+        }
+        
+        .legend-items {
             display: flex;
             flex-direction: column;
             gap: 15px;
         }
-        .control-group {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .control-group label {
-            color: #2c3e50;
-            font-weight: 500;
-        }
-        .filter-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-        .filter-icon {
-            padding: 6px 10px;
-            border: 1px solid #000000; /* Black border */
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background-color: #000000; /* Default black background */
-            color: white;
-            font-size: 0.9em;
-        }
-        .filter-icon:hover {
-            background-color: #333333; /* Slightly lighter black on hover */
-            border-color: #555555;
-        }
-        .filter-icon.active {
-            background-color: #76bb65; /* Green when selected */
-            color: white;
-            border-color: #5a9b50; /* Slightly darker green border */
-        }
-        .legend {
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-        .legend h3 {
-            margin-top: 0;
-            margin-bottom: 10px;
-            color: #2c3e50;
-            font-size: 16px;
-        }
-        .legend-items {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
+        
         .legend-item {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            font-size: 1.1rem;
         }
+        
         .legend-color {
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
             border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
         }
+        
         .text-content {
-            padding: 15px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            padding: 0;
+            background: transparent;
         }
+        
+        .instruction-text {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 20px;
+        }
+        
         .text-content p {
-            margin: 0 0 10px 0;
-            color: #2c3e50;
-            line-height: 1.5;
+            margin: 0 0 12px 0;
+            color: #333;
+            line-height: 1.6;
+            font-size: 1.05rem;
         }
-        .text-content p:last-child {
-            margin-bottom: 0;
-        }
+        
         svg {
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             width: 100%;
             height: auto;
+            background: transparent;
+            margin-top: 10px;
+        }
+        
+        /* Improve axis labels */
+        text {
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        /* Make the paths more visible */
+        path {
+            stroke-width: 1.5px;
+        }
+        
+        .data-columns {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 15px;
+        }
+        
+        .data-column {
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 6px;
+            padding: 15px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        
+        .column-heading {
+            font-family: "COCOGOOSE", sans-serif;
+            font-size: 1rem;
+            margin: 0 0 10px 0;
+            padding-bottom: 5px;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            color: #333;
+            letter-spacing: 0.5px;
+        }
+        
+        .data-column p {
+            margin: 5px 0;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+        
+        .data-column strong {
+            color: #000;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 1100px) {
+            .data-columns {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .main-layout {
+                flex-direction: column;
+            }
+            
+            .right-panel {
+                width: 100%;
+            }
+            
+            .data-columns {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .data-columns {
+                grid-template-columns: 1fr;
+            }
         }
     `;
     document.head.appendChild(style);
