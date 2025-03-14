@@ -40,7 +40,7 @@
     stampSection.append("div")
         .attr("id", "transition-guide-text")
         .attr("class", "transition-guide-text")
-        .text("CLICK ON THE MAP TO EXPLORE OUR INTERACTIVE VISUALIZATION");
+        .text("SCROLL DOWN TO EXPLORE");
 
     // Add the main heading (HOW TO FIND)
     content.append("h2")
