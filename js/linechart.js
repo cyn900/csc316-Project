@@ -204,35 +204,38 @@
                     // Make tooltip background larger to accommodate all metrics
                     tooltip.append("rect")
                         .attr("class", "tooltip-bg")
-                        .attr("x", -100)
-                        .attr("y", -75)
-                        .attr("width", 200)
-                        .attr("height", 95)
+                        .attr("x", -120)
+                        .attr("y", -85)
+                        .attr("width", 240)
+                        .attr("height", 115)
                         .attr("fill", "white")
                         .attr("stroke", "#bf1b1b")
-                        .attr("stroke-width", 1)
-                        .attr("rx", 4);
+                        .attr("stroke-width", 1.5)
+                        .attr("rx", 6);
 
                     const tooltipText = tooltip.append("text")
                         .attr("class", "tooltip-text")
                         .attr("text-anchor", "middle")
-                        .attr("font-size", "12px")
+                        .attr("font-size", "14px")
                         .attr("fill", "#333");
 
                     // Add temperature
                     tooltipText.append("tspan")
                         .attr("x", 0)
-                        .attr("dy", -55)
+                        .attr("dy", -60)
                         .attr("font-weight", "bold")
+                        .attr("font-size", "18px")
+                        .attr("fill", "#bf1b1b")
                         .text(`Temperature: ${d.temperature}°C`);
 
                     // Add all metrics
                     allMetrics.forEach((metric, i) => {
                         tooltipText.append("tspan")
                             .attr("x", 0)
-                            .attr("dy", 15)
+                            .attr("dy", 18)
                             .attr("fill", metric.isCurrentMetric ? "#bf1b1b" : "#333")
                             .attr("font-weight", metric.isCurrentMetric ? "bold" : "normal")
+                            .attr("font-size", "15px")
                             .text(`${metric.label}: ${metric.value?.toFixed(1) || 0}${metric.isTime ? ' min' : ''}`);
                     });
                 })
@@ -575,14 +578,16 @@
     .timeline-tooltip {
         position: absolute;
         text-align: center;
-        padding: 8px;
-        font-size: 12px;
+        padding: 15px;
+        font-size: 15px;
         background: white;
-        border: 1px solid #bf1b1b;
-        border-radius: 4px;
+        border: 2px solid #bf1b1b;
+        border-radius: 6px;
         pointer-events: none;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         z-index: 1000;
+        min-width: 250px;
+        max-width: 300px;
     }
     `;
     document.head.appendChild(style);
