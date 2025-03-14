@@ -68,6 +68,9 @@ class SquirrelMapVis {
                 width: 100%;
                 position: relative;
                 z-index: 1;
+                border-radius: 8px;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                margin-top: 0;
             }
             
             .drawing-mode {
@@ -78,8 +81,9 @@ class SquirrelMapVis {
                 background: rgba(255, 255, 255, 0.8);
                 padding: 8px;
                 border-radius: 4px;
-                margin-bottom: 10px;
+                margin-bottom: 15px;
                 font-weight: bold;
+                box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             }
             
             /* Ensure proper z-index for Leaflet elements */
@@ -105,7 +109,7 @@ class SquirrelMapVis {
             /* Custom styling for our lines */
             .test-line {
                 stroke-width: 8px !important;
-                stroke: red !important;
+                stroke: #bf1b1b !important;
                 opacity: 1 !important;
             }
             
@@ -115,17 +119,27 @@ class SquirrelMapVis {
             
             /* Dashboard styling */
             .stat-item {
-                background: #f8f9fa;
-                padding: 10px;
-                border-radius: 4px;
-                margin-bottom: 10px;
-                border-left: 4px solid #6B4423;
+                background: rgba(248, 249, 250, 0.7);
+                backdrop-filter: blur(5px);
+                padding: 12px;
+                border-radius: 6px;
+                margin-bottom: 12px;
+                box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+                transition: all 0.2s ease;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+            
+            .stat-item:hover {
+                background: rgba(248, 249, 250, 0.9);
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             }
             
             .radius-display {
                 font-size: 16px;
                 font-weight: bold;
-                color: #6B4423;
+                color: #bf1b1b;
             }
             
             .stat-value {
@@ -140,19 +154,19 @@ class SquirrelMapVis {
             
             @keyframes pulse {
                 0% {
-                    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.7);
+                    box-shadow: 0 0 0 0 rgba(191, 27, 27, 0.7);
                 }
                 70% {
-                    box-shadow: 0 0 0 10px rgba(0, 123, 255, 0);
+                    box-shadow: 0 0 0 10px rgba(191, 27, 27, 0);
                 }
                 100% {
-                    box-shadow: 0 0 0 0 rgba(0, 123, 255, 0);
+                    box-shadow: 0 0 0 0 rgba(191, 27, 27, 0);
                 }
             }
             
             .activity-bar {
                 height: 20px;
-                background: #e9ecef;
+                background: rgba(233, 236, 239, 0.5);
                 border-radius: 3px;
                 margin-top: 5px;
                 overflow: hidden;
@@ -160,7 +174,7 @@ class SquirrelMapVis {
             
             .activity-fill {
                 height: 100%;
-                background: #6B4423;
+                background: #bf1b1b;
                 transition: width 0.5s ease-in-out;
             }
             
@@ -176,7 +190,7 @@ class SquirrelMapVis {
                 border-radius: 3px;
                 position: relative;
                 overflow: hidden;
-                background: #e9ecef;
+                background: rgba(233, 236, 239, 0.5);
             }
             
             .age-bar:last-child {
@@ -188,7 +202,7 @@ class SquirrelMapVis {
                 bottom: 0;
                 left: 0;
                 width: 100%;
-                background: #6B4423;
+                background: #bf1b1b;
                 transition: height 0.5s ease-in-out;
             }
             
@@ -215,54 +229,175 @@ class SquirrelMapVis {
             }
             
             .section-divider {
-                border-top: 1px solid #dee2e6;
+                border-top: 1px solid rgba(222, 226, 230, 0.5);
                 margin: 15px 0;
             }
             
             .collapsible-section {
-                margin-bottom: 10px;
+                margin-bottom: 12px;
             }
             
             .collapsible-header {
-                background: #f8f9fa;
-                padding: 8px 10px;
-                border-radius: 4px;
+                background: rgba(248, 249, 250, 0.7);
+                padding: 10px 12px;
+                border-radius: 6px;
                 cursor: pointer;
-                border-left: 4px solid #6B4423;
+                border-left: 4px solid #bf1b1b;
                 font-weight: bold;
+                transition: all 0.2s ease;
+            }
+            
+            .collapsible-header:hover {
+                background: rgba(248, 249, 250, 0.9);
             }
             
             .collapsible-content {
-                padding: 10px;
-                background: #fff;
-                border: 1px solid #dee2e6;
+                padding: 12px;
+                background: rgba(255, 255, 255, 0.7);
+                border: 1px solid rgba(222, 226, 230, 0.5);
                 border-top: none;
-                border-radius: 0 0 4px 4px;
+                border-radius: 0 0 6px 6px;
                 display: none;
+            }
+            
+            .squirrel-dashboard {
+                padding: 0 !important;
+                margin-top: 20px !important;
+                background: transparent !important;
+                border-radius: 8px !important;
+                box-shadow: none !important;
+                max-width: 90% !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+                display: flex !important;
+                flex-direction: column !important;
+                height: calc(100% - 40px) !important;
+            }
+            
+            .dashboard-header {
+                background: linear-gradient(135deg, #bf1b1b 0%, #e63e3e 100%);
+                color: white;
+                padding: 15px;
+                border-radius: 8px 8px 0 0;
+                margin-bottom: 15px;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                width: 100% !important;
+                max-width: 100% !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+            }
+            
+            .dashboard-content {
+                padding: 0 15px 15px 15px;
+                flex-grow: 1;
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .dashboard-buttons {
+                margin-top: auto;
+            }
+            
+            .map-wrapper {
+                margin-top: 20px;
+                display: flex;
+                flex-direction: column;
+                height: calc(100% - 40px);
+            }
+            
+            .btn-primary {
+                background-color: #bf1b1b;
+                border-color: #bf1b1b;
+                transition: all 0.2s ease;
+            }
+            
+            .btn-primary:hover {
+                background-color: #e63e3e;
+                border-color: #e63e3e;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            }
+            
+            .btn-danger {
+                transition: all 0.2s ease;
+            }
+            
+            .btn-danger:hover {
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            }
+            
+            .btn-secondary {
+                transition: all 0.2s ease;
+            }
+            
+            .btn-secondary:hover {
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            }
+            
+            input[type=range] {
+                height: 25px;
+                -webkit-appearance: none;
+                margin: 10px 0;
+                width: 100%;
+                background: transparent;
+            }
+            
+            input[type=range]:focus {
+                outline: none;
+            }
+            
+            input[type=range]::-webkit-slider-runnable-track {
+                width: 100%;
+                height: 8px;
+                cursor: pointer;
+                animate: 0.2s;
+                box-shadow: 0px 0px 0px #000000;
+                background: rgba(191, 27, 27, 0.3);
+                border-radius: 4px;
+                border: 0px solid #000000;
+            }
+            
+            input[type=range]::-webkit-slider-thumb {
+                box-shadow: 0px 0px 1px #bf1b1b;
+                border: 1px solid #bf1b1b;
+                height: 18px;
+                width: 18px;
+                border-radius: 50%;
+                background: #bf1b1b;
+                cursor: pointer;
+                -webkit-appearance: none;
+                margin-top: -5px;
+            }
+            
+            .map-instructions {
+                background: rgba(255, 255, 255, 0.9);
+                padding: 12px 15px;
+                border-radius: 6px;
+                margin-bottom: 10px;
+                font-weight: normal;
+                box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+                position: relative;
+                z-index: 1000;
+                margin-top: 35px;
             }
         `;
         document.head.appendChild(mapStyle);
         
-        // Move dashboard to left column
+        // Move dashboard to left column with improved styling
         const dashboardContainer = d3.select("#viz8 .col-md-6:first-child")
             .append("div")
-            .attr("class", "squirrel-dashboard")
-            .style("padding", "15px")
-            .style("margin-top", "20px")
-            .style("background", "rgba(248, 249, 250, 1)")
-            .style("border-radius", "4px")
-            .style("box-shadow", "0 1px 5px rgba(0,0,0,0.1)")
-            .style("max-height", "500px")
-            .style("overflow-y", "auto");
+            .attr("class", "squirrel-dashboard");
 
-        // Dashboard content
-        dashboardContainer.append("h3")
-            .text("Squirrel Path Analysis")
-            .style("margin-top", "0")
-            .style("margin-bottom", "15px");
+        // Dashboard header with gradient
+        dashboardContainer.append("div")
+            .attr("class", "dashboard-header")
+            .html("<h3 style='margin: 0; font-weight: bold;'>Squirrel Path Analysis</h3>");
+            
+        // Dashboard content container
+        const dashboardContent = dashboardContainer.append("div")
+            .attr("class", "dashboard-content");
         
         // Add drawing instructions (initially hidden)
-        dashboardContainer.append("div")
+        dashboardContent.append("div")
             .attr("class", "drawing-instructions")
             .attr("id", "drawing-instructions")
             .html("<strong>Drawing Mode Active:</strong> Click on map to add points. Double-click to finish.")
@@ -271,16 +406,16 @@ class SquirrelMapVis {
             .style("border-left", "4px solid #17a2b8");
             
         // Stats section with improved styling
-        dashboardContainer.append("div")
+        dashboardContent.append("div")
             .attr("class", "stat-item")
             .html("<strong>Squirrels in path:</strong> <span id='count' class='stat-value'>0</span>")
-            .style("margin-bottom", "10px");
+            .style("margin-bottom", "12px");
             
         // Create a two-column layout for color and age
-        const twoColContainer = dashboardContainer.append("div")
+        const twoColContainer = dashboardContent.append("div")
             .style("display", "flex")
-            .style("gap", "10px")
-            .style("margin-bottom", "10px");
+            .style("gap", "12px")
+            .style("margin-bottom", "12px");
             
         // Column 1: Fur Color Distribution
         twoColContainer.append("div")
@@ -308,7 +443,7 @@ class SquirrelMapVis {
                 </div>
             `);
             
-        // Column 2: Age Distribution with numbers
+        // Column 2: Age Distribution with numbers only (no bars)
         twoColContainer.append("div")
             .attr("class", "stat-item")
             .style("flex", "1")
@@ -328,24 +463,10 @@ class SquirrelMapVis {
                         <span id="unknown-age-count">0</span>
                     </div>
                 </div>
-                <div class="age-distribution" style="margin-top: 10px;">
-                    <div class="age-bar">
-                        <div id="adult-bar" class="age-fill" style="height: 0%"></div>
-                        <div class="age-label">A</div>
-                    </div>
-                    <div class="age-bar">
-                        <div id="juvenile-bar" class="age-fill" style="height: 0%"></div>
-                        <div class="age-label">J</div>
-                    </div>
-                    <div class="age-bar">
-                        <div id="unknown-age-bar" class="age-fill" style="height: 0%"></div>
-                        <div class="age-label">U</div>
-                    </div>
-                </div>
             `);
             
         // Add time of day section
-        dashboardContainer.append("div")
+        dashboardContent.append("div")
             .attr("class", "stat-item")
             .html(`
                 <strong>Time of Day:</strong>
@@ -360,81 +481,53 @@ class SquirrelMapVis {
                     </div>
                 </div>
             `)
-            .style("margin-bottom", "10px");
+            .style("margin-bottom", "12px");
             
-        // Add activities section (collapsible)
-        const activitiesSection = dashboardContainer.append("div")
-            .attr("class", "collapsible-section");
-            
-        activitiesSection.append("div")
-            .attr("class", "collapsible-header")
-            .html("Squirrel Activities <span style='float: right;'>▼</span>")
-            .on("click", function() {
-                const content = d3.select(this.parentNode).select(".collapsible-content");
-                const isVisible = content.style("display") !== "none";
-                content.style("display", isVisible ? "none" : "block");
-                d3.select(this).select("span").html(isVisible ? "▼" : "▲");
-            });
-            
-        const activitiesContent = activitiesSection.append("div")
-            .attr("class", "collapsible-content");
-            
-        // Add activity bars
-        const activities = ["Running", "Chasing", "Climbing", "Eating", "Foraging"];
-        activities.forEach(activity => {
-            activitiesContent.append("div")
-                .style("margin-bottom", "8px")
-                .html(`
-                    <div style="display: flex; justify-content: space-between;">
-                        <span>${activity}</span>
-                        <span id="${activity.toLowerCase()}-percent">0%</span>
-                    </div>
-                    <div class="activity-bar">
-                        <div id="${activity.toLowerCase()}-bar" class="activity-fill" style="width: 0%"></div>
-                    </div>
-                `);
-        });
-            
-        // Radius control with visual indicator
-        dashboardContainer.append("div")
-            .attr("class", "radius-control")
+        // Radius control with visual indicator and more precise steps
+        dashboardContent.append("div")
+            .attr("class", "radius-control stat-item")
             .style("margin-bottom", "20px")
-            .style("margin-top", "20px")
-            .style("background", "#f8f9fa")
-            .style("padding", "15px")
-            .style("border-radius", "4px")
-            .style("border-left", "4px solid #6B4423")
+            .style("margin-top", "auto")
             .html(`
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                     <strong>Buffer Radius:</strong>
                     <span id="radiusValue" class="radius-display">${this.currentRadius} meters</span>
                 </div>
-                <input id="radius" type="range" min="10" max="200" step="5" value="${this.currentRadius}" 
+                <input id="radius" type="range" min="10" max="200" step="1" value="${this.currentRadius}" 
                     style="width: 100%;">
+                <div style="display: flex; justify-content: space-between; font-size: 12px; color: #666; margin-top: 5px;">
+                    <span>10m</span>
+                    <span>100m</span>
+                    <span>200m</span>
+                </div>
             `);
             
-        // Set up radius slider event
+        // Set up radius slider event with immediate update
         d3.select("#radius").on("input", function() {
-            const value = this.value;
+            const value = parseInt(this.value);
             d3.select("#radiusValue").text(value + " meters");
-            vis.currentRadius = parseInt(value);
+            vis.currentRadius = value;
             vis.updateBuffers();
         });
         
+        // Create a container for buttons
+        const buttonContainer = dashboardContent.append("div")
+            .attr("class", "dashboard-buttons");
+        
         // Add draw button - keep only this one
-        dashboardContainer.append("button")
+        buttonContainer.append("button")
             .attr("id", "drawButton")
             .text("Draw Path on Map")
             .attr("class", "btn btn-primary")
             .style("width", "100%")
-            .style("margin-bottom", "10px")
+            .style("margin-bottom", "12px")
             .style("font-weight", "bold")
             .on("click", function() {
                 vis.toggleDrawMode();
             });
             
         // Add reset button
-        dashboardContainer.append("button")
+        buttonContainer.append("button")
             .attr("id", "resetButton")
             .text("Reset Map")
             .attr("class", "btn btn-secondary")
@@ -491,6 +584,32 @@ class SquirrelMapVis {
             console.error("Map container not found!");
             return;
         }
+        
+        // Create a wrapper div for the map section with the same top margin as dashboard
+        const rightColumn = document.querySelector("#viz8 .col-md-6:last-child");
+        const mapWrapper = document.createElement('div');
+        mapWrapper.className = 'map-wrapper';
+        
+        // Add instructions above the map (not inside it)
+        const instructionsDiv = document.createElement('div');
+        instructionsDiv.className = 'map-instructions';
+        instructionsDiv.innerHTML = '<strong>Map Instructions:</strong> Click "Draw Path on Map" to start drawing a path. Click on the map to add points, and double-click to finish. The buffer around your path will show squirrels within your selected radius.';
+        
+        // Move the map into the wrapper
+        if (mapContainer.parentNode) {
+            mapContainer.parentNode.removeChild(mapContainer);
+        }
+        
+        // Add instructions and map to wrapper
+        mapWrapper.appendChild(instructionsDiv);
+        mapWrapper.appendChild(mapContainer);
+        
+        // Add wrapper to right column
+        rightColumn.appendChild(mapWrapper);
+        
+        // Update map margin to 0 since it's now in a wrapper with margin
+        mapContainer.style.marginTop = "0";
+        mapContainer.style.flexGrow = "1";
         
         // Initialize the map with simpler options
         vis.map = L.map('squirrel_map', {
@@ -566,6 +685,22 @@ class SquirrelMapVis {
                 this.currentDrawingLine = null;
             }
             
+            // Remove all point markers that were added during this drawing session
+            const pointMarkersToRemove = this.directAddedElements.filter(el => 
+                el && el.options && el.options.radius === 5 && el.options.fillColor === '#FF0000'
+            );
+            
+            pointMarkersToRemove.forEach(marker => {
+                if (marker && this.map) {
+                    this.map.removeLayer(marker);
+                }
+            });
+            
+            // Update the directAddedElements array to remove the point markers
+            this.directAddedElements = this.directAddedElements.filter(el => 
+                !(el && el.options && el.options.radius === 5 && el.options.fillColor === '#FF0000')
+            );
+            
             // Reset points
             this.currentDrawingPoints = [];
             
@@ -573,6 +708,8 @@ class SquirrelMapVis {
             if (mapElement) {
                 mapElement.classList.remove('drawing-mode');
             }
+            
+            console.log("Drawing cancelled, all drawing points removed");
         } else {
             // Start drawing
             this.isDrawing = true;
@@ -710,7 +847,7 @@ class SquirrelMapVis {
             return;
         }
 
-        console.log("Updating buffers with", vis.drawnPaths.length, "paths");
+        console.log("Updating buffers with", vis.drawnPaths.length, "paths and radius", vis.currentRadius, "meters");
         
         try {
             // Convert paths to GeoJSON features
@@ -727,15 +864,20 @@ class SquirrelMapVis {
             
             // Create feature collection and buffer
             const lines = turf.featureCollection(features);
-            const buffer = turf.buffer(lines, vis.currentRadius, {units: 'meters'});
+            
+            // Convert meters to kilometers for turf.js (which uses km by default)
+            const radiusInKm = vis.currentRadius / 1000;
+            
+            // Create buffer with explicit units
+            const buffer = turf.buffer(lines, radiusInKm, {units: 'kilometers'});
             
             // Add buffer to map with more subtle styling - no border
             const bufferLayer = L.geoJSON(buffer, {
                 style: {
-                    color: '#6B4423',
+                    color: '#bf1b1b',
                     weight: 0,  // Remove the border
                     opacity: 0, // Make border invisible
-                    fillColor: '#8B5A2B',
+                    fillColor: '#bf1b1b',
                     fillOpacity: 0.2  // Make fill more subtle
                 }
             }).addTo(vis.map);
@@ -743,7 +885,7 @@ class SquirrelMapVis {
             
             // Find squirrels within buffer
             const selectedSquirrels = vis.findSquirrelsInBuffer(buffer);
-            console.log(`Found ${selectedSquirrels.length} squirrels in buffer`);
+            console.log(`Found ${selectedSquirrels.length} squirrels in buffer with radius ${vis.currentRadius}m`);
             
             // Update dashboard
             vis.updateDashboard(selectedSquirrels);
@@ -834,37 +976,12 @@ class SquirrelMapVis {
             d3.select("#juvenile-count").text(ageCounts.Juvenile);
             d3.select("#unknown-age-count").text(ageCounts.Unknown);
             
-            // Calculate percentages
-            const adultPercent = (ageCounts.Adult / selectedSquirrels.length) * 100;
-            const juvenilePercent = (ageCounts.Juvenile / selectedSquirrels.length) * 100;
-            const unknownPercent = (ageCounts.Unknown / selectedSquirrels.length) * 100;
-            
-            // Update bars
-            d3.select("#adult-bar").transition().duration(500).style("height", `${adultPercent}%`);
-            d3.select("#juvenile-bar").transition().duration(500).style("height", `${juvenilePercent}%`);
-            d3.select("#unknown-age-bar").transition().duration(500).style("height", `${unknownPercent}%`);
-            
             // Update time of day counts
             const amCount = selectedSquirrels.filter(s => s.Shift === 'AM').length;
             const pmCount = selectedSquirrels.filter(s => s.Shift === 'PM').length;
             
             d3.select("#am-count").text(amCount);
             d3.select("#pm-count").text(pmCount);
-            
-            // Update activity bars
-            const activities = ["Running", "Chasing", "Climbing", "Eating", "Foraging"];
-            activities.forEach(activity => {
-                const count = selectedSquirrels.filter(s => s[activity] === 'TRUE').length;
-                const percent = (count / selectedSquirrels.length) * 100;
-                
-                d3.select(`#${activity.toLowerCase()}-bar`)
-                    .transition()
-                    .duration(500)
-                    .style("width", `${percent}%`);
-                    
-                d3.select(`#${activity.toLowerCase()}-percent`)
-                    .text(`${Math.round(percent)}%`);
-            });
         } else {
             // Reset all stats if no squirrels
             d3.select("#gray-count").text("0");
@@ -872,24 +989,14 @@ class SquirrelMapVis {
             d3.select("#black-count").text("0");
             d3.select("#unknown-color-count").text("0");
             
-            // Reset age counts and bars
+            // Reset age counts
             d3.select("#adult-count").text("0");
             d3.select("#juvenile-count").text("0");
             d3.select("#unknown-age-count").text("0");
-            d3.select("#adult-bar").style("height", "0%");
-            d3.select("#juvenile-bar").style("height", "0%");
-            d3.select("#unknown-age-bar").style("height", "0%");
             
             // Reset time of day
             d3.select("#am-count").text("0");
             d3.select("#pm-count").text("0");
-            
-            // Reset activity bars
-            const activities = ["Running", "Chasing", "Climbing", "Eating", "Foraging"];
-            activities.forEach(activity => {
-                d3.select(`#${activity.toLowerCase()}-bar`).style("width", "0%");
-                d3.select(`#${activity.toLowerCase()}-percent`).text("0%");
-            });
         }
     }
 
@@ -898,7 +1005,7 @@ class SquirrelMapVis {
         const vis = this;
         // Filter out and remove only buffer layers, keeping the paths
         const bufferLayers = vis.directAddedElements.filter(el => 
-            el && el.options && el.options.style && el.options.style.fillColor === '#8B5A2B'
+            el && el.options && el.options.style && el.options.style.fillColor === '#bf1b1b'
         );
         
         bufferLayers.forEach(layer => {
@@ -907,7 +1014,7 @@ class SquirrelMapVis {
         
         // Update the directAddedElements array to remove the buffer layers
         vis.directAddedElements = vis.directAddedElements.filter(el => 
-            !(el && el.options && el.options.style && el.options.style.fillColor === '#8B5A2B')
+            !(el && el.options && el.options.style && el.options.style.fillColor === '#bf1b1b')
         );
     }
 }

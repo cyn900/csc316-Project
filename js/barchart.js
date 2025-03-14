@@ -144,7 +144,7 @@
 
     imageSection.append("p")
         .attr("class", "barchart-interaction-text")
-        .text("Interactive Elements: Filter by age (adult/juvenile), color (black/gray/cinnamon/etc), time (am/pm) adn location (ground/above) to see how different factors affect the count. Tooltip showing the detailed information.");
+        .text("This is an interactive chart showing how different factors influence squirrel behavior! Try selecting an age group, color, time of day, or location, and then click to see how squirrel activities change. Hover over the bars to get detailed counts and behaviors. See what insights you can uncover about squirrel life!");
 
     imageSection.append("div")
         .attr("class", "barchart-squirrel-container")
