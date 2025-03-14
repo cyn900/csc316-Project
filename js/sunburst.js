@@ -29,7 +29,7 @@
                 <p>• Middle ring: Fur Color (Gray/Cinnamon/Black)</p>
                 <p>• Outer ring: Activities</p>
                 <p>• Click on sections to zoom in</p>
-                <p>• Click the "Reset View" button to zoom out</p>
+                <p>• Click the "Reset" button below to zoom out</p>
             </div>
         `);
 
