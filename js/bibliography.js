@@ -1,0 +1,161 @@
+(function() {
+    // Select the bibliography page section and add bibliography ID
+    const bibliographyPage = d3.select("#Bibliography\\ Page")
+        .attr("id", "bibliography-page");
+
+    // Create the main content container
+    const content = bibliographyPage.append("div")
+        .attr("id", "bibliography-container")
+        .attr("class", "bibliography-content");
+
+    // Add the header content
+    const header = content.append("div")
+        .attr("id", "bibliography-header")
+        .attr("class", "bibliography-header");
+
+    // Add the apple icon
+    header.append("div")
+        .attr("id", "bibliography-apple-icon")
+        .attr("class", "bibliography-icon apple")
+        .html('<img src="img/apple-icon.png" alt="Apple Icon">');
+
+    // Add the main title
+    header.append("h1")
+        .attr("id", "bibliography-main-title")
+        .attr("class", "bibliography-title")
+        .text("BIBLIOGRAPHY");
+
+    // Add the tree icon
+    header.append("div")
+        .attr("id", "bibliography-tree-icon")
+        .attr("class", "bibliography-icon tree")
+        .html('<img src="img/tree-icon.png" alt="Tree icon">');
+
+    // Add the stamp section
+    const stampSection = content.append("div")
+        .attr("id", "bibliography-stamp-section")
+        .attr("class", "bibliography-stamp-section");
+
+    // Add the left text
+    stampSection.append("div")
+        .attr("id", "bibliography-stamp-text-left")
+        .attr("class", "bibliography-stamp-text left")
+        .text("Data Sources");
+
+    // Add the stamp
+    stampSection.append("div")
+        .attr("id", "bibliography-stamp")
+        .attr("class", "bibliography-stamp")
+        .text("TOP SECRET");
+
+    // Add the right text
+    stampSection.append("div")
+        .attr("id", "bibliography-stamp-text-right")
+        .attr("class", "bibliography-stamp-text right")
+        .text("CSC316 Winter 2025");
+
+    // Create a new custom section with two columns inside your bibliography container
+    const customSection = bibliographyPage.append("div")
+        .attr("class", "custom-section")
+        .style("display", "flex")
+        .style("justify-content", "space-between")
+        .style("align-items", "center")
+        .style("margin-top", "2rem");
+
+    // Left column with placeholder text and no background
+    customSection.append("div")
+        .attr("class", "left-text")
+        .style("flex", "1")
+        .style("padding", "20px")
+        .style("color", "#000")
+        .text("Placeholder text: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vehicula, sapien sit amet congue dignissim, urna sapien laoreet massa, vitae tristique odio nunc non libero.");
+
+    // Right column for the image
+    const rightCol = customSection.append("div")
+        .attr("class", "right-image")
+        .style("flex", "1")
+        .style("display", "flex")
+        .style("justify-content", "center")
+        .style("align-items", "flex-start")  // Align top with text
+        .style("overflow", "hidden")  // Ensure cropping effect
+        .style("position", "relative");  // Keep layout intact
+
+    // Append the oversized apple image
+    rightCol.append("img")
+        .attr("src", "img/apple2.png")
+        .attr("alt", "Apple Image")
+        .style("width", "130%")  // Increase size
+        .style("height", "130%")  // Increase size
+        .style("object-fit", "cover")  // Ensure cropping
+        .style("margin-right", "-40%")  // Crop left side
+        .style("margin-bottom", "-60%");  // Crop bottom side
+
+    // Update CSS
+    const style = document.createElement('style');
+    style.textContent = `
+        @import url('https://fonts.cdnfonts.com/css/cocogoose');
+
+        #bibliography-container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+
+        .bibliography-line {
+            width: 100%;
+            height: 2px;
+            background: #000;
+            margin: 1rem 0;
+        }
+
+        #bibliography-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding: 0 1rem;
+        }
+
+        .bibliography-icon img {
+            width: 200px;
+            height: 120px;
+        }
+
+        #bibliography-main-title {
+            font-family: "COCOGOOSE", sans-serif;
+            font-weight: 500;
+            font-size: 3rem;
+            margin: 0;
+            letter-spacing: 2px;
+        }
+
+        #bibliography-stamp-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0.5rem 0;
+            border-top: 2px solid #000;
+            border-bottom: 2px solid #000;
+            padding: 0.5rem 1rem;
+        }
+
+        .bibliography-stamp-text {
+            font-size: 1.2rem;
+            color: #000;
+        }
+
+        #bibliography-stamp {
+            transform: rotate(15deg);
+            color: #bf1b1b;
+            border: 3px solid #bf1b1b;
+            padding: 0.5rem 2rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+    `;
+    document.head.appendChild(style);
+})();
