@@ -542,11 +542,11 @@ class SquirrelMapVis {
                 vis.updateDashboard([]);
                 
                 // Add back the reference marker
-                const fixedMarker = L.marker([40.7810, -73.966], {
-                    title: "Central Park Reference"
-                }).addTo(vis.map);
-                vis.directAddedElements.push(fixedMarker);
-                
+        const fixedMarker = L.marker([40.7810, -73.966], {
+            title: "Central Park Reference"
+        }).addTo(vis.map);
+        vis.directAddedElements.push(fixedMarker);
+        
                 // Reset the map view
                 vis.map.setView([40.7810, -73.966], 14);
             });
@@ -850,20 +850,20 @@ class SquirrelMapVis {
         console.log("Updating buffers with", vis.drawnPaths.length, "paths and radius", vis.currentRadius, "meters");
         
         try {
-            // Convert paths to GeoJSON features
-            const features = vis.drawnPaths.map(coords => {
-                // Convert LatLng objects to GeoJSON format [lng, lat]
+        // Convert paths to GeoJSON features
+        const features = vis.drawnPaths.map(coords => {
+            // Convert LatLng objects to GeoJSON format [lng, lat]
                 const points = coords.map(coord => {
                     // Handle both {lat, lng} objects and [lat, lng] arrays
                     const lng = coord.lng !== undefined ? coord.lng : coord[1];
                     const lat = coord.lat !== undefined ? coord.lat : coord[0];
                     return [lng, lat];
                 });
-                return turf.lineString(points);
-            });
-            
-            // Create feature collection and buffer
-            const lines = turf.featureCollection(features);
+            return turf.lineString(points);
+        });
+        
+        // Create feature collection and buffer
+        const lines = turf.featureCollection(features);
             
             // Convert meters to kilometers for turf.js (which uses km by default)
             const radiusInKm = vis.currentRadius / 1000;
@@ -872,23 +872,23 @@ class SquirrelMapVis {
             const buffer = turf.buffer(lines, radiusInKm, {units: 'kilometers'});
             
             // Add buffer to map with more subtle styling - no border
-            const bufferLayer = L.geoJSON(buffer, {
-                style: {
+        const bufferLayer = L.geoJSON(buffer, {
+            style: {
                     color: '#bf1b1b',
                     weight: 0,  // Remove the border
                     opacity: 0, // Make border invisible
                     fillColor: '#bf1b1b',
                     fillOpacity: 0.2  // Make fill more subtle
-                }
-            }).addTo(vis.map);
-            vis.directAddedElements.push(bufferLayer);
-            
-            // Find squirrels within buffer
-            const selectedSquirrels = vis.findSquirrelsInBuffer(buffer);
+            }
+        }).addTo(vis.map);
+        vis.directAddedElements.push(bufferLayer);
+        
+        // Find squirrels within buffer
+        const selectedSquirrels = vis.findSquirrelsInBuffer(buffer);
             console.log(`Found ${selectedSquirrels.length} squirrels in buffer with radius ${vis.currentRadius}m`);
-            
-            // Update dashboard
-            vis.updateDashboard(selectedSquirrels);
+        
+        // Update dashboard
+        vis.updateDashboard(selectedSquirrels);
         } catch (error) {
             console.error("Error updating buffers:", error);
             alert("Error creating buffer: " + error.message);

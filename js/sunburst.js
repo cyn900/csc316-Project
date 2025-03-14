@@ -115,11 +115,67 @@
 
     // Create right section for placeholder
     const rightSection = container.append("div")
-        .attr("class", "sunburst-side-section")
+        .attr("class", "sunburst-side-section");
+        
+    // Add legend to the right section
+    rightSection.append("div")
+        .attr("class", "sunburst-legend")
         .html(`
-            <div class="info-box">
-                <h3>Fun Facts:</h3>
-                <p>A group of squirrels is called a dray or a scurry. They are very territorial and will fight to the death to defend their area.</p>
+            <h3>Color Legend</h3>
+            <div class="legend-section">
+                <h4>Age (Inner Ring)</h4>
+                <div class="legend-item">
+                    <span class="color-box" style="background-color: #76bb65;"></span>
+                    <span class="legend-label">Adult</span>
+                </div>
+                <div class="legend-item">
+                    <span class="color-box" style="background-color: #a9d6a0;"></span>
+                    <span class="legend-label">Juvenile</span>
+                </div>
+            </div>
+            
+            <div class="legend-section">
+                <h4>Fur Color (Middle Ring)</h4>
+                <div class="legend-item">
+                    <span class="color-box" style="background-color: #bf1b1b;"></span>
+                    <span class="legend-label">Gray</span>
+                </div>
+                <div class="legend-item">
+                    <span class="color-box" style="background-color: #e85a5a;"></span>
+                    <span class="legend-label">Cinnamon</span>
+                </div>
+                <div class="legend-item">
+                    <span class="color-box" style="background-color: #fa8072;"></span>
+                    <span class="legend-label">Black</span>
+                </div>
+            </div>
+            
+            <div class="legend-section">
+                <h4>Activities (Outer Ring)</h4>
+                <div class="legend-item">
+                    <span class="color-box" style="background-color: #bf5b1b;"></span>
+                    <span class="legend-label">Running</span>
+                </div>
+                <div class="legend-item">
+                    <span class="color-box" style="background-color: #bf821b;"></span>
+                    <span class="legend-label">Chasing</span>
+                </div>
+                <div class="legend-item">
+                    <span class="color-box" style="background-color: #f1af2e;"></span>
+                    <span class="legend-label">Climbing</span>
+                </div>
+                <div class="legend-item">
+                    <span class="color-box" style="background-color: #ffb347;"></span>
+                    <span class="legend-label">Eating</span>
+                </div>
+                <div class="legend-item">
+                    <span class="color-box" style="background-color: #fdca40;"></span>
+                    <span class="legend-label">Foraging</span>
+                </div>
+                <div class="legend-item">
+                    <span class="color-box" style="background-color: #e6a23c;"></span>
+                    <span class="legend-label">Other Activities</span>
+                </div>
             </div>
         `);
 
@@ -292,6 +348,62 @@
             display: inline-flex !important;
             visibility: visible !important;
             opacity: 1 !important;
+        }
+        
+        /* Sunburst Legend Styles */
+        .sunburst-legend {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-top: 20px;
+            width: 100%;
+        }
+        
+        .sunburst-legend h3 {
+            margin-top: 0;
+            font-size: 20px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #bf1b1b;
+            padding-bottom: 8px;
+            text-align: center;
+        }
+        
+        .legend-section {
+            margin-bottom: 20px;
+        }
+        
+        .legend-section h4 {
+            margin: 0 0 10px 0;
+            font-size: 16px;
+            color: #333;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            padding-bottom: 5px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .color-box {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            border-radius: 4px;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        .legend-label {
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            .legend-grid {
+                grid-template-columns: 1fr;
+            }
         }
     `;
     document.head.appendChild(style);

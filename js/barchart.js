@@ -574,4 +574,17 @@
         }
     `;
     document.head.appendChild(style);
+
+    // Create left section for text content
+    const leftSection = mainContainer.append("div")
+        .attr("class", "barchart-side-section");
+
+    leftSection.append("div")
+        .attr("class", "info-box")
+        .html(`
+            <h3>Fun Facts:</h3>
+            <p>A group of squirrels is called a dray or a scurry. They are very territorial and will fight to the death to defend their area.</p>
+            <p>Squirrels can find food buried beneath a foot of snow and can detect food that's been buried for up to 9 months.</p>
+            <p>They plant thousands of trees each year by forgetting where they buried their nuts!</p>
+        `);
 })();
