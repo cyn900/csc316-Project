@@ -70,7 +70,7 @@ class SquirrelMapVis {
                 z-index: 1;
                 border-radius: 8px;
                 box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-                margin-top: 30px;
+                margin-top: 0;
             }
             
             .drawing-mode {
@@ -124,9 +124,11 @@ class SquirrelMapVis {
                 padding: 12px;
                 border-radius: 6px;
                 margin-bottom: 12px;
-                border-left: 4px solid #bf1b1b;
                 box-shadow: 0 1px 3px rgba(0,0,0,0.05);
                 transition: all 0.2s ease;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
             }
             
             .stat-item:hover {
@@ -260,10 +262,16 @@ class SquirrelMapVis {
             
             .squirrel-dashboard {
                 padding: 0 !important;
-                margin-top: 30px !important;
+                margin-top: 20px !important;
                 background: transparent !important;
                 border-radius: 8px !important;
                 box-shadow: none !important;
+                max-width: 90% !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+                display: flex !important;
+                flex-direction: column !important;
+                height: calc(100% - 40px) !important;
             }
             
             .dashboard-header {
@@ -273,10 +281,28 @@ class SquirrelMapVis {
                 border-radius: 8px 8px 0 0;
                 margin-bottom: 15px;
                 box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                width: 100% !important;
+                max-width: 100% !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
             }
             
             .dashboard-content {
                 padding: 0 15px 15px 15px;
+                flex-grow: 1;
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .dashboard-buttons {
+                margin-top: auto;
+            }
+            
+            .map-wrapper {
+                margin-top: 20px;
+                display: flex;
+                flex-direction: column;
+                height: calc(100% - 40px);
             }
             
             .btn-primary {
@@ -340,6 +366,18 @@ class SquirrelMapVis {
                 cursor: pointer;
                 -webkit-appearance: none;
                 margin-top: -5px;
+            }
+            
+            .map-instructions {
+                background: rgba(255, 255, 255, 0.9);
+                padding: 12px 15px;
+                border-radius: 6px;
+                margin-bottom: 10px;
+                font-weight: normal;
+                box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+                position: relative;
+                z-index: 1000;
+                margin-top: 35px;
             }
         `;
         document.head.appendChild(mapStyle);
@@ -405,7 +443,7 @@ class SquirrelMapVis {
                 </div>
             `);
             
-        // Column 2: Age Distribution with numbers
+        // Column 2: Age Distribution with numbers only (no bars)
         twoColContainer.append("div")
             .attr("class", "stat-item")
             .style("flex", "1")
@@ -423,20 +461,6 @@ class SquirrelMapVis {
                     <div style="display: flex; justify-content: space-between;">
                         <span>Unknown</span>
                         <span id="unknown-age-count">0</span>
-                    </div>
-                </div>
-                <div class="age-distribution" style="margin-top: 10px;">
-                    <div class="age-bar">
-                        <div id="adult-bar" class="age-fill" style="height: 0%"></div>
-                        <div class="age-label">A</div>
-                    </div>
-                    <div class="age-bar">
-                        <div id="juvenile-bar" class="age-fill" style="height: 0%"></div>
-                        <div class="age-label">J</div>
-                    </div>
-                    <div class="age-bar">
-                        <div id="unknown-age-bar" class="age-fill" style="height: 0%"></div>
-                        <div class="age-label">U</div>
                     </div>
                 </div>
             `);
@@ -463,7 +487,7 @@ class SquirrelMapVis {
         dashboardContent.append("div")
             .attr("class", "radius-control stat-item")
             .style("margin-bottom", "20px")
-            .style("margin-top", "20px")
+            .style("margin-top", "auto")
             .html(`
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                     <strong>Buffer Radius:</strong>
@@ -486,8 +510,12 @@ class SquirrelMapVis {
             vis.updateBuffers();
         });
         
+        // Create a container for buttons
+        const buttonContainer = dashboardContent.append("div")
+            .attr("class", "dashboard-buttons");
+        
         // Add draw button - keep only this one
-        dashboardContent.append("button")
+        buttonContainer.append("button")
             .attr("id", "drawButton")
             .text("Draw Path on Map")
             .attr("class", "btn btn-primary")
@@ -499,7 +527,7 @@ class SquirrelMapVis {
             });
             
         // Add reset button
-        dashboardContent.append("button")
+        buttonContainer.append("button")
             .attr("id", "resetButton")
             .text("Reset Map")
             .attr("class", "btn btn-secondary")
@@ -556,6 +584,32 @@ class SquirrelMapVis {
             console.error("Map container not found!");
             return;
         }
+        
+        // Create a wrapper div for the map section with the same top margin as dashboard
+        const rightColumn = document.querySelector("#viz8 .col-md-6:last-child");
+        const mapWrapper = document.createElement('div');
+        mapWrapper.className = 'map-wrapper';
+        
+        // Add instructions above the map (not inside it)
+        const instructionsDiv = document.createElement('div');
+        instructionsDiv.className = 'map-instructions';
+        instructionsDiv.innerHTML = '<strong>Map Instructions:</strong> Click "Draw Path on Map" to start drawing a path. Click on the map to add points, and double-click to finish. The buffer around your path will show squirrels within your selected radius.';
+        
+        // Move the map into the wrapper
+        if (mapContainer.parentNode) {
+            mapContainer.parentNode.removeChild(mapContainer);
+        }
+        
+        // Add instructions and map to wrapper
+        mapWrapper.appendChild(instructionsDiv);
+        mapWrapper.appendChild(mapContainer);
+        
+        // Add wrapper to right column
+        rightColumn.appendChild(mapWrapper);
+        
+        // Update map margin to 0 since it's now in a wrapper with margin
+        mapContainer.style.marginTop = "0";
+        mapContainer.style.flexGrow = "1";
         
         // Initialize the map with simpler options
         vis.map = L.map('squirrel_map', {
@@ -922,16 +976,6 @@ class SquirrelMapVis {
             d3.select("#juvenile-count").text(ageCounts.Juvenile);
             d3.select("#unknown-age-count").text(ageCounts.Unknown);
             
-            // Calculate percentages
-            const adultPercent = (ageCounts.Adult / selectedSquirrels.length) * 100;
-            const juvenilePercent = (ageCounts.Juvenile / selectedSquirrels.length) * 100;
-            const unknownPercent = (ageCounts.Unknown / selectedSquirrels.length) * 100;
-            
-            // Update bars
-            d3.select("#adult-bar").transition().duration(500).style("height", `${adultPercent}%`);
-            d3.select("#juvenile-bar").transition().duration(500).style("height", `${juvenilePercent}%`);
-            d3.select("#unknown-age-bar").transition().duration(500).style("height", `${unknownPercent}%`);
-            
             // Update time of day counts
             const amCount = selectedSquirrels.filter(s => s.Shift === 'AM').length;
             const pmCount = selectedSquirrels.filter(s => s.Shift === 'PM').length;
@@ -945,13 +989,10 @@ class SquirrelMapVis {
             d3.select("#black-count").text("0");
             d3.select("#unknown-color-count").text("0");
             
-            // Reset age counts and bars
+            // Reset age counts
             d3.select("#adult-count").text("0");
             d3.select("#juvenile-count").text("0");
             d3.select("#unknown-age-count").text("0");
-            d3.select("#adult-bar").style("height", "0%");
-            d3.select("#juvenile-bar").style("height", "0%");
-            d3.select("#unknown-age-bar").style("height", "0%");
             
             // Reset time of day
             d3.select("#am-count").text("0");
