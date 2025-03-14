@@ -119,44 +119,33 @@ class SquirrelMapVis {
             
             /* Dashboard styling */
             .stat-item {
-                background: rgba(255, 255, 255, 0.85);
-                backdrop-filter: blur(10px);
-                padding: 16px;
-                border-radius: 8px;
-                margin-bottom: 15px;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-                transition: all 0.3s ease;
+                background: rgba(248, 249, 250, 0.7);
+                backdrop-filter: blur(5px);
+                padding: 12px;
+                border-radius: 6px;
+                margin-bottom: 12px;
+                box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+                transition: all 0.2s ease;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
-                min-height: 90px;
             }
             
             .stat-item:hover {
-                background: rgba(255, 255, 255, 0.95);
-                box-shadow: 0 4px 12px rgba(0,0,0,0.12);
-                transform: translateY(-2px);
+                background: rgba(248, 249, 250, 0.9);
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             }
             
             .radius-display {
-                font-size: 18px;
+                font-size: 16px;
                 font-weight: bold;
                 color: #bf1b1b;
             }
             
             .stat-value {
                 font-weight: bold;
-                font-size: 22px;
+                font-size: 18px;
                 color: #333;
-                transition: all 0.3s ease;
-            }
-            
-            .stat-title {
-                font-weight: 600;
-                color: #555;
-                margin-bottom: 10px;
-                font-size: 15px;
-                letter-spacing: 0.5px;
             }
             
             .btn-pulse {
@@ -189,14 +178,54 @@ class SquirrelMapVis {
                 transition: width 0.5s ease-in-out;
             }
             
+            .age-distribution {
+                display: flex;
+                margin-top: 8px;
+            }
+            
+            .age-bar {
+                flex-grow: 1;
+                height: 24px;
+                margin-right: 4px;
+                border-radius: 3px;
+                position: relative;
+                overflow: hidden;
+                background: rgba(233, 236, 239, 0.5);
+            }
+            
+            .age-bar:last-child {
+                margin-right: 0;
+            }
+            
+            .age-fill {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                background: #bf1b1b;
+                transition: height 0.5s ease-in-out;
+            }
+            
+            .age-label {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                text-align: center;
+                font-size: 12px;
+                font-weight: bold;
+                color: white;
+                text-shadow: 0 0 2px rgba(0,0,0,0.7);
+                padding: 2px 0;
+            }
+            
             .color-swatch {
                 display: inline-block;
                 width: 15px;
                 height: 15px;
                 border-radius: 50%;
-                margin-right: 8px;
+                margin-right: 5px;
                 vertical-align: middle;
-                box-shadow: 0 1px 3px rgba(0,0,0,0.2);
             }
             
             .section-divider {
@@ -213,6 +242,7 @@ class SquirrelMapVis {
                 padding: 10px 12px;
                 border-radius: 6px;
                 cursor: pointer;
+                border-left: 4px solid #bf1b1b;
                 font-weight: bold;
                 transition: all 0.2s ease;
             }
@@ -234,7 +264,7 @@ class SquirrelMapVis {
                 padding: 0 !important;
                 margin-top: 20px !important;
                 background: transparent !important;
-                border-radius: 12px !important;
+                border-radius: 8px !important;
                 box-shadow: none !important;
                 max-width: 90% !important;
                 margin-left: auto !important;
@@ -247,10 +277,10 @@ class SquirrelMapVis {
             .dashboard-header {
                 background: linear-gradient(135deg, #bf1b1b 0%, #e63e3e 100%);
                 color: white;
-                padding: 18px 20px;
-                border-radius: 12px 12px 0 0;
-                margin-bottom: 20px;
-                box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+                padding: 15px;
+                border-radius: 8px 8px 0 0;
+                margin-bottom: 15px;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
                 width: 100% !important;
                 max-width: 100% !important;
                 margin-left: auto !important;
@@ -258,7 +288,7 @@ class SquirrelMapVis {
             }
             
             .dashboard-content {
-                padding: 0 20px 20px 20px;
+                padding: 0 15px 15px 15px;
                 flex-grow: 1;
                 display: flex;
                 flex-direction: column;
@@ -278,44 +308,29 @@ class SquirrelMapVis {
             .btn-primary {
                 background-color: #bf1b1b;
                 border-color: #bf1b1b;
-                transition: all 0.3s ease;
-                padding: 12px 20px;
-                font-weight: 600;
-                letter-spacing: 0.5px;
-                border-radius: 8px;
+                transition: all 0.2s ease;
             }
             
             .btn-primary:hover {
                 background-color: #e63e3e;
                 border-color: #e63e3e;
-                box-shadow: 0 4px 12px rgba(191, 27, 27, 0.3);
-                transform: translateY(-2px);
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             }
             
             .btn-danger {
-                transition: all 0.3s ease;
-                padding: 12px 20px;
-                font-weight: 600;
-                letter-spacing: 0.5px;
-                border-radius: 8px;
+                transition: all 0.2s ease;
             }
             
             .btn-danger:hover {
-                box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
-                transform: translateY(-2px);
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             }
             
             .btn-secondary {
-                transition: all 0.3s ease;
-                padding: 12px 20px;
-                font-weight: 600;
-                letter-spacing: 0.5px;
-                border-radius: 8px;
+                transition: all 0.2s ease;
             }
             
             .btn-secondary:hover {
-                box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
-                transform: translateY(-2px);
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             }
             
             input[type=range] {
@@ -337,90 +352,32 @@ class SquirrelMapVis {
                 animate: 0.2s;
                 box-shadow: 0px 0px 0px #000000;
                 background: rgba(191, 27, 27, 0.3);
-                border-radius: 10px;
+                border-radius: 4px;
                 border: 0px solid #000000;
             }
             
             input[type=range]::-webkit-slider-thumb {
-                box-shadow: 0px 0px 3px rgba(191, 27, 27, 0.5);
+                box-shadow: 0px 0px 1px #bf1b1b;
                 border: 1px solid #bf1b1b;
-                height: 20px;
-                width: 20px;
+                height: 18px;
+                width: 18px;
                 border-radius: 50%;
                 background: #bf1b1b;
                 cursor: pointer;
                 -webkit-appearance: none;
-                margin-top: -6px;
-                transition: all 0.2s ease;
-            }
-            
-            input[type=range]::-webkit-slider-thumb:hover {
-                transform: scale(1.2);
+                margin-top: -5px;
             }
             
             .map-instructions {
                 background: rgba(255, 255, 255, 0.9);
-                padding: 16px 20px;
-                border-radius: 10px;
-                margin-bottom: 15px;
+                padding: 12px 15px;
+                border-radius: 6px;
+                margin-bottom: 10px;
                 font-weight: normal;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+                box-shadow: 0 1px 3px rgba(0,0,0,0.1);
                 position: relative;
                 z-index: 1000;
                 margin-top: 35px;
-                line-height: 1.6;
-            }
-            
-            .data-row {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                margin-bottom: 8px;
-                padding: 4px 0;
-                border-bottom: 1px solid rgba(0,0,0,0.05);
-            }
-            
-            .data-row:last-child {
-                margin-bottom: 0;
-                border-bottom: none;
-            }
-            
-            .data-label {
-                display: flex;
-                align-items: center;
-            }
-            
-            .data-value {
-                font-weight: 600;
-                color: #333;
-            }
-            
-            .time-display {
-                background: linear-gradient(to right, #f8f9fa, #e9ecef);
-                border-radius: 8px;
-                overflow: hidden;
-                box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            }
-            
-            .drawing-instructions {
-                background: rgba(255, 255, 255, 0.9);
-                padding: 12px 16px;
-                border-radius: 8px;
-                margin-bottom: 15px;
-                font-weight: bold;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-                border-left: 4px solid #17a2b8;
-            }
-            
-            #squirrel_map {
-                height: 500px;
-                width: 100%;
-                position: relative;
-                z-index: 1;
-                border-radius: 12px;
-                box-shadow: 0 3px 15px rgba(0,0,0,0.15);
-                margin-top: 0;
-                overflow: hidden;
             }
         `;
         document.head.appendChild(mapStyle);
@@ -451,37 +408,37 @@ class SquirrelMapVis {
         // Stats section with improved styling
         dashboardContent.append("div")
             .attr("class", "stat-item")
-            .html("<div class='stat-title'>SQUIRRELS IN PATH</div> <span id='count' class='stat-value'>0</span>")
-            .style("margin-bottom", "15px");
+            .html("<strong>Squirrels in path:</strong> <span id='count' class='stat-value'>0</span>")
+            .style("margin-bottom", "12px");
             
         // Create a two-column layout for color and age
         const twoColContainer = dashboardContent.append("div")
             .style("display", "flex")
-            .style("gap", "15px")
-            .style("margin-bottom", "15px");
+            .style("gap", "12px")
+            .style("margin-bottom", "12px");
             
         // Column 1: Fur Color Distribution
         twoColContainer.append("div")
             .attr("class", "stat-item")
             .style("flex", "1")
             .html(`
-                <div class='stat-title'>FUR COLORS</div>
-                <div id="color-breakdown">
-                    <div class="data-row">
-                        <div class="data-label"><span class="color-swatch" style="background-color: #808080;"></span>Gray</div>
-                        <div id="gray-count" class="data-value">0</div>
+                <strong>Fur Colors:</strong>
+                <div id="color-breakdown" style="margin-top: 8px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                        <span><span class="color-swatch" style="background-color: #808080;"></span>Gray</span>
+                        <span id="gray-count">0</span>
                     </div>
-                    <div class="data-row">
-                        <div class="data-label"><span class="color-swatch" style="background-color: #D2691E;"></span>Cinnamon</div>
-                        <div id="cinnamon-count" class="data-value">0</div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                        <span><span class="color-swatch" style="background-color: #D2691E;"></span>Cinnamon</span>
+                        <span id="cinnamon-count">0</span>
                     </div>
-                    <div class="data-row">
-                        <div class="data-label"><span class="color-swatch" style="background-color: #333333;"></span>Black</div>
-                        <div id="black-count" class="data-value">0</div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                        <span><span class="color-swatch" style="background-color: #333333;"></span>Black</span>
+                        <span id="black-count">0</span>
                     </div>
-                    <div class="data-row">
-                        <div class="data-label"><span class="color-swatch" style="background-color: #EEEEEE; border: 1px solid #ccc;"></span>Unknown</div>
-                        <div id="unknown-color-count" class="data-value">0</div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span><span class="color-swatch" style="background-color: #EEEEEE; border: 1px solid #ccc;"></span>Unknown</span>
+                        <span id="unknown-color-count">0</span>
                     </div>
                 </div>
             `);
@@ -491,19 +448,19 @@ class SquirrelMapVis {
             .attr("class", "stat-item")
             .style("flex", "1")
             .html(`
-                <div class='stat-title'>AGE GROUPS</div>
-                <div id="age-breakdown">
-                    <div class="data-row">
-                        <div class="data-label">Adult</div>
-                        <div id="adult-count" class="data-value">0</div>
+                <strong>Age Groups:</strong>
+                <div id="age-breakdown" style="margin-top: 8px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                        <span>Adult</span>
+                        <span id="adult-count">0</span>
                     </div>
-                    <div class="data-row">
-                        <div class="data-label">Juvenile</div>
-                        <div id="juvenile-count" class="data-value">0</div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                        <span>Juvenile</span>
+                        <span id="juvenile-count">0</span>
                     </div>
-                    <div class="data-row">
-                        <div class="data-label">Unknown</div>
-                        <div id="unknown-age-count" class="data-value">0</div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span>Unknown</span>
+                        <span id="unknown-age-count">0</span>
                     </div>
                 </div>
             `);
@@ -512,19 +469,19 @@ class SquirrelMapVis {
         dashboardContent.append("div")
             .attr("class", "stat-item")
             .html(`
-                <div class='stat-title'>TIME OF DAY</div>
-                <div class="time-display" style="display: flex; margin-top: 8px;">
-                    <div style="flex: 1; text-align: center; padding: 10px; background: #f8f9fa; border-radius: 8px 0 0 8px;">
-                        <span style="font-weight: bold; color: #555;">AM</span>
-                        <div id="am-count" style="font-size: 20px; font-weight: 600; color: #333; margin-top: 5px;">0</div>
+                <strong>Time of Day:</strong>
+                <div style="display: flex; margin-top: 8px;">
+                    <div style="flex: 1; text-align: center; padding: 5px; background: #f0f0f0; border-radius: 3px 0 0 3px;">
+                        <span style="font-weight: bold;">AM</span>
+                        <div id="am-count" style="font-size: 16px;">0</div>
                     </div>
-                    <div style="flex: 1; text-align: center; padding: 10px; background: #e9ecef; border-radius: 0 8px 8px 0;">
-                        <span style="font-weight: bold; color: #555;">PM</span>
-                        <div id="pm-count" style="font-size: 20px; font-weight: 600; color: #333; margin-top: 5px;">0</div>
+                    <div style="flex: 1; text-align: center; padding: 5px; background: #e0e0e0; border-radius: 0 3px 3px 0;">
+                        <span style="font-weight: bold;">PM</span>
+                        <div id="pm-count" style="font-size: 16px;">0</div>
                     </div>
                 </div>
             `)
-            .style("margin-bottom", "15px");
+            .style("margin-bottom", "12px");
             
         // Radius control with visual indicator and more precise steps
         dashboardContent.append("div")
@@ -532,13 +489,13 @@ class SquirrelMapVis {
             .style("margin-bottom", "20px")
             .style("margin-top", "auto")
             .html(`
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                    <div class='stat-title' style="margin-bottom: 0;">BUFFER RADIUS</div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <strong>Buffer Radius:</strong>
                     <span id="radiusValue" class="radius-display">${this.currentRadius} meters</span>
                 </div>
                 <input id="radius" type="range" min="10" max="200" step="1" value="${this.currentRadius}" 
                     style="width: 100%;">
-                <div style="display: flex; justify-content: space-between; font-size: 12px; color: #666; margin-top: 8px;">
+                <div style="display: flex; justify-content: space-between; font-size: 12px; color: #666; margin-top: 5px;">
                     <span>10m</span>
                     <span>100m</span>
                     <span>200m</span>
@@ -636,7 +593,7 @@ class SquirrelMapVis {
         // Add instructions above the map (not inside it)
         const instructionsDiv = document.createElement('div');
         instructionsDiv.className = 'map-instructions';
-        instructionsDiv.innerHTML = '<strong style="color: #bf1b1b; font-size: 15px; display: block; margin-bottom: 8px;">MAP INSTRUCTIONS</strong> Click "Draw Path on Map" to start drawing a path. Click on the map to add points, and double-click to finish. The buffer around your path will show squirrels within your selected radius.';
+        instructionsDiv.innerHTML = '<strong>Map Instructions:</strong> Click "Draw Path on Map" to start drawing a path. Click on the map to add points, and double-click to finish. The buffer around your path will show squirrels within your selected radius.';
         
         // Move the map into the wrapper
         if (mapContainer.parentNode) {
