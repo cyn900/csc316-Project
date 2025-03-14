@@ -56,7 +56,7 @@ d3.csv("data/word_frequencies.csv").then(function(wordData) {
             }
 
             .story-title-container {
-                margin-bottom: 2rem;
+                margin-bottom: 5rem;
             }
 
             .story-title {
