@@ -36,23 +36,11 @@
         .attr("id", "transition-stamp-section")
         .attr("class", "transition-stamp-section");
 
-    // Add the left text
+    // Add centered guide text
     stampSection.append("div")
-        .attr("id", "transition-stamp-text-left")
-        .attr("class", "transition-stamp-text left")
-        .text("90% Dead CS Girls");
-
-    // Add the stamp
-    stampSection.append("div")
-        .attr("id", "transition-stamp")
-        .attr("class", "transition-stamp")
-        .text("TOP SECRET");
-
-    // Add the right text
-    stampSection.append("div")
-        .attr("id", "transition-stamp-text-right")
-        .attr("class", "transition-stamp-text right")
-        .text("CSC316 Winter 2025");
+        .attr("id", "transition-guide-text")
+        .attr("class", "transition-guide-text")
+        .text("CLICK ON THE MAP TO EXPLORE OUR INTERACTIVE VISUALIZATION");
 
     // Add the main heading (HOW TO FIND)
     content.append("h2")
@@ -64,13 +52,12 @@
     content.append("div")
         .attr("id", "transition-subtitle")
         .attr("class", "transition-subtitle")
-        .text("our furry friends");
+        .text("OUR FURRY FRIENDS");
 
     // Update CSS
     const style = document.createElement('style');
     style.textContent = `
         @import url('https://fonts.cdnfonts.com/css/cocogoose');
-        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap');
 
         #transition-container {
             width: 100%;
@@ -78,6 +65,7 @@
             margin: 0 auto;
             padding: 2rem 1rem;
             text-align: center;
+            position: relative;
         }
 
         .transition-line {
@@ -110,38 +98,35 @@
 
         #transition-stamp-section {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
             margin: 0.5rem 0;
             border-top: 2px solid #000;
             border-bottom: 2px solid #000;
-            padding: 0.5rem 1rem;
+            padding: 0.8rem 1rem;
+            position: relative;
         }
 
-        .transition-stamp-text {
+        .transition-guide-text {
             font-size: 1.2rem;
             color: #000;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-align: center;
         }
 
-        #transition-stamp {
-            transform: rotate(-15deg);
-            color: #bf1b1b;
-            border: 3px solid #bf1b1b;
-            padding: 0.5rem 2rem;
-            font-size: 1.5rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
+        /* Stamp CSS removed as requested */
 
         #transition-heading {
-            font-size: 5rem; /* Reduced size */
+            font-size: 8rem;
             margin: 2rem 0;
             letter-spacing: 4px;
             padding: 0 1rem;
             font-family: "COCOGOOSE", sans-serif;
             font-weight: 500;
             font-style: bold;
+            position: relative;
+            z-index: 1;
         }
 
         #transition-subtitle {
@@ -152,7 +137,7 @@
             margin: 0 auto;
             width: fit-content;
             font-weight: bold;
-            font-family: 'Dancing Script', cursive; /* Cursive style */
+            font-family: "COCOGOOSE", sans-serif;
         }
     `;
     document.head.appendChild(style);

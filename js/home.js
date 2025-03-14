@@ -42,17 +42,17 @@
         .attr("class", "home-stamp-text left")
         .text("90% Dead CS Girls");
 
-    // Add the stamp
-    stampSection.append("div")
-        .attr("id", "home-stamp")
-        .attr("class", "home-stamp")
-        .text("TOP SECRET");
-
     // Add the right text
     stampSection.append("div")
         .attr("id", "home-stamp-text-right")
         .attr("class", "home-stamp-text right")
         .text("CSC316 Winter 2025");
+        
+    // Add the stamp positioned to overlap both lines
+    content.append("div")
+        .attr("id", "home-stamp")
+        .attr("class", "home-stamp")
+        .html('<img src="img/secret.png" alt="Top Secret Stamp">');
 
     // Add the main heading
     content.append("h2")
@@ -78,6 +78,7 @@
             margin: 0 auto;
             padding: 2rem 1rem;
             text-align: center;
+            position: relative;
         }
 
         .home-line {
@@ -116,22 +117,22 @@
             border-top: 2px solid #000;
             border-bottom: 2px solid #000;
             padding: 0.5rem 1rem;
-        }
-
-        .home-stamp-text {
-            font-size: 1.2rem;
-            color: #000;
+            position: relative;
         }
 
         #home-stamp {
-            transform: rotate(-15deg);
-            color: #bf1b1b;
-            border: 3px solid #bf1b1b;
-            padding: 0.5rem 2rem;
-            font-size: 1.5rem;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            width: 180px;
+        }
+        
+        #home-stamp img {
+            width: 150%;
+            height: auto;
+            display: block;
         }
 
         #home-heading {
@@ -142,6 +143,8 @@
             font-family: "COCOGOOSE", sans-serif;
             font-weight: 500;
             font-style: bold;
+            position: relative;
+            z-index: 1;
         }
 
         #home-subtitle {
