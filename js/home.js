@@ -66,6 +66,24 @@
         .attr("class", "home-subtitle")
         .text("OF THE BIG APPLE");
 
+    // Add project motivation at the bottom of the page
+    const motivationSection = content.append("div")
+        .attr("class", "home-motivation-section")
+        .style("margin-top", "2rem")
+        .style("padding", "1rem")
+        .style("text-align", "center")
+        .style("border-top", "1px solid rgba(0,0,0,0.1)")
+        .style("max-width", "800px")
+        .style("margin-left", "auto")
+        .style("margin-right", "auto");
+        
+    motivationSection.append("p")
+        .attr("class", "home-motivation-text")
+        .style("font-style", "italic")
+        .style("color", "#555")
+        .style("font-size", "0.9rem")
+        .style("line-height", "1.5")
+        .text("Our project explores the behaviors of Central Park's squirrels, drawing insights into what conditions influence their activities and interactions. No squirrels were harmed in this process!");
 
     // Update CSS
     const style = document.createElement('style');
