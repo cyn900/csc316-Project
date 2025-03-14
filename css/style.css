@@ -2,3 +2,27 @@
 @import url(https://db.onlinewebfonts.com/c/07cb29fdcb073fff840edc6de2067b50?family=Amsterdam+Four_ttf);
 @import url('https://fonts.cdnfonts.com/css/cocogoose');
 
+#reset-button-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    pointer-events: none; /* Allow clicks to pass through to the sunburst */
+}
+
+#reset-button {
+    pointer-events: all; /* Enable clicks on the button */
+    padding: 8px 16px;
+    font-size: 14px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#reset-button:hover {
+    background-color: #0056b3;
+}
