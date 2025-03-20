@@ -136,7 +136,8 @@
         .attr("x", width / 2)
         .attr("y", -margin.top / 2)
         .attr("text-anchor", "middle")
-        .text("Observed Behaviors");
+        .style("font-size", "30px")
+        .text("Squirrel Behaviour");
         
     // Add y-axis label
     g.append("text")
@@ -145,6 +146,7 @@
         .attr("y", -margin.left + 20)
         .attr("x", -height / 2)
         .attr("text-anchor", "middle")
+        .style("font-size", "30px")
         .text("Number of Squirrels");
 
     // Create image section
@@ -239,7 +241,7 @@
             .style("text-anchor", "end")
             .attr("transform", "rotate(-45)")
             .attr("dx", "-.8em")
-            .attr("dy", ".5em");
+            .attr("dy", ".5em")
 
         g.append("g")
             .attr("class", "barchart-y-axis")
@@ -489,13 +491,13 @@
         }
         
         .barchart-x-axis text {
-            font-size: 12px;
+            font-size: 20px;
             transform: rotate(-45deg);
             text-anchor: end;
         }
 
         .barchart-y-axis text {
-            font-size: 12px;
+            font-size: 20px;
         }
 
         .barchart-tooltip {
