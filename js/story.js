@@ -5,7 +5,7 @@ d3.csv("data/word_frequencies.csv").then(function(wordData) {
     d3.csv("data/stories.csv").then(function(storyData) {
         // Extract the stories
         const stories = storyData.map(d => d["Note Squirrel & Park Stories"]);
-        let selectedWords = [];
+        let selectedWord = null;
 
         // Create main container with grid layout
         const container = d3.select("#wordcloud")
@@ -20,10 +20,10 @@ d3.csv("data/word_frequencies.csv").then(function(wordData) {
             .attr("class", "story-left-section")
             .html(`
                 <div class="story-title-container">
-                    <h2 class="story-title">Squirrel Stories</h2>
+                    <h2 class="story-title">Squirrel Sighting Stories</h2>
                 </div>
                 <div class="story-text-content">
-                    <p>This is a word cloud of the most common words found in stories by sighters! Try to click on one of them and click fetch a random story to see what kind of stories sighters tell.</p>
+                    <p>This is a word cloud of the most common words found in stories by sighters! Click a word to explore a related story.</p>
                 </div>
             `);
 
@@ -35,16 +35,11 @@ d3.csv("data/word_frequencies.csv").then(function(wordData) {
         const controls = rightSection.append("div")
             .attr("class", "story-controls");
 
-        // Add HTML button
-        const button = controls.append("button")
-            .attr("class", "story-button")
-            .text("Fetch Random Story");
-
         // Add story display
         const storyDisplay = controls.append("div")
             .attr("class", "story-display");
 
-        // Add CSS
+        // Add CSS styles
         const style = document.createElement('style');
         style.textContent = `
         @import url(https://db.onlinewebfonts.com/c/07cb29fdcb073fff840edc6de2067b50?family=Amsterdam+Four_ttf);
@@ -75,20 +70,18 @@ d3.csv("data/word_frequencies.csv").then(function(wordData) {
                 margin-bottom: 2rem;
             }
 
-            .story-button {
-                padding: 10px 20px;
-                cursor: pointer;
-                background: #bf1b1b;
-                color: white;
-                border: none;
-                font-size: 1rem;
-            }
-
             .story-display {
                 padding: 15px;
                 border: 2px solid #eee;
                 min-height: 100px;
                 margin-bottom: 2rem;
+                font-size: 1.1rem;
+                line-height: 1.6;
+            }
+
+            .highlighted-word {
+                color: #bf1b1b;
+                font-weight: bold;
             }
         `;
         document.head.appendChild(style);
@@ -123,39 +116,47 @@ d3.csv("data/word_frequencies.csv").then(function(wordData) {
                 .enter().append("text")
                 .style("font-size", d => `${d.size}px`)
                 .style("font-family", "Impact")
-                .style("fill", "#bf1b1b")  // Updated to match theme color
+                .style("fill", "#bf1b1b")  // Default color
                 .style("cursor", "pointer")
                 .attr("text-anchor", "middle")
                 .attr("transform", d => `translate(${[d.x, d.y]})rotate(${d.rotate})`)
                 .text(d => d.text)
                 .on("click", function(event, d) {
-                    const idx = selectedWords.indexOf(d.text);
-                    if (idx === -1) {
-                        selectedWords.push(d.text);
-                        d3.select(this).style("fill", "#ff6b6b");
-                    } else {
-                        selectedWords.splice(idx, 1);
-                        d3.select(this).style("fill", "#bf1b1b");
-                    }
+                    // Deselect previous word
+                    d3.selectAll("text").style("fill", "#bf1b1b");
+
+                    // Select new word
+                    selectedWord = d.text;
+                    d3.select(this).style("fill", "#ff6b6b");
+
+                    // Fetch a related story immediately
+                    fetchStory();
                 });
         }
 
-        // Story fetching logic
-        button.on("click", () => {
-            const filteredStories = selectedWords.length > 0
-                ? stories.filter(story => 
-                    selectedWords.some(word => 
-                        story.toLowerCase().includes(word.toLowerCase())
-                    )
-                ) : stories;
+        function fetchStory() {
+            if (!selectedWord) return;
+
+            // Filter stories containing the selected word
+            const filteredStories = stories.filter(story =>
+                story.toLowerCase().includes(selectedWord.toLowerCase())
+            );
 
             if (filteredStories.length === 0) {
-                storyDisplay.html("<em>No stories found matching selected words</em>");
+                storyDisplay.html("<em>No stories found matching the selected word.</em>");
                 return;
             }
 
+            // Select a random story
             const randomStory = filteredStories[Math.floor(Math.random() * filteredStories.length)];
-            storyDisplay.html(randomStory);
-        });
+
+            // Highlight the selected word in the story
+            const highlightedStory = randomStory.replace(
+                new RegExp(`\\b(${selectedWord})\\b`, "gi"),
+                `<span class="highlighted-word">$1</span>`
+            );
+
+            storyDisplay.html(highlightedStory);
+        }
     });
 });

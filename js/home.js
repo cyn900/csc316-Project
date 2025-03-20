@@ -81,7 +81,7 @@
         .attr("class", "home-motivation-text")
         .style("font-style", "italic")
         .style("color", "#555")
-        .style("font-size", "0.9rem")
+        .style("font-size", "1.8rem")
         .style("line-height", "1.5")
         .text("Our project explores the behaviors of Central Park's squirrels, drawing insights into what conditions influence their activities and interactions. No squirrels were harmed in this process!");
 
