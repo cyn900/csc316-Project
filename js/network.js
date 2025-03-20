@@ -354,16 +354,18 @@
                         }
                         return "#ddd";
                     })
+                    .attr("stroke", node => node.id === d.id ? "#000000" : "none")
+                    .attr("stroke-width", node => node.id === d.id ? 2 : 0);
 
                 // Update labels
                 node.selectAll("text")
                     .transition()
                     .duration(200)
                     .style("opacity", node => connectedNodes.has(node.id) ? 1 : 0.3)
-                    .style("font-size", node => 
+                    .style("font-size", node =>
                         connectedNodes.has(node.id) ? "14px" : "12px"
                     )
-                    .style("font-weight", node => 
+                    .style("font-weight", node =>
                         connectedNodes.has(node.id) ? "bold" : "normal"
                     );
 
@@ -376,9 +378,9 @@
                         }
                         return "#ddd";
                     })
-                    .attr("stroke-opacity", l => 
+                    .attr("stroke-opacity", l =>
                         (l.source.id === d.id || l.target.id === d.id) ? 0.8 : 0.1
-                    )
+                    );
 
                 // Add glow effect to connected nodes
                 node.selectAll("circle")

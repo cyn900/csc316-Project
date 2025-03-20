@@ -404,7 +404,7 @@ class SquirrelMapVis {
             }
         `;
         document.head.appendChild(mapStyle);
-        
+
         // Move dashboard to left column with improved styling
         const dashboardContainer = d3.select("#viz8 .col-md-6:first-child")
             .append("div")
@@ -532,93 +532,6 @@ class SquirrelMapVis {
             vis.currentRadius = value;
             vis.updateBuffers();
         });
-        
-        // Create a container for buttons
-        const buttonContainer = dashboardContent.append("div")
-            .attr("class", "dashboard-buttons")
-            .style("display", "flex")
-            .style("flex-direction", "column")
-            .style("gap", "12px")
-            .style("margin-top", "20px");
-        
-        // Add draw button - keep only this one
-        buttonContainer.append("button")
-            .attr("id", "drawButton")
-            .text("Draw Path on Map")
-            .attr("class", "btn btn-primary")
-            .style("width", "100%")
-            .style("margin-bottom", "0") // Remove margin since we're using gap
-            .style("font-weight", "bold")
-            .on("click", function() {
-                vis.toggleDrawMode();
-            });
-            
-        // Add reset button with improved visibility
-        buttonContainer.append("button")
-            .attr("id", "resetButton")
-            .text("Reset Map")
-            .attr("class", "btn btn-secondary")
-            .style("width", "100%")
-            .style("margin-bottom", "0") // Remove margin since we're using gap
-            .style("font-weight", "bold")
-            .style("background-color", "#6c757d")
-            .style("border-color", "#6c757d")
-            .style("display", "block") // Ensure it's displayed as a block
-            .style("padding", "8px 16px") // Add padding for better visibility
-            .on("click", function() {
-                // Clear all drawn paths
-                vis.drawnPaths = [];
-                
-                // Remove all directly added elements
-                vis.directAddedElements.forEach(el => {
-                    if (el && vis.map) vis.map.removeLayer(el);
-                });
-                vis.directAddedElements = [];
-                
-                // Reset dashboard stats
-                vis.updateDashboard([]);
-                
-                // Add back the reference marker
-                const fixedMarker = L.marker([40.7810, -73.966], {
-                    title: "Central Park Reference"
-                }).addTo(vis.map);
-                vis.directAddedElements.push(fixedMarker);
-                
-                // Reset the map view
-                vis.map.setView([40.7810, -73.966], 14);
-                
-                // Reset radius to default
-                vis.currentRadius = 50;
-                d3.select("#radius").property("value", 50);
-                d3.select("#radiusValue").text("50 meters");
-                
-                // Show confirmation message
-                const mapContainer = document.getElementById('squirrel_map');
-                const resetMessage = document.createElement('div');
-                resetMessage.className = 'reset-message';
-                resetMessage.innerHTML = 'Map has been reset!';
-                resetMessage.style.position = 'absolute';
-                resetMessage.style.top = '50%';
-                resetMessage.style.left = '50%';
-                resetMessage.style.transform = 'translate(-50%, -50%)';
-                resetMessage.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
-                resetMessage.style.padding = '10px 20px';
-                resetMessage.style.borderRadius = '5px';
-                resetMessage.style.boxShadow = '0 2px 5px rgba(0,0,0,0.2)';
-                resetMessage.style.zIndex = '1000';
-                resetMessage.style.fontWeight = 'bold';
-                
-                mapContainer.appendChild(resetMessage);
-                
-                // Remove the message after 2 seconds
-                setTimeout(() => {
-                    if (resetMessage.parentNode) {
-                        resetMessage.parentNode.removeChild(resetMessage);
-                    }
-                }, 2000);
-                
-                console.log("Map reset completed");
-            });
 
         // Add a debug message to check if buttons are created
         console.log("Buttons created: Draw button and Reset button");
@@ -656,24 +569,112 @@ class SquirrelMapVis {
             console.error("Map container not found!");
             return;
         }
-        
+
         // Create a wrapper div for the map section with the same top margin as dashboard
         const rightColumn = document.querySelector("#viz8 .col-md-6:last-child");
         const mapWrapper = document.createElement('div');
         mapWrapper.className = 'map-wrapper';
-        
+
         // Add instructions above the map (not inside it)
         const instructionsDiv = document.createElement('div');
         instructionsDiv.className = 'map-instructions';
         instructionsDiv.innerHTML = '<strong>Map Instructions:</strong> Click "Draw Path on Map" to start drawing a path. Click on the map to add points, and double-click to finish. The buffer around your path will show squirrels within your selected radius.';
-        
+
+        // Create button container between instructions and map
+        const buttonContainer = document.createElement('div');
+        buttonContainer.className = 'map-buttons';
+        buttonContainer.style.display = 'flex';
+        buttonContainer.style.gap = '12px';
+        buttonContainer.style.marginBottom = '12px';
+        buttonContainer.style.marginTop = '10px';
+
+        // Create Draw button
+        const drawButton = document.createElement('button');
+        drawButton.id = 'drawButton';
+        drawButton.className = 'btn btn-primary';
+        drawButton.textContent = 'Draw Path on Map';
+        drawButton.style.fontWeight = 'bold';
+        drawButton.style.flex = '1';
+        drawButton.addEventListener('click', function() {
+            vis.toggleDrawMode();
+        });
+
+        // Create Reset button
+        const resetButton = document.createElement('button');
+        resetButton.id = 'resetButton';
+        resetButton.className = 'btn btn-secondary';
+        resetButton.textContent = 'Reset Map';
+        resetButton.style.fontWeight = 'bold';
+        resetButton.style.backgroundColor = '#6c757d';
+        resetButton.style.borderColor = '#6c757d';
+        resetButton.style.flex = '1';
+        resetButton.addEventListener('click', function() {
+            // Clear all drawn paths
+            vis.drawnPaths = [];
+
+            // Remove all directly added elements
+            vis.directAddedElements.forEach(el => {
+                if (el && vis.map) vis.map.removeLayer(el);
+            });
+            vis.directAddedElements = [];
+
+            // Reset dashboard stats
+            vis.updateDashboard([]);
+
+            // Add back the reference marker
+            const fixedMarker = L.marker([40.7810, -73.966], {
+                title: "Central Park Reference"
+            }).addTo(vis.map);
+            vis.directAddedElements.push(fixedMarker);
+
+            // Reset the map view
+            vis.map.setView([40.7810, -73.966], 14);
+
+            // Reset radius to default
+            vis.currentRadius = 50;
+            d3.select("#radius").property("value", 50);
+            d3.select("#radiusValue").text("50 meters");
+
+            // Show confirmation message
+            const mapContainer = document.getElementById('squirrel_map');
+            const resetMessage = document.createElement('div');
+            resetMessage.className = 'reset-message';
+            resetMessage.innerHTML = 'Map has been reset!';
+            resetMessage.style.position = 'absolute';
+            resetMessage.style.top = '50%';
+            resetMessage.style.left = '50%';
+            resetMessage.style.transform = 'translate(-50%, -50%)';
+            resetMessage.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
+            resetMessage.style.padding = '10px 20px';
+            resetMessage.style.borderRadius = '5px';
+            resetMessage.style.boxShadow = '0 2px 5px rgba(0,0,0,0.2)';
+            resetMessage.style.zIndex = '1000';
+            resetMessage.style.fontWeight = 'bold';
+
+            mapContainer.appendChild(resetMessage);
+
+            // Remove the message after 2 seconds
+            setTimeout(() => {
+                if (resetMessage.parentNode) {
+                    resetMessage.parentNode.removeChild(resetMessage);
+                }
+            }, 2000);
+
+            console.log("Map reset completed");
+        });
+
+        // Add buttons to container
+        buttonContainer.appendChild(drawButton);
+        buttonContainer.appendChild(resetButton);
+
         // Move the map into the wrapper
         if (mapContainer.parentNode) {
             mapContainer.parentNode.removeChild(mapContainer);
         }
-        
-        // Add instructions and map to wrapper
+
+        // Add instructions, buttons, and map to wrapper
         mapWrapper.appendChild(instructionsDiv);
+        mapWrapper.appendChild(buttonContainer);
         mapWrapper.appendChild(mapContainer);
         
         // Add wrapper to right column
