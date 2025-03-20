@@ -152,7 +152,7 @@ d3.csv("data/word_frequencies.csv").then(function(wordData) {
 
             // Highlight the selected word in the story
             const highlightedStory = randomStory.replace(
-                new RegExp(`\\b(${selectedWord})\\b`, "gi"),
+                new RegExp(`\\b(\\w*${selectedWord}\\w*)\\b`, "gi"),
                 `<span class="highlighted-word">$1</span>`
             );
 
