@@ -453,8 +453,19 @@
             .innerRadius(d => d.y0)
             .outerRadius(d => d.y1);
 
-        // Keep track of the current parent
-        let currentRoot = root;
+        // Store original coordinates for each node when data is first processed
+        root.each(d => {
+            // Store the original coordinates
+            d._original = {
+                x0: d.x0,
+                x1: d.x1,
+                y0: d.y0,
+                y1: d.y1
+            };
+        });
+
+        let transitioning = false;  // Flag to track if we're currently in a transition
+        let currentRoot = root;  // Keep track of the current parent
 
         // Add paths
         const paths = g.selectAll("path")
@@ -476,14 +487,7 @@
             .style("opacity", 0.9)
             .style("stroke", "white")
             .style("stroke-width", "1px")
-            .attr("class", "sunburst-path")
-            .each(function(d) {
-                // Store the original coordinates for zooming
-                d.x0_orig = d.x0;
-                d.x1_orig = d.x1;
-                d.y0_orig = d.y0;
-                d.y1_orig = d.y1;
-            });
+            .attr("class", "sunburst-path");
 
         // Add interactivity
         paths.on("mouseover", function(event, d) {
@@ -527,25 +531,119 @@
             })
             .on("click", clicked);
 
+        // Function to fully reset the sunburst
+        function resetSunburst() {
+            // If we're in a transition or already at root, ignore
+            if (transitioning || currentRoot === root) return;
+
+            transitioning = true;
+
+            // Update center text with transition
+            centerText.select(".center-category")
+                .transition()
+                .duration(750)
+                .text("All Squirrels");
+
+            centerText.select(".center-count")
+                .transition()
+                .duration(750)
+                .text("Click to explore");
+
+            const t = g.transition()
+                .duration(750)
+                .ease(d3.easeQuadInOut);
+
+            // Reset to original coordinates
+            paths.transition(t)
+                .tween("data", d => {
+                    const i = d3.interpolate({
+                        x0: d.x0,
+                        x1: d.x1,
+                        y0: d.y0,
+                        y1: d.y1
+                    }, d._original);
+
+                    return t => {
+                        // Update the current coordinates
+                        d.x0 = i(t).x0;
+                        d.x1 = i(t).x1;
+                        d.y0 = i(t).y0;
+                        d.y1 = i(t).y1;
+                        // Ensure the data binding is maintained
+                        d.target = d._original;
+                    };
+                })
+                .attrTween("d", d => {
+                    return () => arc(d);
+                })
+                .style("visibility", "visible")
+                .on("end", function(d) {
+                    // Reset all nodes to their original state
+                    root.each(node => {
+                        node.x0 = node._original.x0;
+                        node.x1 = node._original.x1;
+                        node.y0 = node._original.y0;
+                        node.y1 = node._original.y1;
+                        node.target = node._original;
+                    });
+
+                    // Reset the current root
+                    currentRoot = root;
+                    transitioning = false;
+
+                    // Ensure paths maintain their data binding
+                    paths.each(function(d) {
+                        d3.select(this)
+                            .datum(d)
+                            .on("click", clicked);  // Rebind click event
+                    });
+                });
+        }
+
         // Click handler for zooming
         function clicked(event, p) {
+            event.stopPropagation();  // Prevent event bubbling
+
+            // If we're in a transition, ignore the click
+            if (transitioning) return;
+
             // If we're already at this node, zoom out to the parent
             if (currentRoot === p && p.parent) {
                 p = p.parent;
             }
 
+            // If we're clicking the same node again, ignore it
+            if (currentRoot === p) return;
+
+            transitioning = true;
             currentRoot = p;
 
-            // Update center text
+            // Update center text with transition
             centerText.select(".center-category")
+                .transition()
+                .duration(750)
                 .text(p === root ? "All Squirrels" : p.data.name);
 
             centerText.select(".center-count")
+                .transition()
+                .duration(750)
                 .text(p === root ? "Click to explore" : `${p.value} squirrels`);
 
-            const t = g.transition().duration(750);
+            const t = g.transition()
+                .duration(750)
+                .ease(d3.easeQuadInOut);
 
-            // Transition all paths to new view
+            // Store current positions before transition
+            root.each(d => {
+                d.target = {
+                    x0: (d.x0 - p.x0) / (p.x1 - p.x0) * 2 * Math.PI,
+                    x1: (d.x1 - p.x0) / (p.x1 - p.x0) * 2 * Math.PI,
+                    y0: Math.max(0, d.y0 - p.y0),
+                    y1: Math.max(0, d.y1 - p.y0)
+                };
+            });
+
+            // Transition paths
             paths.transition(t)
                 .tween("data", d => {
                     const i = d3.interpolate({
@@ -553,79 +651,50 @@
                         x1: d.x1,
                         y0: d.y0,
                         y1: d.y1
-                    }, {
-                        x0: (d.x0 - p.x0) / (p.x1 - p.x0) * 2 * Math.PI,
-                        x1: (d.x1 - p.x0) / (p.x1 - p.x0) * 2 * Math.PI,
-                        y0: Math.max(0, d.y0 - p.y0),
-                        y1: Math.max(0, d.y1 - p.y0)
-                    });
+                    }, d.target);
 
                     return t => {
-                        const b = i(t);
-                        d.x0 = b.x0;
-                        d.x1 = b.x1;
-                        d.y0 = b.y0;
-                        d.y1 = b.y1;
+                        d.x0 = i(t).x0;
+                        d.x1 = i(t).x1;
+                        d.y0 = i(t).y0;
+                        d.y1 = i(t).y1;
                     };
                 })
-                .attr("d", arc)
-                .style("visibility", d => isVisible(d) ? "visible" : "hidden");
-
-            // Helper to determine if a segment should be visible during zoom
-            function isVisible(d) {
-                return d.x0 >= 0 && d.x1 <= 2 * Math.PI && d.y0 >= 0;
-            }
-        }
-
-        // Function to fully reset the sunburst
-        function resetSunburst() {
-            // Reset to root
-            currentRoot = root;
-
-            // Update center text
-            centerText.select(".center-category")
-                .text("All Squirrels");
-
-            centerText.select(".center-count")
-                .text("Click to explore");
-
-            const t = g.transition().duration(750);
-
-            // Transition all paths back to their original positions
-            paths.transition(t)
-                .tween("data", d => {
-                    const i = d3.interpolate({
-                        x0: d.x0,
-                        x1: d.x1,
-                        y0: d.y0,
-                        y1: d.y1
-                    }, {
-                        x0: d.x0_orig,
-                        x1: d.x1_orig,
-                        y0: d.y0_orig,
-                        y1: d.y1_orig
-                    });
-
-                    return t => {
-                        const b = i(t);
-                        d.x0 = b.x0;
-                        d.x1 = b.x1;
-                        d.y0 = b.y0;
-                        d.y1 = b.y1;
+                .attrTween("d", d => {
+                    return () => arc(d);
+                })
+                .styleTween("visibility", d => {
+                    return () => {
+                        const visible = d.x0 >= 0 && d.x1 <= 2 * Math.PI && d.y0 >= 0;
+                        return visible ? "visible" : "hidden";
                     };
                 })
-                .attr("d", arc)
-                .style("visibility", "visible");
-                
-            console.log("Reset sunburst called");
+                .on("end", function(d) {
+                    transitioning = false;
+                    // Ensure click handler is still bound
+                    d3.select(this)
+                        .datum(d)
+                        .on("click", clicked);
+                });
         }
 
-        // Connect the reset button to the resetSunburst function
-        d3.select("#sunburst-reset-button").on("click", function() {
-            console.log("Reset button clicked");
-            resetSunburst();
-        });
-        
+        // Connect the reset button to the resetSunburst function with debounce
+        const debouncedReset = debounce(resetSunburst, 100);
+        d3.select("#sunburst-reset-button").on("click", debouncedReset);
+
+        // Debounce function to prevent multiple rapid clicks
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
         // Make sure the button is visible
         d3.select("#sunburst-reset-button")
             .style("display", "inline-flex")
