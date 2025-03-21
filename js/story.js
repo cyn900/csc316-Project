@@ -5,7 +5,7 @@ d3.csv("data/word_frequencies.csv").then(function(wordData) {
     d3.csv("data/stories.csv").then(function(storyData) {
         // Extract the stories
         const stories = storyData.map(d => d["Note Squirrel & Park Stories"]);
-        let selectedWord = null;
+        let selectedWords = new Set();  // Change to Set for better management of selected words
 
         // Create main container with grid layout
         const container = d3.select("#wordcloud")
@@ -23,7 +23,7 @@ d3.csv("data/word_frequencies.csv").then(function(wordData) {
                     <h2 class="story-title">Squirrel Sighting Stories</h2>
                 </div>
                 <div class="story-text-content">
-                    <p>This is a word cloud of the most common words found in stories by sighters! Click a word to explore a related story.</p>
+                    <p>This is a word cloud of the most common words found in stories by sighters! Click words to explore related stories.</p>
                 </div>
             `);
 
@@ -31,18 +31,33 @@ d3.csv("data/word_frequencies.csv").then(function(wordData) {
         const rightSection = container.append("div")
             .attr("class", "story-right-section");
 
-        // Create controls container
+        // Create controls container with refresh button
         const controls = rightSection.append("div")
             .attr("class", "story-controls");
 
+        // Add story container with refresh button
+        const storyContainer = controls.append("div")
+            .attr("class", "story-container");
+
+        // Add story header with refresh button
+        const storyHeader = storyContainer.append("div")
+            .attr("class", "story-header");
+
+        // Add refresh button
+        const refreshButton = storyHeader.append("button")
+            .attr("class", "refresh-button")
+            .html('<i class="fas fa-sync-alt"></i> New Story')
+            .on("click", fetchStory);
+
         // Add story display
-        const storyDisplay = controls.append("div")
+        const storyDisplay = storyContainer.append("div")
             .attr("class", "story-display");
 
         // Add CSS styles
         const style = document.createElement('style');
         style.textContent = `
         @import url(https://db.onlinewebfonts.com/c/07cb29fdcb073fff840edc6de2067b50?family=Amsterdam+Four_ttf);
+        @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
 
             .story-left-section {
                 padding: 2rem;
@@ -70,17 +85,51 @@ d3.csv("data/word_frequencies.csv").then(function(wordData) {
                 margin-bottom: 2rem;
             }
 
+            .story-container {
+                border: 2px solid #eee;
+                border-radius: 8px;
+                overflow: hidden;
+            }
+
+            .story-header {
+                padding: 10px;
+                background: #f8f8f8;
+                border-bottom: 2px solid #eee;
+                display: flex;
+                justify-content: flex-end;
+            }
+
+            .refresh-button {
+                padding: 8px 16px;
+                background: #bf1b1b;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                font-size: 14px;
+                transition: background-color 0.2s;
+            }
+
+            .refresh-button:hover {
+                background: #ff6b6b;
+            }
+
+            .refresh-button i {
+                font-size: 12px;
+            }
+
             .story-display {
                 padding: 15px;
-                border: 2px solid #eee;
                 min-height: 100px;
-                margin-bottom: 2rem;
                 font-size: 1.1rem;
                 line-height: 1.6;
             }
 
             .highlighted-word {
-                color: #bf1b1b;
+                color: #ff6b6b;
                 font-weight: bold;
             }
         `;
@@ -122,12 +171,18 @@ d3.csv("data/word_frequencies.csv").then(function(wordData) {
                 .attr("transform", d => `translate(${[d.x, d.y]})rotate(${d.rotate})`)
                 .text(d => d.text)
                 .on("click", function(event, d) {
-                    // Deselect previous word
-                    d3.selectAll("text").style("fill", "#bf1b1b");
-
-                    // Select new word
-                    selectedWord = d.text;
-                    d3.select(this).style("fill", "#ff6b6b");
+                    const word = d.text;
+                    const element = d3.select(this);
+                    
+                    if (selectedWords.has(word)) {
+                        // Deselect word
+                        selectedWords.delete(word);
+                        element.style("fill", "#bf1b1b");
+                    } else {
+                        // Select word
+                        selectedWords.add(word);
+                        element.style("fill", "#ff6b6b");
+                    }
 
                     // Fetch a related story immediately
                     fetchStory();
@@ -135,25 +190,35 @@ d3.csv("data/word_frequencies.csv").then(function(wordData) {
         }
 
         function fetchStory() {
-            if (!selectedWord) return;
+            if (selectedWords.size === 0) {
+                storyDisplay.html("<em>Click on words in the cloud to see related stories!</em>");
+                return;
+            }
 
-            // Filter stories containing the selected word
+            // Filter stories containing any of the selected words
             const filteredStories = stories.filter(story =>
-                story.toLowerCase().includes(selectedWord.toLowerCase())
+                Array.from(selectedWords).some(word =>
+                    story.toLowerCase().includes(word.toLowerCase())
+                )
             );
 
             if (filteredStories.length === 0) {
-                storyDisplay.html("<em>No stories found matching the selected word.</em>");
+                storyDisplay.html("<em>No stories found matching the selected words.</em>");
                 return;
             }
 
             // Select a random story
             const randomStory = filteredStories[Math.floor(Math.random() * filteredStories.length)];
 
-            // Highlight the selected word in the story
+            // Create a regex pattern that matches any of the selected words
+            const pattern = Array.from(selectedWords)
+                .map(word => `\\b(\\w*${word}\\w*)\\b`)
+                .join('|');
+            
+            // Highlight all selected words in the story
             const highlightedStory = randomStory.replace(
-                new RegExp(`\\b(\\w*${selectedWord}\\w*)\\b`, "gi"),
-                `<span class="highlighted-word">$1</span>`
+                new RegExp(pattern, 'gi'),
+                match => `<span class="highlighted-word">${match}</span>`
             );
 
             storyDisplay.html(highlightedStory);
