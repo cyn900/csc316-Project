@@ -253,8 +253,26 @@
     }
 
     function brushed(event) {
-        if (!event.selection) return;
+        if (!event.selection) {
+            // If the brush is cleared, reset to full extent
+            brushGroup.call(brush.move, [margin.left, width - margin.right]);
+            return;
+        }
+
+        // Get the current selection
         const [x0, x1] = event.selection.map(timeScale.invert);
+
+        // Ensure minimum width of the brush (e.g., 1 day)
+        const minWidth = timeScale(d3.timeDay.offset(timeScale.invert(0), 1)) - timeScale(timeScale.invert(0));
+        if (event.selection[1] - event.selection[0] < minWidth) {
+            const center = (event.selection[0] + event.selection[1]) / 2;
+            const newX0 = center - minWidth / 2;
+            const newX1 = center + minWidth / 2;
+            brushGroup.call(brush.move, [newX0, newX1]);
+            return;
+        }
+
+        // Filter and update the data
         const filteredData = processedData.filter(d => d.date >= x0 && d.date <= x1);
         const newData = processDataForMetric(filteredData, currentMetric);
         updateChart(newData);
@@ -341,13 +359,7 @@
             .domain(d3.extent(processedData, d => d.date))
             .range([margin.left, width - margin.right]);
 
-        // Create timeline brush
-        const brush = d3.brushX()
-            .extent([[margin.left, height - timelineHeight - timelineMargin.bottom], 
-                    [width - margin.right, height - timelineMargin.bottom]])
-            .on("brush end", brushed);
-
-        // Add timeline axis
+        // Add timeline axis first (bottom layer)
         const timelineAxis = svg.append("g")
             .attr("class", "timeline-axis")
             .attr("transform", `translate(0,${height - timelineHeight - timelineMargin.bottom})`)
@@ -355,23 +367,42 @@
                 .ticks(10)
                 .tickFormat(d3.timeFormat("%m/%d")));
 
-        // Add brush group
+        // Create timeline brush with updated configuration
+        const brush = d3.brushX()
+            .extent([[margin.left, height - timelineHeight - timelineMargin.bottom], 
+                    [width - margin.right, height - timelineMargin.bottom]])
+            .on("start brush end", brushed);  // Handle all brush events
+
+        // Remove the timelineOverlay creation since it's blocking the brush
+        // Instead, we'll add hover functionality to the brush overlay itself
         brushGroup = svg.append("g")
             .attr("class", "brush")
             .call(brush)
             .call(brush.move, [margin.left, width - margin.right]);
 
-        // Add overlay rects for timeline hover
-        const timelineOverlay = svg.append("g")
-            .attr("class", "timeline-overlay")
-            .attr("transform", `translate(0,${height - timelineHeight - timelineMargin.bottom})`);
+        // Add brush handle styling and ensure they're visible
+        brushGroup.selectAll(".handle")
+            .attr("fill", "#bf1b1b")
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 2)
+            .attr("pointer-events", "all");  // Ensure handles can receive events
 
-        timelineOverlay.append("rect")
-            .attr("x", margin.left)
-            .attr("y", 0)
-            .attr("width", width - margin.left - margin.right)
-            .attr("height", timelineHeight)
-            .attr("fill", "transparent")
+        // Ensure the brush overlay and selection can receive events
+        brushGroup.select(".overlay")
+            .attr("pointer-events", "all");
+
+        brushGroup.select(".selection")
+            .attr("pointer-events", "all")
+            .style("cursor", "grab")
+            .on("mousedown.drag", function() {
+                d3.select(this).style("cursor", "grabbing");
+            })
+            .on("mouseup.drag", function() {
+                d3.select(this).style("cursor", "grab");
+            });
+
+        // Add the hover functionality to the brush overlay
+        brushGroup.select(".overlay")
             .on("mousemove", function(event) {
                 const [x0] = d3.pointer(event);
                 const date = timeScale.invert(x0);
@@ -492,7 +523,22 @@
         fill: #bf1b1b;
         fill-opacity: 0.2;
         stroke: #bf1b1b;
-        stroke-width: 1px;
+        stroke-width: 2px;
+        cursor: grab;
+        pointer-events: all;
+    }
+
+    .brush .handle {
+        fill: #bf1b1b;
+        stroke: #fff;
+        stroke-width: 2px;
+        cursor: ew-resize;
+        pointer-events: all;
+    }
+
+    .brush .overlay {
+        cursor: crosshair;
+        pointer-events: all;
     }
 
     .timeline-axis text {
