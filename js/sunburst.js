@@ -429,15 +429,15 @@
         // Define color scales for different levels
         const ageColorScale = d3.scaleOrdinal()
             .domain(["Adult", "Juvenile"])
-            .range(["#76bb65", "#a9d6a0"]);
+            .range(["#2d6a26", "#a4de5b"]);
 
         const furColorScale = d3.scaleOrdinal()
             .domain(["Gray", "Cinnamon", "Black"])
-            .range(["#bf1b1b", "#e85a5a", "#fa8072"]);
+            .range(["#700d0d", "#c32f2f", "#ff4d4d"]);
 
         const activitiesColorScale = d3.scaleOrdinal()
             .domain(["Running", "Chasing", "Climbing", "Eating", "Foraging", "Other Activities"])
-            .range(["#bf5b1b", "#bf821b", "#f1af2e", "#ffb347", "#fdca40", "#e6a23c"]);
+            .range(["#fff4a3", "#ffd166", "#ff9f1c", "#d9771e", "#914e1b", "#4e2a14"]);
 
         // Process the data
         const root = d3.hierarchy(hierarchyData)
