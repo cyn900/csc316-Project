@@ -29,8 +29,8 @@
     controls.append("div")
         .attr("class", "network-control-group")
         .html(`
-            <label for="networkAnimalCount">Number of top animals to show: <span id="networkAnimalCountValue">3</span></label>
-            <input type="range" id="networkAnimalCount" class="network-range" min="3" max="20" value="3">
+            <label for="networkAnimalCount">Number of top animals to show: <span id="networkAnimalCountValue">8</span></label>
+            <input type="range" id="networkAnimalCount" class="network-range" min="3" max="20" value="8">
         `);
 
     // Add SVG to left section
@@ -501,7 +501,7 @@
         });
 
         // Initial render
-        updateNetwork(3);
+        updateNetwork(8);
     });
 
     // Add CSS styles
