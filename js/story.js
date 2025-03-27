@@ -43,8 +43,33 @@ d3.csv("data/word_frequencies.csv").then(function(wordData) {
         const storyHeader = storyContainer.append("div")
             .attr("class", "story-header");
 
+        // Add instructions to the header
+        storyHeader.append("div")
+            .attr("class", "story-instructions")
+            .html('<i class="fas fa-info-circle"></i> Click words in the cloud to see related stories. Click again to deselect.');
+
+        // Add button container
+        const buttonContainer = storyHeader.append("div")
+            .attr("class", "button-container");
+
+        // Add reset button
+        const resetButton = buttonContainer.append("button")
+            .attr("class", "reset-button")
+            .html('<i class="fas fa-undo"></i> Reset')
+            .on("click", function() {
+                // Reset all words to default color
+                d3.selectAll("#wordcloud text")
+                    .style("fill", "#bf1b1b");
+                
+                // Clear selected words
+                selectedWords.clear();
+                
+                // Reset story display
+                storyDisplay.html("<em>Click on words in the cloud to see related stories!</em>");
+            });
+
         // Add refresh button
-        const refreshButton = storyHeader.append("button")
+        const refreshButton = buttonContainer.append("button")
             .attr("class", "refresh-button")
             .html('<i class="fas fa-sync-alt"></i> New Story')
             .on("click", fetchStory);
@@ -92,16 +117,33 @@ d3.csv("data/word_frequencies.csv").then(function(wordData) {
             }
 
             .story-header {
-                padding: 10px;
+                padding: 10px 15px;
                 background: #f8f8f8;
                 border-bottom: 2px solid #eee;
                 display: flex;
-                justify-content: flex-end;
+                justify-content: space-between;
+                align-items: center;
             }
 
-            .refresh-button {
+            .story-instructions {
+                color: #666;
+                font-size: 0.9rem;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+
+            .story-instructions i {
+                color: #bf1b1b;
+            }
+
+            .button-container {
+                display: flex;
+                gap: 10px;
+            }
+
+            .reset-button, .refresh-button {
                 padding: 8px 16px;
-                background: #bf1b1b;
                 color: white;
                 border: none;
                 border-radius: 4px;
@@ -113,11 +155,23 @@ d3.csv("data/word_frequencies.csv").then(function(wordData) {
                 transition: background-color 0.2s;
             }
 
+            .reset-button {
+                background: #666;
+            }
+
+            .reset-button:hover {
+                background: #888;
+            }
+
+            .refresh-button {
+                background: #bf1b1b;
+            }
+
             .refresh-button:hover {
                 background: #ff6b6b;
             }
 
-            .refresh-button i {
+            .reset-button i, .refresh-button i {
                 font-size: 12px;
             }
 
