@@ -126,9 +126,36 @@
         .style("min-width", "600px") // Ensure minimum width
         .style("min-height", "400px"); // Ensure minimum height
 
-    // Make sure the g element is created after the background rect
+    // Add this after creating the SVG and before creating the g element
+    // Create a clip path
+    svg.append("defs")
+        .append("clipPath")
+        .attr("id", "chart-area")
+        .append("rect")
+        .attr("x", 0)
+        .attr("y", 0)
+        .attr("width", width)
+        .attr("height", height);
+
+    // Update the main g element (remove the clip-path from here)
     const g = svg.append("g")
         .attr("transform", `translate(${margin.left},${margin.top})`);
+
+    // Create a separate group for the clipped content (bars and grid lines)
+    const clipGroup = g.append("g")
+        .attr("clip-path", "url(#chart-area)");
+
+    // First, create the axes initially (add this after creating the g element)
+    // Create x-axis
+    g.append("g")
+        .attr("class", "barchart-x-axis")
+        .attr("transform", `translate(0,${height})`)
+        .call(d3.axisBottom(d3.scaleBand()));
+
+    // Create y-axis
+    g.append("g")
+        .attr("class", "barchart-y-axis")
+        .call(d3.axisLeft(d3.scaleLinear()));
 
     // Add chart title
     g.append("text")
@@ -226,51 +253,76 @@
             .domain([0, d3.max(activities, d => d.count)])
             .range([height, 0]);
 
-        // Update axes
-        const xAxis = d3.axisBottom(xScale);
-        const yAxis = d3.axisLeft(yScale);
+        // Update axes with transitions
+        const t = d3.transition().duration(750);
 
-        g.selectAll(".barchart-x-axis").remove();
-        g.selectAll(".barchart-y-axis").remove();
+        // Update y-axis with animation (keep this on main g)
+        g.select(".barchart-y-axis")
+            .transition(t)
+            .call(d3.axisLeft(yScale)
+                .ticks(5)
+                .tickSize(-width));
 
-        g.append("g")
-            .attr("class", "barchart-x-axis")
-            .attr("transform", `translate(0,${height})`)
-            .call(xAxis)
+        // Update x-axis with animation (keep this on main g)
+        g.select(".barchart-x-axis")
+            .transition(t)
+            .call(d3.axisBottom(xScale))
             .selectAll("text")
             .style("text-anchor", "end")
             .attr("transform", "rotate(-45)")
             .attr("dx", "-.8em")
-            .attr("dy", ".5em")
+            .attr("dy", ".5em");
 
-        g.append("g")
-            .attr("class", "barchart-y-axis")
-            .call(yAxis.ticks(5).tickSize(-width));
+        // Make sure axis labels stay visible
+        // Update y-axis label
+        g.select(".barchart-axis-label")
+            .attr("transform", "rotate(-90)")
+            .attr("y", -margin.left + 20)
+            .attr("x", -height / 2)
+            .attr("text-anchor", "middle")
+            .style("font-size", "30px")
+            .text("Number of Squirrels");
 
-        // Update bars
-        const bars = g.selectAll(".barchart-bar")
+        // Update chart title
+        g.select(".barchart-chart-subtitle")
+            .attr("x", width / 2)
+            .attr("y", -margin.top / 2)
+            .attr("text-anchor", "middle")
+            .style("font-size", "30px")
+            .text("Squirrel Behaviour");
+
+        // Update bars with animation - use clipGroup instead of g
+        const bars = clipGroup.selectAll(".barchart-bar")
             .data(activities);
 
-        bars.exit().remove();
+        // Remove old bars
+        bars.exit()
+            .transition(t)
+            .attr("y", height)
+            .attr("height", 0)
+            .remove();
 
+        // Add new bars
         const barsEnter = bars.enter()
             .append("rect")
-            .attr("class", "barchart-bar");
+            .attr("class", "barchart-bar")
+            .attr("x", d => xScale(d.name))
+            .attr("y", height)
+            .attr("width", xScale.bandwidth())
+            .attr("height", 0)
+            .attr("fill", colors.bars);
 
-        // Merge and update all bars
-        const allBars = bars.merge(barsEnter)
-            .transition()
-            .duration(500)
+        // Update all bars with transition
+        bars.merge(barsEnter)
+            .transition(t)
             .attr("x", d => xScale(d.name))
             .attr("y", d => yScale(d.count))
             .attr("width", xScale.bandwidth())
-            .attr("height", d => height - yScale(d.count))
-            .attr("fill", colors.bars);
+            .attr("height", d => height - yScale(d.count));
 
-        // Add event listeners to all bars - use on() directly on the selection, not after transition
-        g.selectAll(".barchart-bar").each(function(d) {
-            const bar = d3.select(this);
-            bar.on("mouseover", function(event) {
+        // Add hover effects after transition - use clipGroup for selection
+        clipGroup.selectAll(".barchart-bar")
+            .on("mouseover", function(event, d) {
                 const total = filteredData.length;
                 const count = d.count;
                 const percentage = ((count / total) * 100).toFixed(1);
@@ -324,7 +376,13 @@
                     .duration(200)
                     .attr("fill", colors.bars);
             });
-        });
+
+        // Update grid lines with transition - move grid lines to clipGroup
+        clipGroup.selectAll(".barchart-y-axis .tick line")
+            .transition(t)
+            .attr("stroke", "rgba(0, 0, 0, 0.1)")
+            .attr("stroke-width", 1)
+            .attr("stroke-dasharray", "2,2");
     }
 
     // Load data and initialize chart
@@ -594,6 +652,29 @@
         .barchart-y-axis path.domain {
             stroke: #ccc;
             stroke-width: 1px;
+        }
+
+        .barchart-bar {
+            transition: fill 0.2s;
+        }
+
+        .barchart-y-axis .tick line {
+            transition: all 0.75s;
+        }
+
+        .barchart-y-axis .tick text,
+        .barchart-x-axis .tick text {
+            transition: all 0.75s;
+        }
+
+        .barchart-y-axis path,
+        .barchart-x-axis path {
+            transition: all 0.75s;
+        }
+
+        /* Ensure the clip path works with the chart container */
+        .barchart-chart-section {
+            overflow: hidden;
         }
     `;
     document.head.appendChild(style);
