@@ -10,33 +10,32 @@ d3.csv("data/word_frequencies.csv").then(function(wordData) {
         // Create main container with grid layout
         const container = d3.select("#wordcloud")
             .style("display", "grid")
-            .style("grid-template-columns", "1fr 2fr")  // 1:2 ratio
+            .style("grid-template-columns", "1.2fr 1.8fr")  // Changed from "2fr 1fr" to "1.2fr 1.8fr"
             .style("gap", "4rem")
             .style("padding", "0 4rem")
             .style("background", "transparent");
 
-        // Create left section for text content
+        // Create left section for wordcloud first (switched from right)
         const leftSection = container.append("div")
+            .attr("class", "story-right-section"); // Keep the class name for consistent styling
+
+        // Create right section for text content (switched from left)
+        const rightSection = container.append("div")
             .attr("class", "story-left-section")
+            .style("display", "flex")
+            .style("flex-direction", "column")
+            .style("gap", "2rem");
+
+        // Add title at the top of right section
+        rightSection.append("div")
+            .attr("class", "story-title-container")
             .html(`
-                <div class="story-title-container">
-                    <h2 class="story-title">Squirrel Sighting Stories</h2>
-                </div>
-                <div class="story-text-content">
-                    <p>This is a word cloud of the most common words found in stories by sighters! Click words to explore related stories.</p>
-                </div>
+                <h2 class="story-title">Squirrel Sighting Stories</h2>
+                <p class="story-description">This is a word cloud of the most common words found in stories by sighters! Click words to explore related stories.</p>
             `);
 
-        // Create right section for wordcloud and controls
-        const rightSection = container.append("div")
-            .attr("class", "story-right-section");
-
-        // Create controls container with refresh button
-        const controls = rightSection.append("div")
-            .attr("class", "story-controls");
-
-        // Add story container with refresh button
-        const storyContainer = controls.append("div")
+        // Add story container at the bottom of right section
+        const storyContainer = rightSection.append("div")
             .attr("class", "story-container");
 
         // Add story header with refresh button
@@ -46,11 +45,15 @@ d3.csv("data/word_frequencies.csv").then(function(wordData) {
         // Add instructions to the header
         storyHeader.append("div")
             .attr("class", "story-instructions")
-            .html('<i class="fas fa-info-circle"></i> Click words in the cloud to see related stories. Click again to deselect.');
+            .html('<i class="fas fa-info-circle"></i> Click words in the cloud to see related stories.');
 
         // Add button container
         const buttonContainer = storyHeader.append("div")
             .attr("class", "button-container");
+
+        // Add story display
+        const storyDisplay = storyContainer.append("div")
+            .attr("class", "story-display");
 
         // Add reset button
         const resetButton = buttonContainer.append("button")
@@ -74,10 +77,6 @@ d3.csv("data/word_frequencies.csv").then(function(wordData) {
             .html('<i class="fas fa-sync-alt"></i> New Story')
             .on("click", fetchStory);
 
-        // Add story display
-        const storyDisplay = storyContainer.append("div")
-            .attr("class", "story-display");
-
         // Add CSS styles
         const style = document.createElement('style');
         style.textContent = `
@@ -85,35 +84,53 @@ d3.csv("data/word_frequencies.csv").then(function(wordData) {
         @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
 
             .story-left-section {
-                padding: 2rem;
-                max-width: 400px;
-                margin: 0 auto;
+                display: flex;
+                flex-direction: column;
+                gap: 2rem;
+                height: 100%;
             }
 
             .story-title-container {
-                margin-bottom: 7rem;
+                margin-bottom: 2rem;
             }
 
-            .story-title {
-                font-size: 50px;
-                font-family: "Amsterdam Four_ttf";
-                color: black;
-                font-weight: 500;
-            }
-
-            .story-text-content {
+            .story-description {
                 font-size: 1.2rem;
-                line-height: 1.8;
+                line-height: 1.6;
+                color: #666;
+                margin-top: 1rem;
+            }
+
+            .story-container {
+                flex-grow: 1;
+                display: flex;
+                flex-direction: column;
+                border: 2px solid #eee;
+                border-radius: 8px;
+                background: white;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+
+            .story-right-section {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 100%;
+                padding: 2rem;
+            }
+
+            .story-right-section svg {
+                width: 100%;
+                height: 100%;
+                max-width: 600px;  // Match the layout width
+                max-height: 400px; // Match the layout height
+                display: block;
+                margin: auto;
             }
 
             .story-controls {
                 margin-bottom: 2rem;
-            }
-
-            .story-container {
-                border: 2px solid #eee;
-                border-radius: 8px;
-                overflow: hidden;
             }
 
             .story-header {
@@ -196,9 +213,9 @@ d3.csv("data/word_frequencies.csv").then(function(wordData) {
         }));
 
         const layout = d3.layout.cloud()
-            .size([800, 400])
+            .size([600, 400])  // Changed from [800, 400] to [600, 400]
             .words(wordArray)
-            .padding(5)
+            .padding(8)  // Increased padding between words
             .rotate(() => ~~(Math.random() * 2) * 90)
             .font("Impact")
             .fontSize(d => d.size)
@@ -207,12 +224,13 @@ d3.csv("data/word_frequencies.csv").then(function(wordData) {
         layout.start();
 
         function draw(words) {
-            // Create SVG in the right section instead of directly in #wordcloud
-            const cloudContainer = rightSection.append("svg")
-                .attr("width", layout.size()[0])
-                .attr("height", layout.size()[1])
+            const cloudContainer = leftSection.append("svg")
+                .attr("viewBox", `0 0 600 400`)  // Match the layout size
+                .attr("preserveAspectRatio", "xMidYMid meet")
+                .style("width", "100%")
+                .style("height", "auto")
                 .append("g")
-                .attr("transform", `translate(${layout.size()[0]/2},${layout.size()[1]/2})`);
+                .attr("transform", `translate(${600/2},${400/2})`);  // Center based on new dimensions
 
             cloudContainer.selectAll("text")
                 .data(words)
