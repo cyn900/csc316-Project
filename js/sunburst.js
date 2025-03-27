@@ -60,9 +60,14 @@
         .attr("id", "sunburst-reset-button")
         .attr("class", "sunburst-reset-button")
         .html('<i class="reset-icon"></i> Reset Zoom')
-        .style("display", "block")  // Ensure it's visible
+        .style("display", "block")
         .style("margin", "20px auto")
-        .style("z-index", "1000");  // Ensure it's on top
+        .style("z-index", "1000")
+        .on("click", function() {  // Add direct click handler here
+            if (typeof resetSunburst === "function") {
+                resetSunburst();
+            }
+        });
 
     // Create group for the sunburst and center it
     const g = svg.append("g")
@@ -405,14 +410,21 @@
     // Add CSS to hide any unwanted reset buttons
     const hideResetStyle = document.createElement('style');
     hideResetStyle.textContent = `
-        /* Hide any reset buttons in the bottom left corner */
-        body > button:not(#sunburst-reset-button):not(#sunburst-backup-reset),
-        #sunburst > button,
-        button.reset {
+        /* Only hide reset buttons that are not our specific ones */
+        body > button:not(#sunburst-reset-button):not(#squirrel-map-reset-btn):not(#sunburst-backup-reset),
+        #sunburst > button:not(#sunburst-reset-button):not(#squirrel-map-reset-btn):not(#sunburst-backup-reset) {
             display: none !important;
             visibility: hidden !important;
             opacity: 0 !important;
             pointer-events: none !important;
+        }
+
+        /* Ensure our sunburst reset button is visible */
+        #sunburst-reset-button {
+            display: inline-flex !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            pointer-events: auto !important;
         }
     `;
     document.head.appendChild(hideResetStyle);
@@ -424,20 +436,21 @@
 
         // Create partition layout
         const partition = d3.partition()
-            .size([2 * Math.PI, radius]);
+            .size([2 * Math.PI, radius])
+            .padding(0);  // Remove any padding between segments
 
         // Define color scales for different levels
         const ageColorScale = d3.scaleOrdinal()
             .domain(["Adult", "Juvenile"])
-            .range(["#2d6a26", "#a4de5b"]);
+            .range(["#76bb65", "#a9d6a0"]);
 
         const furColorScale = d3.scaleOrdinal()
             .domain(["Gray", "Cinnamon", "Black"])
-            .range(["#700d0d", "#c32f2f", "#ff4d4d"]);
+            .range(["#bf1b1b", "#e85a5a", "#fa8072"]);
 
         const activitiesColorScale = d3.scaleOrdinal()
             .domain(["Running", "Chasing", "Climbing", "Eating", "Foraging", "Other Activities"])
-            .range(["#fff4a3", "#ffd166", "#ff9f1c", "#d9771e", "#914e1b", "#4e2a14"]);
+            .range(["#bf5b1b", "#bf821b", "#f1af2e", "#ffb347", "#fdca40", "#e6a23c"]);
 
         // Process the data
         const root = d3.hierarchy(hierarchyData)
@@ -451,7 +464,8 @@
             .startAngle(d => d.x0)
             .endAngle(d => d.x1)
             .innerRadius(d => d.y0)
-            .outerRadius(d => d.y1);
+            .outerRadius(d => d.y1)
+            .cornerRadius(0);  // Remove any corner rounding
 
         // Store original coordinates for each node when data is first processed
         root.each(d => {
@@ -678,22 +692,8 @@
                 });
         }
 
-        // Connect the reset button to the resetSunburst function with debounce
-        const debouncedReset = debounce(resetSunburst, 100);
-        d3.select("#sunburst-reset-button").on("click", debouncedReset);
-
-        // Debounce function to prevent multiple rapid clicks
-        function debounce(func, wait) {
-            let timeout;
-            return function executedFunction(...args) {
-                const later = () => {
-                    clearTimeout(timeout);
-                    func(...args);
-                };
-                clearTimeout(timeout);
-                timeout = setTimeout(later, wait);
-            };
-        }
+        // Connect the reset button to the resetSunburst function with direct binding
+        d3.select("#sunburst-reset-button").on("click", resetSunburst);
 
         // Make sure the button is visible
         d3.select("#sunburst-reset-button")
@@ -729,9 +729,6 @@
 
     // Helper function to process data into nested hierarchical structure
     function processNestedData(data) {
-        // Process data into nested hierarchy: Age -> Fur Color -> Activities
-
-        // Create a nested structure
         const nestedData = {
             name: "root",
             children: []
@@ -753,10 +750,8 @@
             const furColors = ["Gray", "Cinnamon", "Black"];
 
             furColors.forEach(color => {
-                // Filter data for this age and fur color
                 const colorData = ageData.filter(d => d["Primary Fur Color"] === color);
 
-                // Only create nodes for combinations that exist
                 if (colorData.length > 0) {
                     const colorGroup = {
                         name: color,
@@ -765,41 +760,35 @@
 
                     // Third level: Activities
                     const activities = [
-                        { name: "Running", field: "Running" },
-                        { name: "Chasing", field: "Chasing" },
-                        { name: "Climbing", field: "Climbing" },
-                        { name: "Eating", field: "Eating" },
-                        { name: "Foraging", field: "Foraging" },
-                        { name: "Other Activities", field: "Other Activities" }
+                        "Running", "Chasing", "Climbing", 
+                        "Eating", "Foraging", "Other Activities"
                     ];
 
-                    activities.forEach(activity => {
-                        // Count squirrels with this activity in this age and fur color group
-                        const activityCount = colorData.filter(d => d[activity.field] === "TRUE").length;
+                    let activityTotal = 0;
+                    const activityValues = [];
 
-                        // Only add activities with non-zero counts
-                        if (activityCount > 0) {
-                            colorGroup.children.push({
-                                name: activity.name,
-                                value: activityCount
-                            });
-                        }
+                    // First pass: calculate actual values
+                    activities.forEach(activity => {
+                        const count = colorData.filter(d => d[activity] === "TRUE").length;
+                        activityTotal += count;
+                        activityValues.push({
+                            name: activity,
+                            value: count
+                        });
                     });
 
-                    // Add fur color group to age group if it has activities
-                    if (colorGroup.children.length > 0) {
-                        ageGroup.children.push(colorGroup);
-                    } else {
-                        // If no activities, add a direct count for this fur color
-                        ageGroup.children.push({
-                            name: color,
-                            value: colorData.length
+                    // Second pass: ensure no zero values and maintain proportions
+                    activityValues.forEach(activity => {
+                        colorGroup.children.push({
+                            name: activity.name,
+                            value: activity.value === 0 ? activityTotal * 0.01 : activity.value
                         });
-                    }
+                    });
+
+                    ageGroup.children.push(colorGroup);
                 }
             });
 
-            // Add age group to root if it has children
             if (ageGroup.children.length > 0) {
                 nestedData.children.push(ageGroup);
             }
