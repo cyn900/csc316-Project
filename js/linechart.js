@@ -24,26 +24,39 @@
     // Create main container with grid layout
     const container = d3.select("#linechart")
         .style("display", "grid")
-        .style("grid-template-columns", "0.5fr 3fr 0.5fr")
+        .style("grid-template-columns", "1fr 3fr")
         .style("gap", "2rem")
         .style("padding", "2rem")
         .style("width", "100%")
         .style("max-width", "1600px")
         .style("margin", "0 auto");
 
-    // Add left text
-    container.append("div")
-        .attr("class", "linechart-text left")
-        .text("Temperature's");
+    // Create left section for text
+    const leftSection = container.append("div")
+        .attr("class", "linechart-left-section")
+        .html(`
+            <div class="linechart-text-container">
+                <h2 class="linechart-heading">Temperature's Impact</h2>
+                <div class="linechart-description">
+                    <p>This visualization shows how temperature affects squirrel behavior in Central Park. The line graph reveals patterns in:</p>
+                    <ul>
+                        <li>Activity levels across different temperatures</li>
+                        <li>Time spent in specific behaviors</li>
+                        <li>Population distribution throughout the day</li>
+                    </ul>
+                    <p>Use the interactive features to explore how squirrels adapt their behavior to temperature changes.</p>
+                </div>
+            </div>
+        `);
 
-    // Create center section for title and chart
+    // Update the center section
     const centerSection = container.append("div")
         .attr("class", "linechart-center");
 
     // Add title
     centerSection.append("h2")
         .attr("class", "linechart-title")
-        .text("IMPACT ON SQUIRRELS");
+        .text("SQUIRRELS SIGHTINGS");
 
     // Add metric selection buttons before the SVG
     const buttonContainer = centerSection.append("div")
@@ -57,15 +70,6 @@
         .style("background", "white")
         .style("border-radius", "8px")
         .style("box-shadow", "0 4px 6px rgba(0, 0, 0, 0.1)");
-
-    // Add right text
-    container.append("div")
-        .attr("class", "linechart-text right")
-        .text("Activity");
-
-    // Add filter section below the chart
-    const filterSection = centerSection.append("div")
-        .attr("class", "linechart-filters");
 
     // Add tooltip div to the container
     const tooltipDiv = d3.select("#linechart")
@@ -315,7 +319,8 @@
                 .attr("y", -10)
                 .attr("fill", "black")
                 .attr("text-anchor", "end")
-                .attr("font-size", "14px")
+                .attr("font-size", "30px")
+                .attr("font-weight", "bold")
                 .text("Temperature (°C)"));
 
         yAxis = svg.append("g")
@@ -326,10 +331,11 @@
                 .attr("class", "y-axis-label")
                 .attr("transform", "rotate(-90)")
                 .attr("x", -(height - margin.bottom - timelineHeight - timelineMargin.top) / 2)
-                .attr("y", -40)
+                .attr("y", -60)
                 .attr("fill", "black")
                 .attr("text-anchor", "middle")
-                .attr("font-size", "14px")
+                .attr("font-size", "30px")
+                .attr("font-weight", "bold")
                 .text(currentMetric.label));
 
         // Add grid lines
@@ -469,18 +475,40 @@
     style.textContent = `
     @import url('https://fonts.cdnfonts.com/css/cocogoose');
     
-    .linechart-text {
-        font-size: 2rem;
-        font-weight: bold;
-        padding-top: 2rem;
+    .linechart-left-section {
+        padding: 2rem;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        margin-top: 4rem;
     }
 
-    .linechart-text.left {
-        text-align: right;
+    .linechart-heading {
+        font-family: "COCOGOOSE", sans-serif;
+        font-size: 2.5rem;
+        color: #bf1b1b;
+        margin-bottom: 1.5rem;
+        line-height: 1.2;
     }
 
+    .linechart-description {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        color: #333;
+    }
+
+    .linechart-description ul {
+        margin: 1rem 0;
+        padding-left: 1.5rem;
+    }
+
+    .linechart-description li {
+        margin-bottom: 0.5rem;
+    }
+
+    .linechart-text.left,
     .linechart-text.right {
-        text-align: left;
+        display: none;
     }
 
     .linechart-title {
@@ -488,8 +516,9 @@
         font-size: 3rem;
         font-weight: bold;
         text-align: center;
-        margin-bottom: 2rem;
+        margin: 0 0 2rem 0;
         font-family: "COCOGOOSE", sans-serif;
+        line-height: 1.2;
     }
 
     .linechart-center {
@@ -512,7 +541,8 @@
     }
 
     .grid line {
-        stroke: #000;
+        stroke: rgba(0, 0, 0, 0.1);
+        stroke-width: 1px;
     }
 
     .grid path {
@@ -542,7 +572,7 @@
     }
 
     .timeline-axis text {
-        font-size: 12px;
+        font-size: 20px;
         font-weight: 500;
     }
 
@@ -563,7 +593,7 @@
 
     .x-axis text,
     .y-axis text {
-        font-size: 12px;
+        font-size: 20px !important;
         font-weight: 500;
     }
 
@@ -572,6 +602,7 @@
     .x-axis line,
     .y-axis line {
         stroke-width: 2px;
+        stroke: #333;
     }
 
     .tooltip {
@@ -634,6 +665,25 @@
         z-index: 1000;
         min-width: 250px;
         max-width: 300px;
+    }
+
+    /* Update axis label and tick styles */
+    .x-axis .tick text,
+    .y-axis .tick text {
+        font-size: 20px !important;
+    }
+
+    /* Make axis labels more prominent */
+    .x-axis text,
+    .y-axis .y-axis-label {
+        font-size: 30px !important;
+        font-weight: bold !important;
+    }
+
+    /* Update timeline axis text */
+    .timeline-axis text {
+        font-size: 20px;
+        font-weight: 500;
     }
     `;
     document.head.appendChild(style);
