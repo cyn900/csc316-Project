@@ -10,7 +10,7 @@ d3.csv("data/word_frequencies.csv").then(function(wordData) {
         // Create main container with grid layout
         const container = d3.select("#wordcloud")
             .style("display", "grid")
-            .style("grid-template-columns", "1.2fr 1.8fr")  // Changed from "2fr 1fr" to "1.2fr 1.8fr"
+            .style("grid-template-columns", "1.4fr 1.6fr")  // Changed from "2fr 1fr" to "1.2fr 1.8fr"
             .style("gap", "4rem")
             .style("padding", "0 4rem")
             .style("background", "transparent");
@@ -45,7 +45,7 @@ d3.csv("data/word_frequencies.csv").then(function(wordData) {
         // Add instructions to the header
         storyHeader.append("div")
             .attr("class", "story-instructions")
-            .html('<i class="fas fa-info-circle"></i> Click words in the cloud to see related stories.');
+            .html('<i class="fas fa-info-circle"></i> Click reset to unclick all the words.');
 
         // Add button container
         const buttonContainer = storyHeader.append("div")
@@ -86,7 +86,7 @@ d3.csv("data/word_frequencies.csv").then(function(wordData) {
             .story-left-section {
                 display: flex;
                 flex-direction: column;
-                gap: 2rem;
+                gap: 1rem;
                 height: 100%;
             }
 

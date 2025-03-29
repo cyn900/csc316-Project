@@ -57,6 +57,9 @@
 
         <div class="row section" id="viz3">
             <div id="sunburst"></div>
+            <div id="reset-button-container">
+                <button id="reset-button">Reset</button>
+            </div>
         </div>
 
         <div class="row section" id="viz4">
@@ -73,10 +76,6 @@
 
         <div class="row section" id="viz 7">
             <div id="network"></div>
-        </div>
-
-        <div class="row section" id="transition">
-            <div id="Transition Page"></div>
         </div>
 
         <div class="row section" id="viz8">
@@ -132,7 +131,7 @@
 <script src="js/story.js"></script>
 <script src="js/aboutus.js"></script>
 <script src="js/bibliography.js"></script>
-<script src="js/transition.js"></script>
+
 
 <!-- Initialize Fullpage stepper-->
 <!-- TODO obtain license key for fullpage.js. Read at https://github.com/alvarotrigo/fullPage.js#options.-->
@@ -152,6 +151,12 @@
         navigationTooltips: ['Home', 'Stories', 'Behaviour Barchart', 'Behaviour Sunburst', 'Weather Heatmap', 'Temperature Line Graph', 'Juvenile vs Adult Squirrels', 'Animal Interactions', 'Transition', 'Central Park Map', 'AboutUs', 'Bibliography'],
     });
 </script>
+<style>
+    .fp-tooltip {
+        color: black !important;
+    }
+</style>
+
 
 </body>
 </html>
