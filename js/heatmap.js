@@ -40,7 +40,7 @@ leftSection.append("div")
 const infoDisplay = leftSection.append("div")
     .attr("class", "heatmap-info-display")
     .html(`
-        <p id="interaction-info">Interactive Elements: Click on cells to see detailed information.</p>
+        <p id="interaction-info">Click on cells to see how many squirrels were spotted!</p>
     `);
 
 // Create right section for heatmap and tree image
@@ -83,7 +83,7 @@ style.textContent = `
     .heatmap-title {
         color: #ffffff;
         margin: 0;
-        font-size: 32px;
+        font-size: 36px;
         font-weight: bold;
         font-family: 'Arial', sans-serif;
         letter-spacing: 1px;
@@ -124,7 +124,8 @@ style.textContent = `
     }
 
     .heatmap-info-display {
-        border: 4px solid #bf1b1b;
+        border: 4
+        px solid #bf1b1b;
         border-radius: 8px;
         padding: 1.5rem;
         background-color: rgba(243, 244, 246, 0.8);
@@ -146,29 +147,23 @@ style.textContent = `
         cursor: pointer;
     }
 
-    .heatmap-cell:hover {
-        opacity: 0.8;
-        stroke: #333;
-        stroke-width: 3px;
-    }
-
     .heatmap-cell.active {
         stroke: #000;
         stroke-width: 4px;
     }
 
     .axis-label {
-        font-size: 14px;
-        font-weight: bold;
-    }
-
-    .axis-title {
         font-size: 16px;
         font-weight: bold;
     }
 
+    .axis-title {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
     .legend-tick {
-        font-size: 12px;
+        font-size: 14px;
     }
 
     svg {
@@ -285,10 +280,10 @@ Promise.all([
     // Function to update the interaction info
     const updateInteractionInfo = (d) => {
         if (d) {
-            const infoText = `When it's ${d.weather}, there are ${d.value} squirrels ${d.activity.toLowerCase()}.`;
+            const infoText = `When the weather is ${d.weather}, there are ${d.value} squirrels ${d.activity.toLowerCase()}.`;
             d3.select("#interaction-info").text(infoText);
         } else {
-            d3.select("#interaction-info").text("Interactive Elements: Click on cells to see detailed information.");
+            d3.select("#interaction-info").text("Click on cells to see how many squirrels were spotted!");
         }
     };
 
