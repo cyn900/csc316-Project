@@ -73,7 +73,7 @@
         .style("padding", "1rem")
         .style("text-align", "center")
         .style("border-top", "1px solid rgba(0,0,0,0.1)")
-        .style("max-width", "800px")
+        .style("max-width", "900px")
         .style("margin-left", "auto")
         .style("margin-right", "auto");
         
@@ -83,7 +83,17 @@
         .style("color", "#555")
         .style("font-size", "1.8rem")
         .style("line-height", "1.5")
-        .text("Our project explores the behaviors of Central Park's squirrels, drawing insights into what conditions influence their activities and interactions. No squirrels were harmed in this process!");
+        .text("Our project explores the behaviors of Central Park's squirrels, drawing insights into what conditions " +
+            "influence their activities and interactions. This project is powered by the 2018 Central Park Squirrel Census, sourced from NYC Open Data." +
+            " ");
+
+    motivationSection.append("p")
+        .attr("class", "home-motivation-text2")
+        .style("font-style", "bold")
+        .style("color", "black")
+        .style("font-size", "1.8rem")
+        .style("line-height", "1.5")
+        .text("No squirrels were harmed in this process!");
 
     // Update CSS
     const style = document.createElement('style');
@@ -140,7 +150,7 @@
 
         #home-stamp {
             position: absolute;
-            top: 30%;
+            top: 21%;
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 10;
