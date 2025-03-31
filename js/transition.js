@@ -40,7 +40,7 @@
     stampSection.append("div")
         .attr("id", "transition-guide-text")
         .attr("class", "transition-guide-text")
-        .text("SCROLL DOWN TO EXPLORE");
+        .text("Welcome to the exciting next step of our exploration! Ready to put your newfound knowledge into action? We’ve designed an interactive map to guide your adventure through Central Park.");
 
     // Add the main heading (HOW TO FIND)
     content.append("h2")
