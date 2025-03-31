@@ -77,6 +77,9 @@
         .attr("class", "timeline-tooltip")
         .style("opacity", 0);
 
+    let tooltipHideTimeout = null;
+    let brushTooltipHideTimeout = null;
+
     function processDataForMetric(data, metric) {
         const groupedData = d3.group(data, d => Math.round(d.temperature));
         return Array.from(groupedData, ([temp, values]) => ({
@@ -174,6 +177,12 @@
             // Update hover behavior
             chartGroup.selectAll("circle")
                 .on("mouseover", function(event, d) {
+                    // Cancel any pending tooltip hide for circles
+                    if (tooltipHideTimeout) {
+                        clearTimeout(tooltipHideTimeout);
+                        tooltipHideTimeout = null;
+                    }
+
                     d3.select(this)
                         .transition()
                         .duration(200)
@@ -220,7 +229,7 @@
                     const tooltipText = tooltip.append("text")
                         .attr("class", "tooltip-text")
                         .attr("text-anchor", "middle")
-                        .attr("font-size", "14px")
+                        .attr("font-size", "18px")
                         .attr("fill", "#333");
 
                     // Add temperature
@@ -248,8 +257,11 @@
                         .transition()
                         .duration(200)
                         .attr("r", 4);
-                    
-                    svg.selectAll(".tooltip-group").remove();
+
+                    // Delay removal by 500ms (0.5sec)
+                    tooltipHideTimeout = setTimeout(() => {
+                        svg.selectAll(".tooltip-group").remove();
+                    }, 500);
                 });
         } catch (error) {
             console.error('Error updating chart:', error);
@@ -379,8 +391,6 @@
                     [width - margin.right, height - timelineMargin.bottom]])
             .on("start brush end", brushed);  // Handle all brush events
 
-        // Remove the timelineOverlay creation since it's blocking the brush
-        // Instead, we'll add hover functionality to the brush overlay itself
         brushGroup = svg.append("g")
             .attr("class", "brush")
             .call(brush)
@@ -393,9 +403,39 @@
             .attr("stroke-width", 2)
             .attr("pointer-events", "all");  // Ensure handles can receive events
 
-        // Ensure the brush overlay and selection can receive events
         brushGroup.select(".overlay")
-            .attr("pointer-events", "all");
+            .on("mousemove", function(event) {
+                // Cancel any pending hide for the brush tooltip
+                if (brushTooltipHideTimeout) {
+                    clearTimeout(brushTooltipHideTimeout);
+                    brushTooltipHideTimeout = null;
+                }
+
+                const [x0] = d3.pointer(event);
+                const date = timeScale.invert(x0);
+                const nearestData = findNearestData(date);
+
+                if (nearestData) {
+                    const formattedDate = d3.timeFormat("%B %d, %Y")(nearestData.date);
+                    const value = nearestData.value.toFixed(1);
+
+                    tooltipDiv.transition()
+                        .duration(200)
+                        .style("opacity", .9);
+
+                    tooltipDiv.html(`Date: ${formattedDate}<br/>Value: ${value}`)
+                        .style("left", (event.pageX + 10) + "px")
+                        .style("top", (event.pageY - 28) + "px");
+                }
+            })
+            .on("mouseout", function() {
+                // Delay the hide for the tooltip div by 500ms
+                brushTooltipHideTimeout = setTimeout(() => {
+                    tooltipDiv.transition()
+                        .duration(500)
+                        .style("opacity", 0);
+                }, 500);
+            });
 
         brushGroup.select(".selection")
             .attr("pointer-events", "all")
