@@ -127,26 +127,9 @@
             </div>
             
             <div class="network-percentage-explanation">
-                <p><strong>What do these percentages mean?</strong></p>
+    
             `;
         
-        if (connections.length > 0) {
-            const topConnection = connections[0];
-            const percentage = (topConnection.value * 100).toFixed(1);
-            
-            html += `
-                <p>For example, when you see "${d.id}" and "${topConnection.name}" together:</p>
-                <ul class="network-example-list">
-                    <li>There were ${animalCounts[d.id]} total ${d.id} sightings</li>
-                    <li>There were ${animalCounts[topConnection.name]} total ${topConnection.name} sightings</li>
-                    <li>They were seen together ${topConnection.count} times</li>
-                </ul>
-                
-                <p>The ${percentage}% means: <strong>If you spot a ${d.id} in the park, there's a ${percentage}% chance you'll also see a ${topConnection.name} nearby.</strong></p>
-                
-                <p>We calculate this by taking the number of times they were seen together (${topConnection.count}) divided by the total number of opportunities to see them together (${Math.min(animalCounts[d.id], animalCounts[topConnection.name])}).</p>
-            `;
-        }
         
         html += `
             </div>
