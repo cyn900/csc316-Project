@@ -783,10 +783,6 @@
         }
 
         /* Update axis and label text */
-        text {
-            font-size: 20px !important;  // Match bar chart text size
-            font-weight: 500;
-        }
 
         .panel-heading {
             font-size: 1.3rem;  // Match bar chart heading size
