@@ -45,7 +45,12 @@ This repository contains:
     - The `index.html` file is likewise authored by our team.
 
 - **Third-Party Libraries**:
-    - TODO: List any libraries or frameworks used
+    - D3.js: Creating interactive data visualizations, force-directed graphs, charts, and data manipulation
+    - Bootstrap: Layout structure and responsive design
+    - FullPage.js: Used for creating full-screen scrolling sections of our project layout
+    - leaflet.js: Used for map visualization
+    - Turf.js: Used for geospatial analysis
+    - pandas: Used for data manipulation
 
 ## 4. Project Website & Screencast Links
 
@@ -57,5 +62,4 @@ This repository contains:
 
 ## 5. Non-obvious Features of our Interface
 
-- TODO
-- Jiggly? (for fun)
+- Buffer Radius in the Squirrel Path Map: It is used to adjust the radius where we look for squirrels in relation to the path. We found during user testing that this feature is not usually used by testers. 
