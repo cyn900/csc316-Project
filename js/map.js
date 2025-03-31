@@ -65,7 +65,7 @@ class SquirrelMapVis {
         mapStyle.textContent = `
             #squirrel_map {
                 height: 500px;
-                width: 100%;
+                width: 95%;
                 position: relative;
                 z-index: 1;
                 border-radius: 8px;
@@ -381,7 +381,8 @@ class SquirrelMapVis {
                 box-shadow: 0 1px 3px rgba(0,0,0,0.1);
                 position: relative;
                 z-index: 1000;
-                margin-top: 35px;
+                margin-top: 0px;
+                width: 95%;
             }
             
             /* Reset button hover effect */
@@ -587,6 +588,7 @@ class SquirrelMapVis {
         buttonContainer.style.gap = '12px';
         buttonContainer.style.marginBottom = '12px';
         buttonContainer.style.marginTop = '10px';
+        buttonContainer.style.width = '95%';
 
         // Create Draw button
         const drawButton = document.createElement('button');
@@ -595,6 +597,7 @@ class SquirrelMapVis {
         drawButton.textContent = 'Draw Path on Map';
         drawButton.style.fontWeight = 'bold';
         drawButton.style.flex = '1';
+        drawButton.style.width = '2px';
         drawButton.addEventListener('click', function() {
             vis.toggleDrawMode();
         });
@@ -608,6 +611,7 @@ class SquirrelMapVis {
         resetButton.style.backgroundColor = '#6c757d';
         resetButton.style.borderColor = '#6c757d';
         resetButton.style.flex = '1';
+        drawButton.style.width = '2px';
         resetButton.addEventListener('click', function() {
             // Clear all drawn paths
             vis.drawnPaths = [];
@@ -641,7 +645,7 @@ class SquirrelMapVis {
             resetMessage.className = 'reset-message';
             resetMessage.innerHTML = 'Map has been reset!';
             resetMessage.style.position = 'absolute';
-            resetMessage.style.top = '50%';
+            resetMessage.style.top = '30%';
             resetMessage.style.left = '50%';
             resetMessage.style.transform = 'translate(-50%, -50%)';
             resetMessage.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
