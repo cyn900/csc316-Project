@@ -62,4 +62,4 @@ This repository contains:
 
 ## 5. Non-obvious Features of our Interface
 
-- TODO
+- Buffer Radius in the Squirrel Path Map: It is used to adjust the radius where we look for squirrels in relation to the path. We found during user testing that this feature is not usually used by testers. 
