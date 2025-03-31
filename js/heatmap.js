@@ -24,7 +24,7 @@ leftSection.append("div")
     .attr("class", "heatmap-title-container")
     .append("h2")
     .attr("class", "heatmap-title")
-    .text("SPECIAL ADDITION");
+    .text("SPECIAL EDITION");
 
 // Add question text
 leftSection.append("div")
