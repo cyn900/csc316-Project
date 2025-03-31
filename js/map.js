@@ -751,7 +751,7 @@ class SquirrelMapVis {
         if (this.isDrawing) {
             // Cancel drawing
             this.isDrawing = false;
-            drawButton.textContent = "Start Drawing Path";
+            drawButton.textContent = "Draw Path on Map";
             drawButton.classList.remove('btn-danger');
             drawButton.classList.add('btn-primary');
             instructions.style.display = 'none';
@@ -907,10 +907,6 @@ class SquirrelMapVis {
         this.map.invalidateSize();
     }
     
-    // Replace the test line function with a reset function
-    addTestLine() {
-        alert("The test line feature has been removed. Please draw your own path by clicking 'Start Drawing Path'.");
-    }
 
     updateBuffers() {
         const vis = this;
