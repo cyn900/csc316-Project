@@ -31,7 +31,7 @@ This repository contains:
     - Files: `home.js`, `aboutus.js`, `barchart.js`, `heatmap.js`, `linechart.js`, `map.js`, `network.js`, `parallelcoordinates.js`, `piechart.js`, `squirrel.js`
 
 - **script/**  
-  TODO: Explain
+  Python script for counting the frequencies of words in the stories dataset. Excludes common words in the set called STOP_WORDS.
     - 'word_fetching.py'
 
 - **README.md**  
@@ -55,11 +55,13 @@ This repository contains:
 ## 4. Project Website & Screencast Links
 
 - **Project Website (Deployed Version)**  
-  TODO: [Project Website URL]
+  https://cyn900.github.io/csc316-Project/
 
 - **Screencast / Demo Video**  
   TODO: [Screencast Video Link]
 
 ## 5. Non-obvious Features of our Interface
 
+- When fetching stories, if multiple words are selected, at least one word will appear in the randomly chosen story. It does not guarantee that all selected words are in the story. 
 - Buffer Radius in the Squirrel Path Map: It is used to adjust the radius where we look for squirrels in relation to the path. We found during user testing that this feature is not usually used by testers. 
+- You can draw multiple paths in the leaflet map. 
