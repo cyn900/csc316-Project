@@ -31,7 +31,7 @@ This repository contains:
     - Files: `home.js`, `aboutus.js`, `barchart.js`, `heatmap.js`, `linechart.js`, `map.js`, `network.js`, `parallelcoordinates.js`, `piechart.js`, `squirrel.js`
 
 - **script/**  
-  TODO: Explain
+  Python script for counting the frequencies of words in the stories dataset. Excludes common words in the set called STOP_WORDS.
     - 'word_fetching.py'
 
 - **README.md**  
