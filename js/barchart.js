@@ -192,8 +192,8 @@
         .attr("class", "info-box")
         .html(`
             <h3>Fun Facts:</h3>
-            <p>A group of squirrels is called a dray or a scurry. They are very territorial and will fight to the death to defend their area.</p>
-            <p>Squirrels can find food buried beneath a foot of snow and can detect food that's been buried for up to 9 months.</p>
+            <p>A “kuk” is a sharp bark used as an alarm call to signal danger, primarily from predators.</p> 
+            <p>A “quaa” is a longer, more intense call indicating high alert or distress.</p>
         `);
 
     // Create tooltip - Move this to the top level, outside of any function
