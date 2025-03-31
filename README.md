@@ -31,7 +31,7 @@ This repository contains:
     - Files: `home.js`, `aboutus.js`, `barchart.js`, `heatmap.js`, `linechart.js`, `map.js`, `network.js`, `parallelcoordinates.js`, `piechart.js`, `squirrel.js`
 
 - **script/**  
-  TODO: Explain
+  Python script for counting the frequencies of words in the stories dataset. Excludes common words in the set called STOP_WORDS.
     - 'word_fetching.py'
 
 - **README.md**  
@@ -55,7 +55,7 @@ This repository contains:
 ## 4. Project Website & Screencast Links
 
 - **Project Website (Deployed Version)**  
-  TODO: [Project Website URL]
+  https://cyn900.github.io/csc316-Project/
 
 - **Screencast / Demo Video**  
   TODO: [Screencast Video Link]

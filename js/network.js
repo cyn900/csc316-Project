@@ -47,10 +47,10 @@
     rightSection.html(`
         <div class="network-info-container">
             <div id="network-info-display">
-                <p class="network-default-text">Click on a node to see detailed information about that animal's interactions.</p>
                 
                 <div class="network-explanation">
                     <p><strong>About the visualization:</strong></p>
+                    <p>• Click on a node to see detailed information about that animal's interactions</p>
                     <p>• Each node represents an animal species observed in Central Park</p>
                     <p>• Connections show which animals are frequently seen together</p>
                     <p>• Percentages indicate how often two animals are seen together relative to their total sightings</p>
@@ -75,12 +75,13 @@
         const infoDisplay = d3.select("#network-info-display");
         
         if (!d) {
-            // Reset to default text
+            // Show default text with current animal count
+            const currentCount = d3.select("#networkAnimalCount").property("value");
             infoDisplay.html(`
-                <p class="network-default-text">Click on a node to see detailed information about that animal's interactions.</p>
                 
                 <div class="network-explanation">
                     <p><strong>About the visualization:</strong></p>
+                    <p>• Click on a node to see detailed information about that animal's interactions.</p>
                     <p>• Each node represents an animal species observed in Central Park</p>
                     <p>• Connections show which animals are frequently seen together</p>
                     <p>• Percentages indicate how often two animals are seen together relative to their total sightings</p>
@@ -246,53 +247,62 @@
             // Clear previous network
             svg.selectAll("*").remove();
 
-            // Create force simulation with proper nodes array
-            const simulation = d3.forceSimulation(nodes)
-                .force("link", d3.forceLink(links).id(d => d.id).distance(50))  // Fixed link distance
-                .force("charge", d3.forceManyBody().strength(-300))  // Reduced repulsion strength
-                .force("center", d3.forceCenter(width / 2, height / 2))
-                .force("collision", d3.forceCollide().radius(d => Math.sqrt(d.size) * 2 + 10));  // Adjusted collision radius
+            // Create separate groups for links, nodes, and labels with specific order
+            const linkGroup = svg.append("g").attr("class", "link-group");
+            const nodeGroup = svg.append("g").attr("class", "node-group");
+            const labelGroup = svg.append("g").attr("class", "label-group");
 
             // Create the links
-            const link = svg.append("g")
-                .selectAll("line")
+            const link = linkGroup.selectAll("line")
                 .data(links)
                 .enter().append("line")
                 .attr("class", "network-link")
                 .attr("stroke-width", d => Math.sqrt(d.value) * 4)
                 .attr("stroke", "#bf1b1b")
                 .attr("stroke-opacity", 0.8);
-            
-            // Create the nodes with proper data
-            const node = svg.append("g")
-                .selectAll("g")
-                .data(nodes)  // Use the nodes array directly
-                .enter().append("g")
-                .attr("class", "network-node")
+
+            // Create the node circles
+            const node = nodeGroup.selectAll("circle")
+                .data(nodes)
+                .enter().append("circle")
+                .attr("r", d => Math.sqrt(d.size) * 2.5)
+                .attr("fill", d => d.id === "squirrel" ? "#D2691E" : "#bf1b1b")
+                .attr("class", d => d.id === "squirrel" ? "squirrel-node" : "animal-node")
                 .call(d3.drag()
                     .on("start", dragstarted)
                     .on("drag", dragged)
                     .on("end", dragended))
                 .on("click", handleNodeClick);
 
-            // Add circles to nodes
-            node.append("circle")
-                .attr("r", d => Math.sqrt(d.size) * 2.5)
-                .attr("fill", d => d.id === "squirrel" ? "#D2691E" : "#bf1b1b")
-                .attr("class", d => d.id === "squirrel" ? "squirrel-node" : "animal-node");
-
-            // Add labels to nodes
-            node.append("text")
+            // Create labels with dynamic positioning
+            const label = labelGroup.selectAll("text")
+                .data(nodes)
+                .enter().append("text")
                 .text(d => d.id)
-                .attr("x", d => Math.sqrt(d.size) * 3 + 5)
-                .attr("y", 3)
+                .attr("text-anchor", "middle")
+                .attr("dominant-baseline", "middle")
                 .style("font-family", "sans-serif")
-                .style("font-size", "14px")
-                .style("font-weight", d => d.id === "squirrel" ? "bold" : "normal");
+                .style("font-size", d => {
+                    const radius = Math.sqrt(d.size) * 2.5;
+                    const textLength = d.id.length * 6;
+                    return radius * 2 > textLength ? "12px" : "14px";
+                })
+                .style("fill", "#000000")  // Always black text
+                .style("font-weight", d => d.id === "squirrel" ? "bold" : "normal")
+                .style("pointer-events", "none")
+                .attr("transform", d => {
+                    const radius = Math.sqrt(d.size) * 2.5;
+                    const textLength = d.id.length * 6;
+                    return radius * 2 > textLength ? 
+                        `translate(${d.x},${d.y})` : 
+                        `translate(${d.x + radius + 5},${d.y})`;
+                });
 
             // Handle node click
             let selectedNode = null;
             function handleNodeClick(event, d) {
+                const isFirstClick = !selectedNode; // Check before updating selectedNode
+                
                 if (selectedNode === d.id) {
                     // If clicking the same node again, reset the view
                     selectedNode = null;
@@ -301,7 +311,7 @@
                 } else {
                     // Highlight the selected node and its connections
                     selectedNode = d.id;
-                    highlightConnections(d);
+                    highlightConnections(d, isFirstClick);
                     updateInfoDisplay(d);
                 }
                 event.stopPropagation();
@@ -327,69 +337,65 @@
                 return connected;
             }
 
-            function highlightConnections(d) {
+            function highlightConnections(d, isFirstClick) {
                 const connectedNodes = getConnectedNodes(d.id);
+                const duration = isFirstClick ? 0 : 200;
 
-                // Update nodes
-                node.selectAll("circle")
+                // Update node circles immediately for first click
+                nodeGroup.selectAll("circle")
                     .transition()
-                    .duration(200)
+                    .duration(duration)
                     .attr("fill", node => {
                         if (node.id === "squirrel") return "#D2691E";
                         if (connectedNodes.has(node.id)) {
                             return "#bf1b1b";
                         }
-                        return "#ddd";
+                        return "#dddddd";
                     })
+                    .attr("opacity", node => connectedNodes.has(node.id) ? 1 : 0.3)
                     .attr("stroke", node => node.id === d.id ? "#000000" : "none")
                     .attr("stroke-width", node => node.id === d.id ? 2 : 0);
 
                 // Update labels
-                node.selectAll("text")
+                labelGroup.selectAll("text")
                     .transition()
-                    .duration(200)
+                    .duration(duration)
                     .style("opacity", node => connectedNodes.has(node.id) ? 1 : 0.3)
-                    .style("font-size", node =>
-                        connectedNodes.has(node.id) ? "14px" : "12px"
-                    )
-                    .style("font-weight", node =>
-                        connectedNodes.has(node.id) ? "bold" : "normal"
+                    .style("fill", "#000000")  // Keep text black even during highlighting
+                    .style("font-weight", node => 
+                        node.id === "squirrel" || connectedNodes.has(node.id) ? "bold" : "normal"
                     );
 
-                // Update links
+                // Update links immediately for first click
                 link.transition()
-                    .duration(200)
+                    .duration(duration)
                     .attr("stroke", l => {
                         if (l.source.id === d.id || l.target.id === d.id) {
                             return "#bf1b1b";
                         }
-                        return "#ddd";
+                        return "#dddddd";
                     })
                     .attr("stroke-opacity", l =>
                         (l.source.id === d.id || l.target.id === d.id) ? 0.8 : 0.1
                     );
-
-                // Add glow effect to connected nodes
-                node.selectAll("circle")
-                    .filter(node => connectedNodes.has(node.id))
-                    .style("filter", "url(#glow)");
             }
 
             function resetHighlight() {
-                // Reset nodes
-                node.selectAll("circle")
+                // Reset node circles
+                nodeGroup.selectAll("circle")
                     .transition()
                     .duration(200)
                     .attr("fill", d => d.id === "squirrel" ? "#D2691E" : "#bf1b1b")
-                    .attr("r", d => Math.sqrt(d.size) * 2.5)
+                    .attr("opacity", 1) // Restore full opacity
+                    .attr("stroke-width", 0)
                     .style("filter", null);
 
                 // Reset labels
-                node.selectAll("text")
+                labelGroup.selectAll("text")
                     .transition()
                     .duration(200)
                     .style("opacity", 1)
-                    .style("font-size", "12px")
+                    .style("fill", "#000000")  // Keep text black when resetting
                     .style("font-weight", d => d.id === "squirrel" ? "bold" : "normal");
 
                 // Reset links
@@ -450,6 +456,12 @@
             `;
 
             // Update positions on each tick
+            const simulation = d3.forceSimulation(nodes)
+                .force("link", d3.forceLink(links).id(d => d.id).distance(50))  // Fixed link distance
+                .force("charge", d3.forceManyBody().strength(-300))  // Reduced repulsion strength
+                .force("center", d3.forceCenter(width / 2, height / 2))
+                .force("collision", d3.forceCollide().radius(d => Math.sqrt(d.size) * 2 + 10));  // Adjusted collision radius
+
             simulation.on("tick", () => {
                 link
                     .attr("x1", d => d.source.x)
@@ -458,7 +470,18 @@
                     .attr("y2", d => d.target.y);
 
                 node
-                    .attr("transform", d => `translate(${d.x},${d.y})`);
+                    .attr("cx", d => d.x)
+                    .attr("cy", d => d.y);
+
+                label
+                    .attr("transform", d => {
+                        const radius = Math.sqrt(d.size) * 2.5;
+                        const textLength = d.id.length * 6;
+                        // Dynamically position labels based on node size
+                        return radius * 2 > textLength ? 
+                            `translate(${d.x},${d.y})` : 
+                            `translate(${d.x + radius + 5},${d.y})`;
+                    });
             });
 
             // Drag functions
@@ -485,6 +508,9 @@
             const value = this.value;
             d3.select("#networkAnimalCountValue").text(value);
             updateNetwork(+value);
+            
+            // Reset the info display when number changes
+            updateInfoDisplay(null);
         });
 
         // Initial render
@@ -727,19 +753,13 @@
         }
         
         .network-connection-count {
-            font-size: 0.9rem;
+            font-size: 1rem;
             color: #666;
-        }
-        
-        .network-percentage-explanation {
-            margin-top: 1rem;
-            font-size: 0.9rem;
-            line-height: 1.4;
         }
         
         .network-explanation {
             margin-top: 1rem;
-            font-size: 0.9rem;
+            font-size: 1.2rem;
             line-height: 1.4;
         }
     `;
@@ -793,34 +813,4 @@
             setTimeout(updateScrollIndicator, 500);
         }
     }, 100);
-
-    // Update the updateInfoDisplay function to check scroll status after content changes
-    const originalUpdateInfoDisplay = updateInfoDisplay;
-    updateInfoDisplay = function(d) {
-        // Call the original function
-        originalUpdateInfoDisplay(d);
-        
-        // Check scroll status after a short delay to allow DOM to update
-        setTimeout(() => {
-            const container = document.querySelector('.network-info-container');
-            const scrollIndicator = document.querySelector('.network-scroll-indicator');
-            
-            if (container && scrollIndicator) {
-                const isScrollable = container.scrollHeight > container.clientHeight;
-                const isScrolledToBottom = container.scrollHeight - container.scrollTop <= container.clientHeight + 10;
-                
-                if (isScrollable && !isScrolledToBottom) {
-                    scrollIndicator.style.display = 'flex';
-                    scrollIndicator.style.opacity = '0.8';
-                } else {
-                    scrollIndicator.style.opacity = '0';
-                    setTimeout(() => {
-                        if (!isScrollable || isScrolledToBottom) {
-                            scrollIndicator.style.display = 'none';
-                        }
-                    }, 300);
-                }
-            }
-        }, 100);
-    };
 })();

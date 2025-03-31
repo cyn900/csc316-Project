@@ -73,7 +73,7 @@
         .style("padding", "1rem")
         .style("text-align", "center")
         .style("border-top", "1px solid rgba(0,0,0,0.1)")
-        .style("max-width", "900px")
+        .style("max-width", "1500px")
         .style("margin-left", "auto")
         .style("margin-right", "auto");
         
