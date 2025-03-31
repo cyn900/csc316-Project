@@ -526,7 +526,7 @@
             margin-bottom: 2rem;
             text-align: center;
             width: 100%;
-            max-width: 1000px;
+            max-width: 1300px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -565,16 +565,18 @@
             display: flex;
             flex-direction: column;
             gap: 1rem;
+            width: 100%;
         }
 
         .network-control-group label {
             color: #000;
             font-weight: 500;
             font-size: 1.1rem;
+            width: 200%;
         }
 
         .network-range {
-            width: 100%;
+            width: 200%;
             max-width: 100%;
             height: 6px;
             background: rgba(0, 0, 0, 0.1);
@@ -586,7 +588,7 @@
         .network-range::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
-            width: 18px;
+            width: 30px;
             height: 18px;
             background: #bf1b1b;
             border-radius: 50%;
@@ -594,7 +596,7 @@
         }
 
         .network-svg {
-            width: 90%;
+            width: 110%;
             height: auto;
             aspect-ratio: 4/3;
             background: transparent !important;
