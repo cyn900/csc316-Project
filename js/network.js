@@ -236,10 +236,14 @@
             topAnimals.forEach((animal1, i) => {
                 topAnimals.slice(i + 1).forEach(animal2 => {
                     const count = coOccurrences[animal1][animal2];
-                    const totalSightings = Math.min(animalCounts[animal1], animalCounts[animal2]);
-                    const strength = count / totalSightings;
+                    // Calculate the total number of sightings where both animals could have been seen together
+                    const totalPossibleCooccurrences = animalSightings.filter(sighting =>
+                        sighting.includes(animal1) || sighting.includes(animal2)
+                    ).length;
+                    const strength = count / totalPossibleCooccurrences;
 
-                    if (strength > 0.1) {
+                    // Always include links to/from squirrel, and include other links if they have any co-occurrences
+                    if (animal1 === "squirrel" || animal2 === "squirrel" || count > 0) {
                         links.push({
                             source: animal1,
                             target: animal2,
@@ -261,10 +265,10 @@
 
             // Create force simulation with proper nodes array
             const simulation = d3.forceSimulation(nodes)
-                .force("link", d3.forceLink(links).id(d => d.id))
-                .force("charge", d3.forceManyBody().strength(-800))  // Reduced strength
+                .force("link", d3.forceLink(links).id(d => d.id).distance(50))  // Fixed link distance
+                .force("charge", d3.forceManyBody().strength(-300))  // Reduced repulsion strength
                 .force("center", d3.forceCenter(width / 2, height / 2))
-                .force("collision", d3.forceCollide().radius(d => Math.sqrt(d.size) * 2.5 + 5));  // Reduced padding
+                .force("collision", d3.forceCollide().radius(d => Math.sqrt(d.size) * 2 + 10));  // Adjusted collision radius
 
             // Create the links
             const link = svg.append("g")
