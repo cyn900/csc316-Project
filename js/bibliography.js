@@ -60,8 +60,9 @@
     customSection.append("div")
         .attr("class", "left-text")
         .style("flex", "1")
-        .style("padding", "20px")
-        .style("color", "#000")
+        .style("padding", "40px")
+        .style("margin-top", "-15rem")
+        .style("color", "#000") 
         .style("text-align", "left")
         .style("line-height", "1.6")
         .style("font-size", "1.1rem")
@@ -70,7 +71,7 @@
             <p>This project visualizes the fascinating world of Central Park's squirrels, revealing their behaviors, interactions, and habitats through data.</p>
             <p>As you've seen, these small creatures have complex lives - from their varied activities to their social connections with other park animals.</p>
             <p>Next time you're in a park, take a moment to observe these remarkable urban wildlife ambassadors. They're not just cute; they're essential parts of our urban ecosystems.</p>
-            <p style="font-style: italic; margin-top: 20px;">Fun Fact: Squirrels bury nuts and often forget where, helping forests grow.</p>
+            <p style="font-style: italic; margin-top: 20px;">Fun Fact: Squirrels bury nuts and often forget where, helping forests grow!</p>
         `);
 
     // Right column for the image
