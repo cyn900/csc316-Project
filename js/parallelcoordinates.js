@@ -1,8 +1,13 @@
 (function() {
     // Set up margins and dimensions
-    const margin = { top: 20, right: 10, bottom: 40, left: 20 },
-        width = 700 - margin.left - margin.right,
-        height = 300 - margin.top - margin.bottom;
+    const margin = { 
+        top: 30, 
+        right: 150,    // Increased for right side spacing
+        bottom: 50,   
+        left: 150      // Changed to positive value for left side spacing
+    },
+    width = 1400 - margin.left - margin.right,  // Adjusted width
+    height = 500 - margin.top - margin.bottom;
 
     // Define our three dimensions
     const dims = ["Age", "Activity", "Interaction"];
@@ -47,8 +52,9 @@
 
     // Append an SVG for the visualization below the controls
     const svg = vizContainer.append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom);
+        .attr("viewBox", `${margin.left} ${margin.top} ${width + margin.left/2} ${height + margin.top + margin.bottom}`)
+        .style("width", "100%")
+        .style("height", "auto");
 
     // Group for the chart contents
     const chartG = svg.append("g")
@@ -440,24 +446,25 @@
                 else if (dim === "Activity") mapping = activityMap;
                 else if (dim === "Interaction") mapping = interactionMap;
 
+                // Add text labels
                 for (let key in mapping) {
-                    chartG.append("line")
-                        .attr("x1", x(dim) - 5)
-                        .attr("x2", x(dim) + 5)
-                        .attr("y1", mapping[key].start)
-                        .attr("y2", mapping[key].start)
-                        .attr("stroke", "#000");
                     chartG.append("text")
                         .attr("x", x(dim))
-                        .attr("y", mapping[key].start - 5)
-                        .attr("text-anchor", "middle")
-                        .attr("font-size", "10px")
+                        .attr("y", (mapping[key].start + mapping[key].end) / 2)
+                        .attr("dy", "0.35em")
+                        .attr("text-anchor", dim === "Age" ? "end" : (dim === "Interaction" ? "start" : "middle"))
+                        .attr("transform", `translate(${dim === "Age" ? -10 : (dim === "Interaction" ? 10 : 0)}, 0)`)
+                        .style("font-size", "20px")  // Increased from 12px to 20px
+                        .style("font-weight", "500")
                         .text(key);
                 }
+
+                // Add dimension labels at the bottom with larger font
                 chartG.append("text")
                     .attr("x", x(dim))
-                    .attr("y", height + 25)
+                    .attr("y", height + 40)  // Adjusted position for larger font
                     .attr("text-anchor", "middle")
+                    .style("font-size", "20px")  // Increased from 14px to 20px
                     .style("font-weight", "bold")
                     .text(dim);
             });
@@ -512,10 +519,11 @@
         
         .network-container {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            max-width: 1200px;
+            max-width: 1800px;
+            padding: 40px 60px;  // Increased horizontal padding
             margin: 0 auto;
-            padding: 40px 20px;
             background: transparent;
+            width: 100%;
         }
         
         .title-section {
@@ -544,12 +552,18 @@
         
         .main-layout {
             display: flex;
-            gap: 40px;
+            gap: 60px;  // Increased gap between viz and right panel
             margin-top: 20px;
+            align-items: flex-start;
+            width: 100%;
+            padding: 0 20px;  // Added padding to main layout
         }
         
         .viz-container {
-            flex: 1.2;
+            flex: 1.6;
+            padding: 0 10px;  // Added horizontal padding
+            width: 100%;
+            margin: 0;
         }
         
         .right-panel {
@@ -562,17 +576,13 @@
         .controls {
             padding: 20px 0;
             margin-bottom: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            background: transparent;
-            border-bottom: 1px solid rgba(0,0,0,0.1);
+            margin-left: 100px;  // Added left margin to match the chart margin
+            width: calc(100% - 150px);  // Adjust width to account for margin
         }
         
         .control-group {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
+            margin-bottom: 15px;
+            width: 100%;
         }
         
         .control-group label {
@@ -585,7 +595,7 @@
         .filter-container {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 8px;
         }
         
         .filter-icon {
@@ -673,7 +683,8 @@
             width: 100%;
             height: auto;
             background: transparent;
-            margin-top: 10px;
+            margin: 0 auto;  // Center the SVG
+            overflow: visible;  // Allow labels to extend outside SVG
         }
         
         /* Improve axis labels */
@@ -746,6 +757,55 @@
             .data-columns {
                 grid-template-columns: 1fr;
             }
+        }
+
+        /* Ensure the chart aligns with filters */
+        .viz-container svg {
+            width: 100%;
+            overflow: visible;
+            margin: 0 auto;  // Center the SVG
+        }
+
+        /* Adjust the chart group positioning */
+        .chart-group {
+            transform-origin: left center;
+        }
+
+        /* Make all text in the visualization larger */
+        .chart-title {
+            font-size: 2.8rem;  // Match bar chart title size
+            margin-bottom: 0.5rem;
+        }
+
+        .chart-subtitle {
+            font-size: 1.4rem;  // Match bar chart subtitle size
+            margin-bottom: 1rem;
+        }
+
+        /* Update axis and label text */
+        text {
+            font-size: 20px !important;  // Match bar chart text size
+            font-weight: 500;
+        }
+
+        .panel-heading {
+            font-size: 1.3rem;  // Match bar chart heading size
+            margin-bottom: 15px;
+        }
+
+        /* Update legend text */
+        .legend-item {
+            font-size: 1.1rem;  // Match bar chart legend size
+        }
+
+        /* Update details text */
+        .data-column {
+            font-size: 1.1rem;  // Match bar chart details size
+        }
+
+        .column-heading {
+            font-size: 1.1rem;  // Match bar chart column heading size
+            font-weight: bold;
         }
     `;
     document.head.appendChild(style);
