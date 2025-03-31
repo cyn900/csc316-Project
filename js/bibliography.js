@@ -86,7 +86,7 @@
 
     // Append the oversized apple image
     rightCol.append("img")
-        .attr("src", "img/Apple2.png")
+        .attr("src", "img/apple2.png")
         .attr("alt", "Apple Image")
         .style("width", "130%")  // Increase size
         .style("height", "130%")  // Increase size
