@@ -75,12 +75,13 @@
         const infoDisplay = d3.select("#network-info-display");
         
         if (!d) {
-            // Reset to default text
+            // Show default text with current animal count
+            const currentCount = d3.select("#networkAnimalCount").property("value");
             infoDisplay.html(`
-                <p class="network-default-text">Click on a node to see detailed information about that animal's interactions.</p>
                 
                 <div class="network-explanation">
                     <p><strong>About the visualization:</strong></p>
+                    <p>• Click on a node to see detailed information about that animal's interactions.</p>
                     <p>• Each node represents an animal species observed in Central Park</p>
                     <p>• Connections show which animals are frequently seen together</p>
                     <p>• Percentages indicate how often two animals are seen together relative to their total sightings</p>
@@ -273,17 +274,29 @@
                     .on("end", dragended))
                 .on("click", handleNodeClick);
 
-            // Create labels in top layer
+            // Create labels with dynamic positioning
             const label = labelGroup.selectAll("text")
                 .data(nodes)
                 .enter().append("text")
                 .text(d => d.id)
-                .attr("x", d => Math.sqrt(d.size) * 3 + 5)
-                .attr("y", 3)
+                .attr("text-anchor", "middle")
+                .attr("dominant-baseline", "middle")
                 .style("font-family", "sans-serif")
-                .style("font-size", "14px")
+                .style("font-size", d => {
+                    const radius = Math.sqrt(d.size) * 2.5;
+                    const textLength = d.id.length * 6;
+                    return radius * 2 > textLength ? "12px" : "14px";
+                })
+                .style("fill", "#000000")  // Always black text
                 .style("font-weight", d => d.id === "squirrel" ? "bold" : "normal")
-                .style("pointer-events", "none"); // Make labels non-interactive
+                .style("pointer-events", "none")
+                .attr("transform", d => {
+                    const radius = Math.sqrt(d.size) * 2.5;
+                    const textLength = d.id.length * 6;
+                    return radius * 2 > textLength ? 
+                        `translate(${d.x},${d.y})` : 
+                        `translate(${d.x + radius + 5},${d.y})`;
+                });
 
             // Handle node click
             let selectedNode = null;
@@ -326,7 +339,7 @@
 
             function highlightConnections(d, isFirstClick) {
                 const connectedNodes = getConnectedNodes(d.id);
-                const duration = isFirstClick ? 0 : 200; // No transition on first click
+                const duration = isFirstClick ? 0 : 200;
 
                 // Update node circles immediately for first click
                 nodeGroup.selectAll("circle")
@@ -343,12 +356,12 @@
                     .attr("stroke", node => node.id === d.id ? "#000000" : "none")
                     .attr("stroke-width", node => node.id === d.id ? 2 : 0);
 
-                // Update labels immediately for first click
+                // Update labels
                 labelGroup.selectAll("text")
                     .transition()
                     .duration(duration)
                     .style("opacity", node => connectedNodes.has(node.id) ? 1 : 0.3)
-                    .style("fill", node => connectedNodes.has(node.id) ? "#000000" : "#999999")
+                    .style("fill", "#000000")  // Keep text black even during highlighting
                     .style("font-weight", node => 
                         node.id === "squirrel" || connectedNodes.has(node.id) ? "bold" : "normal"
                     );
@@ -382,7 +395,7 @@
                     .transition()
                     .duration(200)
                     .style("opacity", 1)
-                    .style("fill", "#000000") // Restore original text color
+                    .style("fill", "#000000")  // Keep text black when resetting
                     .style("font-weight", d => d.id === "squirrel" ? "bold" : "normal");
 
                 // Reset links
@@ -461,7 +474,14 @@
                     .attr("cy", d => d.y);
 
                 label
-                    .attr("transform", d => `translate(${d.x},${d.y})`);
+                    .attr("transform", d => {
+                        const radius = Math.sqrt(d.size) * 2.5;
+                        const textLength = d.id.length * 6;
+                        // Dynamically position labels based on node size
+                        return radius * 2 > textLength ? 
+                            `translate(${d.x},${d.y})` : 
+                            `translate(${d.x + radius + 5},${d.y})`;
+                    });
             });
 
             // Drag functions
@@ -488,6 +508,9 @@
             const value = this.value;
             d3.select("#networkAnimalCountValue").text(value);
             updateNetwork(+value);
+            
+            // Reset the info display when number changes
+            updateInfoDisplay(null);
         });
 
         // Initial render
@@ -730,19 +753,13 @@
         }
         
         .network-connection-count {
-            font-size: 0.9rem;
+            font-size: 1rem;
             color: #666;
-        }
-        
-        .network-percentage-explanation {
-            margin-top: 1rem;
-            font-size: 0.9rem;
-            line-height: 1.4;
         }
         
         .network-explanation {
             margin-top: 1rem;
-            font-size: 0.9rem;
+            font-size: 1.2rem;
             line-height: 1.4;
         }
     `;
@@ -796,34 +813,4 @@
             setTimeout(updateScrollIndicator, 500);
         }
     }, 100);
-
-    // Update the updateInfoDisplay function to check scroll status after content changes
-    const originalUpdateInfoDisplay = updateInfoDisplay;
-    updateInfoDisplay = function(d) {
-        // Call the original function
-        originalUpdateInfoDisplay(d);
-        
-        // Check scroll status after a short delay to allow DOM to update
-        setTimeout(() => {
-            const container = document.querySelector('.network-info-container');
-            const scrollIndicator = document.querySelector('.network-scroll-indicator');
-            
-            if (container && scrollIndicator) {
-                const isScrollable = container.scrollHeight > container.clientHeight;
-                const isScrolledToBottom = container.scrollHeight - container.scrollTop <= container.clientHeight + 10;
-                
-                if (isScrollable && !isScrolledToBottom) {
-                    scrollIndicator.style.display = 'flex';
-                    scrollIndicator.style.opacity = '0.8';
-                } else {
-                    scrollIndicator.style.opacity = '0';
-                    setTimeout(() => {
-                        if (!isScrollable || isScrolledToBottom) {
-                            scrollIndicator.style.display = 'none';
-                        }
-                    }, 300);
-                }
-            }
-        }, 100);
-    };
 })();
