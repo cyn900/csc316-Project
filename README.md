@@ -55,7 +55,7 @@ This repository contains:
 ## 4. Project Website & Screencast Links
 
 - **Project Website (Deployed Version)**  
-  TODO: [Project Website URL]
+  https://cyn900.github.io/csc316-Project/
 
 - **Screencast / Demo Video**  
   TODO: [Screencast Video Link]
