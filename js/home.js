@@ -40,7 +40,7 @@
     stampSection.append("div")
         .attr("id", "home-stamp-text-left")
         .attr("class", "home-stamp-text left")
-        .text("90% Dead CS Girls");
+        .text("Cynthia Zhou, Jonathan Chen, Melissa Cecilia, Naura Taufiq");
 
     // Add the right text
     stampSection.append("div")
