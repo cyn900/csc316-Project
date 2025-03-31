@@ -277,7 +277,7 @@
         // Update y-axis label
         g.select(".barchart-axis-label")
             .attr("transform", "rotate(-90)")
-            .attr("y", -margin.left + 20)
+            .attr("y", -margin.left + 5)
             .attr("x", -height / 2)
             .attr("text-anchor", "middle")
             .style("font-size", "30px")
