@@ -562,6 +562,7 @@
             background: transparent;
             width: 90%;
             max-width: 600px;
+            margin-left: 10%;
             margin: 0 auto;
         }
 
@@ -617,6 +618,8 @@
             display: flex;
             flex-direction: column;
             height: 100%;
+            margin-left: -35%;
+            margin-right: 40%;
         }
 
         .network-facts-title {
