@@ -34,6 +34,7 @@
     // Create left section for text
     const leftSection = container.append("div")
         .attr("class", "linechart-left-section")
+        .style("margin-left", "20%")
         .html(`
             <div class="linechart-text-container">
                 <h2 class="linechart-heading">Temperature's Impact</h2>
@@ -520,7 +521,7 @@
 
     .linechart-heading {
         font-family: "COCOGOOSE", sans-serif;
-        font-size: 2.5rem;
+        font-size: 1.8rem;
         color: #bf1b1b;
         margin-bottom: 1.5rem;
         line-height: 1.2;
