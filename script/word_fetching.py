@@ -54,15 +54,15 @@ def handle_word_variations(word_counter):
         if word in words_to_keep:
             continue
             
-        # Check if this word is a variation of any other word
-        is_variation = False
+        # Keep this word and mark its variations as processed
+        words_to_keep.add(word)
         for j, (other_word, other_count) in enumerate(words):
             if i != j and is_word_variation(word, other_word):
-                is_variation = True
-                break
-        
-        if not is_variation:
-            words_to_keep.add(word)
+                # If the variation has a higher count, replace the current word
+                if other_count > count:
+                    words_to_keep.remove(word)
+                    words_to_keep.add(other_word)
+                    break
     
     # Create new counter with only kept words
     new_counter = Counter()
@@ -103,8 +103,8 @@ def calculate_word_frequencies(input_file, output_file):
             csv_writer = csv.writer(out_file)
             csv_writer.writerow(['Word', 'Frequency'])
             
-            # Sort by frequency (highest first) and take top 60
-            for word, count in word_counter.most_common(60):
+            # Sort by frequency (highest first) and take top 80
+            for word, count in word_counter.most_common(80):
                 csv_writer.writerow([word, count])
         
         print(f"Word frequencies have been written to {output_file}")
