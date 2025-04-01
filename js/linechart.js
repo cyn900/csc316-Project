@@ -39,12 +39,11 @@
                 <h2 class="linechart-heading">Temperature's Impact</h2>
                 <div class="linechart-description">
                     <p>This visualization shows how temperature affects squirrel behavior in Central Park. The line graph reveals patterns in:</p>
-                    <ul>
-                        <li>Activity levels across different temperatures</li>
-                        <li>Time spent in specific behaviors</li>
-                        <li>Population distribution throughout the day</li>
-                    </ul>
+                    
                     <p>Use the interactive features to explore how squirrels adapt their behavior to temperature changes.</p>
+                </div>
+                <div class="linechart-squirrel">
+                    <img src="img/squirrel6.png" alt="Squirrel 6">
                 </div>
             </div>
         `);
@@ -724,6 +723,20 @@
     .timeline-axis text {
         font-size: 20px;
         font-weight: 500;
+    }
+
+    .linechart-squirrel {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 2rem;
+    }
+
+    .linechart-squirrel img {
+        width: 300px;
+        height: auto;
+        object-fit: contain;
     }
     `;
     document.head.appendChild(style);
