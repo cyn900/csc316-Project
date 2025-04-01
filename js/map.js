@@ -1094,10 +1094,7 @@ class SquirrelMapVis {
 
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-    if (!window.turf) {
-        console.error("Turf.js is required but not loaded!");
-        return;
-    }
+
     
     // Create a dedicated container for the map if it doesn't exist
     const mapContainer = document.getElementById('squirrel_map');
