@@ -282,17 +282,14 @@
                 .attr("text-anchor", "middle")
                 .attr("dominant-baseline", "middle")
                 .style("font-family", "sans-serif")
-                .style("font-size", d => {
-                    const radius = Math.sqrt(d.size) * 2.5;
-                    const textLength = d.id.length * 6;
-                    return radius * 2 > textLength ? "12px" : "14px";
-                })
-                .style("fill", "#000000")  // Always black text
+                .style("font-size", "14px")  // Set a consistent font size for all labels
+                .style("fill", "#000000")
                 .style("font-weight", d => d.id === "squirrel" ? "bold" : "normal")
                 .style("pointer-events", "none")
                 .attr("transform", d => {
                     const radius = Math.sqrt(d.size) * 2.5;
                     const textLength = d.id.length * 6;
+                    // Position labels to the right of nodes if they don't fit inside
                     return radius * 2 > textLength ? 
                         `translate(${d.x},${d.y})` : 
                         `translate(${d.x + radius + 5},${d.y})`;
@@ -387,7 +384,8 @@
                     .duration(200)
                     .attr("fill", d => d.id === "squirrel" ? "#D2691E" : "#bf1b1b")
                     .attr("opacity", 1) // Restore full opacity
-                    .attr("stroke-width", 0)
+                    .attr("stroke", "none")  // Remove the border
+                    .attr("stroke-width", 0)  // Set stroke width to 0
                     .style("filter", null);
 
                 // Reset labels
@@ -395,7 +393,7 @@
                     .transition()
                     .duration(200)
                     .style("opacity", 1)
-                    .style("fill", "#000000")  // Keep text black when resetting
+                    .style("fill", "#000000")
                     .style("font-weight", d => d.id === "squirrel" ? "bold" : "normal");
 
                 // Reset links
