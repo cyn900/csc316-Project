@@ -40,7 +40,7 @@
     stampSection.append("div")
         .attr("id", "transition-guide-text")
         .attr("class", "transition-guide-text")
-        .text("Welcome to the exciting next step of our exploration! Ready to put your newfound knowledge into action? We’ve designed an interactive map to guide your adventure through Central Park.");
+        .text("Welcome to the exciting next step of our exploration! Ready to put your newfound knowledge into action? We've designed an interactive map to guide your adventure through Central Park.");
 
     // Add the main heading (HOW TO FIND)
     content.append("h2")
@@ -53,6 +53,23 @@
         .attr("id", "transition-subtitle")
         .attr("class", "transition-subtitle")
         .text("OUR FURRY FRIENDS");
+
+    // Add squirrel images to bottom corners
+    const bottomLeft = content.append("div")
+        .attr("class", "corner-squirrel left")
+        .style("position", "absolute")
+        .style("bottom", "10rem")
+        .style("left", "0")
+        .style("z-index", "1")
+        .html('<img src="img/squirrel4.png" alt="Squirrel 4">');
+
+    const bottomRight = content.append("div")
+        .attr("class", "corner-squirrel right")
+        .style("position", "absolute")
+        .style("bottom", "10rem")
+        .style("right", "0")
+        .style("z-index", "1")
+        .html('<img src="img/squirrel5.png" alt="Squirrel 5">');
 
     // Update CSS
     const style = document.createElement('style');
@@ -67,6 +84,7 @@
             text-align: center;
             position: relative;
             background: transparent;
+            min-height: 100vh;  /* Ensure full height for positioning */
         }
 
         .transition-line {
@@ -142,6 +160,33 @@
 
         #transition-page {
             background: transparent;
+        }
+
+        .corner-squirrel img {
+            width: 300px;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .corner-squirrel.left img {
+            transform: scaleX(-1);  /* Flip the left squirrel */
+        }
+
+        .corner-squirrel.right img {
+            transform: scaleX(-1);  /* Flip the right squirrel */
+        }
+
+        .corner-squirrel {
+            position: absolute;
+            bottom: 0;
+        }
+
+        .corner-squirrel.left {
+            left: 0;
+        }
+
+        .corner-squirrel.right {
+            right: 0;
         }
     `;
     document.head.appendChild(style);
