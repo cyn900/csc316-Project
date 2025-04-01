@@ -3,7 +3,7 @@
 ## 1. Overview
 
 **Project Description**  
-The Squirrel Project explores the behavior and interactions of squirrels in Central Park, NYC. It visualizes data collected from various datasets to reveal patterns in movement, activity, and responses to environmental factors.
+The Squirrel Project explores the behavior and interactions of squirrels in Central Park, NYC. It visualizes data collected from various datasets to reveal patterns in movement, activity, and responses to environmental factors. Prcoess book: https://docs.google.com/document/d/1kEd25zDxbP9Lt1jQWh1bYo2XiIUfywO669BPogUP0-Q/edit?usp=sharing
 
 **Purpose / Motivation**  
 We created this project to gain insights into how factors like human presence, weather, and other animals affect squirrel behavior. The project aims to provide fun, data-driven facts about squirrels while showcasing interactive data visualizations.
