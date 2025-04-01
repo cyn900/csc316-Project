@@ -88,6 +88,7 @@ d3.csv("data/word_frequencies.csv").then(function(wordData) {
                 flex-direction: column;
                 gap: 1rem;
                 height: 100%;
+                margin-right: 10%;
             }
 
             .story-title-container {
