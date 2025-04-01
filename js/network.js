@@ -37,7 +37,10 @@
     const svg = leftSection.append("svg")
         .attr("class", "network-svg")
         .attr("viewBox", `0 0 ${width} ${height}`)
-        .attr("preserveAspectRatio", "xMidYMid meet");
+        .attr("preserveAspectRatio", "xMidYMid meet")
+        .style("background", "white")
+        .style("border-radius", "8px")
+        .style("box-shadow", "0 4px 6px rgba(0, 0, 0, 0.1)");
 
     // Create right section for text
     const rightSection = contentGrid.append("div")
@@ -282,17 +285,14 @@
                 .attr("text-anchor", "middle")
                 .attr("dominant-baseline", "middle")
                 .style("font-family", "sans-serif")
-                .style("font-size", d => {
-                    const radius = Math.sqrt(d.size) * 2.5;
-                    const textLength = d.id.length * 6;
-                    return radius * 2 > textLength ? "12px" : "14px";
-                })
-                .style("fill", "#000000")  // Always black text
+                .style("font-size", "14px")  // Set a consistent font size for all labels
+                .style("fill", "#000000")
                 .style("font-weight", d => d.id === "squirrel" ? "bold" : "normal")
                 .style("pointer-events", "none")
                 .attr("transform", d => {
                     const radius = Math.sqrt(d.size) * 2.5;
                     const textLength = d.id.length * 6;
+                    // Position labels to the right of nodes if they don't fit inside
                     return radius * 2 > textLength ? 
                         `translate(${d.x},${d.y})` : 
                         `translate(${d.x + radius + 5},${d.y})`;
@@ -387,7 +387,8 @@
                     .duration(200)
                     .attr("fill", d => d.id === "squirrel" ? "#D2691E" : "#bf1b1b")
                     .attr("opacity", 1) // Restore full opacity
-                    .attr("stroke-width", 0)
+                    .attr("stroke", "none")  // Remove the border
+                    .attr("stroke-width", 0)  // Set stroke width to 0
                     .style("filter", null);
 
                 // Reset labels
@@ -395,7 +396,7 @@
                     .transition()
                     .duration(200)
                     .style("opacity", 1)
-                    .style("fill", "#000000")  // Keep text black when resetting
+                    .style("fill", "#000000")
                     .style("font-weight", d => d.id === "squirrel" ? "bold" : "normal");
 
                 // Reset links
@@ -562,6 +563,7 @@
             background: transparent;
             width: 90%;
             max-width: 600px;
+            margin-left: 10%;
             margin: 0 auto;
         }
 
@@ -605,11 +607,13 @@
         }
 
         .network-svg {
-            width: 110%;
+            width: 100%;
             height: auto;
             aspect-ratio: 4/3;
             background: transparent !important;
-            margin: 0 auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-right: 100%;
         }
 
         .network-right-section {
@@ -617,6 +621,8 @@
             display: flex;
             flex-direction: column;
             height: 100%;
+            margin-left: -35%;
+            margin-right: 40%;
         }
 
         .network-facts-title {
@@ -627,13 +633,11 @@
         }
 
         .network-info-container {
-            flex: 1;
             overflow-y: auto;
             border: 1px solid rgba(0, 0, 0, 0.1);
             border-radius: 4px;
             background: rgba(255, 255, 255, 0.7);
-            height: 600px;  /* Increased height from 450px to 600px */
-            max-height: 600px; /* Increased max-height from 500px to 650px */
+            height: 550px;
             scrollbar-width: thin;
             position: relative;
         }

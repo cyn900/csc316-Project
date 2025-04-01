@@ -571,6 +571,7 @@
             display: flex;
             flex-direction: column;
             gap: 30px;
+            margin-right: 10%;
         }
         
         .controls {

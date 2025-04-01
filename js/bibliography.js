@@ -36,16 +36,26 @@
         .attr("id", "bibliography-stamp-section")
         .attr("class", "bibliography-stamp-section");
 
-    // Add the left text with NYC Open Data
+    // Add the left text with NYC Open Data and Process Book
     stampSection.append("div")
         .attr("id", "bibliography-stamp-text-left")
         .attr("class", "bibliography-stamp-text left")
-        .html(`Data Sources: <a href="https://data.cityofnewyork.us/browse?category=Environment&Data-Collection_Data-Collection=2018+Central+Park+Squirrel+Census" target="_blank" class="data-source-link">NYC Open Data</a>`);
+        .html(`
+            <div style="text-align: left;">
+                Data Sources: <a href="https://data.cityofnewyork.us/browse?category=Environment&Data-Collection_Data-Collection=2018+Central+Park+Squirrel+Census" target="_blank" class="data-source-link">NYC Open Data</a>
+                <br>
+                Process Book: <a href="https://docs.google.com/document/d/1kEd25zDxbP9Lt1jQWh1bYo2XiIUfywO669BPogUP0-Q/edit?tab=t.0" target="_blank" class="data-source-link">Google Doc</a>
+            </div>
+        `);
 
-    // Add the right text
+    // Add the right text with vertical centering
     stampSection.append("div")
         .attr("id", "bibliography-stamp-text-right")
         .attr("class", "bibliography-stamp-text right")
+        .style("display", "flex")
+        .style("align-items", "center")
+        .style("height", "100%")
+        .style("margin-top", "1rem")
         .text("CSC316 Winter 2025");
 
     // Create a new custom section with two columns inside your bibliography container
@@ -62,6 +72,7 @@
         .style("flex", "1")
         .style("padding", "40px")
         .style("margin-top", "-15rem")
+        .style("margin-left", "7rem")
         .style("color", "#000") 
         .style("text-align", "left")
         .style("line-height", "1.6")
@@ -138,16 +149,32 @@
         #bibliography-stamp-section {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: stretch;  /* Changed to stretch to allow full height */
             margin: 0.5rem 0;
             border-top: 2px solid #000;
             border-bottom: 2px solid #000;
-            padding: 0.5rem 1rem;
+            padding: 0.8rem 1rem;
+            min-height: 4rem;  /* Ensure minimum height for proper alignment */
         }
 
         .bibliography-stamp-text {
             font-size: 1.2rem;
             color: #000;
+            line-height: 1.6;
+            text-align: left;
+        }
+        
+        .bibliography-stamp-text.left {
+            text-align: left;
+        }
+        
+        .bibliography-stamp-text.right {
+            text-align: right;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 0;
+            margin: 0;
         }
         
         .data-source-link {

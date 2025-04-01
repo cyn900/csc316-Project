@@ -34,17 +34,16 @@
     // Create left section for text
     const leftSection = container.append("div")
         .attr("class", "linechart-left-section")
+        .style("margin-left", "20%")
         .html(`
             <div class="linechart-text-container">
                 <h2 class="linechart-heading">Temperature's Impact</h2>
                 <div class="linechart-description">
-                    <p>This visualization shows how temperature affects squirrel behavior in Central Park. The line graph reveals patterns in:</p>
-                    <ul>
-                        <li>Activity levels across different temperatures</li>
-                        <li>Time spent in specific behaviors</li>
-                        <li>Population distribution throughout the day</li>
-                    </ul>
                     <p>Use the interactive features to explore how squirrels adapt their behavior to temperature changes.</p>
+                    <p>Notably, the averge sighting time is max at high temperature (29°C).</p>
+                </div>
+                <div class="linechart-squirrel">
+                    <img src="img/squirrel6.png" alt="Squirrel 6" style="margin-top:3rem">
                 </div>
             </div>
         `);
@@ -66,10 +65,7 @@
     const svg = centerSection.append("svg")
         .attr("viewBox", `0 0 ${width} ${height}`)
         .attr("width", "100%")
-        .attr("height", "100%")
-        .style("background", "white")
-        .style("border-radius", "8px")
-        .style("box-shadow", "0 4px 6px rgba(0, 0, 0, 0.1)");
+        .attr("height", "100%");
 
     // Add tooltip div to the container
     const tooltipDiv = d3.select("#linechart")
@@ -525,7 +521,7 @@
 
     .linechart-heading {
         font-family: "COCOGOOSE", sans-serif;
-        font-size: 2.5rem;
+        font-size: 1.8rem;
         color: #bf1b1b;
         margin-bottom: 1.5rem;
         line-height: 1.2;
@@ -724,6 +720,20 @@
     .timeline-axis text {
         font-size: 20px;
         font-weight: 500;
+    }
+
+    .linechart-squirrel {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 2rem;
+    }
+
+    .linechart-squirrel img {
+        width: 300px;
+        height: auto;
+        object-fit: contain;
     }
     `;
     document.head.appendChild(style);

@@ -432,7 +432,7 @@ class SquirrelMapVis {
         // Stats section with improved styling
         dashboardContent.append("div")
             .attr("class", "stat-item")
-            .html("<strong>Squirrels in path:</strong> <span id='count' class='stat-value'>0</span>")
+            .html("<strong>Squirrels in path(s):</strong> <span id='count' class='stat-value'>0 out of 3023 total squirrels</span>")
             .style("margin-bottom", "12px");
             
         // Create a two-column layout for color and age
@@ -980,19 +980,19 @@ class SquirrelMapVis {
     }
 
     updateDashboard(selectedSquirrels) {
-        // Update count with animation
+        // Update count with animation and proper format
         const countElement = d3.select("#count");
         const oldCount = parseInt(countElement.text()) || 0;
         const newCount = selectedSquirrels.length || 0;
         
-        // Simple animation for count change
+        // Simple animation for count change with proper format
         if (oldCount !== newCount) {
             countElement.transition()
                 .duration(500)
                 .tween("text", function() {
                     const i = d3.interpolateNumber(oldCount, newCount);
                     return function(t) {
-                        this.textContent = Math.round(i(t));
+                        this.textContent = `${Math.round(i(t))} out of 3023 total squirrels`;
                     };
                 });
         }
@@ -1094,10 +1094,7 @@ class SquirrelMapVis {
 
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-    if (!window.turf) {
-        console.error("Turf.js is required but not loaded!");
-        return;
-    }
+
     
     // Create a dedicated container for the map if it doesn't exist
     const mapContainer = document.getElementById('squirrel_map');

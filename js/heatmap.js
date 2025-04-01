@@ -17,7 +17,8 @@ const container = d3.select("#heatmap")
 
 // Create left section for text content
 const leftSection = container.append("div")
-    .attr("class", "heatmap-left-section");
+    .attr("class", "heatmap-left-section")
+    .style("margin-left", "20%");
 
 // Add title box
 leftSection.append("div")

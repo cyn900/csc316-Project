@@ -81,7 +81,7 @@
         .attr("class", "home-motivation-text")
         .style("font-style", "italic")
         .style("color", "#555")
-        .style("font-size", "1.8rem")
+        .style("font-size", "2.2rem")
         .style("line-height", "1.5")
         .text("Our project explores the behaviors of Central Park's squirrels, drawing insights into what conditions " +
             "influence their activities and interactions. This project is powered by the 2018 Central Park Squirrel Census, sourced from NYC Open Data." +
@@ -90,10 +90,76 @@
     motivationSection.append("p")
         .attr("class", "home-motivation-text2")
         .style("font-style", "bold")
-        .style("color", "black")
-        .style("font-size", "1.8rem")
+        .style("color", "rgba(191, 27, 27, 0.8)")
+        .style("font-size", "1.5rem")
         .style("line-height", "1.5")
-        .text("No squirrels were harmed in this process!");
+        .text("*No squirrels were harmed in this process*");
+
+    // Add animation classes and initial states to elements
+    header.style("opacity", "0")
+        .style("transform", "translateY(-20px)");
+
+    stampSection.style("opacity", "0")
+        .style("transform", "translateY(20px)");
+
+    const stamp = content.select("#home-stamp")
+        .style("opacity", "0")
+        .style("transform", "scale(0.8) rotate(-15deg)");
+
+    const mainHeading = content.select("#home-heading")
+        .style("opacity", "0")
+        .style("transform", "translateY(30px)");
+
+    const subtitle = content.select("#home-subtitle")
+        .style("opacity", "0")
+        .style("transform", "translateY(20px)");
+
+    const motivation = content.select(".home-motivation-section")
+        .style("opacity", "0")
+        .style("transform", "translateY(20px)");
+
+    // Sequence the animations with faster timings
+    // Header animation
+    header.transition()
+        .duration(500)    // Reduced from 800 to 500
+        .delay(100)      // Reduced from 200 to 100
+        .style("opacity", "1")
+        .style("transform", "translateY(0)");
+
+    // Stamp section animation
+    stampSection.transition()
+        .duration(500)    // Reduced from 800 to 500
+        .delay(300)      // Reduced from 600 to 300
+        .style("opacity", "1")
+        .style("transform", "translateY(0)");
+
+    // Stamp animation with rotation
+    stamp.transition()
+        .duration(600)    // Reduced from 1000 to 600
+        .delay(500)      // Reduced from 1000 to 500
+        .style("opacity", "1")
+        .style("transform", "scale(1) rotate(0deg)");
+
+    // Main heading animation
+    mainHeading.transition()
+        .duration(500)    // Reduced from 800 to 500
+        .delay(700)      // Reduced from 1400 to 700
+        .style("opacity", "1")
+        .style("transform", "translateY(0)");
+
+    // Subtitle animation
+    subtitle.transition()
+        .duration(500)    // Reduced from 800 to 500
+        .delay(900)      // Reduced from 1800 to 900
+        .style("opacity", "1")
+        .style("transform", "translateY(0)");
+
+    // Motivation section animation
+    motivation.transition()
+        .duration(500)    // Reduced from 800 to 500
+        .delay(1100)     // Reduced from 2200 to 1100
+        .style("opacity", "1")
+        .style("transform", "translateY(0)");
 
     // Update CSS
     const style = document.createElement('style');
@@ -150,8 +216,8 @@
 
         #home-stamp {
             position: absolute;
-            top: 21%;
-            left: 50%;
+            top: 12%;
+            left: 40%;
             transform: translate(-50%, -50%);
             z-index: 10;
             width: 180px;
@@ -185,6 +251,35 @@
             font-weight: bold;
         }
 
+        /* Update transition properties to be faster */
+        .home-header,
+        .home-stamp-section,
+        #home-stamp,
+        #home-heading,
+        #home-subtitle,
+        .home-motivation-section {
+            transition: all 0.5s ease-out;  // Reduced from 0.8s to 0.5s
+        }
+
+        /* Update hover effect timing */
+        .home-icon img,
+        #home-stamp img,
+        #home-subtitle {
+            transition: all 0.2s ease;  // Reduced from 0.3s to 0.2s
+        }
+
+        .home-icon img:hover {
+            transform: scale(1.1);
+        }
+
+        #home-stamp img:hover {
+            transform: scale(1.05);
+        }
+
+        #home-subtitle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
     `;
     document.head.appendChild(style);
 })();
