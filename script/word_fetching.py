@@ -36,7 +36,7 @@ def clean_text(text):
     text = text.translate(str.maketrans('', '', string.punctuation))
     # Convert to lowercase
     text = text.lower()
-    # Split into words and filter out stop words
+    # Split into words and filter out stop words (exact matches only)
     words = [word for word in text.split() if word not in STOP_WORDS and len(word) > 1]
     return words
 
