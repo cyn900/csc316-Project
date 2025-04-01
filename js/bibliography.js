@@ -62,6 +62,7 @@
         .style("flex", "1")
         .style("padding", "40px")
         .style("margin-top", "-15rem")
+        .style("margin-left", "7rem")
         .style("color", "#000") 
         .style("text-align", "left")
         .style("line-height", "1.6")
