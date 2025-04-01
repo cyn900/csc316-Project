@@ -37,7 +37,10 @@
     const svg = leftSection.append("svg")
         .attr("class", "network-svg")
         .attr("viewBox", `0 0 ${width} ${height}`)
-        .attr("preserveAspectRatio", "xMidYMid meet");
+        .attr("preserveAspectRatio", "xMidYMid meet")
+        .style("background", "white")
+        .style("border-radius", "8px")
+        .style("box-shadow", "0 4px 6px rgba(0, 0, 0, 0.1)");
 
     // Create right section for text
     const rightSection = contentGrid.append("div")
@@ -604,11 +607,13 @@
         }
 
         .network-svg {
-            width: 110%;
+            width: 100%;
             height: auto;
             aspect-ratio: 4/3;
             background: transparent !important;
-            margin: 0 auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-right: 100%;
         }
 
         .network-right-section {
@@ -628,13 +633,11 @@
         }
 
         .network-info-container {
-            flex: 1;
             overflow-y: auto;
             border: 1px solid rgba(0, 0, 0, 0.1);
             border-radius: 4px;
             background: rgba(255, 255, 255, 0.7);
-            height: 600px;  /* Increased height from 450px to 600px */
-            max-height: 600px; /* Increased max-height from 500px to 650px */
+            height: 550px;
             scrollbar-width: thin;
             position: relative;
         }

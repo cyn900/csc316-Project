@@ -38,12 +38,11 @@
             <div class="linechart-text-container">
                 <h2 class="linechart-heading">Temperature's Impact</h2>
                 <div class="linechart-description">
-                    <p>This visualization shows how temperature affects squirrel behavior in Central Park. The line graph reveals patterns in:</p>
-                    
                     <p>Use the interactive features to explore how squirrels adapt their behavior to temperature changes.</p>
+                    <p>Notably, the averge sighting time is max at high temperature (29°C).</p>
                 </div>
                 <div class="linechart-squirrel">
-                    <img src="img/squirrel6.png" alt="Squirrel 6">
+                    <img src="img/squirrel6.png" alt="Squirrel 6" style="margin-top:3rem">
                 </div>
             </div>
         `);
@@ -65,10 +64,7 @@
     const svg = centerSection.append("svg")
         .attr("viewBox", `0 0 ${width} ${height}`)
         .attr("width", "100%")
-        .attr("height", "100%")
-        .style("background", "white")
-        .style("border-radius", "8px")
-        .style("box-shadow", "0 4px 6px rgba(0, 0, 0, 0.1)");
+        .attr("height", "100%");
 
     // Add tooltip div to the container
     const tooltipDiv = d3.select("#linechart")
